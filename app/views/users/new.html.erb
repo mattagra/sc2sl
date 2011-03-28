@@ -1,0 +1,18 @@
+<h1>Register</h1>
+
+<% form_for @user, :url => account_path do |f| %>
+  <% if @user.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div><div style="width:100%" />
+  <% end %>
+  <div id="user_form">
+  <%= render :partial => "form", :object => f %>
+  <%= f.submit "Register" %>
+  </div>
+<% end %>

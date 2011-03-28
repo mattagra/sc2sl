@@ -1,0 +1,11 @@
+<%= @user.login %>
+<br />
+<% if @user == current_user %>
+<p>
+  <b>Email:</b>
+  <%=h @user.email %>
+</p>
+
+<%= link_to 'Update my Information', edit_account_path %>
+
+<% end %>
