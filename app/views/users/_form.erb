@@ -4,14 +4,14 @@
 <% else %>
 <%=  form.object.first_name %>
 <% end  %>
-
+<br />
 <%= form.label :last_name %><br />
 <% if form.object.new_record? %>
 <%=  form.text_field :last_name %>
 <% else %>
 <%=  form.object.last_name %>
 <% end  %>
-
+<br />
 <%= form.label :email %><br />
 <% if form.object.new_record? %>
 <%=  form.text_field :email %>
