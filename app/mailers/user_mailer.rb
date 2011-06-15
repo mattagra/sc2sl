@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => "SC2 Stars Administration<admin@sc2stars.com>"
+  default :from => "Michael<michael.darmousseh@gmail.com>"
 
   def activation(user)
     @user = user

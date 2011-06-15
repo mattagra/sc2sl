@@ -6,9 +6,7 @@ class User < ActiveRecord::Base
   validates :email, :presence => true, :uniqueness => true, :email_format => true
   validates :login, :presence => true, :uniqueness => true, :length => {:within => 3..20}
   after_validation :set_defaults, :on => :create
-  has_attached_file :photo, :styles => { :small => "250x250>", :thumb => "100x100>" }
-
-
+  belongs_to :attachment
   
 
   def set_defaults

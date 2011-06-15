@@ -22,9 +22,6 @@
 <%= form.label :login %><br />
 <% if form.object.new_record? %>
 <%=  form.text_field :login %>
-<% else %>
-<%=  form.object.login %>
-<%=  form.file_field :photo %>
 <% end  %>
 <br />
 <%= form.label :password, form.object.new_record? ? nil : "Change password" %><br />

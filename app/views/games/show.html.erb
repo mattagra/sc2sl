@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Player0:</b>
+  <%= @game.player0_id %>
+</p>
+
+<p>
+  <b>Player1:</b>
+  <%= @game.player1_id %>
+</p>
+
+<p>
+  <b>Result:</b>
+  <%= @game.result %>
+</p>
+
+<p>
+  <b>Downloads:</b>
+  <%= @game.downloads %>
+</p>
+
+<p>
+  <b>Map:</b>
+  <%= @game.map %>
+</p>
+
+<p>
+  <b>Match:</b>
+  <%= @game.match %>
+</p>
+
+<p>
+  <b>Match order:</b>
+  <%= @game.match_order %>
+</p>
+
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

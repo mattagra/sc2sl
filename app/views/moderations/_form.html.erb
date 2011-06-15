@@ -1,0 +1,33 @@
+<%= form_for(@moderation) do |f| %>
+  <% if @moderation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@moderation.errors.count, "error") %> prohibited this moderation from being saved:</h2>
+
+      <ul>
+        <% @moderation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :length %><br />
+    <%= f.text_field :length %>
+  </div>
+  <div class="field">
+    <%= f.label :reason %><br />
+    <%= f.text_field :reason %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

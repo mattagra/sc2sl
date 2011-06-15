@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.reset_perishable_token
-      @user.reset_single_access_token
+    @user.reset_single_access_token
     if @user.save
       flash[:notice] = "Thank you for registering. Please check your email to confirm your information before proceding."
       UserMailer.activation(@user).deliver
@@ -23,8 +23,11 @@ class UsersController < ApplicationController
   def show
     if current_user and params[:id].nil?
       @user = @current_user
-    else
+    elsif params[:id]
       @user = User.find(params[:id])
+    else
+      flash[:params] = "Cannot Find a User with that ID"
+      redirect_to root_url
     end
   end
 
@@ -34,6 +37,17 @@ class UsersController < ApplicationController
 
   def update
     @user = @current_user # makes our views "cleaner" and more consistent
+    if params[:attachment]
+      @attachment = Attachment.new
+      @attachment.uploaded_file = params[:attachment]
+
+      if @attachment.save
+        flash[:notice] = "Thank you for your submission..."
+        @user.attachment_id = @attachment.id
+      else
+        flash[:error] = "There was a problem submitting your attachment."
+      end
+    end
     if @user.update_attributes(params[:user])
       flash[:notice] = "Account updated!"
       redirect_to account_url

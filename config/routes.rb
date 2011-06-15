@@ -1,5 +1,33 @@
 Sc2sl::Application.routes.draw do
 
+  resources :streams
+
+  resources :matches
+
+  resources :game_ratings
+
+  resources :maps
+
+  resources :games
+
+  resources :seasons
+
+  resources :countries
+
+  resources :players
+
+  resources :teams
+
+  resources :moderations
+
+  resources :comments
+
+  resources :articles
+
+  resources :partners
+
+  resources :attachments
+
   resources :password_resets
   resource :user_session
   resource :account, :controller => :users
@@ -13,6 +41,8 @@ Sc2sl::Application.routes.draw do
   match '/activate/:activation_code' => 'activations#new', :as => :activate
 
   root :to=>"site#index"
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

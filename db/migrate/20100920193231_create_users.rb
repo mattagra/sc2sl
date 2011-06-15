@@ -20,14 +20,14 @@ class CreateUsers < ActiveRecord::Migration
       t.datetime  :last_updated
       t.string    :first_name, :null => false
       t.string    :last_name, :null => false
-      t.string    :photo_file_name
-      t.string    :photo_content_type
-      t.integer   :photo_file_size
-      t.integer   :photo_updated_at
-      t.boolean   :photo_status
       t.date      :birthdate
       t.string    :race #protoss, terran, zerg, random
-      t.text      :profile
+      t.text      :profile_text
+      t.string    :bnet_name
+      t.integer   :bent_code
+      t.integer   :bnet_id
+      t.text      :signature
+      t.integer   :country_id
       t.timestamps
     end
   end

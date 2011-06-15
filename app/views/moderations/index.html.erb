@@ -1,0 +1,29 @@
+<h1>Listing moderations</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Type</th>
+    <th>Length</th>
+    <th>Reason</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @moderations.each do |moderation| %>
+  <tr>
+    <td><%= moderation.user %></td>
+    <td><%= moderation.type %></td>
+    <td><%= moderation.length %></td>
+    <td><%= moderation.reason %></td>
+    <td><%= link_to 'Show', moderation %></td>
+    <td><%= link_to 'Edit', edit_moderation_path(moderation) %></td>
+    <td><%= link_to 'Destroy', moderation, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Moderation', new_moderation_path %>

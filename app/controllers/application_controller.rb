@@ -2,11 +2,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
   helper_method :current_user_session, :current_user
-  filter_parameter_logging :password, :password_confirmation
+  #filter_parameter_logging :password, :password_confirmation
 
   before_filter :set_timezone
+  before_filter :mailer_set_url_options
 
   private
+  def mailer_set_url_options
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end
+
 
   def set_timezone
     min = cookies[:timezone].to_i

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  team: 
+  user: 
+  date_joined: 2011-06-15
+  date_quit: 2011-06-15
+
+two:
+  team: 
+  user: 
+  date_joined: 2011-06-15
+  date_quit: 2011-06-15
