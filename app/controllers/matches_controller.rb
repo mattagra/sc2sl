@@ -1,4 +1,7 @@
 class MatchesController < ApplicationController
+
+  before_filter :require_admin, :only => [:new, :edit, :create, :update, :destroy]
+
   # GET /matches
   # GET /matches.xml
   def index
@@ -14,7 +17,7 @@ class MatchesController < ApplicationController
   # GET /matches/1.xml
   def show
     @match = Match.find(params[:id])
-
+    @comment = Comment.new_of_type(@match)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @match }

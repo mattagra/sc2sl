@@ -1,6 +1,8 @@
 class GamesController < ApplicationController
   # GET /games
   # GET /games.xml
+  before_filter :require_admin, :only => [:new, :edit, :create, :update, :destroy]
+
   def index
     @games = Game.all
 
@@ -14,7 +16,7 @@ class GamesController < ApplicationController
   # GET /games/1.xml
   def show
     @game = Game.find(params[:id])
-
+    @comment = Comment.new_of_type(@game)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @game }

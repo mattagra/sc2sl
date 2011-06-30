@@ -20,6 +20,19 @@
   <%= @team.user %>
 </p>
 
+<p>
+  <b>Comments:</b>
+  <%- @team.comments.each do |comment| %>
+    <br />
+    <b><%= comment.user.login %> said: </b>
+    <br />
+    <%= comment.description %>
+  <% end %>
+</p>
+
+<p>
+  <%= render :partial => "comments/form" %>
+</p>
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>

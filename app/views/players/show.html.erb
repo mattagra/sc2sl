@@ -20,6 +20,20 @@
   <%= @player.date_quit %>
 </p>
 
+<p>
+  <b>Comments:</b>
+  <%- @player.comments.each do |comment| %>
+    <br />
+    <b><%= comment.user.login %> said: </b>
+    <br />
+    <%= comment.description %>
+  <% end %>
+</p>
+
+<p>
+  <%= render :partial => "comments/form" %>
+</p>
+
 
 <%= link_to 'Edit', edit_player_path(@player) %> |
 <%= link_to 'Back', players_path %>

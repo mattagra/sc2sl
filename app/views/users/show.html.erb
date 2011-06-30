@@ -6,6 +6,27 @@
   <%=h @user.email %>
 </p>
 
+<p>
+  <b>Country:</b>
+  <% if @user.country  %>
+  <%= @user.country %> <%= image_tag @user.country.flag %>
+  <% end %>
+</p>
+
 <%= link_to 'Update my Information', edit_account_path %>
 
 <% end %>
+
+<p>
+  <b>Comments:</b>
+  <%- @user.comments.each do |comment| %>
+    <br />
+    <b><%= comment.user.login %> said: </b>
+    <br />
+    <%= comment.description %>
+  <% end %>
+</p>
+
+<p>
+  <%= render :partial => "comments/form" %>
+</p>

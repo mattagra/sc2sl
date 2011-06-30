@@ -1,4 +1,7 @@
 class MapsController < ApplicationController
+
+  before_filter :require_super_admin
+
   # GET /maps
   # GET /maps.xml
   def index

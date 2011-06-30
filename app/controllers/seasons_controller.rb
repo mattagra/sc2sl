@@ -1,4 +1,6 @@
 class SeasonsController < ApplicationController
+
+  before_filter :require_super_admin
   # GET /seasons
   # GET /seasons.xml
   def index

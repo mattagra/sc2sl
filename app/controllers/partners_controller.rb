@@ -1,4 +1,6 @@
 class PartnersController < ApplicationController
+
+  before_filter :require_super_admin
   # GET /partners
   # GET /partners.xml
   def index

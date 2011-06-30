@@ -1,7 +1,7 @@
 class CreateComments < ActiveRecord::Migration
   def self.up
     create_table :comments do |t|
-      t.string :type
+      t.string :external_type
       t.integer :external_id
       t.references :user
       t.text :description

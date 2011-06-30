@@ -2,7 +2,17 @@
 
 <p>
   <b>Title:</b>
-  <%= @article.title %>
+  <%= link_to @article.title, named_article_path(:year => @article.created_at.year, :month => @article.created_at.month, :day => @article.created_at.day, :url => @article.url) %>
+</p>
+
+<p>
+  <b>Published on:</b>
+  <%= american_time(@article.created_at) %>
+</p>
+
+<p>
+  <b>Last updated on:</b>
+  <%= american_time(@article.updated_at) %>
 </p>
 
 <p>
@@ -12,7 +22,7 @@
 
 <p>
   <b>Description:</b>
-  <%= @article.description %>
+  <%= simple_format @article.description %>
 </p>
 
 <p>
@@ -22,7 +32,21 @@
 
 <p>
   <b>Tags:</b>
-  <%= @article.tags %>
+  <%=raw tags_to_links(@article.tags) %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%- @article.comments.each do |comment| %>
+    <br />
+    <b><%= comment.user.login %> said: </b>
+    <br />
+    <%= comment.description %>
+  <% end %>
+</p>
+
+<p>
+  <%= render :partial => "comments/form" %>
 </p>
 
 

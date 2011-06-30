@@ -1,4 +1,7 @@
 class ModerationsController < ApplicationController
+
+  before_filter :require_moderator
+
   # GET /moderations
   # GET /moderations.xml
   def index

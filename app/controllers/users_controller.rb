@@ -8,8 +8,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.reset_perishable_token
-    @user.reset_single_access_token
+    @user.login = params[:user][:login]
     if @user.save
       flash[:notice] = "Thank you for registering. Please check your email to confirm your information before proceding."
       UserMailer.activation(@user).deliver
@@ -23,8 +22,10 @@ class UsersController < ApplicationController
   def show
     if current_user and params[:id].nil?
       @user = @current_user
+      @comment = Comment.new_of_type(@user)
     elsif params[:id]
       @user = User.find(params[:id])
+      @comment = Comment.new_of_type(@user)
     else
       flash[:params] = "Cannot Find a User with that ID"
       redirect_to root_url

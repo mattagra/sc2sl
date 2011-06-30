@@ -1,4 +1,6 @@
 class PlayersController < ApplicationController
+
+  before_filter :require_super_admin
   # GET /players
   # GET /players.xml
   def index
@@ -14,7 +16,7 @@ class PlayersController < ApplicationController
   # GET /players/1.xml
   def show
     @player = Player.find(params[:id])
-
+    @comment = Comment.new_of_type(@player)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @player }

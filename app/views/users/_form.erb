@@ -1,35 +1,57 @@
-<%= form.label :first_name %><br />
+<b><%= form.label :first_name %></b><br />
 <% if form.object.new_record? %>
 <%=  form.text_field :first_name %>
 <% else %>
 <%=  form.object.first_name %>
 <% end  %>
 <br />
-<%= form.label :last_name %><br />
+<b><%= form.label :last_name %></b><br />
 <% if form.object.new_record? %>
 <%=  form.text_field :last_name %>
 <% else %>
 <%=  form.object.last_name %>
 <% end  %>
 <br />
-<%= form.label :email %><br />
+<b><%= form.label :email %></b><br />
 <% if form.object.new_record? %>
 <%=  form.text_field :email %>
 <% else %>
 <%=  form.object.email %>
 <% end  %>
 <br />
-<%= form.label :login %><br />
+<b><%= form.label :login %></b><br />
 <% if form.object.new_record? %>
 <%=  form.text_field :login %>
+<% else %>
+<%= form.object.login %>
 <% end  %>
 <br />
-<%= form.label :password, form.object.new_record? ? nil : "Change password" %><br />
+<b><%= form.label :password, form.object.new_record? ? nil : "Change password" %></b><br />
 <%= form.password_field :password %><br />
 <br />
-<%= form.label :password_confirmation %><br />
+<b><%= form.label :password_confirmation %></b><br />
 <%= form.password_field :password_confirmation %><br />
 <br />
+<b><%= form.label :birthdate %></b><br />
+<%=  form.date_select :birthdate, :start_year => Time.now.year - 100, :end_year => Time.now.year %>
+<br />
+<b><%= form.label :Country %></b><br />
+<%=  form.select :country_id, Country.all.collect {|c| [c.name, c.id]},  { :include_blank => true }  %>
+<br />
+
+<b><%= form.label :race %></b><br />
+<%=  form.select :race, ["protoss", "zerg", "terran", "random"] %>
+<br />
+<b><%= form.label :bnet_name %></b><b><%= form.label :bent_code %></b><br />
+Name: <%=  form.text_field :bnet_name %> Identifier <%= form.text_field :bent_code %>
+<br />
+<b><%= form.label :profile_text %></b><br />
+<%=  form.text_area :profile_text %>
+<br />
+<b><%= form.label :signature %></b><br />
+<%=  form.text_field :signature %>
+<br />
+
 
 
 <br />

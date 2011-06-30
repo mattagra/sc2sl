@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20110615203032) do
     t.text     "description"
     t.integer  "user_id"
     t.string   "tags"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20110615203032) do
   end
 
   create_table "comments", :force => true do |t|
-    t.string   "type"
+    t.string   "external_type"
     t.integer  "external_id"
     t.integer  "user_id"
     t.text     "description"

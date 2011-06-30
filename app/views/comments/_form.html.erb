@@ -10,22 +10,11 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :type %><br />
-    <%= f.text_field :type %>
-  </div>
-  <div class="field">
-    <%= f.label :external_id %><br />
-    <%= f.text_field :external_id %>
-  </div>
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
-  </div>
+  <%= f.hidden_field :external_type %>
+  <%= f.hidden_field :external_id %>
   <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :cols => 25, :rows => 5 %>
   </div>
   <div class="actions">
     <%= f.submit %>

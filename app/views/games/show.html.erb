@@ -34,7 +34,19 @@
   <b>Match order:</b>
   <%= @game.match_order %>
 </p>
+<p>
+  <b>Comments:</b>
+  <%- @game.comments.each do |comment| %>
+    <br />
+    <b><%= comment.user.login %> said: </b>
+    <br />
+    <%= comment.description %>
+  <% end %>
+</p>
 
+<p>
+  <%= render :partial => "comments/form" %>
+</p>
 
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>

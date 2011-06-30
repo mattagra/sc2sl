@@ -42,10 +42,31 @@ class ApplicationController < ActionController::Base
     unless current_user and current_user.is_admin?
       store_location
       flash[:notice] = "You do not have access to this page"
-      redirect_to new_user_session_url
+      render :status => 404
       return false
     end
   end
+
+  def require_moderator
+    unless current_user and current_user.is_moderator?
+      store_location
+      flash[:notice] = "You do not have access to this page"
+      render :status => 404
+      return false
+    end
+  end
+
+  def require_super_admin
+    unless current_user and current_user.is_super_admin?
+      store_location
+      flash[:notice] = "You do not have access to this page"
+      render :status => 404
+      return false
+    end
+  end
+
+
+
 
   def require_no_user
     if current_user

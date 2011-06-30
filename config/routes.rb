@@ -1,7 +1,5 @@
 Sc2sl::Application.routes.draw do
 
-  resources :streams
-
   resources :matches
 
   resources :game_ratings
@@ -12,8 +10,6 @@ Sc2sl::Application.routes.draw do
 
   resources :seasons
 
-  resources :countries
-
   resources :players
 
   resources :teams
@@ -21,8 +17,12 @@ Sc2sl::Application.routes.draw do
   resources :moderations
 
   resources :comments
+  
+  match 'articles/:year/:month/:day/:url' => 'articles#show', :as => :named_article
 
-  resources :articles
+  resources :articles do |articles|
+    resources :comments
+  end
 
   resources :partners
 
