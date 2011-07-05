@@ -12,6 +12,10 @@ class UsersController < ApplicationController
     if @user.save
       flash[:notice] = "Thank you for registering. Please check your email to confirm your information before proceding."
       UserMailer.activation(@user).deliver
+      if RAILS_ENV == "development"
+        flash[:notice] += "No email was sent, to active your account click <a href='#{activate_url(@user.perishable_token)}' >here</a>"
+      end
+
       redirect_to root_url
     else
       flash[:notice] = "Some errors prevented you from registering "
@@ -33,11 +37,19 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = @current_user
+    if params[:id] and current_user.is_admin?
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
   end
 
   def update
-    @user = @current_user # makes our views "cleaner" and more consistent
+    if params[:id] and current_user.is_admin?
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
     if params[:attachment]
       @attachment = Attachment.new
       @attachment.uploaded_file = params[:attachment]
@@ -49,9 +61,9 @@ class UsersController < ApplicationController
         flash[:error] = "There was a problem submitting your attachment."
       end
     end
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(params[:user], !current_user.is_admin?)
       flash[:notice] = "Account updated!"
-      redirect_to account_url
+      redirect_to profile_path(@user)
     else
       render :action => :edit
     end

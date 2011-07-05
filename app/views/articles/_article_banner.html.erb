@@ -1,0 +1,8 @@
+<div id="slider-news-<%= i  %>" class="nivo-html-caption">
+              <%= link_to(image_tag(article.photo.url(:normal), :alt => "", :title => "#slider-news-#{i}"), view_article_path(article)) %>
+
+                <%= link_to(content_tag(:span, article.title, :class => "slider-news-titre"), view_article_path(article)) %>
+
+                <%= link_to(content_tag(:span, article.summary.upcase, :class => "slider-news-infos"), view_article_path(article)) %>
+
+              </div>

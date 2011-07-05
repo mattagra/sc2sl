@@ -7,10 +7,11 @@ class ArticlesController < ApplicationController
 
   def index
     if params[:tag]
-      @articles = Article.find(:all, :conditions => ["tags like ? or tags like ?", "% #{params[:tag]}%", "%#{params[:tag]} %"])
+      @articles = Article.tagged_with(params[:tag])
     else
       @articles = Article.all
     end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @articles }
@@ -23,12 +24,18 @@ class ArticlesController < ApplicationController
     if params[:id]
       @article = Article.find(params[:id])
     elsif params[:url]
-      @article = Article.find_by_url(params[:url])
+      date_start = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i).midnight
+      date_end = date_start + 1.day
+      @article = Article.where(:url => params[:url]).where("created_at between ? and ?", date_start, date_end).first
     end
+    unless @article.nil?
     @comment = Comment.new_of_type(@article)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @article }
+    end
+    else
+      render :file => "public/404.html", :status => 404, :layout => false
     end
   end
 
@@ -92,5 +99,7 @@ class ArticlesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  
 
 end

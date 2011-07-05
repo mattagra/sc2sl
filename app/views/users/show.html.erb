@@ -1,3 +1,7 @@
+<div id="fullpage2">
+				<div id="newsmain"><br>
+<%= image_tag @user.avatar %>
+
 <%= @user.login %>
 <br />
 <% if @user == current_user %>
@@ -5,6 +9,7 @@
   <b>Email:</b>
   <%=h @user.email %>
 </p>
+<% end %>
 
 <p>
   <b>Country:</b>
@@ -13,20 +18,24 @@
   <% end %>
 </p>
 
-<%= link_to 'Update my Information', edit_account_path %>
+<p>
+  <b>Race: </b>
+  <%= image_tag race_icon_url(@user.race), :alt => "protoss" %>
+</p>
+<% if @user == current_user %>
 
+<%= link_to 'Update Information', edit_account_path %>
+<% elsif current_user.is_admin? %>
+<%= link_to "Update Information", edit_user_path(@user) %>
 <% end %>
 
-<p>
-  <b>Comments:</b>
-  <%- @user.comments.each do |comment| %>
-    <br />
-    <b><%= comment.user.login %> said: </b>
-    <br />
-    <%= comment.description %>
-  <% end %>
-</p>
+<h3>Comments:</h3>
+  <%= render  @user.comments.order('id desc') %>
+  <%= render :partial => "comments/comment_footer" %>
 
 <p>
   <%= render :partial => "comments/form" %>
 </p>
+
+</div>
+</div>

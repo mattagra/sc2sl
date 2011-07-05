@@ -18,7 +18,7 @@ Sc2sl::Application.routes.draw do
 
   resources :comments
   
-  match 'articles/:year/:month/:day/:url' => 'articles#show', :as => :named_article
+  match 'articles/:year/:month/:day/:url' => 'articles#show', :constraints => { :year => /\d{4}/, :month => /\d{2}/, :day => /\d{2}/ },  :as => :named_article
 
   resources :articles do |articles|
     resources :comments

@@ -10,17 +10,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110615203032) do
+ActiveRecord::Schema.define(:version => 20110704184442) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
     t.text     "summary"
     t.text     "description"
     t.integer  "user_id"
-    t.string   "tags"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.boolean  "featured"
+    t.string   "featured_photo_file_name"
+    t.string   "featured_photo_content_type"
+    t.integer  "featured_photo_file_size"
   end
 
   create_table "attachments", :force => true do |t|
@@ -43,7 +49,6 @@ ActiveRecord::Schema.define(:version => 20110615203032) do
   create_table "countries", :force => true do |t|
     t.string   "name"
     t.string   "short"
-    t.string   "flag_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -114,15 +119,21 @@ ActiveRecord::Schema.define(:version => 20110615203032) do
     t.datetime "updated_at"
   end
 
-  create_table "streams", :force => true do |t|
-    t.string   "name"
-    t.string   "url"
-    t.integer  "country_id"
-    t.text     "description"
-    t.integer  "user_id"
-    t.integer  "match_id"
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context"
     t.datetime "created_at"
-    t.datetime "updated_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
   end
 
   create_table "teams", :force => true do |t|
@@ -161,8 +172,16 @@ ActiveRecord::Schema.define(:version => 20110615203032) do
     t.integer  "bnet_id"
     t.text     "signature"
     t.integer  "country_id"
+    t.integer  "permission_level"
+    t.boolean  "caster"
+    t.string   "team_name"
+    t.string   "website"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.boolean  "photo_approved"
   end
 
 end

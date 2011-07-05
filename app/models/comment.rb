@@ -13,4 +13,8 @@ class Comment < ActiveRecord::Base
     new_object
   end
 
+  def formatted_time
+    self.created_at.strftime("%b %d %Y %H:%M").upcase
+  end
+
 end

@@ -3,7 +3,22 @@ class User < ActiveRecord::Base
     #c.my_config_option = my_value # for available options see documentation in: Authlogic::ActsAsAuthentic
   end # block optional
 
-  attr_protected :permission_level, :login
+  has_attached_file :photo,
+    :styles => {
+      :normal => "96x96",
+      :thumb => "32x32"
+    }
+
+
+  def avatar
+    if self.photo.exists? and self.photo_approved != false
+      self.photo.url(:normal)
+    else
+      "/css/images/comment/avatar.jpg"
+    end
+  end
+
+  attr_protected :permission_level, :login, :team_name, :caster, :website, :email
   
   validates :email, :presence => true, :uniqueness => true, :email_format => true
   validates :login, :presence => true, :uniqueness => true, :length => {:within => 3..20}
