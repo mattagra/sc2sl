@@ -147,18 +147,18 @@
     </div>
 
     <div class="article">
+      <% if @article %>
+        <div class="article-image"><%= link_to(image_tag(@article.featured_photo.url(:normal)), view_article_path(@article)) %></div>
+        <div class="article-titre"><%= link_to @article.title, view_article_path(@article) %> </div>
 
-      <div class="article-image"><%= link_to(image_tag(@article.featured_photo.url(:normal)), view_article_path(@article)) %></div>
-      <div class="article-titre"><%= link_to @article.title, view_article_path(@article) %> </div>
+        <div class="article-texte"><%= simple_format(auto_link(truncate_words(@article.description, 200))) %>
+          <br/> &nbsp;
 
-      <div class="article-texte"><%= simple_format(auto_link(truncate_words(@article.description, 200))) %>
-        <br/> &nbsp;
-
-        <div align="right">
-          <%= @article.created_at.strftime("%b %d") %>,  <%= @article.user.login %> <b><%= link_to "Read More", view_article_path(@article) %></b>
+          <div align="right">
+            <%= @article.created_at.strftime("%b %d") %>,  <%= @article.user.login %> <b><%= link_to "Read More", view_article_path(@article) %></b>
+          </div>
         </div>
-      </div>
-
+      <% end %>
     </div>
 
   </div>
@@ -193,7 +193,7 @@
       </div>
       <% @articles.each do |article| %>
         <%= link_to content_tag(:font, article.created_at.strftime("%m/%d/%Y") + " - ", :class => "ntitle2") + content_tag(:font, article.title, :class => "ntitle"), view_article_path(article) %>
-      <br />
+        <br />
       <% end %>
     </div>
     <div id="middle">

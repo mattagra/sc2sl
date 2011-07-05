@@ -1,13 +1,12 @@
-<b><%= form.label :first_name %></b><br />
 <b><%= form.label :email %></b><br />
-<% if form.object.new_record? or current_user.is_admin? %>
+<% if form.object.new_record? or (current_user and current_user.is_admin?) %>
 <%=  form.text_field :email %>
 <% else %>
 <%=  form.object.email %>
 <% end  %>
 <br />
 <b><%= form.label :login %></b><br />
-<% if form.object.new_record? or current_user.is_admin? %>
+<% if form.object.new_record? or (current_user and current_user.is_admin?) %>
 <%=  form.text_field :login %>
 <% else %>
 <%= form.object.login %>
@@ -35,7 +34,7 @@
 <b><%= form.label :race %></b><br />
 <%=  form.select :race, ["protoss", "zerg", "terran", "random"] %>
 <br />
-<% if current_user.is_admin? %>
+<% if current_user and current_user.is_admin? %>
 <b><%= form.label :caster %></b><br />
 <%= form.check_box :caster %>
 <br />

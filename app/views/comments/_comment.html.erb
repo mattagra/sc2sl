@@ -3,7 +3,7 @@
       <td colspan="2">
         <div id="commentup">
           <div id="thumbs">
-            <div align="right"><a href="#" class="commentuptime">Quote - <%= link_to "Edit", edit_comment_path(comment) %>  - Warn - Censor </a></div>
+            <div align="right"><a href="#" class="commentuptime">Quote - <%= link_to "Edit", edit_comment_path(comment, :url => request.fullpath) %>  - Warn - Censor </a></div>
           </div>
           <% if comment.user.country %><%=  image_tag comment.user.country.flag, :alt => comment.user.country.name %> <% end %>  <%= link_to comment.user.login, profile_path(comment.user) %> <span class="commentuptime"><%= comment.formatted_time %> </span></div></td>
     </tr>

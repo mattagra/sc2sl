@@ -11,7 +11,7 @@ class UserSessionsController < ApplicationController
     if @user_session.save
       @user_session.user.reset_perishable_token!
       flash[:notice] = "Login successful!"
-      redirect_back_or_default account_url
+      redirect_back_or_default root_url
     else
       flash[:notice] = "Login not succesful, please try again."
       render :action => :new

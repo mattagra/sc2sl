@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.login = params[:user][:login]
+    @user.email = params[:user][:email]
     if @user.save
       flash[:notice] = "Thank you for registering. Please check your email to confirm your information before proceding."
       UserMailer.activation(@user).deliver
@@ -37,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if params[:id] and current_user.is_admin?
+    if params[:id] and current_user and current_user.is_admin?
       @user = User.find(params[:id])
     else
       @user = current_user
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if params[:id] and current_user.is_admin?
+    if params[:id] and current_user and current_user.is_admin?
       @user = User.find(params[:id])
     else
       @user = current_user

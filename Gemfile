@@ -12,6 +12,7 @@ gem 'stringex'
 gem 'paperclip'
 gem 'paperclip'
 gem 'acts-as-taggable-on'
+gem 'jquery-rails', '>= 1.0.3'
 
 # Use unicorn as the web server
 # gem 'unicorn'

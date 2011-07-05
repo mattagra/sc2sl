@@ -6,7 +6,7 @@
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
     <title>PokerStrategy.com SC2SL</title>
-
+    <%= javascript_include_tag :defaults %>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
     <meta name="title" content="SC2SL" />
@@ -229,10 +229,10 @@
             <% if params[:notice] %>
               <div id="notice"><%= params[:notice] %> </div><% end %>
             <%= yield %>
-            
+
           </div>
           <div id="right">
-            
+
 
             <div id="advertissement">
 

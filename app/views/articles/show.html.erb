@@ -8,7 +8,7 @@
       <div style="float:left;">
         <%= @article.title %> <br />
         <div id="undertitle">
-          <%= @article.formatted_time %> | <%= link_to @article.user.login, profile_path(@article) %>
+          <%= @article.formatted_time %> | <%= link_to @article.user.login, profile_path(@article) %><% if (current_user and current_user.is_moderator?) %> | <%= link_to 'edit', edit_article_path(@article) %><% end %>
         </div>
       </div>
       <div id="titrecom">
@@ -24,10 +24,20 @@
     </p>
   </div>
   <div id="footernews" align="right">
-    <a href="#"><img src="/css/images/comment/reddit.png" alt="add a comment"></a>
-    <a href="#"><img src="/css/images/comment/fbook.png" alt="add a comment"></a>
-    <a href="#"><img src="/css/images/comment/twitter.png" alt="add a comment"></a>
-    <br>
+    <script type="text/javascript">var switchTo5x=false;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'03241b11-6315-49ee-98d8-7b7d13dcc018'});</script>
+  <!-- Place this tag in your head or just before your close body tag -->
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+
+<!-- Place this tag where you want the +1 button to render -->
+<table>
+  <tr>
+    <td><span  class='st_reddit' displayText='Reddit'></span></td>
+    <td><span  class='st_twitter' displayText='Tweet'></span></td>
+    <td><span  class='st_facebook' displayText='Facebook'></span></td>
+    <td><g:plusone size="small"></g:plusone></td>
+  </tr>
+</table>
+ <br>
     <span class="style7" style="color: #000000"><font style="text-transform:uppercase;font-size:10px;font-color:#333333"><%= @article.comments.count %>  comments | Add a comment</font><br>
 							 PAGE 1 | 2 | 3</span>				    <br>
 
@@ -37,19 +47,15 @@
   <%=raw tags_to_links(@article.tags) %>
 
 
-<h3>Comments: </h3>
-<div id="comments">
-  <%= render @article.comments %>
-  <% if @article.comments.count > 0 %>
-  <%= render :partial => "comments/comment_footer" %>
-  <% end %>
-</div>
-<p>
-  <%= render :partial => "comments/form" %>
-</p>
-
-
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+  <h3>Comments: </h3>
+  <div id="comments">
+    <%= render @article.comments %>
+    <% if @article.comments.count > 0 %>
+      <%= render :partial => "comments/comment_footer" %>
+    <% end %>
+  </div>
+  <p>
+    <%= render :partial => "comments/form" %>
+  </p>
 
 </div>

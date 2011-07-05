@@ -22,6 +22,9 @@ Sc2sl::Application.routes.draw do
 
   resources :articles do |articles|
     resources :comments
+    collection do
+      get 'upload_image'
+    end
   end
 
   resources :partners
