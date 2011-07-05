@@ -13,6 +13,8 @@ module Sc2sl
     # -- all .rb files in that directory are automatically loaded.
         Dir.glob("./lib/*.{rb}").each { |file| require file }
     config.filter_parameters << :password << :password_confirmation
+
+    IMGUR_API_KEY = "edb81443e23154af166573652a25544a"
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
 
