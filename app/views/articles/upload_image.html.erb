@@ -1,0 +1,5 @@
+<%- form_tag "http://api.imgur.com/2/upload", :method => :post, :multipart => true, :remote => true do %>
+<%= hidden_field_tag "key", Sc2sl::Application::IMGUR_API_KEY %>
+<%= file_field_tag "image" %>
+<%= hidden_field_tag "type", "file" %>
+<%= submit_tag "Upload" %>
