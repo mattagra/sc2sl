@@ -1,1 +1,293 @@
-Index Page
+
+<div id="fullpage3">
+  <div id="left">
+
+    <div id="ranking">
+
+      <div id="ranking-titre">
+
+        <div id="ranking-titre-fleche"></div>
+
+        <div id="ranking-titre-texte">RANKING</div>
+
+        <div id="ranking-titre-texte-right">+ see statistics</div>
+
+      </div>
+
+      <div id="ranking-content">
+
+        <div id="ranking-ligne-titre">
+
+          <div class="ranking-ligne-titre-id">#</div>
+
+          <div class="ranking-ligne-titre-name">Name</div>
+
+          <div class="ranking-ligne-titre-points">Points</div>
+
+          <div class="ranking-ligne-titre-win">Win</div>
+
+          <div class="ranking-ligne-titre-loose">Loose</div>
+
+          <div class="ranking-ligne-titre-mw">MW</div>
+
+          <div class="ranking-ligne-titre-ml">ML</div>
+
+        </div>
+
+        <div class="ranking-ligne">
+
+          <div class="ranking-ligne-id">1.</div>
+
+          <div class="ranking-ligne-name"><img src="css/images/drapeaux/fr.jpg" alt="francais" />Millenium</div>
+
+          <div class="ranking-ligne-points">3458pts</div>
+
+          <div class="ranking-ligne-win">96</div>
+
+          <div class="ranking-ligne-loose">16</div>
+
+          <div class="ranking-ligne-mw">3</div>
+
+          <div class="ranking-ligne-ml">3</div>
+
+        </div>
+
+        <div class="ranking-ligne" style="background-color : #E7E2E2;" >
+
+          <div class="ranking-ligne-id">2.</div>
+
+          <div class="ranking-ligne-name"><img src="css/images/drapeaux/fr.jpg" alt="francais" />Fnactic.msi</div>
+
+          <div class="ranking-ligne-points">2758pts</div>
+
+          <div class="ranking-ligne-win">92</div>
+
+          <div class="ranking-ligne-loose">16</div>
+
+          <div class="ranking-ligne-mw">1</div>
+
+          <div class="ranking-ligne-ml">6</div>
+
+        </div>
+
+        <div class="ranking-ligne">
+
+          <div class="ranking-ligne-id">3.</div>
+
+          <div class="ranking-ligne-name"><img src="css/images/drapeaux/fr.jpg" alt="francais" />Na'vi</div>
+
+          <div class="ranking-ligne-points">2256pts</div>
+
+          <div class="ranking-ligne-win">82</div>
+
+          <div class="ranking-ligne-loose">6</div>
+
+          <div class="ranking-ligne-mw">1</div>
+
+          <div class="ranking-ligne-ml">3</div>
+
+        </div>
+
+        <div class="ranking-ligne" style="background-color : #E7E2E2;" >
+
+          <div class="ranking-ligne-id">4.</div>
+
+          <div class="ranking-ligne-name"><img src="css/images/drapeaux/fr.jpg" alt="francais" />SK Gaming</div>
+
+          <div class="ranking-ligne-points">2138pts</div>
+
+          <div class="ranking-ligne-win">96</div>
+
+          <div class="ranking-ligne-loose">16</div>
+
+          <div class="ranking-ligne-mw">3</div>
+
+          <div class="ranking-ligne-ml">3</div>
+
+        </div>
+
+        <div class="ranking-ligne">
+
+          <div class="ranking-ligne-id">5.</div>
+
+          <div class="ranking-ligne-name"><img src="css/images/drapeaux/fr.jpg" alt="francais" />Extensive</div>
+
+          <div class="ranking-ligne-points">2005pts</div>
+
+          <div class="ranking-ligne-win">44</div>
+
+          <div class="ranking-ligne-loose">9</div>
+
+          <div class="ranking-ligne-mw">3</div>
+
+          <div class="ranking-ligne-ml">3</div>
+
+        </div>
+
+        <div class="ranking-ligne" style="background-color : #E7E2E2;" >
+
+          <div class="ranking-ligne-id">6.</div>
+
+          <div class="ranking-ligne-name"><img src="css/images/drapeaux/fr.jpg" alt="francais" />Ching.Gaming</div>
+
+          <div class="ranking-ligne-points">1938pts</div>
+
+          <div class="ranking-ligne-win">56</div>
+
+          <div class="ranking-ligne-loose">26</div>
+
+          <div class="ranking-ligne-mw">3</div>
+
+          <div class="ranking-ligne-ml">2</div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="article">
+
+      <div class="article-image"><%= link_to(image_tag(@article.featured_photo.url(:normal)), view_article_path(@article)) %></div>
+      <div class="article-titre"><%= link_to @article.title, view_article_path(@article) %> </div>
+
+      <div class="article-texte"><%= simple_format(auto_link(truncate_words(@article.description, 200))) %>
+        <br/> &nbsp;
+
+        <div align="right">
+          <%= @article.created_at.strftime("%b %d") %>,  <%= @article.user.login %> <b><%= link_to "Read More", view_article_path(@article) %></b>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="center">
+
+    <div id="middle-full">
+
+      <div id="middle-titre">
+
+        <div id="middle-titre-fleche"></div>
+
+        <div id="middle-titre-texte">SC2SL CALENDAR</div>
+
+        <div id="middle-titre-texte-right">
+        </div>
+      </div>
+      <img src="css/images/calendar.jpg" />
+
+    </div>
+
+    <div id="middlenews">
+
+      <div id="middle-titre">
+
+        <div id="middle-titre-fleche"></div>
+
+        <div id="middle-titre-texte">LAST NEWS</div>
+
+        <div id="middle-titre-texte-right">+see all</div>
+
+      </div>
+      <% @articles.each do |article| %>
+        <%= link_to content_tag(:font, article.created_at.strftime("%m/%d/%Y") + " - ", :class => "ntitle2") + content_tag(:font, article.title, :class => "ntitle"), view_article_path(article) %>
+      <br />
+      <% end %>
+    </div>
+    <div id="middle">
+
+      <div id="middle-titre">
+
+        <div id="middle-titre-fleche"></div>
+
+        <div id="middle-titre-texte">LAST REPLAYS</div>
+
+        <div id="middle-titre-texte-right">+see all</div>
+
+      </div>
+
+
+      <table width="346" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td height="26" width="34" valign="middle">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/goldstar.png" alt="download the replay" /></a> </td>
+          <td  width="150"  valign="absmiddle"><img src="css/images/races/mauve.jpg" alt="mauve" align="top"/>&nbsp;aAa <b>Nerchio</b></td>
+          <td  width="150"  valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
+          <td width="20" valign="middle" vspace="2"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay" /></a></td>
+        </tr>
+      </table>
+      <table width="346" cellpadding="0" cellspacing="0" bgcolor="#E7E2E2">
+        <tr>
+          <td height="26" width="33" align="left">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/silverstar.png" alt="download the replay" /></a> </td>
+          <td  width="150" valign="middle"><img src="css/images/races/mauve.jpg" alt="mauve"  align="top"/>&nbsp;aAa <b>Nerchio</b></td>
+          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
+          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
+        </tr>
+      </table>
+      <table width="346" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td height="26" width="34" valign="middle">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/bronzestar.png" alt="download the replay" /></a> </td>
+          <td  width="150" valign="absmiddle"><img src="css/images/races/mauve.jpg" alt="mauve" align="top"/>&nbsp;aAa <b>Nerchio</b></td>
+          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
+          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
+        </tr>
+      </table>
+      <table width="346" cellpadding="0" cellspacing="0" bgcolor="#E7E2E2">
+        <tr>
+          <td height="26" width="33" align="left">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/bronzestar.png" alt="download the replay" /></a> </td>
+          <td  width="150" valign="middle"><img src="css/images/races/mauve.jpg" alt="mauve"  align="top"/>&nbsp;aAa <b>Nerchio</b></td>
+          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
+          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
+        </tr>
+      </table>	<table width="346" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td height="26" width="34" valign="middle">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/bronzestar.png" alt="download the replay" /></a> </td>
+          <td  width="150" valign="absmiddle"><img src="css/images/races/mauve.jpg" alt="mauve" align="top"/>&nbsp;aAa <b>Nerchio</b></td>
+          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
+          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
+        </tr>
+      </table>
+      <table width="346" cellpadding="0" cellspacing="0" bgcolor="#E7E2E2">
+        <tr>
+          <td height="26" width="33" align="left">&nbsp;&nbsp; </td>
+          <td  width="150" valign="middle"><img src="css/images/races/mauve.jpg" alt="mauve"  align="top"/>&nbsp;aAa <b>Nerchio</b></td>
+          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
+          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
+        </tr>
+      </table>	<table width="346" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td height="26" width="34" valign="middle">&nbsp;&nbsp; </td>
+          <td  width="150" valign="absmiddle"><img src="css/images/races/mauve.jpg" alt="mauve" align="top"/>&nbsp;aAa <b>Nerchio</b></td>
+          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
+          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
+        </tr>
+      </table>
+      <table width="346" cellpadding="0" cellspacing="0" bgcolor="#E7E2E2">
+        <tr>
+          <td height="26" width="33" align="left">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/silverstar.png" alt="download the replay" /></a> </td>
+          <td  width="150" valign="middle"><img src="css/images/races/mauve.jpg" alt="mauve"  align="top"/>&nbsp;aAa <b>Nerchio</b></td>
+          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
+          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
+        </tr>
+      </table>	<table width="346" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td height="26" width="34" valign="middle">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/goldstar.png" alt="download the replay" /></a> </td>
+          <td  width="150" valign="absmiddle"><img src="css/images/races/mauve.jpg" alt="mauve" align="top"/>&nbsp;aAa <b>Nerchio</b></td>
+          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
+          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
+        </tr>
+      </table>
+      <table width="346" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td height="26" width="34" valign="middle">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/goldstar.png" alt="download the replay" /></a> </td>
+          <td  width="150" valign="absmiddle"><img src="css/images/races/mauve.jpg" alt="mauve" align="top"/>&nbsp;aAa <b>Nerchio</b></td>
+          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
+          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
+        </tr>
+      </table>
+
+    </div>
+
+  </div></div>
+

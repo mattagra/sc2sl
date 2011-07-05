@@ -6,10 +6,20 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_timezone
   before_filter :mailer_set_url_options
+  before_filter :tag_cloud
+  before_filter :articles
 
   private
   def mailer_set_url_options
     ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end
+
+  def articles
+    @articles = Article.order("articles.id desc").limit(5)
+  end
+
+  def tag_cloud
+    @tags = Article.tag_counts_on(:tags)
   end
 
 
@@ -42,7 +52,7 @@ class ApplicationController < ActionController::Base
     unless current_user and current_user.is_admin?
       store_location
       flash[:notice] = "You do not have access to this page"
-      render :status => 404
+      render :file => "public/404.html", :status => 404, :layout => false
       return false
     end
   end
@@ -51,7 +61,7 @@ class ApplicationController < ActionController::Base
     unless current_user and current_user.is_moderator?
       store_location
       flash[:notice] = "You do not have access to this page"
-      render :status => 404
+      render :file => "public/404.html", :status => 404, :layout => false
       return false
     end
   end
@@ -60,7 +70,7 @@ class ApplicationController < ActionController::Base
     unless current_user and current_user.is_super_admin?
       store_location
       flash[:notice] = "You do not have access to this page"
-      render :status => 404
+      render :file => "public/404.html", :status => 404, :layout => false
       return false
     end
   end
@@ -78,7 +88,7 @@ class ApplicationController < ActionController::Base
   end
 
   def store_location
-    session[:return_to] = request.request_uri
+    session[:return_to] = request.fullpath
   end
 
   def redirect_back_or_default(default)

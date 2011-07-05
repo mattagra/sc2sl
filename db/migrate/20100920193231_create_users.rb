@@ -28,7 +28,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer   :bnet_id
       t.text      :signature
       t.integer   :country_id
-      t.inteer    :permission_level #0 for banned, 1 for normal, 2 for news moderation, 3 for match moderation, 4 for super admin
+      t.integer    :permission_level #0 for banned, 1 for normal, 2 for news moderation, 3 for match moderation, 4 for super admin
       t.boolean   :caster
       t.string    :team_name
       t.string    :website

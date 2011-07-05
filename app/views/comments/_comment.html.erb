@@ -1,0 +1,26 @@
+<table width="780" border="0" cellpadding="0" cellspacing="0" id="comtab">
+  <tbody><tr>
+      <td colspan="2">
+        <div id="commentup">
+          <div id="thumbs">
+            <div align="right"><a href="#" class="commentuptime">Quote - <%= link_to "Edit", edit_comment_path(comment) %>  - Warn - Censor </a></div>
+          </div>
+          <% if comment.user.country %><%=  image_tag comment.user.country.flag, :alt => comment.user.country.name %> <% end %>  <%= link_to comment.user.login, profile_path(comment.user) %> <span class="commentuptime"><%= comment.formatted_time %> </span></div></td>
+    </tr>
+    <tr>
+      <td width="94" valign="top"><div id="div"> <%= link_to (image_tag comment.user.avatar, :alt => "", :width => 90, :height => 96, :vspace => 4, :hspace => 4, :border => 1), profile_path(comment.user) %></a><br>
+          <%= image_tag race_icon_url(comment.user.race), :align => "absmiddle", :width => 21, :height => 13, :hspace => 4 %>  <span class="lineup"><%= comment.user.race.capitalize %> </span><br>
+          <span class="lineup"><% if comment.user.caster %> <img src="/css/images/comment/Mic.png" alt="" width="22" height="22" vspace="4" align="absmiddle"><% end %> <%= comment.user.team_name.to_s.upcase %> </span> </div></td>
+      <td width="724" valign="top" padding="10" align="center"><table width="690" height="146" border="0" cellpadding="0">
+          <tbody><tr valign="top">
+              <td><%= simple_format comment.description %><br>
+                <hr>
+                <span class="signature"><%= comment.user.signature %></span>
+              </td>
+            </tr>
+          </tbody></table>                                   </td>
+    </tr>
+  </tbody></table>
+
+
+

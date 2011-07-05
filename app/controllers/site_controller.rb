@@ -1,5 +1,6 @@
 class SiteController < ApplicationController
   def index
+    @article = Article.order('articles.id desc').where(:featured => true).first
   end
 
   def about

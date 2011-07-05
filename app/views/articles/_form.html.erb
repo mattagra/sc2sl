@@ -1,4 +1,4 @@
-<%= form_for(@article) do |f| %>
+<%= form_for(@article,  :html => { :multipart => true } ) do |f| %>
   <% if @article.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
@@ -17,15 +17,36 @@
   </div>
   <div class="field">
     <%= f.label :summary %><br />
-    <%= f.text_area :summary %>
+    <%= f.text_area :summary, :rows => 2, :cols => 50 %>
   </div>
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
+<div class="field">
+  <%= f.label :photo %>
+  <%= f.file_field :photo %>
+  <br />
+  <% if @article.photo.exists? then %>
+	<%= image_tag @article.photo.url(:normal) %>
+<% end %>
+</div>
+
+<div class="field">
+  <%= f.label :featured %>
+  <%= f.check_box :featured %>
+</div>
+<div class="field">
+  <%= f.label :featured_photo %>
+  <%= f.file_field :featured_photo %>
+  <br />
+  <% if @article.featured_photo.exists? then %>
+	<%= image_tag @article.featured_photo.url(:normal) %>
+<% end %>
+</div>
   <div class="field">
-    <%= f.label :tags %><br />
-    <%= f.text_field :tags %>
+    <%= f.label :tag_list %><br />
+    <%= f.text_field :tag_list %>
   </div>
   <div class="actions">
     <%= f.submit %>

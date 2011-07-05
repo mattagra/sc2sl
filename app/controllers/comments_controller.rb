@@ -50,12 +50,13 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(params[:comment])
     @comment.user = current_user
+    url_back = params[:url]
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to(@comment, :notice => 'Comment was successfully created.') }
+        format.html { redirect_to(url_back) }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to(url_back, :errors => @comment.errors, :notice => "All entries must be at least 5 characters and at most 750.") }
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
       end
     end
