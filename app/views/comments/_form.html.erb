@@ -13,7 +13,7 @@
   <% end %>
   <%= f.hidden_field :external_type %>
   <%= f.hidden_field :external_id %>
-  <%= hidden_field_tag :url, params[:url] || request.fullpath  %>
+  <%= hidden_field_tag :back_url, params[:back_url] || request.fullpath  %>
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description, :cols => 75, :rows => 10 %>

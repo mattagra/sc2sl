@@ -50,7 +50,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(params[:comment])
     @comment.user = current_user
-    url_back = params[:url]
+    url_back = params[:back_url]
     respond_to do |format|
       if @comment.save
         format.html { redirect_to(url_back) }
@@ -66,7 +66,7 @@ class CommentsController < ApplicationController
   # PUT /comments/1.xml
   def update
     @comment = Comment.find(params[:id])
-    url_back = params[:url]
+    url_back = params[:back_url]
     if current_user.is_moderator? or @comment.user == current_user
       respond_to do |format|
         if @comment.update_attributes(params[:comment])

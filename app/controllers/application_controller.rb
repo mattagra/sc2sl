@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def articles
-    @articles = Article.order("articles.id desc").limit(5)
+    @articles = Article.order("articles.id desc").limit(8)
   end
 
   def tag_cloud
