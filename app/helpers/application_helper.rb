@@ -21,10 +21,10 @@ module ApplicationHelper
       "/css/images/races/jaune.jpg"
     when "zerg"
       "/css/images/races/mauve.jpg"
-    when "random"
+    when "terran"
       "/css/images/races/rogue.jpg"
     else
-      "/css/images/races/rogue.jpg"
+      "/css/images/races/random.jpg"
     end
   end
 
