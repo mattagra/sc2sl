@@ -35,6 +35,9 @@ class UsersController < ApplicationController
       flash[:params] = "Cannot Find a User with that ID"
       redirect_to root_url
     end
+    @current_page = (params[:page].to_i || 0)
+    @comments_count = @user.comments.count
+    @comments= @user.comments.paginated(10, @current_page)
   end
 
   def edit

@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
   # GET /teams.xml
   def index
     @teams = Team.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @teams }
@@ -16,6 +16,9 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find_by_name(Team.deslug(params[:name]))
     @comment = Comment.new_of_type(@team)
+    @current_page = (params[:page].to_i || 0)
+    @comments_count = @team.comments.count
+    @comments= @team.comments.paginated(10, @current_page)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @team }

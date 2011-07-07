@@ -12,7 +12,7 @@ Sc2sl::Application.routes.draw do
 
   resources :players
 
-  get "/teams/:name" => "teams#show"
+  get "/teams/:name" => "teams#show", :as => :named_team
 
   resources :teams
 

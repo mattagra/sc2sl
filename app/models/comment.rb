@@ -6,6 +6,12 @@ class Comment < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :description, :presence => true, :length => {:minimum => 5, :maximum => 750}
 
+  scope :newest, order('id asc')
+
+  scope :paginated, lambda { |page, offset|
+    newest.limit(page).offset(offset)
+  }
+
   def self.new_of_type(model)
     new_object = self.new
     new_object.external_type = model.class.to_s

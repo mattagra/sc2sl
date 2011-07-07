@@ -18,6 +18,9 @@ class MatchesController < ApplicationController
   def show
     @match = Match.find(params[:id])
     @comment = Comment.new_of_type(@match)
+        @current_page = (params[:page].to_i || 0)
+      @comments_count = @match.comments.count
+      @comments= @match.comments.paginated(10, @current_page)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @match }

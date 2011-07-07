@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
   belongs_to :country
 
   has_one :player, :conditions => ["players.date_quit is null"]
+  has_many :players
+  #has_many :games, :through => :players
 
   before_save :capitalize_names, :reset_tokens
 

@@ -5,6 +5,9 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.all
+    @current_page = (params[:page].to_i || 0)
+      @comments_count = @games.comments.count
+      @comments= @games.comments.paginated(10, @current_page)
 
     respond_to do |format|
       format.html # index.html.erb

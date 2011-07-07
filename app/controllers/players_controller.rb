@@ -17,6 +17,9 @@ class PlayersController < ApplicationController
   def show
     @player = Player.find(params[:id])
     @comment = Comment.new_of_type(@player)
+    @current_page = (params[:page].to_i || 0)
+    @comments_count = @player.comments.count
+    @comments= @player.comments.paginated(10, @current_page)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @player }

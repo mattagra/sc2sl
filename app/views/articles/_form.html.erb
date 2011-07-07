@@ -1,57 +1,57 @@
-<%= form_for(@article,  :html => { :multipart => true } ) do |f| %>
-  <% if @article.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+  <%= form_for(@article,  :html => { :multipart => true } ) do |f| %>
+    <% if @article.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
 
-      <ul>
-      <% @article.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <ul>
+          <% @article.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :summary %><br />
+      <%= f.text_area :summary, :rows => 2, :cols => 50 %>
+    </div>
+    <div>
+      <%= link_to "Upload Image", upload_image_articles_path, :onclick => "window.open(this.href, 'Upload Image', 'status=0,toolbar=0,location=0,menubar=0,resizable=0,scrollbars=0,height=500,width=400');return false;" %>
+    </div>
+    <div class="field">
+      <%= f.label :description %><br />
+      <%= f.text_area :description %>
+    </div>
+    <div class="field">
+      <%= f.label :photo %>
+      <%= f.file_field :photo %>
+      <br />
+      <% if @article.photo.exists? then %>
+        <%= image_tag @article.photo.url(:normal) %>
       <% end %>
-      </ul>
+    </div>
+
+    <div class="field">
+      <%= f.label :featured %>
+      <%= f.check_box :featured %>
+    </div>
+    <div class="field">
+      <%= f.label :featured_photo %>
+      <%= f.file_field :featured_photo %>
+      <br />
+      <% if @article.featured_photo.exists? then %>
+        <%= image_tag @article.featured_photo.url(:normal) %>
+      <% end %>
+    </div>
+    <div class="field">
+      <%= f.label :tag_list %><br />
+      <%= f.text_field :tag_list %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :summary %><br />
-    <%= f.text_area :summary, :rows => 2, :cols => 50 %>
-  </div>
-<div>
-  <%= link_to "Upload Image", upload_image_articles_path, :onclick => "window.open(this.href, 'Upload Image', 'status=0,toolbar=0,location=0,menubar=0,resizable=0,scrollbars=0,height=500,width=400');return false;" %>
-</div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-<div class="field">
-  <%= f.label :photo %>
-  <%= f.file_field :photo %>
-  <br />
-  <% if @article.photo.exists? then %>
-	<%= image_tag @article.photo.url(:normal) %>
-<% end %>
-</div>
-
-<div class="field">
-  <%= f.label :featured %>
-  <%= f.check_box :featured %>
-</div>
-<div class="field">
-  <%= f.label :featured_photo %>
-  <%= f.file_field :featured_photo %>
-  <br />
-  <% if @article.featured_photo.exists? then %>
-	<%= image_tag @article.featured_photo.url(:normal) %>
-<% end %>
-</div>
-  <div class="field">
-    <%= f.label :tag_list %><br />
-    <%= f.text_field :tag_list %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>

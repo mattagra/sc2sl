@@ -5,7 +5,10 @@ class CommentsController < ApplicationController
   before_filter :require_moderator, :only => [:destroy]
 
   def index
-    @comments = Comment.all
+    @current_page = (params[:page].to_i || 0)
+    @comments= Comment.paginated(10, @current_page)
+    @comments_count = @comments.count
+    @comment = Comment.new_of_type(@comment)
 
     respond_to do |format|
       format.html # index.html.erb
