@@ -32,6 +32,10 @@ class Article < ActiveRecord::Base
     self.created_at.strftime("%B %d %Y %H:%M")
   end
 
+  def formatted_description
+    self.description.bbcode_to_html_with_formatting.bbcode_to_html({}, false, :disable)
+  end
+
 
 
 end

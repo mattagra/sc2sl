@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
   has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{User.to_s}'"
   belongs_to :country
 
+  has_one :player, :conditions => ["players.date_quit is null"]
+
   before_save :capitalize_names, :reset_tokens
 
   def capitalize_names
@@ -64,7 +66,7 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    self.first_name + " " + self.last_name
+    self.login
   end
 
   def is_moderator?
@@ -79,5 +81,16 @@ class User < ActiveRecord::Base
     permission_level > 3
   end
 
+
+  def permission_level_text
+    case permission_level
+    when 2
+      "moderator"
+    when 3
+      "admin"
+    when 4
+      "super-admin"
+    end
+  end
 
 end

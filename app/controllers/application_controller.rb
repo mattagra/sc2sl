@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :current_admin, :current_moderator, :current_super_admin
   #filter_parameter_logging :password, :password_confirmation
 
   before_filter :set_timezone
@@ -37,6 +37,30 @@ class ApplicationController < ActionController::Base
   def current_user
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.record
+  end
+
+  def current_moderator
+    if current_user and current_user.is_moderator?
+      return current_user
+    else
+      return nil
+    end
+  end
+
+  def current_admin
+    if current_user and current_user.is_admin?
+      return current_user
+    else
+      return nil
+    end
+  end
+
+  def current_super_admin
+    if current_user and current_user.is_super_admin?
+      return current_user
+    else
+      return nil
+    end
   end
 
   def require_user

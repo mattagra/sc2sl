@@ -1,20 +1,43 @@
 <table width="780" border="0" cellpadding="0" cellspacing="0" id="comtab">
   <tbody><tr>
       <td colspan="2">
-        <div id="commentup">
+        <div class="commentup" id="comment_<%= comment.id %>">
           <div id="thumbs">
-            <div align="right"><a href="#" class="commentuptime">Quote - <%= link_to "Edit", edit_comment_path(comment, :back_url => request.fullpath) %>  - Warn - Censor </a></div>
+            <div align="right"><a href="#" class="commentuptime"><%= link_to "Quote", new_comment_path(:comment_id => comment.id, :back_url => request.fullpath) %> - <%= link_to "Edit", edit_comment_path(comment, :back_url => request.fullpath) %>  - Warn - Censor </a></div>
           </div>
           <% if comment.user.country %><%=  image_tag comment.user.country.flag, :alt => comment.user.country.name %> <% end %>  <%= link_to comment.user.login, profile_path(comment.user) %> <span class="commentuptime"><%= comment.formatted_time %> </span></div></td>
     </tr>
     <tr>
-      <td width="94" valign="top"><div id="div"> <%= link_to (image_tag comment.user.avatar, :alt => "", :width => 90, :height => 96, :vspace => 4, :hspace => 4, :border => 1), profile_path(comment.user) %></a><br>
-          <%= image_tag race_icon_url(comment.user.race), :align => "absmiddle", :width => 21, :height => 13, :hspace => 4 %>  <span class="lineup"><%= comment.user.race.capitalize %> </span><br>
-          <span class="lineup"><% if comment.user.caster %> <img src="/css/images/comment/Mic.png" alt="" width="22" height="22" vspace="4" align="absmiddle"><% end %> <%= comment.user.team_name.to_s.upcase %> </span> </div></td>
-      <td width="724" valign="top" padding="10" align="center"><table width="690" height="146" border="0" cellpadding="0">
+      <td width="104" valign="top">
+        <div id="div">
+          <%= link_to (image_tag comment.user.avatar, :alt => "", :width => 90, :height => 96, :vspace => 4, :hspace => 4, :border => 1), profile_path(comment.user) %><br />
+          <%= image_tag race_icon_url(comment.user.race), :align => "top", :width => 21, :height => 13, :hspace => 4, :vspace => 3 %>  <span class="lineup"><%= comment.user.race.capitalize %> </span>
+          <% if comment.user.is_moderator? %>
+          <br />
+            <span class="lineup">
+              <img src="/css/images/comment/staff.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" /><%= comment.user.permission_level_text %>
+            </span>
+          <% end %>
+          <% if comment.user.player %>
+          <br />
+            <span class="lineup">
+              <img src="/css/images/comment/player.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" /><span style="overflow: visible"><%= link_to comment.user.player.team %></span>
+            </span>
+          <% end %>
+          <% if comment.user.caster %>
+          <br />
+            <span class="lineup">
+              <img src="/css/images/comment/caster.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" />caster
+            </span>
+          <% end %>
+
+
+        </div>
+      </td>
+      <td width="714" valign="top" padding="10" align="center"><table width="690" height="146" border="0" cellpadding="0">
           <tbody><tr valign="top">
-              <td><%= simple_format comment.description %><br>
-                <hr>
+              <td><%=raw comment.formatted_description %><br />
+                <hr />
                 <span class="signature"><%= comment.user.signature %></span>
               </td>
             </tr>

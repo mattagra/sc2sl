@@ -32,6 +32,16 @@ module ApplicationHelper
     named_article_path(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url)
   end
 
+  def sanitize_comments(comments)
+    comments = comments ? comments.to_str : ''
+    comments = comments.dup if comments.frozen?
+    comments.gsub!(/\r\n?/, "\n")
+    comments.gsub!(/\n/, "<br />")
+    Sanitize.clean(comments, Sanitize::Config::RELAXED)
+  end
+
+  
+
   
 
 end

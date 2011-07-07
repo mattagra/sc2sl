@@ -14,7 +14,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.xml
   def show
-    @team = Team.find(params[:id])
+    @team = Team.find_by_name(Team.deslug(params[:name]))
     @comment = Comment.new_of_type(@team)
     respond_to do |format|
       format.html # show.html.erb
@@ -45,7 +45,7 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to(@team, :notice => 'Team was successfully created.') }
+        format.html { redirect_to(team_path(@team.slug), :notice => 'Team was successfully created.') }
         format.xml  { render :xml => @team, :status => :created, :location => @team }
       else
         format.html { render :action => "new" }
@@ -61,7 +61,7 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.update_attributes(params[:team])
-        format.html { redirect_to(@team, :notice => 'Team was successfully updated.') }
+        format.html { redirect_to(team_path(@team.slug), :notice => 'Team was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

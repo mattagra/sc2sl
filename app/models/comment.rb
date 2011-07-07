@@ -17,4 +17,8 @@ class Comment < ActiveRecord::Base
     self.created_at.strftime("%b %d %Y %H:%M").upcase
   end
 
+  def formatted_description
+    self.description.bbcode_to_html_with_formatting.bbcode_to_html({}, false, :disable)
+  end
+
 end

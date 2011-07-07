@@ -62,7 +62,7 @@ have icons. Yes. Think about Fvwm (Linux) users like me -->
         xhr.open("POST", "http://api.imgur.com/2/upload.json"); // Boooom!
         xhr.onload = function() {
             // Big win!
-            document.querySelector("#link").value = "<img src='" + JSON.parse(xhr.responseText).upload.links.original + "' alt='Image Not Found' />";
+            document.querySelector("#link").value = "[img]" + JSON.parse(xhr.responseText).upload.links.original + "[/img]";
             document.body.className = "uploaded";
             document.querySelector("#link").select();
         }

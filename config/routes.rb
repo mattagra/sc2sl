@@ -12,6 +12,8 @@ Sc2sl::Application.routes.draw do
 
   resources :players
 
+  get "/teams/:name" => "teams#show"
+
   resources :teams
 
   resources :moderations
@@ -20,14 +22,12 @@ Sc2sl::Application.routes.draw do
   
   match 'articles/:year/:month/:day/:url' => 'articles#show', :constraints => { :year => /\d{4}/, :month => /\d{2}/, :day => /\d{2}/ },  :as => :named_article
 
-  resources :articles do |articles|
+  resources :articles do 
     resources :comments
     collection do
       get 'upload_image'
     end
   end
-
-  resources :partners
 
   resources :attachments
 

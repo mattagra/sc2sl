@@ -20,7 +20,7 @@
     <br />
     <p>
       <%- r = /([^a-z0-9_]|^)@([a-z0-9_]+)/i %>
-      <%= raw  auto_link(simple_format(@article.description)).gsub(r) {|m| "#{$1}<a href='http://twitter.com/#{$2}'>@#{$2}</a>#{$3}" }  %>
+      <%= raw  auto_link(@article.formatted_description).gsub(r) {|m| "#{$1}<a href='http://twitter.com/#{$2}'>@#{$2}</a>#{$3}" }  %>
     </p>
   </div>
   <div id="footernews" align="right">
@@ -31,10 +31,10 @@
 <!-- Place this tag where you want the +1 button to render -->
 <table>
   <tr>
-    <td><span  class='st_reddit' displayText='Reddit'></span></td>
-    <td><span  class='st_twitter' displayText='Tweet'></span></td>
-    <td><span  class='st_facebook' displayText='Facebook'></span></td>
-    <td><g:plusone size="small"></g:plusone></td>
+    <td valign="top"><span  class='st_reddit' displayText='Reddit'></span></td>
+    <td valign="top"><span  class='st_twitter' displayText='Tweet'></span></td>
+    <td valign="top"><g:plusone size="small"></g:plusone></td>
+    <td valign="top"><iframe src="http://www.facebook.com/plugins/like.php?app_id=150751279615&amp;href&amp;send=false&amp;layout=button_count&amp;width=85&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe></td>
   </tr>
 </table>
  <br>

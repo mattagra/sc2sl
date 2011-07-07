@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110704184442) do
+ActiveRecord::Schema.define(:version => 20110706222347) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -96,13 +96,6 @@ ActiveRecord::Schema.define(:version => 20110704184442) do
     t.datetime "updated_at"
   end
 
-  create_table "partners", :force => true do |t|
-    t.string   "name"
-    t.string   "url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "players", :force => true do |t|
     t.integer  "team_id"
     t.integer  "user_id"
@@ -143,6 +136,10 @@ ActiveRecord::Schema.define(:version => 20110704184442) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.text     "description"
   end
 
   create_table "users", :force => true do |t|
