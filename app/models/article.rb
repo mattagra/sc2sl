@@ -33,7 +33,7 @@ class Article < ActiveRecord::Base
   end
 
   def formatted_description
-    self.description.bbcode_to_html_with_formatting.bbcode_to_html({}, false, :disable)
+    self.description.bbcode_to_html.bbcode_to_html({}, false, :disable)
   end
 
 

@@ -7,6 +7,7 @@
 
     <title>PokerStrategy.com SC2SL</title>
     <%= javascript_include_tag :defaults %>
+
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
     <meta name="title" content="SC2SL" />
@@ -64,12 +65,12 @@
                 <%= f.submit "OK", :class => "submit-login" %>
               <% end %>
             <% else %>
-              Welcome, <%= current_user.login %> 
+              Welcome, <%= current_user.login %>
               <%= link_to "My Account", account_path %> |
               <%= link_to "Logout", logout_path %>
               <% if current_user.is_moderator? %>
                 <br />
-                 <%= link_to "Articles", articles_path %> |
+                <%= link_to "Articles", articles_path %> |
                 <%= link_to "Comments", comments_path %> |
                 <%= link_to "Players", players_path %> |
                 <%= link_to "Teams", teams_path %> |

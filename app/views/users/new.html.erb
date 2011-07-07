@@ -13,6 +13,7 @@
   <% end %>
   <div id="user_form">
   <%= render :partial => "form", :object => f %>
+    <%= recaptcha_tags %>
   <%= f.submit "Register" %>
   </div>
 <% end %>

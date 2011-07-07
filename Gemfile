@@ -15,6 +15,7 @@ gem 'acts-as-taggable-on'
 gem 'jquery-rails', '>= 1.0.3'
 gem "sanitize"
 gem "bb-ruby"
+gem "recaptcha", :require => "recaptcha/rails"
 
 # Use unicorn as the web server
 # gem 'unicorn'
