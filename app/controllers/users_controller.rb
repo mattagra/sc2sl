@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.login = params[:user][:login]
     @user.email = params[:user][:email]
-    if @user.save
+    if verify_recaptcha(:model => @user, :message => "The security code you entered was incorrect.") and @user.save
       flash[:notice] = "Thank you for registering. Please check your email to confirm your information before proceding."
       UserMailer.activation(@user).deliver
       if RAILS_ENV == "development"
@@ -35,6 +35,9 @@ class UsersController < ApplicationController
       flash[:params] = "Cannot Find a User with that ID"
       redirect_to root_url
     end
+    @current_page = (params[:page].to_i || 0)
+    @comments_count = @user.comments.count
+    @comments= @user.comments.paginated(10, @current_page)
   end
 
   def edit

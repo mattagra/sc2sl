@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
     #c.my_config_option = my_value # for available options see documentation in: Authlogic::ActsAsAuthentic
   end # block optional
 
+  def self.find_by_login_or_email(login)
+    find_by_login(login) || find_by_email(login)
+  end
+
   has_attached_file :photo,
     :styles => {
       :normal => "96x96",
@@ -31,6 +35,8 @@ class User < ActiveRecord::Base
   belongs_to :country
 
   has_one :player, :conditions => ["players.date_quit is null"]
+  has_many :players
+  #has_many :games, :through => :players
 
   before_save :capitalize_names, :reset_tokens
 

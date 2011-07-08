@@ -21,7 +21,7 @@
           <% if comment.user.player %>
           <br />
             <span class="lineup">
-              <img src="/css/images/comment/player.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" /><span style="overflow: visible"><%= link_to comment.user.player.team, team_path(comment.user.player.team.slug) %></span>
+              <img src="/css/images/comment/player.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" /><span style="overflow: visible"><%= link_to comment.user.player.team, named_team_path(comment.user.player.team.slug) %></span>
             </span>
           <% end %>
           <% if comment.user.caster %>

@@ -15,8 +15,6 @@ Sc2sl::Application.routes.draw do
   match "/teams/new" => "teams#new"
   get "/teams/:name" => "teams#show", :as => :named_team
 
-  
-  
   resources :teams
 
   resources :moderations

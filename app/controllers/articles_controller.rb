@@ -29,11 +29,15 @@ class ArticlesController < ApplicationController
       @article = Article.where(:url => params[:url]).where("created_at between ? and ?", date_start, date_end).first
     end
     unless @article.nil?
-    @comment = Comment.new_of_type(@article)
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @article }
-    end
+      @comment = Comment.new_of_type(@article)
+      @current_page = (params[:page].to_i || 0)
+      @comments_count = @article.comments.count
+      @comments= @article.comments.paginated(10, @current_page)
+ 
+      respond_to do |format|
+        format.html # show.html.erb
+        format.xml  { render :xml => @article }
+      end
     else
       render :file => "public/404.html", :status => 404, :layout => false
     end
