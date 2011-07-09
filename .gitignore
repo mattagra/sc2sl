@@ -6,9 +6,11 @@ log/*
 
 tmp/**/*
 
+
 public/images/articles/*
 public/images/teams/*
 public/images/users/*
 public/images/maps/*
 public/images/games/*
 public/images/seasons/*
+

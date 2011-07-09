@@ -11,6 +11,7 @@ Sc2sl::Application.routes.draw do
   resources :seasons
 
   resources :players
+
   get "/teams/new" => "teams#new"
   get "/teams/:name" => "teams#show", :as => :named_team
 
