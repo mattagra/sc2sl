@@ -8,11 +8,12 @@ class ActivationsController < ApplicationController
     #raise Exception if @user.active?
 
     if @user.activate!
-      flash[:notice] = "Your account has been activated. You can now join or create a league."
+      flash[:notice] = "Your account has been activated. Thank you for joining"
+      UserMailer.welcome(@user).deliver
       UserSession.create(@user, false)
       redirect_to account_url
     else
-      flash[:notice] = "Please conact us immediately at EMAIL"
+      flash[:notice] = "There was a problem, please contact us immediately or check your email to make sure you copied the link correctly."
       redirect_to root_url
     end
   end

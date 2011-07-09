@@ -1,13 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Comment:</b>
+  <%= render @moderation.comment %>
+</p>
+
+<p>
   <b>User:</b>
   <%= @moderation.user %>
 </p>
 
 <p>
   <b>Type:</b>
-  <%= @moderation.type %>
+  <%= @moderation.mod_type %>
 </p>
 
 <p>

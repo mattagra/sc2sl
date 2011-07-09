@@ -3,36 +3,37 @@ class User < ActiveRecord::Base
     #c.my_config_option = my_value # for available options see documentation in: Authlogic::ActsAsAuthentic
   end # block optional
 
+  PERMISSION_LEVELS = { 0 => "banned", 1 => "normal", 2 => "moderator", 3 => "admin", 4 => "super-admin"}
+
   def self.find_by_login_or_email(login)
     find_by_login(login) || find_by_email(login)
   end
 
   has_attached_file :photo,
-    :styles => {
+    {:styles => {
       :normal => "96x96",
       :thumb => "32x32"
-    }
+    }, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url", :default_url => "/css/images/comment/avatar.jpg"}
 
 
   def avatar
-    if self.photo.exists? and self.photo_approved != false
+    if self.photo_approved != false
       self.photo.url(:normal)
-    else
-      "/css/images/comment/avatar.jpg"
     end
   end
 
   attr_protected :permission_level, :login, :team_name, :caster, :website, :email
   
   validates :email, :presence => true, :uniqueness => true, :email_format => true
-  validates :login, :presence => true, :uniqueness => true, :length => {:within => 3..20}
+  validates :login, :presence => true, :uniqueness => true, :length => {:within => 3..20}, :format => { :with => /[A-Za-z0-9]+/ }
   after_validation :set_defaults, :on => :create
-  belongs_to :attachment
 
   has_many :my_comments, :class_name => "Comment"
 
   has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{User.to_s}'"
   belongs_to :country
+
+  has_many :moderations
 
   has_one :player, :conditions => ["players.date_quit is null"]
   has_many :players
@@ -56,14 +57,12 @@ class User < ActiveRecord::Base
     self.reset_single_access_token
   end
 
-  def ban
-    self.permission_level = 0
-    self.save
+  def banned?
+    (Moderation.where(:user_id => self.id, :mod_type => "permaban").count > 0) or (Moderation.where(:user_id => self.id).where(:mod_type => "ban").where("date(moderations.created_at, moderations.length || 'days') > datetime('now') ").count > 0)
   end
 
-  def ban!
-    self.permission_level = 0
-    self.save!
+  def current_ban
+    self.moderations.order('id desc').last
   end
 
   def activate!
@@ -88,15 +87,10 @@ class User < ActiveRecord::Base
   end
 
 
+
+
   def permission_level_text
-    case permission_level
-    when 2
-      "moderator"
-    when 3
-      "admin"
-    when 4
-      "super-admin"
-    end
+    PERMISSION_LEVELS[permission_level.to_i]
   end
 
 end

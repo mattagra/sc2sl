@@ -1,25 +1,4 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Type:</b>
-  <%= @comment.external_type %>
-</p>
-
-<p>
-  <b>External:</b>
-  <%= @comment.external_id %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @comment.user %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @comment.description %>
-</p>
-
-
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= render @comment %>
 <%= link_to 'Back', comments_path %>

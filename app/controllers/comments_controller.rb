@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.xml
-  before_filter :require_user, :only => [:new, :create, :update, :edit]
+  before_filter :require_unbanned_user, :only => [:new, :create, :update, :edit]
   before_filter :require_moderator, :only => [:destroy]
 
   def index

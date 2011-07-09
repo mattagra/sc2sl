@@ -1,24 +1,22 @@
 class Article < ActiveRecord::Base
-  belongs_to :user
+  
   acts_as_url :title, :sync_url => true
   acts_as_taggable
 
-  validates_uniqueness_of :url
-
+  validates :url, :uniqueness => true
   validates :summary, :length => {:minimum => 5, :maximum => 256}
 
-  has_attached_file :photo,
-    :styles => {
-      :normal => "641x253!"
-    }
+  has_attached_file :photo, {:styles => { :normal => "641x253!" }, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
+  has_attached_file :featured_photo, {:styles => {:normal => "524x140"}, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
 
-
-  has_attached_file :featured_photo,
-    :styles => {
-    :normal => "524x140"
-    }
-
+  belongs_to :user
   has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Article.to_s}'"
+
+  scope :published, where(:published => true)
+  scope :featured, where(:featured => true)
+  scope :recent, order("articles.id desc").limit(20)
+
+  scope :latest, order("articles.id desc").limit(1)
 
   def to_s
     self.title

@@ -27,4 +27,6 @@ class Comment < ActiveRecord::Base
     self.description.bbcode_to_html(Sc2sl::Application::CUSTOM_BBCODE).bbcode_to_html({}, false, :disable)
   end
 
+  has_one :moderation
+
 end

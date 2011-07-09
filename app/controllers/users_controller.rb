@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:edit, :update]
+  before_filter :require_moderator, :only => [:index]
 
   def new
     @user = User.new
@@ -13,10 +14,6 @@ class UsersController < ApplicationController
     if verify_recaptcha(:model => @user, :message => "The security code you entered was incorrect.") and @user.save
       flash[:notice] = "Thank you for registering. Please check your email to confirm your information before proceding."
       UserMailer.activation(@user).deliver
-      if RAILS_ENV == "development"
-        flash[:notice] += "No email was sent, to active your account click <a href='#{activate_url(@user.perishable_token)}' >here</a>"
-      end
-
       redirect_to root_url
     else
       flash[:notice] = "Some errors prevented you from registering "
@@ -24,15 +21,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    @users = User.all
+  end
+
   def show
-    if current_user and params[:id].nil?
+    if current_user and params[:login].nil?
       @user = @current_user
       @comment = Comment.new_of_type(@user)
-    elsif params[:id]
-      @user = User.find(params[:id])
+    elsif params[:login]
+      @user = User.find_by_login(params[:login])
       @comment = Comment.new_of_type(@user)
     else
-      flash[:params] = "Cannot Find a User with that ID"
+      flash[:params] = "Cannot Find a User with that name"
       redirect_to root_url
     end
     @current_page = (params[:page].to_i || 0)
@@ -54,20 +55,13 @@ class UsersController < ApplicationController
     else
       @user = current_user
     end
-    if params[:attachment]
-      @attachment = Attachment.new
-      @attachment.uploaded_file = params[:attachment]
-
-      if @attachment.save
-        flash[:notice] = "Thank you for your submission..."
-        @user.attachment_id = @attachment.id
-      else
-        flash[:error] = "There was a problem submitting your attachment."
-      end
-    end
+    login = @user.login
     if @user.update_attributes(params[:user], !current_user.is_admin?)
+      unless login == @user.login
+        UserMailer.username_change(@user, login).deliver
+      end
       flash[:notice] = "Account updated!"
-      redirect_to profile_path(@user)
+      redirect_to profile_path(@user.login)
     else
       render :action => :edit
     end

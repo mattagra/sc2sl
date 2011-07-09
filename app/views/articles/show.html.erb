@@ -8,7 +8,7 @@
       <div style="float:left;">
         <%= @article.title %> <br />
         <div id="undertitle">
-          <%= @article.formatted_time %> | <%= link_to @article.user.login, profile_path(@article) %><% if (current_user and current_user.is_moderator?) %> | <%= link_to 'edit', edit_article_path(@article) %><% end %>
+          <%= @article.formatted_time %> | <%= link_to @article.user.login, profile_path(@article.user.login) %><% if (current_user and current_user.is_moderator?) %> | <%= link_to 'edit', edit_article_path(@article) %><% end %>
         </div>
       </div>
       <div id="titrecom">

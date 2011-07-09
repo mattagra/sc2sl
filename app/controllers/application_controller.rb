@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
-  helper_method :current_user_session, :current_user, :current_admin, :current_moderator, :current_super_admin
+  helper_method :current_user_session, :current_user, :current_admin, :current_moderator, :current_super_admin, :require_unbanned_user
   #filter_parameter_logging :password, :password_confirmation
 
   before_filter :set_timezone
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def articles
-    @articles = Article.order("articles.id desc").limit(8)
+    @articles = Article.order("articles.id desc").published.limit(8)
   end
 
   def tag_cloud
@@ -67,6 +67,20 @@ class ApplicationController < ActionController::Base
     unless current_user
       store_location
       flash[:notice] = "You must be logged in to access this page"
+      redirect_to new_user_session_url
+      return false
+    end
+  end
+
+  def require_unbanned_user
+    if !current_user
+      store_location
+      flash[:notice] = "You must be logged in to access this page"
+      redirect_to new_user_session_url
+      return false
+    elsif current_user.banned?
+      store_location
+      flash[:notice] = "You are now allowed to do this until you are unbanned."
       redirect_to new_user_session_url
       return false
     end

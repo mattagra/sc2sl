@@ -1,6 +1,6 @@
 class SiteController < ApplicationController
   def index
-    @article = Article.order('articles.id desc').where(:featured => true).first
+    @article = Article.latest.featured.published.first
   end
 
   def about
@@ -10,6 +10,10 @@ class SiteController < ApplicationController
   end
 
   def privacy
+    
+  end
+
+  def terms
     
   end
 
