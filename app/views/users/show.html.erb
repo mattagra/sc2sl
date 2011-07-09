@@ -31,8 +31,9 @@
 
 <h3>Comments:</h3>
   <%= render  @user.comments.order('id desc') %>
+  <% if @user.comments.count > 0 %>
   <%= render :partial => "comments/comment_footer" %>
-
+ <% end %>
 <p>
   <%= render :partial => "comments/form" %>
 </p>

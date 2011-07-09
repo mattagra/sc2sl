@@ -1,6 +1,6 @@
 <h1>Register</h1>
 
-<% form_for @user, :url => account_path do |f| %>
+<% form_for @user, :url => account_path, :multipart => true do |f| %>
   <% if @user.errors.any? %>
   <div id="errorExplanation">
     <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
