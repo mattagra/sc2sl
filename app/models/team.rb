@@ -3,10 +3,10 @@ class Team < ActiveRecord::Base
   belongs_to :user
 
   has_attached_file :photo,
-    :styles => {
+    {:styles => {
       :normal => "96x96",
       :thumb => "32x32"
-    }
+    }, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
 
   alias :coach :user
 

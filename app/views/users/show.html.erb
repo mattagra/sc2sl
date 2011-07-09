@@ -11,6 +11,21 @@
 </p>
 <% end %>
 
+<% if @user.banned? %>
+<p>
+  <b>Ban Type: </b><br />
+  <%= @user.current_ban.mod_type %>
+  <br />
+  <b>Length: </b><br />
+  <%= @user.current_ban.length %> days
+  <br />
+  <b>Ends: </b><br />
+  <%= @user.current_ban.ends_at %>
+  <br />
+
+</p>
+<% end %>
+
 <p>
   <b>Country:</b>
   <% if @user.country  %>

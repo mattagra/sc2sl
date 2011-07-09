@@ -11,7 +11,7 @@ Sc2sl::Application.routes.draw do
   resources :seasons
 
   resources :players
-
+  get "/teams/new" => "teams#new"
   get "/teams/:name" => "teams#show", :as => :named_team
 
   resources :teams
@@ -20,7 +20,7 @@ Sc2sl::Application.routes.draw do
 
   resources :comments
   
-  match 'articles/:year/:month/:day/:url' => 'articles#show', :constraints => { :year => /\d{4}/, :month => /\d{2}/, :day => /\d{2}/ },  :as => :named_article
+  match '/articles/:year/:month/:day/:url' => 'articles#show', :constraints => { :year => /\d{4}/, :month => /\d{2}/, :day => /\d{2}/ },  :as => :named_article
 
   resources :articles do 
     resources :comments
@@ -39,10 +39,10 @@ Sc2sl::Application.routes.draw do
   get 'logout' => 'user_sessions#destroy'
   get 'login' => 'user_sessions#new'
   get 'register' => 'users#new'
-  match 'profile/:id' => 'users#show', :as => :profile
+  match 'profile/:login' => 'users#show', :as => :profile
 
   match '/activate/:activation_code' => 'activations#new', :as => :activate
-
+  match '/terms' => "site#terms", :as => :terms
   root :to=>"site#index"
 
 

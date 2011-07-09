@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110706222347) do
+ActiveRecord::Schema.define(:version => 20110708220900) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20110706222347) do
     t.string   "featured_photo_file_name"
     t.string   "featured_photo_content_type"
     t.integer  "featured_photo_file_size"
+    t.boolean  "published",                   :default => false, :null => false
   end
 
   create_table "attachments", :force => true do |t|
@@ -71,6 +72,9 @@ ActiveRecord::Schema.define(:version => 20110706222347) do
     t.integer  "match_order"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "replay_file_name"
+    t.string   "replay_content_type"
+    t.integer  "replay_file_size"
   end
 
   create_table "maps", :force => true do |t|
@@ -78,6 +82,9 @@ ActiveRecord::Schema.define(:version => 20110706222347) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
   end
 
   create_table "matches", :force => true do |t|
@@ -89,11 +96,13 @@ ActiveRecord::Schema.define(:version => 20110706222347) do
 
   create_table "moderations", :force => true do |t|
     t.integer  "user_id"
-    t.string   "type"
+    t.string   "mod_type"
     t.integer  "length"
     t.string   "reason"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "comment_id"
+    t.integer  "moderator_id"
   end
 
   create_table "players", :force => true do |t|
@@ -110,6 +119,10 @@ ActiveRecord::Schema.define(:version => 20110706222347) do
     t.integer  "partner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "banner_file_name"
+    t.string   "banner_content_type"
+    t.integer  "banner_file_size"
+    t.boolean  "published"
   end
 
   create_table "taggings", :force => true do |t|

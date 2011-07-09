@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Photo</th>
     <th>Name</th>
     <th>Description</th>
     <th></th>
@@ -11,6 +12,7 @@
 
 <% @maps.each do |map| %>
   <tr>
+    <td><%= image_tag map.photo.url(:thumb) %> </td>
     <td><%= map.name %></td>
     <td><%= map.description %></td>
     <td><%= link_to 'Show', map %></td>

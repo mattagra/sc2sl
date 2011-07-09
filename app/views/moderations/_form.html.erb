@@ -12,15 +12,21 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :comment %><br />
+    <%= f.hidden_field :comment_id %>
+    <%= render f.object.comment %>
+  </div>
+  <div class="field">
     <%= f.label :user %><br />
-    <%= f.text_field :user %>
+    <%= f.hidden_field :user_id %>
+    <%= f.object.user.login %>
   </div>
   <div class="field">
-    <%= f.label :type %><br />
-    <%= f.text_field :type %>
+    <%= f.label :mod_type %><br />
+    <%= f.select :mod_type, Moderation::TYPES %>
   </div>
   <div class="field">
-    <%= f.label :length %><br />
+    <%= f.label :length %> in days.<br />
     <%= f.text_field :length %>
   </div>
   <div class="field">

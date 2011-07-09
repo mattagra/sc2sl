@@ -3,14 +3,18 @@
       <td colspan="2">
         <div class="commentup" id="comment_<%= comment.id %>">
           <div id="thumbs">
-            <div align="right"><a href="#" class="commentuptime"><%= link_to "Quote", new_comment_path(:comment_id => comment.id, :back_url => request.fullpath) %> - <%= link_to "Edit", edit_comment_path(comment, :back_url => request.fullpath) %>  - Warn - Censor </a></div>
+            <div align="right">
+              <%= link_to "Quote", new_comment_path(:comment_id => comment.id, :back_url => request.fullpath) %> -
+              <%= link_to "Edit", edit_comment_path(comment, :back_url => request.fullpath) %> -
+              <%= link_to "Warn", new_moderation_path(:user_id => comment.user.id, :comment_id => comment.id) %>
+            </div>
           </div>
-          <% if comment.user.country %><%=  image_tag comment.user.country.flag, :alt => comment.user.country.name %> <% end %>  <%= link_to comment.user.login, profile_path(comment.user) %> <span class="commentuptime"><%= comment.formatted_time %> </span></div></td>
+          <% if comment.user.country %><%=  image_tag comment.user.country.flag, :alt => comment.user.country.name %> <% end %>  <%= link_to comment.user.login, profile_path(comment.user.login) %> <span class="commentuptime"><%= comment.formatted_time %> </span></div></td>
     </tr>
     <tr>
       <td width="104" valign="top">
         <div id="div">
-          <%= link_to (image_tag comment.user.avatar, :alt => "", :width => 90, :height => 96, :vspace => 4, :hspace => 4, :border => 1), profile_path(comment.user) %><br />
+          <%= link_to (image_tag comment.user.avatar, :alt => "", :width => 90, :height => 96, :vspace => 4, :hspace => 4, :border => 1), profile_path(comment.user.login) %><br />
           <%= image_tag race_icon_url(comment.user.race), :align => "top", :width => 21, :height => 13, :hspace => 4, :vspace => 3 %>  <span class="lineup"><%= comment.user.race.capitalize %> </span>
           <% if comment.user.is_moderator? %>
           <br />
@@ -27,7 +31,7 @@
           <% if comment.user.caster %>
           <br />
             <span class="lineup">
-              <img src="/css/images/comment/caster.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" />caster
+              <img src="/css/images/comment/caster.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" /><%= link_to "caster", comment.user.website, :rel => "nofollow" %>
             </span>
           <% end %>
 
@@ -37,6 +41,9 @@
       <td width="714" valign="top" padding="10" align="center"><table width="690" height="146" border="0" cellpadding="0">
           <tbody><tr valign="top">
               <td><%=raw comment.formatted_description %><br />
+                <% if comment.moderation %>
+                <span style="color:red">This User was <%= comment.moderation.mod_type  %> for this post for <%= comment.moderation.length %> days  </span>
+                <% end %>
                 <hr />
                 <span class="signature"><%= comment.user.signature %></span>
               </td>

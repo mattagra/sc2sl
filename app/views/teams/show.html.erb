@@ -31,8 +31,10 @@
 </p>
 
 <h3>Comments:</h3>
-  <%= render  @team.comments.order('id desc') %>
+<%= render  @team.comments.order('id desc') %>
+<% if @team.comments.size > 0 %>
   <%= render :partial => "comments/comment_footer" %>
+<% end %>
 
 <p>
   <%= render :partial => "comments/form" %>

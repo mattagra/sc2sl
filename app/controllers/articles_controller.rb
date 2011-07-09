@@ -6,15 +6,23 @@ class ArticlesController < ApplicationController
   before_filter :require_admin, :only => [:destroy]
 
   def index
-    if params[:tag]
-      @articles = Article.tagged_with(params[:tag])
+    if current_admin
+      if params[:tag]
+        @articles = Article.tagged_with(params[:tag]).recent
+      else
+        @articles = Article.recent
+      end
     else
-      @articles = Article.all
+      if params[:tag]
+        @articles = Article.tagged_with(params[:tag]).published.recent
+      else
+        @articles = Article.published.recent
+      end
     end
-    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @articles }
+      format.rss { render :layout => false}
     end
   end
 
@@ -22,13 +30,21 @@ class ArticlesController < ApplicationController
   # GET /articles/1.xml
   def show
     if params[:id]
-      @article = Article.find(params[:id])
+      if current_admin
+        @article = Article.find(params[:id])
+      else
+        @article = Article.find(params[:id]).published
+      end
     elsif params[:url]
       date_start = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i).midnight
       date_end = date_start + 1.day
-      @article = Article.where(:url => params[:url]).where("created_at between ? and ?", date_start, date_end).first
+      if current_admin
+        @article = Article.where(:url => params[:url]).where("created_at between ? and ?", date_start, date_end).first
+      else
+        @article = Article.where(:url => params[:url]).where("created_at between ? and ?", date_start, date_end).published.first
+      end
     end
-    unless @article.nil?
+    unless  @article.nil?
       @comment = Comment.new_of_type(@article)
       @current_page = (params[:page].to_i || 0)
       @comments_count = @article.comments.count

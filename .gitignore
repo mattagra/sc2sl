@@ -1,4 +1,14 @@
 .bundle
-db/*.sqlite3
-log/*.log
+db/*
+.sqlite3
+log/*
+.log
+
 tmp/**/*
+
+public/images/articles/*
+public/images/teams/*
+public/images/users/*
+public/images/maps/*
+public/images/games/*
+public/images/seasons/*

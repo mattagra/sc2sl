@@ -58,7 +58,10 @@ Name: <%=  form.text_field :bnet_name %> Identifier <%= form.text_field :bent_co
 <b><%= form.label :signature %></b><br />
 <%=  form.text_field :signature %>
 <br />
-
-
+<% if current_user and current_user.is_super_admin? %>
+<br />
+<b><%= form.label :permission_level %></b><br />
+<%=  form.select :permission_level, User::PERMISSION_LEVELS.collect { |x| [x[1], x[0]]  } %>
+<% end %>
 
 <br />

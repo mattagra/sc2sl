@@ -28,6 +28,8 @@ class ModerationsController < ApplicationController
   # GET /moderations/new.xml
   def new
     @moderation = Moderation.new
+    @moderation.user = User.find(params[:user_id])
+    @moderation.comment = Comment.find(params[:comment_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,6 +46,7 @@ class ModerationsController < ApplicationController
   # POST /moderations.xml
   def create
     @moderation = Moderation.new(params[:moderation])
+    @moderation.moderator = current_user
 
     respond_to do |format|
       if @moderation.save
@@ -60,6 +63,7 @@ class ModerationsController < ApplicationController
   # PUT /moderations/1.xml
   def update
     @moderation = Moderation.find(params[:id])
+    @moderation.moderator = current_user
 
     respond_to do |format|
       if @moderation.update_attributes(params[:moderation])

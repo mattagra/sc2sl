@@ -1,0 +1,9 @@
+Hello <%= @user.login %>,
+<br /><br />
+You are one step away from the finish line! Just click on the following link to activate your account:<br />
+<%= activate_url(@user.perishable_token) %>
+<br /><br />
+If the above URL does not work try copying and pasting it into your browser. If you continue to have problem, please feel free to contact us.
+<br /><br />
+Best regards and don't forget to tune in!<br />
+The SC2SL Staff.
