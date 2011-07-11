@@ -20,14 +20,13 @@
   <%= @player.date_quit %>
 </p>
 
+<h3>Comments:</h3>
+  <%= render  @player.comments.order('id asc') %>
+  <% if @player.comments.count > 0 %>
+  <%= render :partial => "comments/comment_footer" %>
+ <% end %>
 <p>
-  <b>Comments:</b>
-  <%- @player.comments.each do |comment| %>
-    <br />
-    <b><%= comment.user.login %> said: </b>
-    <br />
-    <%= comment.description %>
-  <% end %>
+  <%= render :partial => "comments/form" %>
 </p>
 
 <p>

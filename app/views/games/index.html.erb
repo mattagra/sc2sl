@@ -11,25 +11,20 @@
     <th>Match order</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @games.each do |game| %>
   <tr>
-    <td><%= game.player0_id %></td>
-    <td><%= game.player1_id %></td>
+    <td><%= game.player0.user.login %></td>
+    <td><%= game.player1.user.login %></td>
     <td><%= game.result %></td>
     <td><%= game.downloads %></td>
-    <td><%= game.map %></td>
-    <td><%= game.match %></td>
+    <td><%= game.map.name %></td>
+    <td><%= game.match.id %></td>
     <td><%= game.match_order %></td>
-    <td><%= link_to 'Show', game %></td>
-    <td><%= link_to 'Edit', edit_game_path(game) %></td>
-    <td><%= link_to 'Destroy', game, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Show', match_game_path(game.match.id, game.id) %></td>
+    <td><%= link_to 'Destroy', match_game_path(game.match.id, game.id), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Game', new_game_path %>

@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Short Name</th>
     <th>Country</th>
     <th>Website</th>
     <th>User</th>
@@ -14,6 +15,7 @@
 <% @teams.each do |team| %>
   <tr>
     <td><%= team.name %></td>
+    <td><%= team.short_name %></td>
     <td><%= team.country %></td>
     <td><%= team.website %></td>
     <td><%= team.user %></td>

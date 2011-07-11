@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <b>Short Name:</b>
+  <%= @team.short_name %>
+</p>
+
+<p>
   <b>Photo:</b>
   <%= image_tag(@team.photo.url(:normal)) if @team.photo.exists?  %>
 </p>

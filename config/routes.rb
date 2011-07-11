@@ -1,12 +1,22 @@
 Sc2sl::Application.routes.draw do
 
-  resources :matches
+  resources :games do
+    member do
+      get 'replay'
+    end
+  end
+
+  resources :matches do
+    resources :games do
+    member do
+      get 'replay'
+    end
+  end
+  end
 
   resources :game_ratings
 
   resources :maps
-
-  resources :games
 
   resources :seasons
 
@@ -44,6 +54,7 @@ Sc2sl::Application.routes.draw do
 
   match '/activate/:activation_code' => 'activations#new', :as => :activate
   match '/terms' => "site#terms", :as => :terms
+  match '/faq' => "site#faq", :as => :faq
   root :to=>"site#index"
 
 

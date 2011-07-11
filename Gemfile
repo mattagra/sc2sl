@@ -17,6 +17,8 @@ gem "sanitize"
 gem "bb-ruby"
 gem "recaptcha", :require => "recaptcha/rails"
 
+gem "rrschedule"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

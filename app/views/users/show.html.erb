@@ -4,7 +4,7 @@
 
 <%= @user.login %>
 <br />
-<% if @user == current_user %>
+<% if @user == current_user or current_admin %>
 <p>
   <b>Email:</b>
   <%=h @user.email %>
@@ -45,7 +45,7 @@
 <% end %>
 
 <h3>Comments:</h3>
-  <%= render  @user.comments.order('id desc') %>
+  <%= render  @user.comments.order('id asc') %>
   <% if @user.comments.count > 0 %>
   <%= render :partial => "comments/comment_footer" %>
  <% end %>

@@ -27,7 +27,11 @@ class Article < ActiveRecord::Base
   end
 
   def formatted_time
+    if self.created_at
     self.created_at.strftime("%B %d %Y %H:%M")
+    else
+      Time.now.strftime("%B %d %Y %H:%M")
+    end
   end
 
   def formatted_description

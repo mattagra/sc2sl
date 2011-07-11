@@ -9,7 +9,7 @@ class Comment < ActiveRecord::Base
   scope :newest, order('id asc')
 
   scope :paginated, lambda { |page, offset|
-    newest.limit(page).offset(offset)
+    newest.limit(page).offset(offset.to_i * page.to_i)
   }
 
   def self.new_of_type(model)
@@ -24,7 +24,7 @@ class Comment < ActiveRecord::Base
   end
 
   def formatted_description
-    self.description.bbcode_to_html(Sc2sl::Application::CUSTOM_BBCODE).bbcode_to_html({}, false, :disable)
+    self.description.bbcode_to_html(Sc2sl::Application::CUSTOM_BBCODE).bbcode_to_html({}, false, :disable, false)
   end
 
   has_one :moderation

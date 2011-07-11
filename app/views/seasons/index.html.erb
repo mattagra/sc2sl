@@ -3,7 +3,6 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Partner</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,7 +11,6 @@
 <% @seasons.each do |season| %>
   <tr>
     <td><%= season.name %></td>
-    <td><%= season.partner %></td>
     <td><%= link_to 'Show', season %></td>
     <td><%= link_to 'Edit', edit_season_path(season) %></td>
     <td><%= link_to 'Destroy', season, :confirm => 'Are you sure?', :method => :delete %></td>

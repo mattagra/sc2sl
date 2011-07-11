@@ -14,6 +14,7 @@
   <div id="user_form">
   <%= render :partial => "form", :object => f %>
     <%= recaptcha_tags %>
+    <%= f.check_box :terms  %> By Clicking the box, you agree to our <%= link_to "Terms and Conditions", terms_path, "data-popup" => "menubar=0,resizable=1,width=600,height=800" %>.<br />
   <%= f.submit "Register" %>
   </div>
 <% end %>

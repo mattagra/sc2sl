@@ -48,7 +48,8 @@ class ArticlesController < ApplicationController
       @comment = Comment.new_of_type(@article)
       @current_page = (params[:page].to_i || 0)
       @comments_count = @article.comments.count
-      @comments= @article.comments.paginated(10, @current_page)
+      @per_page = 10
+      @comments= @article.comments.paginated(@per_page, @current_page)
  
       respond_to do |format|
         format.html # show.html.erb
@@ -86,7 +87,9 @@ class ArticlesController < ApplicationController
     @article.user = current_user
 
     respond_to do |format|
-      if @article.save
+      if params[:commit] == "Preview"
+        format.html { render :action => "new" }
+      elsif @article.save
         format.html { redirect_to( named_article_path(:year => @article.created_at.year, :month => @article.created_at.strftime("%m"), :day => @article.created_at.strftime("%d"), :url => @article.url), :notice => 'Article was successfully created.') }
         format.xml  { render :xml => @article, :status => :created, :location => @article }
       else
@@ -102,7 +105,9 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     
     respond_to do |format|
-      if @article.update_attributes(params[:article])
+      if params[:commit] == "Preview"
+        format.html { render :action => "edit" }
+      elsif @article.update_attributes(params[:article])
         format.html { redirect_to( named_article_path(:year => @article.created_at.year, :month => @article.created_at.strftime("%m"), :day => @article.created_at.strftime("%d"), :url => @article.url), :notice => 'Article was successfully updated.') }
         format.xml  { head :ok }
       else

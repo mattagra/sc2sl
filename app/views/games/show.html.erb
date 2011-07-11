@@ -2,12 +2,12 @@
 
 <p>
   <b>Player0:</b>
-  <%= @game.player0_id %>
+  <%= @game.player0.user.login %>
 </p>
 
 <p>
   <b>Player1:</b>
-  <%= @game.player1_id %>
+  <%= @game.player1.user.login %>
 </p>
 
 <p>
@@ -16,18 +16,24 @@
 </p>
 
 <p>
+  <b>Replay: </b>
+  <%= link_to "Replay", replay_match_game_path(@game.match_id, @game) %>
+</p>
+
+
+<p>
   <b>Downloads:</b>
   <%= @game.downloads %>
 </p>
 
 <p>
   <b>Map:</b>
-  <%= @game.map %>
+  <%= @game.map.name %>
 </p>
 
 <p>
   <b>Match:</b>
-  <%= @game.match %>
+  <%= link_to "View Match", match_path(@game.match) %>
 </p>
 
 <p>
@@ -48,5 +54,5 @@
   <%= render :partial => "comments/form" %>
 </p>
 
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+<%= link_to 'Destroy', match_game_path(@game.match_id, @game), :method => :delete, :confirm => "Are you sure you wish to delete this game?" %> |
+<%= link_to 'Back', match_games_path %>

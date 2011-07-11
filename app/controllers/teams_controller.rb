@@ -18,7 +18,8 @@ class TeamsController < ApplicationController
     @comment = Comment.new_of_type(@team)
     @current_page = (params[:page].to_i || 0)
     @comments_count = @team.comments.count
-    @comments= @team.comments.paginated(10, @current_page)
+    @per_page = 10
+    @comments= @team.comments.paginated(@per_page, @current_page)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @team }

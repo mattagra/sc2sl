@@ -13,12 +13,12 @@ module Sc2sl
     # -- all .rb files in that directory are automatically loaded.
     Dir.glob("./lib/*.{rb}").each { |file| require file }
     config.filter_parameters << :password << :password_confirmation
-    config.action_view.javascript_expansions[:defaults] = %w(jquery)
+    config.action_view.javascript_expansions[:defaults] = %w(jquery jquery_ujs application)
     IMGUR_API_KEY = "edb81443e23154af166573652a25544a"
     CUSTOM_BBCODE = {
       'Spoiler' => [
         /\[spoiler(:.*)?=(.*?)\](.*?)\[\/spoiler\1?\]/mi,
-        '<div style="margin:20px; margin-top:5px"><div class="smallfont" style="margin-bottom:2px"><a href="#" onClick="if (this.parentNode.parentNode.getElementsByTagName(\'div\')[1].getElementsByTagName(\'div\')[0].style.display != \'\') { this.parentNode.parentNode.getElementsByTagName(\'div\')[1].getElementsByTagName(\'div\')[0].style.display = \'\'; return false; } else { this.parentNode.parentNode.getElementsByTagName(\'div\')[1].getElementsByTagName(\'div\')[0].style.display = \'none\'; return false; }">+ Show Spoiler - \2 +</a></div><div class="alt2" style="margin: 0px; padding: 6px; border: 1px inset;"><div style="display: none;">\3</div></div></div>',
+        '<div style="margin:20px; margin-top:5px"><div class="smallfont" style="margin-bottom:2px"><a href="#" onClick="if (this.parentNode.parentNode.getElementsByTagName(\'div\')[1].getElementsByTagName(\'div\')[0].style.display != \'\') { this.parentNode.parentNode.getElementsByTagName(\'div\')[1].getElementsByTagName(\'div\')[0].style.display = \'\'; return false; } else { this.parentNode.parentNode.getElementsByTagName(\'div\')[1].getElementsByTagName(\'div\')[0].style.display = \'none\'; return false; }">+ Show Spoiler - \2 +</a></div><div class="alt2" style="margin: 0px; padding: 6px; border: 2px groove threedface;"><div style="display: none;">\3</div></div></div>',
         'Spoiler with preview',
         '[spoiler=Game 2 Results]Huk Wins![/quote]',
         :spoiler

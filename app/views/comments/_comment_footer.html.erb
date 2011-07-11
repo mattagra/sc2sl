@@ -7,7 +7,7 @@
 <table width="820" border="0" cellpadding="0" cellspacing="0" >
                                <tbody><tr>
                                  <td align="center">
-							Page: <%=  paginate_links(@comments, @current_page, @comments_count, request.path) %>
+							Page: <%=  paginate_links(@per_page, @current_page, @comments_count, request.path) %>
                                  </td>
                                </tr>
 				</tbody></table>

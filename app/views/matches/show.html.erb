@@ -2,13 +2,52 @@
 
 <p>
   <b>Team0:</b>
-  <%= @match.team0_id %>
+  <%= @match.team0.short_name %>
 </p>
 
 <p>
   <b>Team1:</b>
-  <%= @match.team1_id %>
+  <%= @match.team1.short_name %>
 </p>
+
+<p>
+  <b>Season:</b>
+  <%= @match.season_id %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @match.scheduled_at %>
+</p>
+
+<p>
+  <b>Week:</b>
+  <%= @match.weeks_id %>
+</p>
+
+<table>
+  <tr>
+    <th>Game #</th>
+    <th><%= @match.team0.short_name %> Player</th>
+    <th><%= @match.team1.short_name %> Player</th>
+    <th>Map</th>
+    <th>Winning Team</th>
+    <th>Replay</th>
+    <th>Replay Downloads</th>
+  </tr>
+<% @match.games.order("match_order asc").each do |game| %>
+  <tr>
+    <td><%= game.match_order %> </td>
+<td><%= game.player0.login %> </td>
+<td><%= game.player1.login %></td>
+<td><%= game.map.name %></td>
+<td><%= game.result_s  %></td>
+<td><%= link_to "Download Replay", replay_match_game_path(@match.id, game.id) %> </td>
+<td><%= game.downloads %></td>
+</tr>
+<% end %>
+</table>
+
 
 <p>
   <b>Comments:</b>

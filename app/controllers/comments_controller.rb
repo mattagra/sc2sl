@@ -6,8 +6,9 @@ class CommentsController < ApplicationController
 
   def index
     @current_page = (params[:page].to_i || 0)
-    @comments= Comment.paginated(10, @current_page)
-    @comments_count = @comments.count
+    @per_page = 10
+    @comments= Comment.newest.paginated(@per_page, @current_page)
+    @comments_count = Comment.count
     @comment = Comment.new_of_type(@comment)
 
     respond_to do |format|

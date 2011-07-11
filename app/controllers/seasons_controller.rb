@@ -27,6 +27,7 @@ class SeasonsController < ApplicationController
   # GET /seasons/new.xml
   def new
     @season = Season.new
+    @season.teams.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,6 +47,7 @@ class SeasonsController < ApplicationController
 
     respond_to do |format|
       if @season.save
+        schedule_matches(@season, params[:weeks], params[:days], params[:hour], params[:minute])
         format.html { redirect_to(@season, :notice => 'Season was successfully created.') }
         format.xml  { render :xml => @season, :status => :created, :location => @season }
       else
@@ -62,6 +64,7 @@ class SeasonsController < ApplicationController
 
     respond_to do |format|
       if @season.update_attributes(params[:season])
+        schedule_matches(@season, params[:weeks], params[:days], params[:hour], params[:minute])
         format.html { redirect_to(@season, :notice => 'Season was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -82,4 +85,33 @@ class SeasonsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+
+  private
+  def schedule_matches(season, weeks, days, h, m)
+    if weeks and weeks.count > 0 and days and days.count > 0
+      rules = []
+      days.each do |day|
+        rules << RRSchedule::Rule.new(:wday => day.to_i, :ps => "1")
+      end
+      schedule=RRSchedule::Schedule.new(:teams => season.teams,
+        :rules => rules,
+        :cycles => 1,
+        :shuffle => true
+      )
+      schedule.generate
+      games = schedule.gamedays.collect{ |gd| gd.games }
+      w = 1
+      weeks.each do |week|
+        days.each do |day|
+          t = Time.now.end_of_week + (week.to_i).week + day.to_i.days + h.to_i.hours + m.to_i.minutes + 1.second
+          game = games.shift
+          Match.new(:team0 => game[0].team_a, :team1 => game[0].team_b, :season_id => season.id, :weeks_id => w, :scheduled_at => t, :best_of => 7).save
+        end
+        w += 1
+      end
+    end
+  end
+
+
 end

@@ -1,11 +1,16 @@
 class Team < ActiveRecord::Base
   belongs_to :country
   belongs_to :user
+  has_and_belongs_to_many :seasons
+  has_many :players
+
+  
 
   has_attached_file :photo,
     {:styles => {
-      :normal => "96x96",
-      :thumb => "32x32"
+      :large => "180x180!",
+      :normal => "100x100!",
+      :thumb => "32x32!"
     }, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
 
   alias :coach :user

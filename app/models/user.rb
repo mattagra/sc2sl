@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   
   validates :email, :presence => true, :uniqueness => true, :email_format => true
   validates :login, :presence => true, :uniqueness => true, :length => {:within => 3..20}, :format => { :with => /[A-Za-z0-9]+/ }
+  validates_acceptance_of :terms, :on => :create
   after_validation :set_defaults, :on => :create
 
   has_many :my_comments, :class_name => "Comment"

@@ -151,7 +151,7 @@
         <div class="article-image"><%= link_to(image_tag(@article.featured_photo.url(:normal)), view_article_path(@article)) %></div>
         <div class="article-titre"><%= link_to @article.title, view_article_path(@article) %> </div>
 
-        <div class="article-texte"><%= simple_format(auto_link(truncate_words(@article.description, 200))) %>
+        <div class="article-texte"><%=raw auto_link(truncate_words(@article.formatted_description, 200)) %>
           <br/> &nbsp;
 
           <div align="right">

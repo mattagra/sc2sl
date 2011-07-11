@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110707223232) do
+ActiveRecord::Schema.define(:version => 20110710013406) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20110707223232) do
     t.string   "featured_photo_file_name"
     t.string   "featured_photo_content_type"
     t.integer  "featured_photo_file_size"
+    t.boolean  "published"
   end
 
   create_table "attachments", :force => true do |t|
@@ -91,6 +92,12 @@ ActiveRecord::Schema.define(:version => 20110707223232) do
     t.integer  "team1_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "season_id"
+    t.integer  "playoff_id"
+    t.integer  "weeks_id"
+    t.datetime "scheduled_at"
+    t.integer  "best_of"
+    t.integer  "results"
   end
 
   create_table "moderations", :force => true do |t|
@@ -100,6 +107,8 @@ ActiveRecord::Schema.define(:version => 20110707223232) do
     t.string   "reason"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "comment_id"
+    t.string   "mod_type"
   end
 
   create_table "players", :force => true do |t|
@@ -113,13 +122,18 @@ ActiveRecord::Schema.define(:version => 20110707223232) do
 
   create_table "seasons", :force => true do |t|
     t.string   "name"
-    t.integer  "partner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "banner_file_name"
     t.string   "banner_content_type"
     t.integer  "banner_file_size"
     t.boolean  "published"
+    t.integer  "playoff_teams"
+  end
+
+  create_table "seasons_teams", :id => false, :force => true do |t|
+    t.integer "season_id"
+    t.integer "team_id"
   end
 
   create_table "taggings", :force => true do |t|
@@ -150,6 +164,7 @@ ActiveRecord::Schema.define(:version => 20110707223232) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.text     "description"
+    t.string   "short_name"
   end
 
   create_table "users", :force => true do |t|

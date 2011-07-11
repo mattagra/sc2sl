@@ -1,12 +1,12 @@
-<%= form_for(@season) do |f| %>
+<%= form_for(@season, :html => {:multipart => true}) do |f| %>
   <% if @season.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@season.errors.count, "error") %> prohibited this season from being saved:</h2>
 
       <ul>
-      <% @season.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @season.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -15,11 +15,34 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
-    <%= f.label :partner %><br />
-    <%= f.text_field :partner %>
+    <%= f.label :banner %><br />
+    <%= f.file_field :banner %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+    <%= select_tag("season[team_ids]", options_for_select(Team.all.collect{|t| [t.name, t.id]}, f.object.teams.collect{|t| t.id}), {:multiple => true, :size => 12}) %>
+<br /><br />
+Schedule Matches
+
+Please Choose 1 week less than the # of teams<br />
+<% weeks = [] %>
+<% day = Time.now.end_of_week + 1.second %>
+<% 21.times do |i| %>
+<% weeks << [day.strftime("%m/%d/%Y - ") + (day + 6.days).strftime("%m/%d/%Y") ,i]  %>
+<% day += 7.days %>
 <% end %>
+<%= select_tag :weeks, options_for_select(weeks, []), {:multiple => true, :size => 7} %>
+<br /><br />
+Please Choose days, # of teams / 2<br />
+<% days = [["Sunday",0], ["Monday",1],["Tuesday",2],["Wednesday",3],["Thursday",4],["Friday",5],["Saturday",6],] %>
+<%= select_tag :days, options_for_select(days, []), {:multiple => true, :size => 7} %>
+<br /><br />
+Please Pick a Time
+<br />
+Time: <%= select_hour Time.now %>:<%= select_minute Time.now %>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>

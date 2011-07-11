@@ -1,18 +1,32 @@
+
 <h1>Listing matches</h1>
 
 <table>
   <tr>
     <th>Team0</th>
     <th>Team1</th>
+    <th>Date</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @matches.each do |match| %>
+  <% week = 1 %>
   <tr>
-    <td><%= match.team0_id %></td>
-    <td><%= match.team1_id %></td>
+    <td colspan="6"><b>Week 0</b></td>
+  </tr>
+<% @matches.each do |match| %>
+  <% if week != match.weeks_id %>
+  <tr>
+    <td colspan="6"><b>Week <%= match.weeks_id %></b></td>
+  </tr>
+  <% week = match.weeks_id.to_i %>
+  <% end %>
+  <tr>
+    <td><%= match.team0.short_name %></td>
+    <td><%= match.team1.short_name %></td>
+    <td><%= match.scheduled_at %></td>
+
     <td><%= link_to 'Show', match %></td>
     <td><%= link_to 'Edit', edit_match_path(match) %></td>
     <td><%= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete %></td>

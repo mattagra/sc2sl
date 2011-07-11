@@ -5,7 +5,11 @@ class MatchesController < ApplicationController
   # GET /matches
   # GET /matches.xml
   def index
-    @matches = Match.all
+    if params[:match_id]
+    @matches = Match.order("weeks_id asc").where(:match_id => params[:match_id])
+    else
+    @matches = Match.order("id desc")
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,9 +22,10 @@ class MatchesController < ApplicationController
   def show
     @match = Match.find(params[:id])
     @comment = Comment.new_of_type(@match)
-        @current_page = (params[:page].to_i || 0)
-      @comments_count = @match.comments.count
-      @comments= @match.comments.paginated(10, @current_page)
+    @current_page = (params[:page].to_i || 0)
+    @comments_count = @match.comments.count
+    @per_page = 10
+    @comments= @match.comments.paginated(@per_page, @current_page)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @match }
@@ -41,6 +46,10 @@ class MatchesController < ApplicationController
   # GET /matches/1/edit
   def edit
     @match = Match.find(params[:id])
+    games = @match.games.count
+    (7 - games).times do |i|
+      @match.games.build(:match_order => games + 1 + i)
+    end
   end
 
   # POST /matches

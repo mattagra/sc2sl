@@ -64,6 +64,7 @@
               <% form_for UserSession.new, :url => user_session_path do |f| %>
                 <%= f.text_field :login, :placeholder => "Login", :class => "input-login" %>
                 <%= f.password_field :password, :placeholder => "Password", :class => "input-login" %>
+                <%= f.hidden_field :remember_me, :value => true %>
                 <%= f.submit "OK", :class => "submit-login" %>
               <% end %>
             <% else %>
@@ -145,15 +146,15 @@
 
               <div class="menu-separation"></div>
 
-              <div class="menu-lien"><a href="#">LEAGUE</a></div>
+              <div class="menu-lien"><%= link_to "LEAGUES", seasons_path %></div>
 
               <div class="menu-separation"></div>
 
-              <div class="menu-lien"><%= link_to "REPLAYS", games_path %> </div>
+              <div class="menu-lien"><%= link_to "REPLAYS", matches_path %> </div>
 
               <div class="menu-separation"></div>
 
-              <div class="menu-lien"><a href="#">FAQ</a></div>
+              <div class="menu-lien"><%= link_to "FAQ", faq_path %> </div>
 
               <div class="menu-separation"></div>
 
@@ -273,7 +274,7 @@
 
               <div class="menu-lien"><a href="#">LEAGUE</a></div>
 
-              <div class="menu-lien"><%= link_to "REPLAYS", games_path %> </div>
+              <div class="menu-lien"><%= link_to "REPLAYS", matches_path %> </div>
 
               <div class="menu-lien"><a href="#">FAQ</a></div>
 

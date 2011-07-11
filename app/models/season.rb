@@ -1,4 +1,7 @@
 class Season < ActiveRecord::Base
 
-    has_attached_file :photo, {:styles => { :large => "256x256", :normal => "128x128", :thumb => "64x64"}, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
+    has_and_belongs_to_many :teams
+    has_many :matches
+    accepts_nested_attributes_for :teams, :reject_if => proc { |a| a['selected'].blank? }
+    has_attached_file :banner, {:styles => {:normal => "815x129!", :small => "780x124!"}, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
 end

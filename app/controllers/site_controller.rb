@@ -13,7 +13,12 @@ class SiteController < ApplicationController
     
   end
 
+  def faq
+    
+  end
+
   def terms
+    render :layout => false
     
   end
 
