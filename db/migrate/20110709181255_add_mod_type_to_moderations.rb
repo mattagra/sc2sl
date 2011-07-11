@@ -1,9 +1,9 @@
 class AddModTypeToModerations < ActiveRecord::Migration
   def self.up
-    add_column :moderations, :mod_type, :string
+    rename_column :moderations, :type, :mod_type
   end
 
   def self.down
-    remove_column :moderations, :mod_type
+    rename_column :moderations, :mod_type, :type
   end
 end
