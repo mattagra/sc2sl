@@ -189,10 +189,13 @@
               <div id="live-haut">
 
                 <div id="live-haut-status">
-
-                  <div id="live-haut-status-image"><img src="/css/images/content-bar/live/offline.jpg" alt="Offline" /></div>
-
-                  <div id="live-haut-status-texte"><a href=#>LIVE IS OFFLINE</a></div>
+                  <% if @live_match.live %>
+                    <div id="live-haut-status-image"><img src="/css/images/content-bar/live/live.jpg" alt="Live" /></div>
+                    <div id="live-haut-status-texte"><%= link_to "LIVE IS ONLINE", live_path %></div>
+                  <% else %>
+                    <div id="live-haut-status-image"><img src="/css/images/content-bar/live/offline.jpg" alt="Offline" /></div>
+                    <div id="live-haut-status-texte"><a href=#>LIVE IS OFFLINE</a></div>
+                  <% end %>
 
                 </div>
 
@@ -200,9 +203,9 @@
 
                 <div id="live-haut-infos">
 
-                  <div id="live-haut-infos-competition">Playday 2</div>
+                  <div id="live-haut-infos-competition">Week <%= @live_match.weeks_id %></div>
 
-                  <div id="live-haut-infos-team">Millenium <span style="color: #000000;">Vs.</span> Against All Authority</div>
+                  <div id="live-haut-infos-team"><%= @live_match.title %></div>
 
                 </div>
 
@@ -212,7 +215,9 @@
 
                 <div id="live-ligne-left" align="center">Casters</div>
 
-                <div id="live-ligne-right"><a href="#"> AlexToss</a>, <a href="default.aspx">TotalBuiscit</a></div>
+                <div id="live-ligne-right">
+                  <%= link_to @live_match.casters.collect {|c| c.login}.join(", "), @live_match.url %>
+                </div>
 
               </div>
 

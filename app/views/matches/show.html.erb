@@ -38,11 +38,11 @@
 <% @match.games.order("match_order asc").each do |game| %>
   <tr>
     <td><%= game.match_order %> </td>
-<td><%= game.player0.login %> </td>
-<td><%= game.player1.login %></td>
-<td><%= game.map.name %></td>
+<td><%= game.player0 %> </td>
+<td><%= game.player1 %></td>
+<td><%= game.map %></td>
 <td><%= game.result_s  %></td>
-<td><%= link_to "Download Replay", replay_match_game_path(@match.id, game.id) %> </td>
+<td><%= link_to_if game.replay_file_size.to_i > 0, "Download Replay", replay_match_game_path(@match.id, game.id) %> </td>
 <td><%= game.downloads %></td>
 </tr>
 <% end %>

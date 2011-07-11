@@ -15,11 +15,11 @@
 
 <% @games.each do |game| %>
   <tr>
-    <td><%= game.player0.user.login %></td>
-    <td><%= game.player1.user.login %></td>
+    <td><%= game.player0 %></td>
+    <td><%= game.player1 %></td>
     <td><%= game.result %></td>
     <td><%= game.downloads %></td>
-    <td><%= game.map.name %></td>
+    <td><%= game.map %></td>
     <td><%= game.match.id %></td>
     <td><%= game.match_order %></td>
     <td><%= link_to 'Show', match_game_path(game.match.id, game.id) %></td>

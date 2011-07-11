@@ -22,6 +22,7 @@
   </div>
 
     <%= select_tag("season[team_ids]", options_for_select(Team.all.collect{|t| [t.name, t.id]}, f.object.teams.collect{|t| t.id}), {:multiple => true, :size => 12}) %>
+<%= select_tag("season[map_ids]", options_for_select(Map.all.collect{|t| [t.name, t.id]}, f.object.maps.collect{|t| t.id}), {:multiple => true, :size => 12}) %>
 <br /><br />
 Schedule Matches
 

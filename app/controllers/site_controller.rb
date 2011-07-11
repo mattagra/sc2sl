@@ -22,4 +22,8 @@ class SiteController < ApplicationController
     
   end
 
+  def live
+    
+  end
+
 end

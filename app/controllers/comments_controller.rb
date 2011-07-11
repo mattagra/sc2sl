@@ -75,7 +75,7 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     url_back = params[:back_url]
-    if current_user.is_moderator? or @comment.user == current_user
+    if current_user.is_moderator? or (@comment.user == current_user and !@comment.locked)
       respond_to do |format|
         if @comment.update_attributes(params[:comment])
           format.html { redirect_to(url_back+"#comment_#{@comment.id}")   }

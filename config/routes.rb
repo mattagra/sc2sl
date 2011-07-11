@@ -1,5 +1,9 @@
 Sc2sl::Application.routes.draw do
 
+
+  get "/live" => "site#live", :as => :live
+
+
   resources :games do
     member do
       get 'replay'
@@ -11,6 +15,7 @@ Sc2sl::Application.routes.draw do
     member do
       get 'replay'
     end
+    resources :vote_events
   end
   end
 

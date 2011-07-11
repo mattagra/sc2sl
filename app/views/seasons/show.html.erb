@@ -10,6 +10,11 @@ Teams:<br />
 <% @season.teams.each do |team| %>
 <%= link_to team.name, team_path(team.slug) %><br />
 <% end %>
+<br />
+Maps:<br />
+<% @season.maps.each do |map| %>
+<%= link_to map.name, map_path(map) %><br />
+<% end %>
 
 <h1>Listing matches</h1>
 

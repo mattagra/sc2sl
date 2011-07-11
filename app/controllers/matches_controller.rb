@@ -46,7 +46,7 @@ class MatchesController < ApplicationController
   # GET /matches/1/edit
   def edit
     @match = Match.find(params[:id])
-    games = @match.games.count
+    games = @match.games.size
     (7 - games).times do |i|
       @match.games.build(:match_order => games + 1 + i)
     end

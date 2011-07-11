@@ -20,8 +20,25 @@ class UserMailer < ActionMailer::Base
 
   def welcome(user)
     @user = user
-    mail(:to => "#{@user.login} <#{@user.email}>", :subject => "Welcome to the SC2SL!")
+    mail(:to => "#{@user.login} <#{@user.email}>", :subject => "SC2SL: Welcome to the SC2SL!")
   end
 
+  def warning(user, moderation)
+    @user = user
+    @moderation = moderation
+    mail(:to => "#{@user.login} <#{@user.email}>", :subject => "SC2SL: You have been warned for recent activity.")
+  end
+
+  def ban(user, moderation)
+    @user = user
+    @moderation = moderation
+    mail(:to => "#{@user.login} <#{@user.email}>", :subject => "SC2SL: You have been temporarily banned for recent activity.")
+  end
+
+  def permaban(user, moderation)
+    @user = user
+    @moderation = moderation
+    mail(:to => "#{@user.login} <#{@user.email}>", :subject => "SC2SL: You have been banned for recent activity.")
+  end
 
 end

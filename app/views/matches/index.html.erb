@@ -6,6 +6,9 @@
     <th>Team0</th>
     <th>Team1</th>
     <th>Date</th>
+    <th>Stream Url</th>
+    <th>Casters</th>
+    <th>Live</th>
     <th></th>
     <th></th>
     <th></th>
@@ -26,7 +29,9 @@
     <td><%= match.team0.short_name %></td>
     <td><%= match.team1.short_name %></td>
     <td><%= match.scheduled_at %></td>
-
+        <td><%= link_to match.url, match.url %> </td>
+    <td><%= match.casters.collect{|c| c.login}.join(" ") %></td>
+    <td><%= match.live %></td>
     <td><%= link_to 'Show', match %></td>
     <td><%= link_to 'Edit', edit_match_path(match) %></td>
     <td><%= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete %></td>

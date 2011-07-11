@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :mailer_set_url_options
   before_filter :tag_cloud
   before_filter :articles
+  before_filter :live_match
 
   private
   def mailer_set_url_options
@@ -16,6 +17,10 @@ class ApplicationController < ActionController::Base
 
   def articles
     @articles = Article.order("articles.id desc").published.limit(8)
+  end
+
+  def live_match
+    @live_match = Match.where(:results => nil).order("matches.scheduled_at desc").limit(1).first
   end
 
   def tag_cloud

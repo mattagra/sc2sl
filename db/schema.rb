@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110710013406) do
+ActiveRecord::Schema.define(:version => 20110711194728) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -27,15 +27,7 @@ ActiveRecord::Schema.define(:version => 20110710013406) do
     t.string   "featured_photo_file_name"
     t.string   "featured_photo_content_type"
     t.integer  "featured_photo_file_size"
-    t.boolean  "published"
-  end
-
-  create_table "attachments", :force => true do |t|
-    t.string   "filename"
-    t.string   "content_type"
-    t.binary   "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.boolean  "published",                   :default => false, :null => false
   end
 
   create_table "comments", :force => true do |t|
@@ -45,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20110710013406) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "locked",        :default => false
   end
 
   create_table "countries", :force => true do |t|
@@ -98,17 +91,20 @@ ActiveRecord::Schema.define(:version => 20110710013406) do
     t.datetime "scheduled_at"
     t.integer  "best_of"
     t.integer  "results"
+    t.string   "url"
+    t.string   "caster_ids"
+    t.boolean  "live"
   end
 
   create_table "moderations", :force => true do |t|
     t.integer  "user_id"
-    t.string   "type"
+    t.string   "mod_type"
     t.integer  "length"
     t.string   "reason"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "moderator_id"
     t.integer  "comment_id"
-    t.string   "mod_type"
   end
 
   create_table "players", :force => true do |t|
@@ -129,6 +125,11 @@ ActiveRecord::Schema.define(:version => 20110710013406) do
     t.integer  "banner_file_size"
     t.boolean  "published"
     t.integer  "playoff_teams"
+  end
+
+  create_table "seasons_maps", :id => false, :force => true do |t|
+    t.integer "season_id"
+    t.integer "map_id"
   end
 
   create_table "seasons_teams", :id => false, :force => true do |t|
@@ -204,6 +205,24 @@ ActiveRecord::Schema.define(:version => 20110710013406) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.boolean  "photo_approved"
+  end
+
+  create_table "vote_events", :force => true do |t|
+    t.integer  "match_id"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.integer  "team_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "match_id"
+    t.integer  "player_id"
+    t.integer  "user_id"
+    t.integer  "ip_address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
