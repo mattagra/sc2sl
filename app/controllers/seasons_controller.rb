@@ -103,12 +103,14 @@ class SeasonsController < ApplicationController
       )
       schedule.generate
       games = schedule.gamedays.collect{ |gd| gd.games }
+      maps = season.maps
       w = 1
       weeks.each do |week|
+        week_maps = maps.shuffle
         days.each do |day|
           t = Time.now.end_of_week + (week.to_i).week + day.to_i.days + h.to_i.hours + m.to_i.minutes + 1.second
           game = games.shift
-          Match.new(:team0 => game[0].team_a, :team1 => game[0].team_b, :season_id => season.id, :weeks_id => w, :scheduled_at => t, :best_of => 7).save
+          Match.new(:team0 => game[0].team_a, :team1 => game[0].team_b, :season_id => season.id, :weeks_id => w, :scheduled_at => t, :best_of => 7, :maps => week_maps).save
         end
         w += 1
       end

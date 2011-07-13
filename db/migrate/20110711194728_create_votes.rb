@@ -1,7 +1,7 @@
 class CreateVotes < ActiveRecord::Migration
   def self.up
     create_table :votes do |t|
-      t.integer :match_id
+      t.integer :vote_event_id
       t.integer :player_id
       t.integer :user_id
       t.integer :ip_address

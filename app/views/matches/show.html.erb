@@ -34,6 +34,7 @@
     <th>Winning Team</th>
     <th>Replay</th>
     <th>Replay Downloads</th>
+    <th></th>
   </tr>
 <% @match.games.order("match_order asc").each do |game| %>
   <tr>
@@ -44,25 +45,23 @@
 <td><%= game.result_s  %></td>
 <td><%= link_to_if game.replay_file_size.to_i > 0, "Download Replay", replay_match_game_path(@match.id, game.id) %> </td>
 <td><%= game.downloads %></td>
+<td><%= link_to "View", match_game_path(@match.id, game.id) %></td>
 </tr>
 <% end %>
 </table>
 
 
-<p>
-  <b>Comments:</b>
-  <%- @match.comments.each do |comment| %>
-    <br />
-    <b><%= comment.user.login %> said: </b>
-    <br />
-    <%= comment.description %>
-  <% end %>
-</p>
+  <h3>Comments: </h3>
+  <div id="comments">
+    <%= render @match.comments %>
+    <% if @match.comments.size > 0 %>
+      <%= render :partial => "comments/comment_footer" %>
+    <% end %>
+  </div>
+  <p>
+    <%= render :partial => "comments/form" %>
+  </p>
 
-<p>
-  <%= render :partial => "comments/form" %>
-</p>
-
-
+<%= link_to "Live Voting", match_vote_events_path(@match.id) %> | 
 <%= link_to 'Edit', edit_match_path(@match) %> |
 <%= link_to 'Back', matches_path %>

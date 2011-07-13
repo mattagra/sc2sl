@@ -3,6 +3,8 @@ Sc2sl::Application.routes.draw do
 
   get "/live" => "site#live", :as => :live
 
+  get "/vote" => "vote_events#show_current"
+
 
   resources :games do
     member do
@@ -11,12 +13,14 @@ Sc2sl::Application.routes.draw do
   end
 
   resources :matches do
-    resources :games do
-    member do
-      get 'replay'
+    resources :vote_events do
+      resource :votes
     end
-    resources :vote_events
-  end
+    resources :games do
+      member do
+        get 'replay'
+      end
+    end
   end
 
   resources :game_ratings

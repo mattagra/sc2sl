@@ -217,7 +217,7 @@ ActiveRecord::Schema.define(:version => 20110711194728) do
   end
 
   create_table "votes", :force => true do |t|
-    t.integer  "match_id"
+    t.integer  "vote_event_id"
     t.integer  "player_id"
     t.integer  "user_id"
     t.integer  "ip_address"

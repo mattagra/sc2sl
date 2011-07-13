@@ -246,7 +246,10 @@
         <div id="structure">
           <div id="fullpage">
             <% if params[:notice] %>
-              <div id="notice"><%= params[:notice] %> </div><% end %>
+              <div id="notice"><%= params[:notice] %> </div>
+              <% elsif params[:errors] %>
+              <div id="notice"><%= params[:errors] %> </div>
+            <% end %>
             <%= yield %>
 
           </div>

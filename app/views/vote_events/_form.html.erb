@@ -1,0 +1,32 @@
+<%= form_for(@vote_event, :url => match_vote_events_path(params[:match_id])) do |f| %>
+  <% if @vote_event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vote_event.errors.count, "error") %> prohibited this map from being saved:</h2>
+
+      <ul>
+        <% @vote_event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :team_id %><br />
+    <%= f.select :team_id, f.object.match.teams.collect{|t| [t.short_name, t.id]} %>
+
+  </div>
+
+  <div class="field">
+    <%= f.label :started_at %><br />
+    <%= f.datetime_select :started_at %>
+  </div>
+  <div class="field">
+    <%= f.label :ended_at %><br />
+    <%= f.datetime_select :ended_at %>
+  </div>
+
+<%= f.submit %>
+
+
+<% end %>

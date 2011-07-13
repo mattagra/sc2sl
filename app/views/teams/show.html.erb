@@ -4,32 +4,26 @@
   <b>Name:</b>
   <%= @team.name %>
 </p>
-
 <p>
   <b>Short Name:</b>
   <%= @team.short_name %>
 </p>
-
 <p>
   <b>Photo:</b>
   <%= image_tag(@team.photo.url(:normal)) if @team.photo.exists?  %>
 </p>
-
 <p>
   <b>Country:</b>
   <%= @team.country %>
 </p>
-
 <p>
   <b>Website:</b>
   <%= @team.website %>
 </p>
-
 <p>
   <b>Coach:</b>
   <%= @team.user %>
 </p>
-
 <p>
   <b>Bio:</b>
   <%= @team.description %>
