@@ -18,6 +18,7 @@ gem "bb-ruby"
 gem "recaptcha", :require => "recaptcha/rails"
 
 gem "rrschedule"
+gem 'ajaxful_rating', :git => 'git://github.com/edgarjs/ajaxful-rating.git', :branch => "rails3"
 
 # Use unicorn as the web server
 # gem 'unicorn'

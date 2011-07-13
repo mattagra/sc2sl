@@ -48,5 +48,13 @@ class GamesController < ApplicationController
     send_file @game.replay.path, :disposition => 'attachment'
   end
 
+  def rate
+    @game = Game.find(params[:id])
+    @game.rate(params[:stars], current_user)
+    respond_to do |format|
+      format.js
+    end
+  end
+
 
 end

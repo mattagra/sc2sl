@@ -41,6 +41,11 @@
   <%= @game.match_order %>
 </p>
 
+<p>
+  <b>Rating</b>
+  <%= ratings_for @game %>
+</p>
+
   <h3>Comments: </h3>
   <div id="comments">
     <%= render @game.comments.order('id asc') %>

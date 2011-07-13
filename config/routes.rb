@@ -9,6 +9,7 @@ Sc2sl::Application.routes.draw do
   resources :games do
     member do
       get 'replay'
+      post 'rate'
     end
   end
 
@@ -18,12 +19,12 @@ Sc2sl::Application.routes.draw do
     end
     resources :games do
       member do
+        post 'rate'
         get 'replay'
       end
     end
   end
 
-  resources :game_ratings
 
   resources :maps
 
@@ -33,7 +34,6 @@ Sc2sl::Application.routes.draw do
 
   get "/teams/new" => "teams#new"
   get "/teams/:name" => "teams#show", :as => :named_team
-
   resources :teams
 
   resources :moderations
@@ -49,8 +49,6 @@ Sc2sl::Application.routes.draw do
     end
   end
 
-  resources :attachments
-
   resources :password_resets
   resource :user_session
   resource :account, :controller => :users
@@ -64,6 +62,9 @@ Sc2sl::Application.routes.draw do
   match '/activate/:activation_code' => 'activations#new', :as => :activate
   match '/terms' => "site#terms", :as => :terms
   match '/faq' => "site#faq", :as => :faq
+
+
+
   root :to=>"site#index"
 
 

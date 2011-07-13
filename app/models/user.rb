@@ -38,6 +38,8 @@ class User < ActiveRecord::Base
 
   has_one :player, :conditions => ["players.date_quit is null"]
   has_many :players
+  ajaxful_rater
+
   #has_many :games, :through => :players
 
   before_save :capitalize_names, :reset_tokens
