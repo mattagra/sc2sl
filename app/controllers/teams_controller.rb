@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
    authorize_resource
+   cache_sweeper :team_sweeper
   # GET /teams
   # GET /teams.xml
   def index

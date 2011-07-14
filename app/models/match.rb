@@ -12,11 +12,15 @@ class Match < ActiveRecord::Base
   attr_accessor :maps
 
 
+  POINTS = [7,6,6,5,0,2,1,0,0]
+
+
   validates :best_of, :presence => true, :numericality => true
 
-    before_save :determine_status
+  before_save :determine_status
+  before_create :build_maps
 
-  def before_create
+  def build_maps
     maps_count = maps.size
     self.best_of.times do |i|
       map_num = i % maps_count
@@ -51,6 +55,16 @@ class Match < ActiveRecord::Base
 
   def teams
     [self.team0,self.team1]
+  end
+
+  def team0_points
+    i = 4 - self.results.to_i
+    Match::POINTS[i]
+  end
+
+  def team1_points
+    i = 4 + self.results.to_i
+    Match::POINTS[i]
   end
 
   

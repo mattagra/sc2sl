@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   before_filter :articles
   before_filter :live_match
 
+
   private
   def mailer_set_url_options
     ActionMailer::Base.default_url_options[:host] = request.host_with_port
@@ -21,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def live_match
-    @live_match = Match.where(:results => nil).order("matches.scheduled_at desc").limit(1).first
+    @live_match = Match.where(:live => true).order("matches.scheduled_at desc").limit(1)
   end
 
   def tag_cloud

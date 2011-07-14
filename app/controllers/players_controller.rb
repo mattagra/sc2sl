@@ -1,6 +1,7 @@
 class PlayersController < ApplicationController
 
     authorize_resource
+    cache_sweeper :player_sweeper
   # GET /players
   # GET /players.xml
   def index

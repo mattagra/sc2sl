@@ -1,4 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/views/articles/index.html.erb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/views/games/index.html.erb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/models/ability.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/controllers/users_controller.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/controllers/activations_controller.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/public/css/styles.css</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/views/games/show.html.erb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/views/matches/show.html.erb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/models/game.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/models/team.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/db/seeds.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/models/user.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/controllers/password_resets_controller.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/controllers/site_controller.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/Gemfile</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/config/environments/development.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/config/environments/production.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/views/site/live.html.erb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/views/site/index.html.erb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/controllers/application_controller.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/app/views/layouts/application.html.erb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/config/environment.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/config/application.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/db/schema.rb</file>
+        <file>file:/C:/Users/michael/Documents/NetBeansProjects/sc2sl/config/routes.rb</file>
+    </open-files>
 </project-private>

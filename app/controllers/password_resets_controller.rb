@@ -1,7 +1,7 @@
 class PasswordResetsController < ApplicationController
-  
-    authorize_resource
 
+  before_filter :require_no_user, :only => [:new, :create]
+  before_filter :load_user_using_perishable_token, :only => [:edit, :update]
   def edit
     render
   end

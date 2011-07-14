@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
   # GET /articles.xml
 
   authorize_resource
+  cache_sweeper :article_sweeper
 
   def index
     if current_admin

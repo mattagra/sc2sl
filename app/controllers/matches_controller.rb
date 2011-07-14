@@ -1,7 +1,7 @@
 class MatchesController < ApplicationController
 
     authorize_resource
-
+cache_sweeper :match_sweeper
 
 
   # GET /matches

@@ -29,6 +29,7 @@ class Team < ActiveRecord::Base
   def self.deslug(name)
     name.gsub(/\_/,' ')
   end
+  
 
 
 end
