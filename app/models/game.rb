@@ -30,4 +30,26 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def winning_team
+    case result
+    when 0
+      player0.team
+    when 1
+      player1.team
+    else
+      nil
+    end
+  end
+
+  def winning_player
+    case result
+    when 0
+      player0
+    when 1
+      player1
+    else
+      nil
+    end
+  end
+
 end

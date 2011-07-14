@@ -1573,3 +1573,49 @@ margin-top : 8px;
    max-width: 400px;
    max-height: 400px;
 }
+
+.Highlight {
+  color:blue;
+  cursor:pointer;
+  background-color: lightgoldenrodyellow;
+}
+
+#calendar table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#calendar td,
+#calendar th {
+  font-family: "Lucida Grande",arial,helvetica,sans-serif;
+  font-size: 12px;
+  padding: 4px;
+  border: 1px solid #999;
+  text-align: center;
+}
+
+#calendar .today {
+  background-color: #D7F2FF;
+}
+
+#calendar td a {
+  text-decoration: none;
+  color: red;
+}
+
+#calendar td a:hover {
+  text-decoration: underline;
+  color: red;
+}
+
+
+#calendar #month {
+  font-size: 14px;
+  text-align: center;
+}
+
+#calendar #month a, #calendar #month a:hover {
+  text-decoration: none;
+  padding: 0 10px;
+  color: blue;
+}
