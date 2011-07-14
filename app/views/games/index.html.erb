@@ -23,7 +23,7 @@
     <td><%= game.match.id %></td>
     <td><%= game.match_order %></td>
     <td><%= link_to 'Show', match_game_path(game.match.id, game.id) %></td>
-    <td><%= link_to 'Destroy', match_game_path(game.match.id, game.id), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= if can? :destroy, game then link_to 'Destroy', match_game_path(game.match.id, game.id), :confirm => 'Are you sure?', :method => :delete end %></td>
   </tr>
 <% end %>
 </table>

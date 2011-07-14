@@ -1,4 +1,7 @@
 class VoteEventsController < ApplicationController
+
+    authorize_resource
+
   def index
     @vote_events = VoteEvent.all
   end

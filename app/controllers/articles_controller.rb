@@ -2,8 +2,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.xml
 
-  before_filter :require_moderator,  :only => [:new, :edit, :create, :update]
-  before_filter :require_admin, :only => [:destroy]
+  authorize_resource
 
   def index
     if current_admin

@@ -1,8 +1,7 @@
 class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.xml
-  before_filter :require_unbanned_user, :only => [:new, :create, :update, :edit]
-  before_filter :require_moderator, :only => [:destroy]
+  authorize_resource
 
   def index
     @current_page = (params[:page].to_i || 0)

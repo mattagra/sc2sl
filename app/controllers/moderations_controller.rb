@@ -1,6 +1,6 @@
 class ModerationsController < ApplicationController
 
-  before_filter :require_moderator
+    authorize_resource
 
   # GET /moderations
   # GET /moderations.xml

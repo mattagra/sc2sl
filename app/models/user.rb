@@ -3,7 +3,10 @@ class User < ActiveRecord::Base
     #c.my_config_option = my_value # for available options see documentation in: Authlogic::ActsAsAuthentic
   end # block optional
 
-  PERMISSION_LEVELS = { 0 => "banned", 1 => "normal", 2 => "moderator", 3 => "admin", 4 => "super-admin"}
+
+  ROLES = %w[admin moderator superadmin]
+
+  scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0"} }
 
   def self.find_by_login_or_email(login)
     find_by_login(login) || find_by_email(login)
@@ -22,8 +25,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  attr_protected :permission_level, :login, :team_name, :caster, :website, :email
-  
+  attr_protected :login, :caster, :website, :email
   validates :email, :presence => true, :uniqueness => true, :email_format => true
   validates :login, :presence => true, :uniqueness => true, :length => {:within => 3..20}, :format => { :with => /[A-Za-z0-9]+/ }
   validates_acceptance_of :terms, :on => :create
@@ -52,7 +54,6 @@ class User < ActiveRecord::Base
 
   def set_defaults
     self.active = false
-    self.permission_level = 1
   end
 
   def reset_tokens
@@ -78,22 +79,28 @@ class User < ActiveRecord::Base
   end
 
   def is_moderator?
-    permission_level > 1
+    role?(:moderator) or role?(:admin) or role?(:superadmin)
   end
 
   def is_admin?
-    permission_level > 2
+    role?(:admin) or role?(:superadmin)
   end
 
   def is_super_admin?
-    permission_level > 3
+    role?(:superadmin)
   end
 
 
+  def roles=(roles)
+    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
+  end
 
+  def roles
+    ROLES.reject { |r| ((roles_mask || 0) & 2**ROLES.index(r)).zero? }
+  end
 
-  def permission_level_text
-    PERMISSION_LEVELS[permission_level.to_i]
+  def role?(role)
+    roles.include? role.to_s
   end
 
 end

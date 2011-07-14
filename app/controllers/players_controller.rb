@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
 
-  before_filter :require_super_admin, :except => [:index, :show]
+    authorize_resource
   # GET /players
   # GET /players.xml
   def index

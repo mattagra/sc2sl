@@ -1,6 +1,6 @@
 class SeasonsController < ApplicationController
 
-  before_filter :require_super_admin
+   authorize_resource
 
 
   # GET /seasons

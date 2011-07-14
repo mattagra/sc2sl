@@ -42,6 +42,7 @@ GEM
       activerecord (>= 3.0.7)
     bb-ruby (0.9.5)
     builder (2.1.2)
+    cancan (1.6.5)
     cocaine (0.1.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -103,6 +104,7 @@ DEPENDENCIES
   ajaxful_rating!
   authlogic
   bb-ruby
+  cancan
   jquery-rails (>= 1.0.3)
   paperclip
   rails

@@ -1,8 +1,7 @@
 class GamesController < ApplicationController
   # GET /games
   # GET /games.xml
-  before_filter :require_admin, :only => [:new, :edit, :create, :update, :destroy]
-
+  authorize_resource
   def index
     @games = Game.all
     respond_to do |format|

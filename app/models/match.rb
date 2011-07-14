@@ -14,12 +14,22 @@ class Match < ActiveRecord::Base
 
   validates :best_of, :presence => true, :numericality => true
 
+    before_save :determine_status
+
   def before_create
     maps_count = maps.size
     self.best_of.times do |i|
       map_num = i % maps_count
       map = self.maps[map_num] || nil
       self.games.build(:map => map, :match_order => i + 1)
+    end
+  end
+
+  def determine_status
+    if self.games.select{|g| g.result == 0}.size == (self.best_of + 1) / 2
+      self.results  = self.games.select{|g| g.result == 0}.size -  self.games.select{|g| g.result == 1}.size
+    elsif self.games.select{|g| g.result == 1}.size == (self.best_of + 1) / 2
+      self.results  = self.games.select{|g| g.result == 0}.size -  self.games.select{|g| g.result == 1}.size
     end
   end
   

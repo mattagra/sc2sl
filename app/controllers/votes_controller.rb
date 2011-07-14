@@ -1,4 +1,7 @@
 class VotesController < ApplicationController
+
+    authorize_resource
+
   require 'ipaddr'
   def new
     @vote = Vote.new

@@ -69,67 +69,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def require_user
-    unless current_user
-      store_location
-      flash[:notice] = "You must be logged in to access this page"
-      redirect_to new_user_session_url
-      return false
-    end
-  end
 
-  def require_unbanned_user
-    if !current_user
-      store_location
-      flash[:notice] = "You must be logged in to access this page"
-      redirect_to new_user_session_url
-      return false
-    elsif current_user.banned?
-      store_location
-      flash[:notice] = "You are now allowed to do this until you are unbanned."
-      redirect_to new_user_session_url
-      return false
-    end
-  end
-
-  def require_admin
-    unless current_user and current_user.is_admin?
-      store_location
-      flash[:notice] = "You do not have access to this page"
-      render :file => "public/404.html", :status => 404, :layout => false
-      return false
-    end
-  end
-
-  def require_moderator
-    unless current_user and current_user.is_moderator?
-      store_location
-      flash[:notice] = "You do not have access to this page"
-      render :file => "public/404.html", :status => 404, :layout => false
-      return false
-    end
-  end
-
-  def require_super_admin
-    unless current_user and current_user.is_super_admin?
-      store_location
-      flash[:notice] = "You do not have access to this page"
-      render :file => "public/404.html", :status => 404, :layout => false
-      return false
-    end
-  end
-
-
-
-
-  def require_no_user
-    if current_user
-      store_location
-      flash[:notice] = "You must be logged out to access this page"
-      redirect_to account_url
-      return false
-    end
-  end
 
   def store_location
     session[:return_to] = request.fullpath
@@ -139,4 +79,13 @@ class ApplicationController < ActionController::Base
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
   end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    store_location
+    flash[:notice] = "You do not have access to this page"
+    render :file => "public/404.html", :status => 404, :layout => false
+    return false
+  end
+
+
 end

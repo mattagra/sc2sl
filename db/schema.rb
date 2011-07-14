@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110713174239) do
+ActiveRecord::Schema.define(:version => 20110713231704) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(:version => 20110713174239) do
     t.string   "featured_photo_content_type"
     t.integer  "featured_photo_file_size"
     t.boolean  "published",                   :default => false, :null => false
+  end
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "comments", :force => true do |t|
@@ -130,6 +137,12 @@ ActiveRecord::Schema.define(:version => 20110713174239) do
   add_index "rates", ["rateable_id", "rateable_type"], :name => "index_rates_on_rateable_id_and_rateable_type"
   add_index "rates", ["rater_id"], :name => "index_rates_on_rater_id"
 
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "seasons", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -150,6 +163,16 @@ ActiveRecord::Schema.define(:version => 20110713174239) do
     t.integer "season_id"
     t.integer "team_id"
   end
+
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -209,7 +232,6 @@ ActiveRecord::Schema.define(:version => 20110713174239) do
     t.integer  "bnet_id"
     t.text     "signature"
     t.integer  "country_id"
-    t.integer  "permission_level"
     t.boolean  "caster"
     t.string   "team_name"
     t.string   "website"
@@ -219,6 +241,7 @@ ActiveRecord::Schema.define(:version => 20110713174239) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.boolean  "photo_approved"
+    t.integer  "roles_mask"
   end
 
   create_table "vote_events", :force => true do |t|

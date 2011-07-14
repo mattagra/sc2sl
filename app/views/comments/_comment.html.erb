@@ -23,7 +23,7 @@
           <% if comment.user.is_moderator? %>
             <br />
             <span class="lineup">
-              <img src="/css/images/comment/staff.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" /><span><%= comment.user.permission_level_text.capitalize %></span>
+              <img src="/css/images/comment/staff.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" /><span><%= comment.user.roles.last.to_s.capitalize %></span>
             </span>
           <% end %>
           <% if comment.user.player %>

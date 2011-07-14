@@ -1,4 +1,6 @@
 class LiveEventsController < ApplicationController
+
+  authorize_resource
   def index
     @live_events = LiveEvent.order("id desc")
   end

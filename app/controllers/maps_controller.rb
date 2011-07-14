@@ -1,6 +1,6 @@
 class MapsController < ApplicationController
 
-  before_filter :require_super_admin
+    authorize_resource
 
   # GET /maps
   # GET /maps.xml

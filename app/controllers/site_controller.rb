@@ -1,4 +1,6 @@
 class SiteController < ApplicationController
+
+  
   def index
     @article = Article.latest.featured.published.first
   end

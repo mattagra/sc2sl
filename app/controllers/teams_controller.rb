@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_filter :require_super_admin
+   authorize_resource
   # GET /teams
   # GET /teams.xml
   def index

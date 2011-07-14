@@ -1,6 +1,8 @@
 class MatchesController < ApplicationController
 
-  before_filter :require_admin, :only => [:new, :edit, :create, :update, :destroy]
+    authorize_resource
+
+
 
   # GET /matches
   # GET /matches.xml
