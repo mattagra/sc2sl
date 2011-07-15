@@ -24,6 +24,14 @@ class SiteController < ApplicationController
     
   end
 
+  def finish_registration
+
+  end
+
+  def finish_activation
+    
+  end
+
   def terms
     render :layout => false
     

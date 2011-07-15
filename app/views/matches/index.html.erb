@@ -33,12 +33,12 @@
     <td><%= match.casters.collect{|c| c.login}.join(" ") %></td>
     <td><%= match.live %></td>
     <td><%= link_to 'Show', match %></td>
-    <td><%= link_to 'Edit', edit_match_path(match) %></td>
-    <td><%= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><% if can? :edit, match %><%= link_to 'Edit', edit_match_path(match) %><% end %></td>
+    <td><% if can? :destroy, match %><%= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Match', new_match_path %>
+<% if can? :create, Match %><%= link_to 'New Match', new_match_path %><% end %>

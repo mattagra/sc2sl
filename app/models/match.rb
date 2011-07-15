@@ -1,22 +1,31 @@
 class Match < ActiveRecord::Base
+
+  #Associations
   has_many :games
   has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Match.to_s}'"
   belongs_to :team1, :class_name => "Team"
   belongs_to :team0, :class_name => "Team"
-  accepts_nested_attributes_for :games
   belongs_to :season
-
   has_many :vote_events
   has_many :votes, :through => :vote_events
 
+
+  #Accessors
   attr_accessor :maps
+  
+  #Nested Attributes
+  accepts_nested_attributes_for :games
 
-
+  #STATIC
   POINTS = [7,6,6,5,0,2,1,0,0]
 
-
+  #validations
   validates :best_of, :presence => true, :numericality => true
+  validates :team0, :presence => true
+  validates :team1, :presence => true
+  
 
+  #triggers
   before_save :determine_status
   before_create :build_maps
 

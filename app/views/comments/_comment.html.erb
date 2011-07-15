@@ -5,11 +5,13 @@
           <div id="thumbs">
             <div align="right">
               <%= link_to "Quote", new_comment_path(:comment_id => comment.id, :back_url => request.fullpath) %> -
-              <%= link_to "Edit", edit_comment_path(comment, :back_url => request.fullpath) %> -
-              <%- if comment.moderation %>
-                <%= link_to "Warn", edit_moderation_path(comment.moderation) %>
-              <% else %>
-                <%= link_to "Warn", new_moderation_path(:user_id => comment.user.id, :comment_id => comment.id) %>
+              <% if can? :edit, comment %><%= link_to "Edit", edit_comment_path(comment, :back_url => request.fullpath) %> -<% end %>
+              <% if can? :edit, Moderation %>
+                <%- if comment.moderation %>
+                  <%= link_to "Warn", edit_moderation_path(comment.moderation) %>
+                <% else %>
+                  <%= link_to "Warn", new_moderation_path(:user_id => comment.user.id, :comment_id => comment.id) %>
+                <% end %>
               <% end %>
             </div>
           </div>
@@ -47,8 +49,8 @@
               <td><%=raw comment.formatted_description %><br />
                 <% if comment.moderation %>
                   <span style="color:red">This User was <%= comment.moderation.mod_type  %> for this post for <%= comment.moderation.length %> days  <br />Reason: <%= comment.moderation.reason %> </span>
-                  <% end %>
-                  <%- unless comment.user.signature.empty? %>
+                <% end %>
+                <%- unless comment.user.signature.empty? %>
                   <hr />
                   <span class="signature"><%= comment.user.signature %></span>
                 <% end %>

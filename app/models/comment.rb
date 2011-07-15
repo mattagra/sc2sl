@@ -1,13 +1,16 @@
 class Comment < ActiveRecord::Base
+
+  #Associations
   belongs_to :user
 
+  #Validations
   validates :external_type, :presence => true, :inclusion => {:in => ["Article", "Team", "Game", "Match",  "Player", "User"]}
   validates :external_id, :presence => true, :numericality => true
   validates :user_id, :presence => true
   validates :description, :presence => true, :length => {:minimum => 5, :maximum => 750}
 
+  #Scopes
   scope :newest, order('id asc')
-
   scope :paginated, lambda { |page, offset|
     newest.limit(page).offset(offset.to_i * page.to_i)
   }

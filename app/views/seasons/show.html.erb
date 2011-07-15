@@ -45,16 +45,16 @@ Maps:<br />
     <td><%= match.scheduled_at %></td>
 
     <td><%= link_to 'Show', match %></td>
-    <td><%= link_to 'Edit', edit_match_path(match) %></td>
-    <td><%= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><% if can? :edit, match %><%= link_to 'Edit', edit_match_path(match) %><% end  %></td>
+    <td><% if can? :destroy, match %><%= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Match', new_match_path(:season_id => @season.id) %>
+<% if can? :create, Match %><%= link_to 'New Match', new_match_path(:season_id => @season.id) %><% end %>
 
 
-<%= link_to 'Edit', edit_season_path(@season) %> |
+<% if can? :edit, @season %><%= link_to 'Edit', edit_season_path(@season) %> |<% end %>
 <%= link_to 'Back', seasons_path %>

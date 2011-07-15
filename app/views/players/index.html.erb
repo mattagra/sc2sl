@@ -18,12 +18,12 @@
     <td><%= player.date_joined %></td>
     <td><%= player.date_quit %></td>
     <td><%= link_to 'Show', player %></td>
-    <td><%= link_to 'Edit', edit_player_path(player) %></td>
-    <td><%= link_to 'Destroy', player, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><% if can? :edit, player %><%= link_to 'Edit', edit_player_path(player) %><% end %></td>
+    <td><% if can? :destroy, player %><%= link_to 'Destroy', player, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Player', new_player_path %>
+<% if can? :create, Player %><%= link_to 'New Player', new_player_path %><% end %>

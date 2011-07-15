@@ -1,22 +1,52 @@
 class User < ActiveRecord::Base
+  #Authentication
   acts_as_authentic do |c|
     #c.my_config_option = my_value # for available options see documentation in: Authlogic::ActsAsAuthentic
   end # block optional
 
-
+  #STATIC
   ROLES = %w[admin moderator superadmin]
 
+  #Scopes
   scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0"} }
 
-  def self.find_by_login_or_email(login)
-    find_by_login(login) || find_by_email(login)
-  end
-
+  #Attachments
   has_attached_file :photo,
     {:styles => {
       :normal => "96x96",
       :thumb => "32x32"
     }, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url", :default_url => "/css/images/comment/avatar.jpg"}
+
+
+  #Attributes
+  attr_protected :login, :caster, :website, :email
+
+  #Validations
+  validates :email, :presence => true, :uniqueness => true, :email_format => true
+  validates :login, :presence => true, :uniqueness => true, :length => {:within => 3..20}, :format => { :with => /[A-Za-z0-9]+/ }
+  validates_acceptance_of :terms, :on => :create
+  after_validation :set_defaults, :on => :create
+
+  #Associations
+  has_many :my_comments, :class_name => "Comment"
+  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{User.to_s}'"
+  belongs_to :country
+  has_many :moderations
+  has_one :player, :conditions => ["players.date_quit is null"]
+  has_many :players
+  #has_many :games, :through => :players
+
+  #Ratings
+  ajaxful_rater
+
+  
+
+  before_save :capitalize_names, :reset_tokens
+
+  def self.find_by_login_or_email(login)
+    find_by_login(login) || find_by_email(login)
+  end
+
 
 
   def avatar
@@ -25,26 +55,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  attr_protected :login, :caster, :website, :email
-  validates :email, :presence => true, :uniqueness => true, :email_format => true
-  validates :login, :presence => true, :uniqueness => true, :length => {:within => 3..20}, :format => { :with => /[A-Za-z0-9]+/ }
-  validates_acceptance_of :terms, :on => :create
-  after_validation :set_defaults, :on => :create
-
-  has_many :my_comments, :class_name => "Comment"
-
-  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{User.to_s}'"
-  belongs_to :country
-
-  has_many :moderations
-
-  has_one :player, :conditions => ["players.date_quit is null"]
-  has_many :players
-  ajaxful_rater
-
-  #has_many :games, :through => :players
-
-  before_save :capitalize_names, :reset_tokens
 
   def capitalize_names
     self.first_name = self.first_name.capitalize

@@ -11,8 +11,14 @@
     <th></th>
     <th></th>
   </tr>
-
+<% current_month = nil %>
 <% @articles.each do |article| %>
+  <% unless current_month == article.created_at.month %>
+  <tr>
+    <td colspan="8"><h3><%= article.created_at.strftime("%B - %Y") %></h3></td>
+  </tr>
+  <% current_month = article.created_at.month %>
+  <% end %>
   <tr>
     <td><%= article.title %></td>
     <td><%= article.summary %></td>
@@ -27,6 +33,9 @@
 </table>
 
 <br />
+Page: <%=  paginate_links(@per_page, @current_page, @articles_count, request.path, params) %>
+
+
 <% if can? :create, Article %>
 <%= link_to 'New Article', new_article_path %>
 <% end %>

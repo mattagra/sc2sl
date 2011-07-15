@@ -1,8 +1,19 @@
 class Team < ActiveRecord::Base
+
+  #Associations
   belongs_to :country
   belongs_to :user
   has_and_belongs_to_many :seasons
   has_many :players
+
+  #Validations
+  validates :name, :presence => true
+  validates :county, :presence => true
+  validates :short_name, :presence => true
+
+  def matches
+    Match.where("team0_id = ? or team1_id = ?", self.id, self.id)
+  end
 
   
 
