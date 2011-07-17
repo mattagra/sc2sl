@@ -7,7 +7,6 @@
 </table>
 
 Current Votes
-
 <% @vote_event.players.each do |player| %>
 <%= player.login %>: <%= @vote_event.votes.where(:player_id => player.id).count %>
 <% end %>

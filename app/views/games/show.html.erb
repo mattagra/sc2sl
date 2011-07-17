@@ -57,5 +57,5 @@
     <%= render :partial => "comments/form" %>
   </p>
 
-<%= link_to 'Destroy', match_game_path(@game.match_id, @game), :method => :delete, :confirm => "Are you sure you wish to delete this game?" %> |
-<%= link_to 'Back', match_games_path %>
+<% if can :destroy, @game %><%= link_to 'Destroy', match_game_path(@game.match_id, @game), :method => :delete, :confirm => "Are you sure you wish to delete this game?" %> | <% end %>
+<%= link_to 'View Match', match_games_path(@game.match_id) %>

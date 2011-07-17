@@ -54,14 +54,6 @@ ActiveRecord::Schema.define(:version => 20110713231704) do
     t.datetime "updated_at"
   end
 
-  create_table "game_ratings", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "game_id"
-    t.integer  "rating"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "games", :force => true do |t|
     t.integer  "player0_id"
     t.integer  "player1_id"

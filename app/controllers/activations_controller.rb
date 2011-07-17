@@ -11,7 +11,7 @@ class ActivationsController < ApplicationController
       flash[:notice] = "Your account has been activated. Thank you for joining"
       UserMailer.welcome(@user).deliver
       UserSession.create(@user, false)
-      redirect_to account_url
+      redirect_to finish_activation_url
     else
       flash[:notice] = "There was a problem, please contact us immediately or check your email to make sure you copied the link correctly."
       redirect_to root_url

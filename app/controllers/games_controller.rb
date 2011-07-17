@@ -2,8 +2,9 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.xml
   authorize_resource
+  cache_sweeper :game_sweeper
   def index
-    @games = Game.all
+    @games = Game.where("games.result is not null")
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @games }

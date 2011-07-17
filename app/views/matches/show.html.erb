@@ -31,17 +31,19 @@
     <th><%= @match.team0.short_name %> Player</th>
     <th><%= @match.team1.short_name %> Player</th>
     <th>Map</th>
+    <th>Winner</th>
     <th>Winning Team</th>
     <th>Replay</th>
     <th>Replay Downloads</th>
     <th></th>
   </tr>
-<% @match.games.order("match_order asc").each do |game| %>
+<% @match.games.where("games.result is not null").order("match_order asc").each do |game| %>
   <tr>
     <td><%= game.match_order %> </td>
 <td><%= game.player0 %> </td>
 <td><%= game.player1 %></td>
 <td><%= game.map %></td>
+<td><%= game.winning_player %></td>
 <td><%= game.result_s  %></td>
 <td><%= link_to_if game.replay_file_size.to_i > 0, "Download Replay", replay_match_game_path(@match.id, game.id) %> </td>
 <td><%= game.downloads %></td>
@@ -63,5 +65,5 @@
   </p>
 
 <%= link_to "Live Voting", match_vote_events_path(@match.id) %> | 
-<%= link_to 'Edit', edit_match_path(@match) %> |
+<% if can? :edit, @match %><%= link_to 'Edit', edit_match_path(@match) %> |<% end %>
 <%= link_to 'Back', matches_path %>

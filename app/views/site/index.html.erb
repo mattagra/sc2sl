@@ -4,290 +4,203 @@
 
     <div id="ranking">
 
-      <div id="ranking-titre">
+      <% cache('season_rankings') do %>
+        <div id="ranking-titre">
 
-        <div id="ranking-titre-fleche"></div>
+          <div id="ranking-titre-fleche"></div>
 
-        <div id="ranking-titre-texte">RANKING</div>
+          <div id="ranking-titre-texte">RANKING</div>
 
-        <div id="ranking-titre-texte-right">+ see statistics</div>
-
-      </div>
-
-      <div id="ranking-content">
-
-        <div id="ranking-ligne-titre">
-
-          <div class="ranking-ligne-titre-id">#</div>
-
-          <div class="ranking-ligne-titre-name">Name</div>
-
-          <div class="ranking-ligne-titre-points">Points</div>
-
-          <div class="ranking-ligne-titre-win">Win</div>
-
-          <div class="ranking-ligne-titre-loose">Loose</div>
-
-          <div class="ranking-ligne-titre-mw">MW</div>
-
-          <div class="ranking-ligne-titre-ml">ML</div>
+          <div id="ranking-titre-texte-right">+ see statistics</div>
 
         </div>
 
-        <div class="ranking-ligne">
+        <div id="ranking-content">
 
-          <div class="ranking-ligne-id">1.</div>
+          <div id="ranking-ligne-titre">
 
-          <div class="ranking-ligne-name"><img src="css/images/drapeaux/fr.jpg" alt="francais" />Millenium</div>
+            <div class="ranking-ligne-titre-id">#</div>
 
-          <div class="ranking-ligne-points">3458pts</div>
+            <div class="ranking-ligne-titre-name">Name</div>
 
-          <div class="ranking-ligne-win">96</div>
+            <div class="ranking-ligne-titre-points">Points</div>
 
-          <div class="ranking-ligne-loose">16</div>
+            <div class="ranking-ligne-titre-win">Win</div>
 
-          <div class="ranking-ligne-mw">3</div>
+            <div class="ranking-ligne-titre-loose">Loose</div>
 
-          <div class="ranking-ligne-ml">3</div>
+            <div class="ranking-ligne-titre-mw">MW</div>
 
-        </div>
+            <div class="ranking-ligne-titre-ml">ML</div>
 
-        <div class="ranking-ligne" style="background-color : #E7E2E2;" >
+          </div>
+          <% @season = Season.first %>
+          <% @season.teams.sort_by{|t| -1 * @season.points(t)}.each_with_index do |team, i| %>
+            <% if i % 2 == 1 %>
+              <div class="ranking-ligne" style="background-color : #E7E2E2;">
+              <% else %>
+                <div class="ranking-ligne">
+                <% end %>
+                <div class="ranking-ligne-id"><%= i%>.</div>
 
-          <div class="ranking-ligne-id">2.</div>
+                <div class="ranking-ligne-name"><%= image_tag team.country.flag%> <%= link_to team.name, team_path(team.slug) %></div>
 
-          <div class="ranking-ligne-name"><img src="css/images/drapeaux/fr.jpg" alt="francais" />Fnactic.msi</div>
+                <div class="ranking-ligne-points"><%= @season.points(team) %> pts</div>
 
-          <div class="ranking-ligne-points">2758pts</div>
+                <div class="ranking-ligne-win"><%= @season.game_wins(team) %></div>
 
-          <div class="ranking-ligne-win">92</div>
+                <div class="ranking-ligne-loose"><%= @season.game_losses(team) %></div>
 
-          <div class="ranking-ligne-loose">16</div>
+                <div class="ranking-ligne-mw"><%= @season.wins(team) %></div>
 
-          <div class="ranking-ligne-mw">1</div>
+                <div class="ranking-ligne-ml"><%= @season.losses(team) %></div>
 
-          <div class="ranking-ligne-ml">6</div>
+              </div>
 
-        </div>
+            <% end %>
 
-        <div class="ranking-ligne">
 
-          <div class="ranking-ligne-id">3.</div>
-
-          <div class="ranking-ligne-name"><img src="css/images/drapeaux/fr.jpg" alt="francais" />Na'vi</div>
-
-          <div class="ranking-ligne-points">2256pts</div>
-
-          <div class="ranking-ligne-win">82</div>
-
-          <div class="ranking-ligne-loose">6</div>
-
-          <div class="ranking-ligne-mw">1</div>
-
-          <div class="ranking-ligne-ml">3</div>
+          </div>
 
         </div>
+      <% end %>
+      <% cache("featured_article") do  %>
+        <div class="article">
+          <% @article = @article.first %>
+          <% if @article %>
+            <div class="article-image"><%= link_to(image_tag(@article.featured_photo.url(:normal)), view_article_path(@article)) %></div>
+            <div class="article-titre"><%= link_to @article.title, view_article_path(@article) %> </div>
 
-        <div class="ranking-ligne" style="background-color : #E7E2E2;" >
+            <div class="article-texte"><%=raw auto_link(truncate_words(@article.formatted_description, 200)) %>
+              <br/> &nbsp;
 
-          <div class="ranking-ligne-id">4.</div>
-
-          <div class="ranking-ligne-name"><img src="css/images/drapeaux/fr.jpg" alt="francais" />SK Gaming</div>
-
-          <div class="ranking-ligne-points">2138pts</div>
-
-          <div class="ranking-ligne-win">96</div>
-
-          <div class="ranking-ligne-loose">16</div>
-
-          <div class="ranking-ligne-mw">3</div>
-
-          <div class="ranking-ligne-ml">3</div>
-
+              <div align="right">
+                <%= @article.created_at.strftime("%b %d") %>,  <%= @article.user.login %> <b><%= link_to "Read More", view_article_path(@article) %></b>
+              </div>
+            </div>
+          <% end %>
         </div>
-
-        <div class="ranking-ligne">
-
-          <div class="ranking-ligne-id">5.</div>
-
-          <div class="ranking-ligne-name"><img src="css/images/drapeaux/fr.jpg" alt="francais" />Extensive</div>
-
-          <div class="ranking-ligne-points">2005pts</div>
-
-          <div class="ranking-ligne-win">44</div>
-
-          <div class="ranking-ligne-loose">9</div>
-
-          <div class="ranking-ligne-mw">3</div>
-
-          <div class="ranking-ligne-ml">3</div>
-
-        </div>
-
-        <div class="ranking-ligne" style="background-color : #E7E2E2;" >
-
-          <div class="ranking-ligne-id">6.</div>
-
-          <div class="ranking-ligne-name"><img src="css/images/drapeaux/fr.jpg" alt="francais" />Ching.Gaming</div>
-
-          <div class="ranking-ligne-points">1938pts</div>
-
-          <div class="ranking-ligne-win">56</div>
-
-          <div class="ranking-ligne-loose">26</div>
-
-          <div class="ranking-ligne-mw">3</div>
-
-          <div class="ranking-ligne-ml">2</div>
-
-        </div>
-
-      </div>
+      <% end %>
 
     </div>
 
-    <div class="article">
-      <% if @article %>
-        <div class="article-image"><%= link_to(image_tag(@article.featured_photo.url(:normal)), view_article_path(@article)) %></div>
-        <div class="article-titre"><%= link_to @article.title, view_article_path(@article) %> </div>
+    <div id="center">
 
-        <div class="article-texte"><%=raw auto_link(truncate_words(@article.formatted_description, 200)) %>
-          <br/> &nbsp;
+      <% cache("calendar_#{@date.year.to_s}_#{@date.month.to_s}") do  %>
 
-          <div align="right">
-            <%= @article.created_at.strftime("%b %d") %>,  <%= @article.user.login %> <b><%= link_to "Read More", view_article_path(@article) %></b>
+      <div id="middle-full">
+
+        <div id="middle-titre">
+
+          <div id="middle-titre-fleche"></div>
+
+          <div id="middle-titre-texte">SC2SL CALENDAR</div>
+
+          <div id="middle-titre-texte-right">
           </div>
         </div>
-      <% end %>
-    </div>
-
-  </div>
-
-  <div id="center">
-
-    <div id="middle-full">
-
-      <div id="middle-titre">
-
-        <div id="middle-titre-fleche"></div>
-
-        <div id="middle-titre-texte">SC2SL CALENDAR</div>
-
-        <div id="middle-titre-texte-right">
+        <div id="calendar">
+          <h2 id="month">
+            <%= link_to "<<", :month => (@date.beginning_of_month-1).strftime("%m"),  :year => (@date.beginning_of_month-1).strftime("%Y") %>
+            <%= @date.strftime("%B - %Y")  %>
+            <%= link_to ">>", :month => (@date.end_of_month+1).strftime("%m"), :year => (@date.end_of_month+1).strftime("%Y") %>
+          </h2>
+          <% calendar_for Array(@matches), :year => @date.year, :month => @date.month do |calendar| %>
+            <%= calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
+            <% calendar.day(:day_method => :scheduled_at) do |date, matches| %>
+              <% if date.month == @date.month %>
+                <% if matches.size == 0 %>
+                  <%= date.day %>
+                <% else %>
+                  <% str = "" %>
+                  <% id = 0 %>
+                  <% for match in matches %>
+                    <% str += match.title %>
+                    <% id = match.id %>
+                  <% end %>
+                  <%= link_to date.day, match_path(id), :title => str %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
         </div>
-      </div>
-      <img src="css/images/calendar.jpg" />
-
-    </div>
-
-    <div id="middlenews">
-
-      <div id="middle-titre">
-
-        <div id="middle-titre-fleche"></div>
-
-        <div id="middle-titre-texte">LAST NEWS</div>
-
-        <div id="middle-titre-texte-right">+see all</div>
 
       </div>
-      <% @articles.each do |article| %>
-        <%= link_to content_tag(:font, article.created_at.strftime("%m/%d/%Y") + " - ", :class => "ntitle2") + content_tag(:font, article.title, :class => "ntitle"), view_article_path(article) %>
-        <br />
       <% end %>
-    </div>
-    <div id="middle">
 
-      <div id="middle-titre">
+      <% cache("recent_news") do %>
 
-        <div id="middle-titre-fleche"></div>
+      <div id="middlenews">
 
-        <div id="middle-titre-texte">LAST REPLAYS</div>
+        <div id="middle-titre">
 
-        <div id="middle-titre-texte-right">+see all</div>
+          <div id="middle-titre-fleche"></div>
+
+          <div id="middle-titre-texte">LAST NEWS</div>
+
+          <div id="middle-titre-texte-right"><%= link_to "+see all", articles_path %></div>
+
+        </div>
+        <% @articles.each do |article| %>
+          <%= link_to content_tag(:font, article.created_at.strftime("%m/%d/%Y") + " - ", :class => "ntitle2") + content_tag(:font, article.title, :class => "ntitle"), view_article_path(article) %>
+          <br />
+        <% end %>
+      </div>
+      
+      <% end %>
+
+
+      <% cache("recent_games") do %>
+      <div id="middle">
+
+        <div id="middle-titre">
+
+          <div id="middle-titre-fleche"></div>
+
+          <div id="middle-titre-texte">LAST REPLAYS</div>
+
+          <div id="middle-titre-texte-right"><%= link_to "+see all", games_path %></div>
+
+        </div>
+
+
+        <table width="346" cellpadding="0" cellspacing="0" border="0" id="replays_table">
+          <% @games.each do |game| %>
+            <tr>
+              <td><%= link_to game_path(game), game_path(game) %></td>
+              <td height="26" width="34" valign="middle">&nbsp;&nbsp;<img src="css/images/last-replays/goldstar.png" alt="download the replay" /></td>
+              <td  width="150"  valign="absmiddle"><%= image_tag race_icon_url(game.player0.user.race), :align => :top %> &nbsp;<%= game.player0.team.short_name %> <b><%= game.player0.login %></b></td>
+              <td  width="150"  valign="absmiddle"><%= image_tag race_icon_url(game.player1.user.race), :align => :top %> &nbsp;<%= game.player1.team.short_name %> <b><%= game.player1.login %></b></td>
+              <td width="20" valign="middle" vspace="2"><img src="css/images/last-replays/dl2.gif" alt="download the replay" /></td>
+            </tr>
+          <% end %>
+        </table>
+        <script type="text/javascript">
+          $(function ()
+          {
+            // Hide the first cell for JavaScript enabled browsers.
+            $('#replays_table td:first-child').hide();
+
+            // Apply a class on mouse over and remove it on mouse out.
+            $('#replays_table tr').hover(function ()
+            {
+              $(this).toggleClass('Highlight');
+            });
+
+            // Assign a click handler that grabs the URL
+            // from the first cell and redirects the user.
+            $('#replays_table tr').click(function ()
+            {
+              location.href = $(this).find('td a').attr('href');
+            });
+          });
+        </script>
 
       </div>
 
-
-      <table width="346" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td height="26" width="34" valign="middle">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/goldstar.png" alt="download the replay" /></a> </td>
-          <td  width="150"  valign="absmiddle"><img src="css/images/races/mauve.jpg" alt="mauve" align="top"/>&nbsp;aAa <b>Nerchio</b></td>
-          <td  width="150"  valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
-          <td width="20" valign="middle" vspace="2"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay" /></a></td>
-        </tr>
-      </table>
-      <table width="346" cellpadding="0" cellspacing="0" bgcolor="#E7E2E2">
-        <tr>
-          <td height="26" width="33" align="left">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/silverstar.png" alt="download the replay" /></a> </td>
-          <td  width="150" valign="middle"><img src="css/images/races/mauve.jpg" alt="mauve"  align="top"/>&nbsp;aAa <b>Nerchio</b></td>
-          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
-          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
-        </tr>
-      </table>
-      <table width="346" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td height="26" width="34" valign="middle">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/bronzestar.png" alt="download the replay" /></a> </td>
-          <td  width="150" valign="absmiddle"><img src="css/images/races/mauve.jpg" alt="mauve" align="top"/>&nbsp;aAa <b>Nerchio</b></td>
-          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
-          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
-        </tr>
-      </table>
-      <table width="346" cellpadding="0" cellspacing="0" bgcolor="#E7E2E2">
-        <tr>
-          <td height="26" width="33" align="left">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/bronzestar.png" alt="download the replay" /></a> </td>
-          <td  width="150" valign="middle"><img src="css/images/races/mauve.jpg" alt="mauve"  align="top"/>&nbsp;aAa <b>Nerchio</b></td>
-          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
-          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
-        </tr>
-      </table>	<table width="346" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td height="26" width="34" valign="middle">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/bronzestar.png" alt="download the replay" /></a> </td>
-          <td  width="150" valign="absmiddle"><img src="css/images/races/mauve.jpg" alt="mauve" align="top"/>&nbsp;aAa <b>Nerchio</b></td>
-          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
-          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
-        </tr>
-      </table>
-      <table width="346" cellpadding="0" cellspacing="0" bgcolor="#E7E2E2">
-        <tr>
-          <td height="26" width="33" align="left">&nbsp;&nbsp; </td>
-          <td  width="150" valign="middle"><img src="css/images/races/mauve.jpg" alt="mauve"  align="top"/>&nbsp;aAa <b>Nerchio</b></td>
-          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
-          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
-        </tr>
-      </table>	<table width="346" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td height="26" width="34" valign="middle">&nbsp;&nbsp; </td>
-          <td  width="150" valign="absmiddle"><img src="css/images/races/mauve.jpg" alt="mauve" align="top"/>&nbsp;aAa <b>Nerchio</b></td>
-          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
-          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
-        </tr>
-      </table>
-      <table width="346" cellpadding="0" cellspacing="0" bgcolor="#E7E2E2">
-        <tr>
-          <td height="26" width="33" align="left">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/silverstar.png" alt="download the replay" /></a> </td>
-          <td  width="150" valign="middle"><img src="css/images/races/mauve.jpg" alt="mauve"  align="top"/>&nbsp;aAa <b>Nerchio</b></td>
-          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
-          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
-        </tr>
-      </table>	<table width="346" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td height="26" width="34" valign="middle">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/goldstar.png" alt="download the replay" /></a> </td>
-          <td  width="150" valign="absmiddle"><img src="css/images/races/mauve.jpg" alt="mauve" align="top"/>&nbsp;aAa <b>Nerchio</b></td>
-          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
-          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
-        </tr>
-      </table>
-      <table width="346" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td height="26" width="34" valign="middle">&nbsp;&nbsp;<a href=#><img src="css/images/last-replays/goldstar.png" alt="download the replay" /></a> </td>
-          <td  width="150" valign="absmiddle"><img src="css/images/races/mauve.jpg" alt="mauve" align="top"/>&nbsp;aAa <b>Nerchio</b></td>
-          <td  width="150" valign="middle"><img src="css/images/races/rouge.jpg" alt="mauve"  align="top"/>&nbsp;Dignitas <b>Sjow</b></td>
-          <td width="20" valign="middle"><a href=#><img src="css/images/last-replays/dl2.gif" alt="download the replay"></a></td>
-        </tr>
-      </table>
+      <% end %>
 
     </div>
-
-  </div></div>
+  </div>
+</div>
 

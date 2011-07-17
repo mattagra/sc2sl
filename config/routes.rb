@@ -58,6 +58,8 @@ Sc2sl::Application.routes.draw do
   get 'login' => 'user_sessions#new'
   get 'register' => 'users#new'
   match 'profile/:login' => 'users#show', :as => :profile
+  match 'finish_registration' => 'site#finish_registration', :as => :finish_registration
+  match 'finish_activation' => 'site#finish_activation', :as => :finish_activation
 
   match '/activate/:activation_code' => 'activations#new', :as => :activate
   match '/terms' => "site#terms", :as => :terms

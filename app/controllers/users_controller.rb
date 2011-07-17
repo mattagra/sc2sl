@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if verify_recaptcha(:model => @user, :message => "The security code you entered was incorrect.") and @user.save
       flash[:notice] = "Thank you for registering. Please check your email to confirm your information before proceding."
       UserMailer.activation(@user).deliver
-      redirect_to root_url
+      redirect_to finish_registration_url
     else
       flash[:notice] = "Some errors prevented you from registering "
       render :action => :new

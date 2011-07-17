@@ -3,21 +3,29 @@ class ArticlesController < ApplicationController
   # GET /articles.xml
 
   authorize_resource
+  cache_sweeper :article_sweeper
 
   def index
+    @current_page = (params[:page].to_i || 0)
+    @per_page = 20
     if current_admin
       if params[:tag]
-        @articles = Article.tagged_with(params[:tag]).recent
+        @articles = Article.tagged_with(params[:tag]).paginated(@per_page, @current_page)
+        @articles_count = Article.tagged_with(params[:tag]).count
       else
-        @articles = Article.recent
+        @articles = Article.paginated(@per_page, @current_page)
+        @articles_count = Article.count
       end
     else
       if params[:tag]
-        @articles = Article.tagged_with(params[:tag]).published.recent
+        @articles = Article.tagged_with(params[:tag]).published.paginated(@per_page, @current_page)
+        @articles_count = Article.tagged_with(params[:tag]).published.count
       else
-        @articles = Article.published.recent
+        @articles = Article.published.paginated(@per_page, @current_page)
+        @articles_count = Article.published.count
       end
     end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @articles }

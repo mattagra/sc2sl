@@ -1,22 +1,35 @@
 class Match < ActiveRecord::Base
+
+  #Associations
   has_many :games
   has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Match.to_s}'"
   belongs_to :team1, :class_name => "Team"
   belongs_to :team0, :class_name => "Team"
-  accepts_nested_attributes_for :games
   belongs_to :season
-
   has_many :vote_events
   has_many :votes, :through => :vote_events
 
+
+  #Accessors
   attr_accessor :maps
+  
+  #Nested Attributes
+  accepts_nested_attributes_for :games
 
+  #STATIC
+  POINTS = [7,6,6,5,0,2,1,0,0]
 
+  #validations
   validates :best_of, :presence => true, :numericality => true
+  validates :team0, :presence => true
+  validates :team1, :presence => true
+  
 
-    before_save :determine_status
+  #triggers
+  before_save :determine_status
+  before_create :build_maps
 
-  def before_create
+  def build_maps
     maps_count = maps.size
     self.best_of.times do |i|
       map_num = i % maps_count
@@ -51,6 +64,16 @@ class Match < ActiveRecord::Base
 
   def teams
     [self.team0,self.team1]
+  end
+
+  def team0_points
+    i = 4 - self.results.to_i
+    Match::POINTS[i]
+  end
+
+  def team1_points
+    i = 4 + self.results.to_i
+    Match::POINTS[i]
   end
 
   

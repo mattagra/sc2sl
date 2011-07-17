@@ -10,6 +10,8 @@ class Ability
         can :manage, :all
       else
         can :destroy, UserSession
+        can :manage, Vote
+        can :show_current, VoteEvent
         can :update, User do |user|
           user.try(:id) == user.id
         end

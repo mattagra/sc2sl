@@ -1,4 +1,6 @@
 class VoteEvent < ActiveRecord::Base
+
+  #Associations
   has_many :votes
   belongs_to :match
   belongs_to :team

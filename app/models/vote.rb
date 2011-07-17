@@ -1,10 +1,12 @@
 class Vote < ActiveRecord::Base
+
+  #Associations
   belongs_to :vote_event
   belongs_to :user
   belongs_to :player
   
 
-
+  #Validations
   validates :user_id,  :presence => true, :uniqueness => {:scope => :vote_event_id}
   validates :vote_event, :presence => true
   validates :player, :presence => true

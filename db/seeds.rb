@@ -237,7 +237,7 @@ Country.create(:name => 'Uganda', :short => 'UG')
 Country.create(:name => 'Ukraine', :short => 'UA')
 Country.create(:name => 'United Arab Emirates', :short => 'AE')
 Country.create(:name => 'United Kingdom', :short => 'GB')
-Country.create(:name => 'United States', :short => 'US')
+united_states = Country.create(:name => 'United States', :short => 'US')
 Country.create(:name => 'United States Minor Outlying Islands', :short => 'UM')
 Country.create(:name => 'Uruguay', :short => 'UY')
 Country.create(:name => 'Uzbekistan', :short => 'UZ')
@@ -253,4 +253,49 @@ Country.create(:name => 'Yemen', :short => 'YE')
 Country.create(:name => 'Zambia', :short => 'ZM')
 Country.create(:name => 'Zimbabwe', :short => 'ZW')
 
+
+u = User.new
+u.first_name = "Michael"
+u.last_name = "Darmousseh"
+u.login = "admin"
+u.email = "michael.darmousseh@gmail.com"
+u.password = "michael"
+u.password_confirmation = "michael"
+u.terms = "1"
+u.roles = ["moderator", "admin", "superadmin"]
+u.save
+u.activate!
+
+idra = User.new
+idra.first_name = "Greg"
+idra.last_name = "Fields"
+idra.login = "IdrA"
+idra.email = "michael.darmousseh+1@gmail.com"
+idra.password = "michael"
+idra.password_confirmation = "michael"
+idra.terms = "1"
+idra.save
+idra.activate!
+
+inc = User.new
+inc.first_name = "Chris"
+inc.last_name = "Loranger"
+inc.login = "Huk"
+inc.email = "michael.darmousseh+2@gmail.com"
+inc.password = "michael"
+inc.password_confirmation = "michael"
+inc.terms = "1"
+inc.save
+inc.activate!
+
+team_liquid = Team.create(:name => "Team Liquid", :short_name => "TL", :website => "http://teamliquid.net", :country => united_states)
+evil_geniuses = Team.create(:name => "Evil Geniuses", :short_name => "EG", :website => "http://teamliquid.net", :country => united_states)
+
+Player.create(:team => team_liquid, :user => inc, :date_joined => Time.now)
+Player.create(:team => evil_geniuses, :user => idra, :date_joined => Time.now)
+
+map_names = ["Xel'Naga Caverns", "Shakuras", "Blistering Sands", "Lost Temple", "Metalopolis", "Terminus RE"]
+map_names.each do |map_name|
+  Map.create(:name => map_name)
+end
 

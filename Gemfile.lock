@@ -55,6 +55,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcache-client (1.8.5)
     mime-types (1.16)
     nokogiri (1.4.4.1-x86-mingw32)
     paperclip (2.3.12)
@@ -95,6 +96,7 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.29)
+    yaml_db (0.2.1)
 
 PLATFORMS
   x86-mingw32
@@ -106,6 +108,7 @@ DEPENDENCIES
   bb-ruby
   cancan
   jquery-rails (>= 1.0.3)
+  memcache-client
   paperclip
   rails
   recaptcha
@@ -113,3 +116,4 @@ DEPENDENCIES
   sanitize
   sqlite3-ruby
   stringex
+  yaml_db

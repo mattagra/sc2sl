@@ -1,8 +1,19 @@
 class Player < ActiveRecord::Base
+
+  #Associations
   belongs_to :team
   belongs_to :user
+  has_many :comments, :through => :user
 
-    has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Player.to_s}'"
+
+  #Validations
+  validates :team, :presence => true
+  validates :user, :presence => true
+  validates :date_joined, :presence => true
+
+  def games
+    Game.where("games.player0_id = ? or games.player1_id = ?",self.id,self.id)
+  end
 
   def login
     self.user.login if self.user

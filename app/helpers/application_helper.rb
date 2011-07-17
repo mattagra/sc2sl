@@ -45,7 +45,7 @@ module ApplicationHelper
   end
 
 
-  def paginate_links(per_page, current, total, url)
+  def paginate_links(per_page, current, total, url, params = {})
     current = current.to_i
     outside_width = 1
     inside_width = 1
@@ -62,19 +62,19 @@ module ApplicationHelper
       end
     end
     boxes = []
-    boxes << link_to_unless_current("<< Previous", url_for(url+"?page=#{[current - 1, 0].max}"))
+    boxes << link_to_unless_current("<< Previous", url_for(url+"?"+(request.params.except(:action, :controller, :model_name).merge(:page => "#{[current - 1, 0].max}").collect{|k,v| "#{k}=#{v}"}.join("&"))))
     
     c = 0
     final_pages.each do |page|
       if (c - page).abs > 1
         boxes << " | ..."
-        boxes << " | " + link_to_unless_current(page.to_s, url_for(url+"?page=#{page}"))
+        boxes << " | " + link_to_unless_current(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")))
       else
-        boxes << " | " + link_to_unless_current(page.to_s, url_for(url+"?page=#{page}"))
+        boxes << " | " + link_to_unless_current(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")))
       end
       c = page
     end
-    boxes << " | " + link_to_unless_current("Next >>", url_for(url+"?page=#{[current + 1, max_page].min}"))
+    boxes << " | " + link_to_unless_current("Next >>",url_for(url+"?"+(request.params.except(:action, :controller, :model_name).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")))
     return sanitize(boxes.join("")) # + "per_page: #{per_page}, current: #{current}, total: #{total}"
   end
 
