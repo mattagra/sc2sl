@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110713231704) do
+ActiveRecord::Schema.define(:version => 20110719222606) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -53,6 +53,21 @@ ActiveRecord::Schema.define(:version => 20110713231704) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "games", :force => true do |t|
     t.integer  "player0_id"
@@ -105,6 +120,14 @@ ActiveRecord::Schema.define(:version => 20110713231704) do
     t.datetime "updated_at"
     t.integer  "moderator_id"
     t.integer  "comment_id"
+  end
+
+  create_table "newsletters", :force => true do |t|
+    t.string   "subject_line"
+    t.text     "body"
+    t.boolean  "sent"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "players", :force => true do |t|
@@ -225,7 +248,6 @@ ActiveRecord::Schema.define(:version => 20110713231704) do
     t.text     "signature"
     t.integer  "country_id"
     t.boolean  "caster"
-    t.string   "team_name"
     t.string   "website"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -234,6 +256,7 @@ ActiveRecord::Schema.define(:version => 20110713231704) do
     t.integer  "photo_file_size"
     t.boolean  "photo_approved"
     t.integer  "roles_mask"
+    t.boolean  "subscription"
   end
 
   create_table "vote_events", :force => true do |t|

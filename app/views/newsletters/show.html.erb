@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Subject line:</b>
+  <%= @newsletter.subject_line %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @newsletter.body.html_safe %>
+</p>
+
+<p>
+  <b>Sent:</b>
+  <%= @newsletter.sent %>
+</p>
+
+
+<%= link_to 'Edit', edit_newsletter_path(@newsletter) %> |
+<%= link_to 'Back', newsletters_path %>

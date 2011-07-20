@@ -41,4 +41,10 @@ class UserMailer < ActionMailer::Base
     mail(:to => "#{@user.login} <#{@user.email}>", :subject => "SC2SL: You have been banned for recent activity.")
   end
 
+  def newsletter(user, newsletter)
+    @user = user
+    @newsletter = newsletter
+    mail(:to => "#{@user.email}", :subject => @newsletter.subject_line, :content_type => "text/html")
+  end
+
 end

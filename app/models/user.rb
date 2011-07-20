@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   #Scopes
   scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0"} }
+  scope :subscription, where(:subscription => true)
+
 
   #Attachments
   has_attached_file :photo,
@@ -19,7 +21,7 @@ class User < ActiveRecord::Base
 
 
   #Attributes
-  attr_protected :login, :caster, :website, :email
+  attr_protected :login, :caster, :website, :email, :roles
 
   #Validations
   validates :email, :presence => true, :uniqueness => true, :email_format => true
@@ -66,6 +68,7 @@ class User < ActiveRecord::Base
 
   def set_defaults
     self.active = false
+    self.subscription = true
   end
 
   def reset_tokens

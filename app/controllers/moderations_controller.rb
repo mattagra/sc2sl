@@ -52,11 +52,11 @@ class ModerationsController < ApplicationController
       if @moderation.save
         case @moderation.mod_type
         when "warned"
-          UserMailer.warning(@moderation.user, @moderation).deliver
+          UserMailer.delay.warning(@moderation.user, @moderation)
         when "banned"
-          UserMailer.ban(@moderation.user, @moderation).deliver
+          UserMailer.delay.ban(@moderation.user, @moderation)
         when "permabanned"
-          UserMailer.permaban(@moderation.user, @moderation).deliver
+          UserMailer.delay.permaban(@moderation.user, @moderation)
         end
         format.html { redirect_to(@moderation, :notice => 'Moderation was successfully created.') }
         format.xml  { render :xml => @moderation, :status => :created, :location => @moderation }

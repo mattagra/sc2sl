@@ -22,6 +22,7 @@ gem 'ajaxful_rating', :git => 'git://github.com/edgarjs/ajaxful-rating.git', :br
 gem "cancan"
 gem 'yaml_db'
 gem "memcache-client"
+gem 'delayed_job'
 
 # Use unicorn as the web server
 # gem 'unicorn'

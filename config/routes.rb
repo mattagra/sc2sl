@@ -1,6 +1,12 @@
 Sc2sl::Application.routes.draw do
 
 
+  resources :newsletters
+
+  get "admin/index"
+
+  get "admin/newsletter"
+
   get "/live" => "site#live", :as => :live
 
   get "/vote" => "vote_events#show_current"
@@ -48,7 +54,11 @@ Sc2sl::Application.routes.draw do
       get 'upload_image'
     end
   end
-
+  resources :newsletters do
+    member do
+      post 'deliver'
+    end
+  end
   resources :password_resets
   resource :user_session
   resource :account, :controller => :users
@@ -64,7 +74,6 @@ Sc2sl::Application.routes.draw do
   match '/activate/:activation_code' => 'activations#new', :as => :activate
   match '/terms' => "site#terms", :as => :terms
   match '/faq' => "site#faq", :as => :faq
-
 
 
   root :to=>"site#index"

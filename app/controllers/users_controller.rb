@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user.email = params[:user][:email]
     if verify_recaptcha(:model => @user, :message => "The security code you entered was incorrect.") and @user.save
       flash[:notice] = "Thank you for registering. Please check your email to confirm your information before proceding."
-      UserMailer.activation(@user).deliver
+      UserMailer.delay.activation(@user)
       redirect_to finish_registration_url
     else
       flash[:notice] = "Some errors prevented you from registering "
@@ -56,9 +56,9 @@ class UsersController < ApplicationController
       @user = current_user
     end
     login = @user.login
-    if @user.update_attributes(params[:user], !current_user.is_admin?)
+    if @user.update_attributes(params[:user], !current_user.is_super_admin?)
       unless login == @user.login
-        UserMailer.username_change(@user, login).deliver
+        UserMailer.delay.username_change(@user, login)
       end
       flash[:notice] = "Account updated!"
       redirect_to profile_path(@user.login)
