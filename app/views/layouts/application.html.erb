@@ -87,83 +87,83 @@
             <% end %>
 
           </div>
-<% cache("header") do %>
-          <div class="login-content-right">
+          <% cache("header") do %>
+            <div class="login-content-right">
 
-            <a href="http://localhost:3001/articles.rss"><img src="/css/images/login/icones/rss.gif" alt="RSS" /></a>
-            <a href="#"><img src="/css/images/login/icones/twitter.gif" alt="TWITTER" /></a>
+              <a href="http://localhost:3001/articles.rss"><img src="/css/images/login/icones/rss.gif" alt="RSS" /></a>
+              <a href="#"><img src="/css/images/login/icones/twitter.gif" alt="TWITTER" /></a>
 
-            <a href="#"><img src="/css/images/login/icones/facebook.gif" alt="FACEBOOK" /></a>
+              <a href="#"><img src="/css/images/login/icones/facebook.gif" alt="FACEBOOK" /></a>
 
-            <a href="#"><img src="/css/images/login/icones/mirc2.gif" alt="MIRC" /></a>
+              <a href="#"><img src="/css/images/login/icones/mirc2.gif" alt="MIRC" /></a>
+
+            </div>
 
           </div>
 
+
+
         </div>
-
-
-
       </div>
-    </div>
 
-    <div id="global">
+      <div id="global">
 
-      <div id="structure-ombre">
+        <div id="structure-ombre">
 
-        <div id="structure">
+          <div id="structure">
 
-          <div id="header">
-
-            <div id="header-logo">
-
+            <div id="header">
 
               <div id="header-logo">
-                <div id="hlogo"></div>
+
+
+                <div id="header-logo">
+                  <div id="hlogo"></div>
+                </div>
+
+              </div>
+
+              <div id="header-pub">
+
+                <div id="header-pub-left"></div>
+
+                <div id="header-pub-content"><a href="#"><img src="/css/images/header/pub/logi1.gif" alt="Get the SC2SL discount !" width="570" height="92" /></a></div>
+
+                <div id="header-pub-right"></div>
+
               </div>
 
             </div>
 
-            <div id="header-pub">
+            <div id="menu">
 
-              <div id="header-pub-left"></div>
+              <div id="menu-lien">
 
-              <div id="header-pub-content"><a href="#"><img src="/css/images/header/pub/logi1.gif" alt="Get the SC2SL discount !" width="570" height="92" /></a></div>
+                <div class="menu-lien"><a href="/" style="padding-top : 3px;"><img src="/css/images/menu/accueil.png" alt="Retour à l'accueil" /></a></div>
 
-              <div id="header-pub-right"></div>
+                <div class="menu-separation"></div>
 
-            </div>
+                <div class="menu-lien"><%= link_to "NEWS", articles_path %> </div>
 
-          </div>
+                <div class="menu-separation"></div>
 
-          <div id="menu">
+                <div class="menu-lien"><%= link_to "LEAGUES", seasons_path %></div>
 
-            <div id="menu-lien">
+                <div class="menu-separation"></div>
 
-              <div class="menu-lien"><a href="/" style="padding-top : 3px;"><img src="/css/images/menu/accueil.png" alt="Retour à l'accueil" /></a></div>
+                <div class="menu-lien"><%= link_to "REPLAYS", matches_path %> </div>
 
-              <div class="menu-separation"></div>
+                <div class="menu-separation"></div>
 
-              <div class="menu-lien"><%= link_to "NEWS", articles_path %> </div>
+                <div class="menu-lien"><%= link_to "FAQ", faq_path %> </div>
 
-              <div class="menu-separation"></div>
+                <div class="menu-separation"></div>
 
-              <div class="menu-lien"><%= link_to "LEAGUES", seasons_path %></div>
+                <div class="menu-lien"><a href="http://pokerstrategy.com" rel="nofollow">PLAY POKER</a></div>
 
-              <div class="menu-separation"></div>
+                <div class="menu-separation"></div>
 
-              <div class="menu-lien"><%= link_to "REPLAYS", matches_path %> </div>
-
-              <div class="menu-separation"></div>
-
-              <div class="menu-lien"><%= link_to "FAQ", faq_path %> </div>
-
-              <div class="menu-separation"></div>
-
-              <div class="menu-lien"><a href="http://pokerstrategy.com" rel="nofollow">PLAY POKER</a></div>
-
-              <div class="menu-separation"></div>
-
-            </div>
+              </div>
 
             <% end %>
 
@@ -181,77 +181,77 @@
 
           <div id="content-bar">
             <% cache("articles_banner") do %>
-            <div id="slider" class="nivoSlider">
-              <%- @articles.each_with_index do |article, i| %>
-                <%= render :partial => "articles/article_banner", :locals => {:article => article, :i => i} %>
-              <% end %>
+              <div id="slider" class="nivoSlider">
+                <%- @articles.each_with_index do |article, i| %>
+                  <%= render :partial => "articles/article_banner", :locals => {:article => article, :i => i} %>
+                <% end %>
 
-            </div>
+              </div>
             <% end %>
 
             <% cache("live_section") do %>
-            <div id="live">
+              <div id="live">
 
-              <div id="live-haut">
+                <div id="live-haut">
 
-                <div id="live-haut-status">
-                  <% @live_match = @live_match.first %>
-                  <% if @live_match and @live_match.live %>
-                    <div id="live-haut-status-image"><img src="/css/images/content-bar/live/live.jpg" alt="Live" /></div>
-                    <div id="live-haut-status-texte"><%= link_to "LIVE IS ONLINE", live_path %></div>
-                  <% else %>
-                    <div id="live-haut-status-image"><img src="/css/images/content-bar/live/offline.jpg" alt="Offline" /></div>
-                    <div id="live-haut-status-texte"><a href=#>LIVE IS OFFLINE</a></div>
-                  <% end %>
+                  <div id="live-haut-status">
+                    <% @live_match = @live_match.first %>
+                    <% if @live_match and @live_match.live %>
+                      <div id="live-haut-status-image"><img src="/css/images/content-bar/live/live.jpg" alt="Live" /></div>
+                      <div id="live-haut-status-texte"><%= link_to "LIVE IS ONLINE", live_path %></div>
+                    <% else %>
+                      <div id="live-haut-status-image"><img src="/css/images/content-bar/live/offline.jpg" alt="Offline" /></div>
+                      <div id="live-haut-status-texte"><a href=#>LIVE IS OFFLINE</a></div>
+                    <% end %>
+
+                  </div>
+
+                  <div id="live-haut-separation"></div>
+
+                  <div id="live-haut-infos">
+
+                    <div id="live-haut-infos-competition">Week <%= @live_match.weeks_id if @live_match %></div>
+
+                    <div id="live-haut-infos-team"><%= @live_match.title if @live_match  %></div>
+
+                  </div>
 
                 </div>
 
-                <div id="live-haut-separation"></div>
+                <div id="live-ligne">
 
-                <div id="live-haut-infos">
+                  <div id="live-ligne-left" align="center">Casters</div>
 
-                  <div id="live-haut-infos-competition">Week <%= @live_match.weeks_id if @live_match %></div>
-
-                  <div id="live-haut-infos-team"><%= @live_match.title if @live_match  %></div>
+                  <div id="live-ligne-right">
+                    <% if @live_match %>
+                      <%= link_to @live_match.casters.collect {|c| c.login}.join(", "), @live_match.url %>
+                    <% end %>
+                  </div>
 
                 </div>
 
               </div>
-
-              <div id="live-ligne">
-
-                <div id="live-ligne-left" align="center">Casters</div>
-
-                <div id="live-ligne-right">
-                  <% if @live_match %>
-                    <%= link_to @live_match.casters.collect {|c| c.login}.join(", "), @live_match.url %>
-                  <% end %>
-                </div>
-
-              </div>
-
-            </div>
             <% end %>
-<% cache("layout_advertising") do %>
-            <div id="head-sponsors">
+            <% cache("layout_advertising") do %>
+              <div id="head-sponsors">
 
-              <div id="head-sponsors-left"></div>
+                <div id="head-sponsors-left"></div>
 
-              <div id="head-sponsors-content"><a href="#"><img src="/css/images/content-bar/sponsors/qpad.png" alt="SC2SL Main Sponsor" style="margin-top : 30px;" /></a></div>
+                <div id="head-sponsors-content"><a href="#"><img src="/css/images/content-bar/sponsors/qpad.png" alt="SC2SL Main Sponsor" style="margin-top : 30px;" /></a></div>
+
+              </div>
 
             </div>
 
           </div>
 
-        </div>
-
-        <div id="structure-sponsors2"><div id="ssponso" align="center">
-            <a href="default.aspx">
-              <img src="/css/images/slider/logitech.png" alt="Profit of a special SC2SL offer with logitech!" border="0"
-                   onmouseover="this. src='/css/images/slider/logitech2.png';"
-                   onmouseout="this.src= src='/css/images/slider/logitech.png';" />
-            </a></div>
-        </div>
+          <div id="structure-sponsors2"><div id="ssponso" align="center">
+              <a href="default.aspx">
+                <img src="/css/images/slider/logitech.png" alt="Profit of a special SC2SL offer with logitech!" border="0"
+                     onmouseover="this. src='/css/images/slider/logitech2.png';"
+                     onmouseout="this.src= src='/css/images/slider/logitech.png';" />
+              </a></div>
+          </div>
         <% end %>
 
         <div id="structure">
@@ -264,23 +264,23 @@
             <%= yield %>
           </div>
 
-            <% cache("footer") do %>
-              <div id="right">
+          <% cache("footer") do %>
+            <div id="right">
 
 
-                <div id="advertissement">
+              <div id="advertissement">
 
-                  <div id="advertissement-image"><a href="#"><img src="/css/images/header/pub/logi2.gif" alt="logitech offer for starcraft fans!" width="120" height="600" /></a></div>
-
-                </div>
-                <div id="tags">
-                  <span style="font-size: 1.8em">Popular</span><br />
-                  <% tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-                    <%= link_to tag.name, { :controller => :articles, :action => :index, :tag => tag.name }, :class => css_class %>
-                  <% end %>
-                </div>
+                <div id="advertissement-image"><a href="#"><img src="/css/images/header/pub/logi2.gif" alt="logitech offer for starcraft fans!" width="120" height="600" /></a></div>
 
               </div>
+              <div id="tags">
+                <span style="font-size: 1.8em">Popular</span><br />
+                <% tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+                  <%= link_to tag.name, { :controller => :articles, :action => :index, :tag => tag.name }, :class => css_class %>
+                <% end %>
+              </div>
+
+            </div>
           </div>
 
 

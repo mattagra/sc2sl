@@ -50,8 +50,10 @@ class User < ActiveRecord::Base
 
 
   def avatar
-    if self.photo_approved != false
+    if self.photo.exists?
       self.photo.url(:normal)
+    else
+      "/css/images/comment/avatar.jpg"
     end
   end
 
