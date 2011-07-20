@@ -12,7 +12,7 @@ class Moderation < ActiveRecord::Base
   validates :comment_id, :presence => true, :uniqueness => true
   validates :moderator_id, :presence => true
   validates :mod_type, :presence => true, :inclusion => {:in => TYPES}
-  validates :reason, :presence => true, :legnth => {:minimum => 3, :maximum => 256}
+  validates :reason, :presence => true, :length => {:minimum => 3, :maximum => 256}
 
 
   def ends_at

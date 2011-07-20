@@ -9,7 +9,7 @@ class ActivationsController < ApplicationController
 
     if @user.activate!
       flash[:notice] = "Your account has been activated. Thank you for joining"
-      UserMailer.welcome(@user).deliver
+      UserMailer.delay.welcome(@user)
       UserSession.create(@user, false)
       redirect_to finish_activation_url
     else

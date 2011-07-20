@@ -1,15 +1,15 @@
 <b><%= form.label :email %></b><br />
 <% if form.object.new_record? or (current_user and current_user.is_admin?) %>
-<%=  form.text_field :email %>
+  <%=  form.text_field :email %>
 <% else %>
-<%=  form.object.email %>
+  <%=  form.object.email %>
 <% end  %>
 <br />
 <b><%= form.label :login %></b><br />
 <% if form.object.new_record? or (current_user and current_user.is_admin?) %>
-<%=  form.text_field :login %>
+  <%=  form.text_field :login %>
 <% else %>
-<%= form.object.login %>
+  <%= form.object.login %>
 <% end  %>
 <br />
 <b><%= form.label :first_name %></b><br />
@@ -35,15 +35,12 @@
 <%=  form.select :race, ["protoss", "zerg", "terran", "random"] %>
 <br />
 <% if current_user and current_user.is_admin? %>
-<b><%= form.label :caster %></b><br />
-<%= form.check_box :caster %>
-<br />
-<b><%= form.label :team_name %></b><br />
-<%= form.text_field :team_name %>
-<br />
-<b><%= form.label :website %></b><br />
-<%= form.text_field :website %>
-<br />
+  <b><%= form.label :caster %></b><br />
+  <%= form.check_box :caster %>
+  <br />
+  <b><%= form.label :website %></b><br />
+  <%= form.text_field :website %>
+  <br />
 <% end %>
 <b><%= form.label :bnet_name %></b><b><%= form.label :bent_code %></b><br />
 Name: <%=  form.text_field :bnet_name %> Identifier <%= form.text_field :bent_code %>
@@ -58,7 +55,8 @@ Name: <%=  form.text_field :bnet_name %> Identifier <%= form.text_field :bent_co
 <b><%= form.label :signature %></b><br />
 <%=  form.text_field :signature %>
 <br />
-<p>
+<% if current_super_admin %>
+  <p>
     <%= form.label :roles %><br />
     <% for role in User::ROLES %>
       <%= check_box_tag "user[roles][]", role, form.object.roles.include?(role) %>
@@ -66,5 +64,9 @@ Name: <%=  form.text_field :bnet_name %> Identifier <%= form.text_field :bent_co
     <% end %>
     <%= hidden_field_tag "user[roles][]", "" %>
   </p>
-
-<br />
+  <br />
+<% end %>
+<% unless form.object.new_record? %>
+  <b><%= form.label :subscription %></b><br />
+  <%=  form.check_box :subscription %>
+<% end  %>
