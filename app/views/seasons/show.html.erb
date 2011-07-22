@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
-
-<%= image_tag @season.banner.url(:normal) %>
-
+<%=  grayscale_banner_link(@season.banner, season_path(@season)) %>
 <p>
   <b>Name:</b>
   <%= @season.name %>

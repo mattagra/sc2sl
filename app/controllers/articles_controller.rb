@@ -25,7 +25,9 @@ class ArticlesController < ApplicationController
         @articles_count = Article.published.count
       end
     end
-    
+
+    @page = "Sc2SL News"
+    @keywords += ["News", "Articles"]
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @articles }
@@ -57,7 +59,11 @@ class ArticlesController < ApplicationController
       @comments_count = @article.comments.count
       @per_page = 10
       @comments= @article.comments.paginated(@per_page, @current_page)
- 
+
+      @page = "SC2SL News"
+      @subpage = @article.title
+      @description = @article.summary
+      @keywords += @article.tags
       respond_to do |format|
         format.html # show.html.erb
         format.xml  { render :xml => @article }

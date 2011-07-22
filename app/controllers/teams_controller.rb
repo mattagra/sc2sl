@@ -5,6 +5,7 @@ class TeamsController < ApplicationController
   # GET /teams.xml
   def index
     @teams = Team.all
+    @page = "Teams"
     
     respond_to do |format|
       format.html # index.html.erb
@@ -21,6 +22,9 @@ class TeamsController < ApplicationController
     @comments_count = @team.comments.count
     @per_page = 10
     @comments= @team.comments.paginated(@per_page, @current_page)
+    @page = "Teams"
+    @subpage = @team.to_s
+    @keywords += ["teams", @team, @team.short_name]
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @team }

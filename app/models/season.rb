@@ -10,7 +10,18 @@ class Season < ActiveRecord::Base
   accepts_nested_attributes_for :teams, :reject_if => proc { |a| a['selected'].blank? }
 
   #Attached
-  has_attached_file :banner, {:styles => {:normal => "815x129!", :small => "780x124!"}, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
+  has_attached_file :banner, {
+    :styles => {
+      :normal => "815x129!",
+      :normal_gray => "815x129!",
+      :small => "780x124!"
+    },
+    :url => "/images/:class/:attachment/:id/:style_:basename.:extension",
+    :path => ":rails_root/public:url",
+    :convert_options => {
+      :normal_gray => "-colorspace gray"
+    }
+    }
 
   #Validations
   validates :name, :presence => true

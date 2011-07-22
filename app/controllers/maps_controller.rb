@@ -6,6 +6,9 @@ class MapsController < ApplicationController
   # GET /maps.xml
   def index
     @maps = Map.all
+    @page = "Maps"
+    @description = "Maps used in the SC2SL League"
+    @keywords += ["maps"]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,6 +20,10 @@ class MapsController < ApplicationController
   # GET /maps/1.xml
   def show
     @map = Map.find(params[:id])
+    @page = "Maps"
+    @subpage = @map.name
+    
+    @keywords += ["maps", @map.name]
 
     respond_to do |format|
       format.html # show.html.erb

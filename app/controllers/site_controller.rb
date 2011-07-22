@@ -45,4 +45,15 @@ class SiteController < ApplicationController
     @season = Season.where(:published => true).limit(1).first
   end
 
+  def sitemap
+    @static_pages = ["live", "terms", "faq", "", "about", "contact", "privacy"]
+    @articles = Article.all
+    @matches = Match.all
+    @teams = Team.all
+    @players = Player.all
+    respond_to do |format|
+      format.xml
+    end
+  end
+
 end

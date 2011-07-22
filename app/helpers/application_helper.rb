@@ -78,6 +78,12 @@ module ApplicationHelper
     return sanitize(boxes.join("")) # + "per_page: #{per_page}, current: #{current}, total: #{total}"
   end
 
+  def grayscale_banner_link(banner, path)
+   ("<div style='height: 129px;'>" +
+   link_to(image_tag(banner.url(:normal), :class => "img_colorscale"), path) +
+   link_to(image_tag(banner.url(:normal_gray), :class => "img_grayscale"), path) + "</div>").html_safe
+  end
+
   
 
   

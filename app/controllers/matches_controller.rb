@@ -13,6 +13,11 @@ cache_sweeper :match_sweeper
     @matches = Match.order("id desc")
     end
 
+    @page = "Matches"
+    @description = "See the latest matches"
+
+    @keywords += ["matches"]
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @matches }
@@ -28,6 +33,11 @@ cache_sweeper :match_sweeper
     @comments_count = @match.comments.count
     @per_page = 10
     @comments= @match.comments.paginated(@per_page, @current_page)
+    @page = "Matches"
+    @subpage = @match.title
+    @description = "Get the details about this match"
+    @keywords += ["matches", @match.team0, @match.team1] + @match.team0.players + @match.team1.players
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @match }

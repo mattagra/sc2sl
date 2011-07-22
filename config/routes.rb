@@ -74,6 +74,7 @@ Sc2sl::Application.routes.draw do
   match '/activate/:activation_code' => 'activations#new', :as => :activate
   match '/terms' => "site#terms", :as => :terms
   match '/faq' => "site#faq", :as => :faq
+  match '/sitemap' => "site#sitemap", :as => :sitemap
 
 
   root :to=>"site#index"

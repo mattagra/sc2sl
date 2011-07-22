@@ -37,12 +37,12 @@
       <script type="text/javascript" src="/js/slider-news.js"></script>
 
     <% end %>
-    <title>PokerStrategy.com SC2SL!</title>
-    <meta name="title" content="SC2SL" />
+    <title><%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>PokerStrategy.com SC2SL!</title>
+    <meta name="title" content="<%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>PokerStrategy.com SC2SL!" />
 
-    <meta name="description" content="SC2SL" />
+    <meta name="description" content="<%= (@description + " | ") %> <%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>PokerStrategy.com SC2SL!" />
 
-    <meta name="keywords" content="SC2SL" lang="fr" xml:lang="fr" />
+    <meta name="keywords" content="<%= @keywords.join(", ") %>" lang="en" xml:lang="en" />
 
   </head>
 

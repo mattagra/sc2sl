@@ -6,6 +6,9 @@ class PlayersController < ApplicationController
   # GET /players.xml
   def index
     @players = Player.all
+    @page = "Players"
+    @description = "Find out about your favorite players in the SC2SL"
+    @keywords += ["players"]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -22,6 +25,10 @@ class PlayersController < ApplicationController
     @comments_count = @player.comments.count
     @per_page = 10
     @comments= @player.comments.paginated(@per_page, @current_page)
+    @page = "Players"
+    @subpage = @player.team.to_s + " " + @player.to_s
+    @description = "Get all the information on your favorite players."
+    @keywords += ["players", @player, @player.team]
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @player }

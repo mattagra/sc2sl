@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_filter :tag_cloud
   before_filter :articles
   before_filter :live_match
+  before_filter :meta_tags
 
 
   private
@@ -104,6 +105,13 @@ class ApplicationController < ActionController::Base
     flash[:notice] = "You do not have access to this page"
     render :file => "public/404.html", :status => 404, :layout => false
     return false
+  end
+
+  def meta_tags
+    @page = ""
+    @subpage = ""
+    @description = "Welcome to SC2 Survivor League. The top international league that involves you, the fan."
+    @keywords = ["Starcraft 2", "sc2", "Survivor League", "p6e", "protoss", "zerg", "terran"]
   end
 
 

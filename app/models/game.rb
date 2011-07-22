@@ -20,10 +20,22 @@ class Game < ActiveRecord::Base
     (self.player0.team.short_name + "." + self.player0.user.login + " vs " + self.player1.team.short_name + "."  + self.player1.user.login + " on " + self.map.name).gsub(/\s/,"_")
   end
 
+  def title
+     (self.player0.team.short_name + "." + self.player0.user.login + " vs " + self.player1.team.short_name + "."  + self.player1.user.login + " on " + self.map.name)
+  end
+
   before_create :set_defaults
 
   def set_defaults
     self.downloads = 0
+  end
+
+  def team0
+    self.player0.team if player0
+  end
+
+  def team1
+    self.player1.team if player1
   end
 
   def result_s

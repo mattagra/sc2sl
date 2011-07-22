@@ -5,6 +5,9 @@ class GamesController < ApplicationController
   cache_sweeper :game_sweeper
   def index
     @games = Game.where("games.result is not null")
+    @page = "Games List"
+    @description = "List of all recent game results."
+    @keywords += ["games", "replays"]
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @games }
@@ -20,6 +23,10 @@ class GamesController < ApplicationController
     @comments_count = @game.comments.count
     @per_page = 10
     @comments= @game.comments.paginated(@per_page, @current_page)
+    @page = "Game"
+    @subpage = @game.title
+    @description = "Find Replays and VODS"
+    @keywords += ["games", "replays", "VOD"] + [@game.player0, @game.player1, @game.team0, @game.team1, @game.map]
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @game }
