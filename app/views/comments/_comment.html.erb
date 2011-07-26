@@ -20,8 +20,11 @@
     <tr>
       <td width="104" valign="top">
         <div id="div">
-          <%= link_to (image_tag comment.user.avatar, :alt => "", :width => 90, :height => 96, :vspace => 4, :hspace => 4, :border => 1), profile_path(comment.user.login) %><br />
+          <%= link_to (image_tag comment.user.avatar, :alt => "", :width => 90, :height => 96, :vspace => 4, :hspace => 4, :border => 1), profile_path(comment.user.login) %>
+          <% if comment.user.race %>
+          <br />
           <%= image_tag race_icon_url(comment.user.race), :align => "top", :width => 21, :height => 13, :hspace => 4, :vspace => 3 %><span class="lineup" style="font-size: 10px"><%= comment.user.race.capitalize %> </span>
+          <% end %>
           <% if comment.user.is_moderator? %>
             <br />
             <span class="lineup">
@@ -50,10 +53,8 @@
                 <% if comment.moderation %>
                   <span style="color:red">This User was <%= comment.moderation.mod_type  %> for this post for <%= comment.moderation.length %> days  <br />Reason: <%= comment.moderation.reason %> </span>
                 <% end %>
-                <%- unless comment.user.signature.empty? %>
                   <hr />
                   <span class="signature"><%= comment.user.signature %></span>
-                <% end %>
               </td>
             </tr>
           </tbody></table>                                   </td>

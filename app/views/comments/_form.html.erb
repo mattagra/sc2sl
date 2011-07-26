@@ -2,14 +2,11 @@
   <div id="newcomment">
     <%= form_for(@comment) do |f| %>
       <% if @comment.errors.any? %>
-        <div id="error_explanation">
+        <div class="flash flash_error">
           <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-          <ul>
             <% @comment.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
+              <br /><%= msg %>
             <% end %>
-          </ul>
         </div>
       <% end %>
       <%= f.hidden_field :external_type %>

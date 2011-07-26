@@ -1649,3 +1649,21 @@ img:hover.img_grayscale {
   opacity: 0;
   filter:alpha(opacity=0);
 }
+
+.flash_notice {
+
+ BORDER-RIGHT: #090 4px solid; PADDING-RIGHT: 10px; BACKGROUND-POSITION: 5px 50%; BORDER-TOP: #090 4px solid; PADDING-LEFT: 10px; BACKGROUND-IMAGE: url(/images/icon_success_lrg.gif); PADDING-BOTTOM: 10px; MARGIN: 2px; BORDER-LEFT: #090 4px solid; TEXT-INDENT: 40px; PADDING-TOP: 10px; BORDER-BOTTOM: #090 4px solid; BACKGROUND-REPEAT: no-repeat
+
+}
+
+.flash_warning {
+
+ BORDER-RIGHT: #c60 4px solid; PADDING-RIGHT: 10px; BACKGROUND-POSITION: 5px 50%; BORDER-TOP: #c60 4px solid; PADDING-LEFT: 10px; BACKGROUND-IMAGE: url(/images/icon_warning_lrg.gif); PADDING-BOTTOM: 10px; MARGIN: 2px; BORDER-LEFT: #c60 4px solid; TEXT-INDENT: 40px; PADDING-TOP: 10px; BORDER-BOTTOM: #c60 4px solid; BACKGROUND-REPEAT: no-repeat
+
+}
+
+.flash_error {
+
+ BORDER-RIGHT: #f00 4px solid; PADDING-RIGHT: 10px; BACKGROUND-POSITION: 5px 50%; BORDER-TOP: #f00 4px solid; PADDING-LEFT: 10px; BACKGROUND-IMAGE: url(/images/icon_error_lrg.gif); PADDING-BOTTOM: 10px; MARGIN: 2px; BORDER-LEFT: #f00 4px solid; TEXT-INDENT: 40px; PADDING-TOP: 10px; BORDER-BOTTOM: #f00 4px solid; BACKGROUND-REPEAT: no-repeat
+
+}

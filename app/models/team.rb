@@ -8,7 +8,7 @@ class Team < ActiveRecord::Base
 
   #Validations
   validates :name, :presence => true
-  validates :county, :presence => true
+  validates :country, :presence => true
   validates :short_name, :presence => true
 
   def matches

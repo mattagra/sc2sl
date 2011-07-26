@@ -58,12 +58,16 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.user = current_user
     url_back = params[:back_url]
+    
     respond_to do |format|
-      if @comment.save
+      if Comment.recent(current_user).count > 0
+        format.html { render(:action => :new, :errors => @comment.errors, :warning => "You may only post 1 comment every 30 seconds. Please wait and try again.") }
+        format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
+      elsif @comment.save
         format.html { redirect_to(url_back+"#comment_#{@comment.id}") }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
-        format.html { redirect_to(url_back, :errors => @comment.errors, :notice => "All entries must be at least 5 characters and at most 750.") }
+        format.html { render(:action => :new, :errors => @comment.errors, :warning => "All entries must be at least 5 characters and at most 750.") }
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
       end
     end

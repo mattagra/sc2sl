@@ -14,6 +14,10 @@ class Comment < ActiveRecord::Base
   scope :paginated, lambda { |page, offset|
     newest.limit(page).offset(offset.to_i * page.to_i)
   }
+  scope :recent, lambda {|user|
+    where(:user_id => user.id).where("comments.created_at > ?",30.seconds.ago).limit(1)
+  }
+
 
   def self.new_of_type(model)
     new_object = self.new

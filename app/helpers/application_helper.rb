@@ -1,5 +1,11 @@
 module ApplicationHelper
   include ActsAsTaggableOn::TagsHelper
+
+  def show_flash
+    [:notice, :warning, :message].collect do |key|
+      content_tag(:div, flash[key], :class => "flash flash_#{key}") unless flash[key].blank?
+    end.join
+  end
   
   def american_time(time)
     time.strftime("%m-%d-%Y %H:%M")
@@ -79,9 +85,9 @@ module ApplicationHelper
   end
 
   def grayscale_banner_link(banner, path)
-   ("<div style='height: 129px;'>" +
-   link_to(image_tag(banner.url(:normal), :class => "img_colorscale"), path) +
-   link_to(image_tag(banner.url(:normal_gray), :class => "img_grayscale"), path) + "</div>").html_safe
+    ("<div style='height: 129px;'>" +
+        link_to(image_tag(banner.url(:normal), :class => "img_colorscale"), path) +
+        link_to(image_tag(banner.url(:normal_gray), :class => "img_grayscale"), path) + "</div>").html_safe
   end
 
   
