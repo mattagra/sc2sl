@@ -17,7 +17,7 @@ role :db,  domain, :primary => true
 # these http://github.com/rails/irs_process_scripts
 
 
-#require 'bundler/capistrano'
+require 'bundler/capistrano'
 
 # If you are using Passenger mod_rails uncomment this:
 namespace :deploy do
