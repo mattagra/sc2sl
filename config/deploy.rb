@@ -26,6 +26,12 @@ namespace :deploy do
    task :restart, :roles => :app, :except => { :no_release => true } do
      run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
    end
+   
+  desc "Symlink shared resources on each release - not used"
+  task :symlink_shared, :roles => :app do
+    #run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  end
+
  end
 
 #after 'deploy:update_code', 'deploy:symlink_shared'

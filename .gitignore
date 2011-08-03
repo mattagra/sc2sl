@@ -2,6 +2,7 @@
 .sqlite3
 log/*
 .log
+Gemfile.lock
 
 tmp/**/*
 
