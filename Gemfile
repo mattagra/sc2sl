@@ -26,7 +26,7 @@ gem "memcache-client"
 gem 'delayed_job'
 
 group :production do
-  gem 'mysql'
+  gem 'mysql2'
 end
 
 # Use unicorn as the web server
