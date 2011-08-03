@@ -21,7 +21,7 @@ class PlayersController < ApplicationController
   def show
     @player = Player.find(params[:id])
     @comment = Comment.new_of_type(@player)
-    @current_page = (params[:page].to_i || 0)
+    @current_page = (params[:page]|| 1).to_i
     @comments_count = @player.comments.count
     @per_page = 10
     @comments= @player.comments.paginated(@per_page, @current_page)

@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       redirect_to root_url
       return
     end
-    @current_page = (params[:page].to_i || 0)
+    @current_page = (params[:page] || 1).to_i
     @comments_count = @user.comments.count
     @per_page = 10
     @comments= @user.comments.paginated(@per_page, @current_page)

@@ -3,7 +3,7 @@ class SiteController < ApplicationController
   before_filter :current_user
   
   def index
-    @article = Article.latest.featured.published
+    @article = Article.latest.featured.published.first
     @games = Game.where("games.result is not null").order(:updated_at).limit(10)
     @date = params[:month] ? Date.new(params[:year].to_i,params[:month].to_i, 1) : Date.today
     @matches = Match.where(:scheduled_at => (@date.beginning_of_month - 1)..(@date.end_of_month + 1))
@@ -55,5 +55,7 @@ class SiteController < ApplicationController
       format.xml
     end
   end
+
+
 
 end

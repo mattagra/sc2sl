@@ -357,13 +357,13 @@ class String
   #
   #   output = text.bbcode_to_html({}, false)
   #
-  def bbcode_to_html(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
-    BBRuby.to_html(self, tags_alternative_definition, escape_html, method, *tags)
+  def bbcode_to_html(tags_alternative_definition = {}, escape_html=true, method=:disable, parse_breaks = true, *tags)
+    BBRuby.to_html(self, tags_alternative_definition, escape_html, method, parse_breaks, *tags)
   end
 
   # Replace the string contents with the HTML-converted markup
-  def bbcode_to_html!(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
-    self.replace(BBRuby.to_html(self, tags_alternative_definition, escape_html, method, *tags))
+  def bbcode_to_html!(tags_alternative_definition = {}, escape_html=true, method=:disable, parse_breaks = true, *tags)
+    self.replace(BBRuby.to_html(self, tags_alternative_definition, escape_html, method, parse_breaks, *tags))
   end
 
   def bbcode_to_html_with_formatting(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)

@@ -18,7 +18,7 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find_by_name(Team.deslug(params[:name]))
     @comment = Comment.new_of_type(@team)
-    @current_page = (params[:page].to_i || 0)
+    @current_page = (params[:page]|| 1).to_i
     @comments_count = @team.comments.count
     @per_page = 10
     @comments= @team.comments.paginated(@per_page, @current_page)

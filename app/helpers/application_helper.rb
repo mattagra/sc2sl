@@ -52,12 +52,12 @@ module ApplicationHelper
 
 
   def paginate_links(per_page, current, total, url, params = {})
-    current = current.to_i
+    current = current.to_i || 1
     outside_width = 1
     inside_width = 1
-    max_page = ([(total.to_f / per_page.to_f).ceil - 1,0].max).to_i
+    max_page = ([(total.to_f / per_page.to_f).ceil,1].max).to_i
     final_pages = []
-    0.upto(max_page) do |page|
+    1.upto(max_page) do |page|
       if page == current
         final_pages << page
       elsif page < outside_width or page >= max_page - outside_width
@@ -68,19 +68,19 @@ module ApplicationHelper
       end
     end
     boxes = []
-    boxes << link_to_unless_current("<< Previous", url_for(url+"?"+(request.params.except(:action, :controller, :model_name).merge(:page => "#{[current - 1, 0].max}").collect{|k,v| "#{k}=#{v}"}.join("&"))))
+    boxes << link_to_unless_current("<< Previous", url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current, 1].max}").collect{|k,v| "#{k}=#{v}"}.join("&"))))
     
     c = 0
     final_pages.each do |page|
       if (c - page).abs > 1
         boxes << " | ..."
-        boxes << " | " + link_to_unless_current(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")))
+        boxes << " | " + link_to_unless_current(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")))
       else
-        boxes << " | " + link_to_unless_current(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")))
+        boxes << " | " + link_to_unless_current(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")))
       end
       c = page
     end
-    boxes << " | " + link_to_unless_current("Next >>",url_for(url+"?"+(request.params.except(:action, :controller, :model_name).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")))
+    boxes << " | " + link_to_unless_current("Next >>",url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")))
     return sanitize(boxes.join("")) # + "per_page: #{per_page}, current: #{current}, total: #{total}"
   end
 

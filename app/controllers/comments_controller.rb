@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   authorize_resource
 
   def index
-    @current_page = (params[:page].to_i || 0)
+    @current_page = (params[:page] || 1).to_i
     @per_page = 10
     @comments= Comment.newest.paginated(@per_page, @current_page)
     @comments_count = Comment.count

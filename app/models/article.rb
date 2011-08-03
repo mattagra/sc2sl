@@ -7,7 +7,7 @@ class Article < ActiveRecord::Base
   #Validations
   validates :url, :uniqueness => true
   validates :summary, :length => {:minimum => 5, :maximum => 128}
-  validates :description, :length => {:minimum => 5, :maximum => 5096}
+  validates :description, :length => {:minimum => 5}
   
 
   #attached
@@ -24,9 +24,10 @@ class Article < ActiveRecord::Base
   scope :recent, order("articles.id desc").limit(20)
   scope :latest, order("articles.id desc").limit(1)
   scope :newest, order("articles.id desc")
-  scope :paginated, lambda { |page, offset|
-    newest.limit(page).offset(offset.to_i * page.to_i)
-  }
+
+  def self.paginated(page=1,offset=20)
+    newest.limit(offset).offset((page - 1) * offset)
+  end
 
   def to_s
     self.title
@@ -45,7 +46,7 @@ class Article < ActiveRecord::Base
   end
 
   def formatted_description
-    self.description.bbcode_to_html.bbcode_to_html({}, false, :disable)
+    self.description.bbcode_to_html(Sc2sl::Application::CUSTOM_BBCODE).bbcode_to_html({}, false, :disable, false)
   end
 
 

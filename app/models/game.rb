@@ -71,4 +71,8 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def formatted_spoiler
+    ("[spoiler]" + self.winning_player.to_s + "[/spoiler]").bbcode_to_html(Sc2sl::Application::CUSTOM_BBCODE).bbcode_to_html({}, false, :disable, false)
+  end
+
 end

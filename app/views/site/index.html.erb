@@ -68,12 +68,11 @@
       <% end %>
       <% cache("featured_article") do  %>
         <div class="article">
-          <% @article = @article.first %>
           <% if @article %>
             <div class="article-image"><%= link_to(image_tag(@article.featured_photo.url(:normal)), view_article_path(@article)) %></div>
             <div class="article-titre"><%= link_to @article.title, view_article_path(@article) %> </div>
 
-            <div class="article-texte"><%=raw auto_link(truncate_words(@article.formatted_description, 200)) %>
+            <div class="article-texte"><%=raw auto_link(truncate_words(@article.formatted_description, 200, "(..)", 1327)) %>
               <br/> &nbsp;
 
               <div align="right">
@@ -117,7 +116,7 @@
                     <% str = "" %>
                     <% id = 0 %>
                     <% for match in matches %>
-                      <% str += match.title %>
+                      <% str += match.title + "\n" %>
                       <% id = match.id %>
                     <% end %>
                     <%= link_to date.day, match_path(id), :title => str %>
@@ -169,35 +168,13 @@
           <table width="346" cellpadding="0" cellspacing="0" border="0" id="replays_table">
             <% @games.each do |game| %>
               <tr>
-                <td><%= link_to game_path(game), game_path(game) %></td>
-                <td height="26" width="34" valign="middle">&nbsp;&nbsp;<img src="css/images/last-replays/goldstar.png" alt="download the replay" /></td>
-                <td  width="150"  valign="absmiddle"><%= image_tag race_icon_url(game.player0.user.race), :align => :top %> &nbsp;<%= game.player0.team.short_name %> <b><%= game.player0.login %></b></td>
-                <td  width="150"  valign="absmiddle"><%= image_tag race_icon_url(game.player1.user.race), :align => :top %> &nbsp;<%= game.player1.team.short_name %> <b><%= game.player1.login %></b></td>
-                <td width="20" valign="middle" vspace="2"><img src="css/images/last-replays/dl2.gif" alt="download the replay" /></td>
+                <td height="26" width="34" valign="middle">&nbsp;&nbsp;<img src="/css/images/last-replays/goldstar.png" alt="download the replay" /></td>
+                <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} #{game.player0.team.short_name}<b>#{game.player0.login}</b>".html_safe, game_path(game)).html_safe %></td>
+                <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} #{game.player0.team.short_name}<b>#{game.player0.login}</b>".html_safe, game_path(game)).html_safe %></td>
+                <td width="20" valign="middle" vspace="2"><%= link_to(image_tag("/css/images/last-replays/dl2.gif"), replay_match_game_path(game.match_id, game)).html_safe %></td>
               </tr>
             <% end %>
           </table>
-          <script type="text/javascript">
-            $(function ()
-            {
-              // Hide the first cell for JavaScript enabled browsers.
-              $('#replays_table td:first-child').hide();
-
-              // Apply a class on mouse over and remove it on mouse out.
-              $('#replays_table tr').hover(function ()
-              {
-                $(this).toggleClass('Highlight');
-              });
-
-              // Assign a click handler that grabs the URL
-              // from the first cell and redirects the user.
-              $('#replays_table tr').click(function ()
-              {
-                location.href = $(this).find('td a').attr('href');
-              });
-            });
-          </script>
-
         </div>
 
       <% end %>

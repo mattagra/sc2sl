@@ -1,18 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Player0:</b>
+  <b>Player1:</b>
   <%= @game.player0.user.login %>
 </p>
 
 <p>
-  <b>Player1:</b>
+  <b>Player2:</b>
   <%= @game.player1.user.login %>
 </p>
 
 <p>
   <b>Result:</b>
-  <%= @game.result %>
+  <%=raw @game.formatted_spoiler %>
 </p>
 
 <p>

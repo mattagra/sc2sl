@@ -22,7 +22,35 @@ module Sc2sl
         'Spoiler with preview',
         '[spoiler=Game 2 Results]Huk Wins![/quote]',
         :spoiler
-      ]
+      ],
+      'Spoiler (Sourceless)' => [
+        /\[spoiler(:.*)?\](.*?)\[\/spoiler\1?\]/mi,
+        '<div style="margin:20px; margin-top:5px"><div class="smallfont" style="margin-bottom:2px"><a href="#" onClick="if (this.parentNode.parentNode.getElementsByTagName(\'div\')[1].getElementsByTagName(\'div\')[0].style.display != \'\') { this.parentNode.parentNode.getElementsByTagName(\'div\')[1].getElementsByTagName(\'div\')[0].style.display = \'\'; return false; } else { this.parentNode.parentNode.getElementsByTagName(\'div\')[1].getElementsByTagName(\'div\')[0].style.display = \'none\'; return false; }">+ Show Spoiler +</a></div><div class="alt2" style="margin: 0px; padding: 6px; border: 2px groove threedface;"><div style="display: none;">\2</div></div></div>',
+        'Spoiler with preview',
+        '[spoiler=Game 2 Results]Huk Wins![/quote]',
+        :spoiler
+      ],
+      'YouTube' => [
+      /\[youtube\](.*?)\?v=([\w\d\-]+).*\[\/youtube\]/im,
+      # '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
+      '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="400" height="330"></embed></object>',
+      'Display a video from YouTube.com',
+      '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]',
+      :video],
+    'YouTube (Alternative)' => [
+      /\[youtube\](.*?)\/v\/([\w\d\-]+)\[\/youtube\]/im,
+      # '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
+      '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="400" height="330"></embed></object>',
+      'Display a video from YouTube.com (alternative format)',
+      '[youtube]http://youtube.com/watch/v/E4Fbk52Mk1w[/youtube]',
+      :video],
+    'Panda' => [
+      /\[panda\](.*?)\/v\/([\w\d\-]+)\[\/panda\]/im,
+      '',
+      '',
+      '',
+    :panda]
+
     }
 
     # Custom directories with classes and modules you want to be autoloadable.
