@@ -1,25 +1,8 @@
-set :application, "sc2sl"
-set :domain,      "http://vps11537.ovh.net/"
-set :repository,  "git@github.com:turlockmike/sc2sl.git"
-set :branch, "master"
-set :scm, "git"
-set :scm_verbose, true
-set :user, "root"
-set :scm_passphrase, "t9d7ae8v"
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+load 'deploy' if respond_to?(:namespace) # cap2 differentiator
 
-role :app, domain
-role :web, domain
-role :db,  domain, :primary => true
+# Uncomment if you are using Rails' asset pipeline
+# load 'deploy/assets'
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
+Dir['vendor/gems/*/recipes/*.rb','vendor/plugins/*/recipes/*.rb'].each { |plugin| load(plugin) }
 
-# If you are using Passenger mod_rails uncomment this:
-namespace :deploy do
-   task :start do ; end
-   task :stop do ; end
-   task :restart, :roles => :app, :except => { :no_release => true } do
-     run "touch /apps/sc2sl/tmp/restart.txt"
-   end
- end
+load 'config/deploy' # remove this line to skip loading any of the default tasks
