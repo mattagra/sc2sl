@@ -12,8 +12,19 @@ class ApplicationController < ActionController::Base
   before_filter :live_match
   before_filter :meta_tags
 
+  before_filter :require_http_auth
+
+  protected
+  def require_http_auth
+    authenticate_or_request_with_http_basic do |username, password|
+      username == "p6e" && password == "p6esc2"
+    end
+  end
+
 
   private
+
+
   def mailer_set_url_options
     ActionMailer::Base.default_url_options[:host] = request.host_with_port
   end

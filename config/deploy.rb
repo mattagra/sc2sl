@@ -16,7 +16,7 @@ role :db,  domain, :primary => true
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
-
+set :bundle_flags, "--quiet"
 require 'bundler/capistrano'
 
 # If you are using Passenger mod_rails uncomment this:
