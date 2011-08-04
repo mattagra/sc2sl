@@ -102,18 +102,11 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if params[:commit] == "Preview"
-        @tempfile = Tempfile.new(Time.now.to_i.to_s, "#{Rails.root.to_s}/tmp/")
-        @tempfile << @article.photo.body
-        puts @tempfile
         format.html { render :action => "new" }
       elsif @article.save
-
         format.html { redirect_to( named_article_path(:year => @article.created_at.year, :month => @article.created_at.strftime("%m"), :day => @article.created_at.strftime("%d"), :url => @article.url), :notice => 'Article was successfully created.') }
         format.xml  { render :xml => @article, :status => :created, :location => @article }
       else
-        @tempfile = Tempfile.new(Time.now.getutc.to_s + ".pic", "#{Rails.root.to_s}/tmp/")
-        @tempfile << params[:article][:photo].body
-        puts @tempfile
         format.html { render :action => "new" }
         format.xml  { render :xml => @article.errors, :status => :unprocessable_entity }
       end
