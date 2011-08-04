@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110719222606) do
+ActiveRecord::Schema.define(:version => 20110804154842) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(:version => 20110719222606) do
     t.datetime "updated_at"
     t.integer  "moderator_id"
     t.integer  "comment_id"
+    t.datetime "ends_at"
   end
 
   create_table "newsletters", :force => true do |t|

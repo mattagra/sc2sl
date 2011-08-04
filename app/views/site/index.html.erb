@@ -37,11 +37,8 @@
           <% @season = Season.first %>
           <% if @season %>
             <% @season.teams.sort_by{|t| -1 * @season.points(t)}.each_with_index do |team, i| %>
-              <% if i % 2 == 1 %>
-                <div class="ranking-ligne" style="background-color : #E7E2E2;">
-                <% else %>
-                  <div class="ranking-ligne">
-                  <% end %>
+                <div class="ranking-ligne" <% if i % 2 == 1 -%>style="background-color : #E7E2E2;"<% end -%>>
+
                   <div class="ranking-ligne-id"><%= i%>.</div>
 
                   <div class="ranking-ligne-name"><%= image_tag team.country.flag%> <%= link_to team.name, team_path(team.slug) %></div>
@@ -81,9 +78,12 @@
             </div>
           <% end %>
         </div>
+  </div>
+
       <% end %>
 
     </div>
+</div>
 
     <div id="center">
 

@@ -25,8 +25,9 @@ gem 'yaml_db'
 gem "memcache-client"
 gem 'delayed_job'
 
-  gem "mysql2", '< 0.3'
-
+group :production do
+gem "mysql2", '< 0.3'
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'
