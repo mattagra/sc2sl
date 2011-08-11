@@ -9,7 +9,7 @@ $(window).load(function() {
         startSlide:0, //Set starting Slide (0 index)
         directionNav:true, 
         directionNavHide:true, //Only show on hover
-        controlNav:true, //1,2,3...
+        controlNav:false, //1,2,3...
         controlNavThumbs:false, //Use thumbnails for Control Nav
         controlNavThumbsFromRel:false, //Use image rel for thumbs
         controlNavThumbsSearch: '.jpg', //Replace this with...
@@ -17,7 +17,7 @@ $(window).load(function() {
         keyboardNav:true, 
         pauseOnHover:true, //Stop animation while hovering
         manualAdvance:false, //Force manual transitions
-        captionOpacity:0.8, //Universal caption opacity
+        captionOpacity:0.9, //Universal caption opacity
         beforeChange: function(){},
         afterChange: function(){},
         slideshowEnd: function(){}, //Triggers after all slides have been shown
@@ -71,4 +71,4 @@ var trace=function(msg){if(this.console&&typeof console.log!="undefined")
 console.log(msg);}
 this.stop=function(){if(!$(element).data('nivo:vars').stop){$(element).data('nivo:vars').stop=true;trace('Stop Slider');}}
 this.start=function(){if($(element).data('nivo:vars').stop){$(element).data('nivo:vars').stop=false;trace('Start Slider');}}
-settings.afterLoad.call(this);};$.fn.nivoSlider=function(options){return this.each(function(){var element=$(this);if(element.data('nivoslider'))return;var nivoslider=new NivoSlider(this,options);element.data('nivoslider',nivoslider);});};$.fn.nivoSlider.defaults={effect:'random',slices:15,animSpeed:500,pauseTime:3000,startSlide:0,directionNav:true,directionNavHide:true,controlNav:true,controlNavThumbs:false,controlNavThumbsFromRel:false,controlNavThumbsSearch:'.jpg',controlNavThumbsReplace:'_thumb.jpg',keyboardNav:true,pauseOnHover:true,manualAdvance:false,captionOpacity:0.8,beforeChange:function(){},afterChange:function(){},slideshowEnd:function(){},lastSlide:function(){},afterLoad:function(){}};$.fn._reverse=[].reverse;})(jQuery);
+settings.afterLoad.call(this);};$.fn.nivoSlider=function(options){return this.each(function(){var element=$(this);if(element.data('nivoslider'))return;var nivoslider=new NivoSlider(this,options);element.data('nivoslider',nivoslider);});};$.fn.nivoSlider.defaults={effect:'random',slices:15,animSpeed:500,pauseTime:3000,startSlide:0,directionNav:true,directionNavHide:true,controlNav:false,controlNavThumbs:false,controlNavThumbsFromRel:false,controlNavThumbsSearch:'.jpg',controlNavThumbsReplace:'_thumb.jpg',keyboardNav:true,pauseOnHover:true,manualAdvance:false,captionOpacity:0.8,beforeChange:function(){},afterChange:function(){},slideshowEnd:function(){},lastSlide:function(){},afterLoad:function(){}};$.fn._reverse=[].reverse;})(jQuery);

@@ -46,7 +46,7 @@
   <br />
   <div class="field">
     <%= f.label :caster_ids %><br />
-    <%= f.select :caster_ids, User.where(:caster => true).collect{|u| [u.login, u.id]},  {:multiple => true, :size => 6} %>
+    <%= f.select :caster_ids, User.where(:caster => true).collect{|u| [u.login, u.id]},{},  {:multiple => true, :size => 6} %>
   </div>
   <br />
   <div class="field">
