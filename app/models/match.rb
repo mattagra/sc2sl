@@ -58,6 +58,10 @@ class Match < ActiveRecord::Base
     end
   end
 
+  def caster_ids=(new_caster_ids)
+    self["caster_ids"] = new_caster_ids.join(",")
+  end
+
   def casters=(new_casters)
     self.caster_ids = new_casters.collect{|c| c.login}.join(",")
   end

@@ -24,6 +24,8 @@ gem "cancan"
 gem 'yaml_db'
 gem "memcache-client"
 gem 'delayed_job'
+gem 'sprockets', :git => "git://github.com/sstephenson/sprockets"
+gem 'forem', :git => "git://github.com/radar/forem.git", :branch => "three-dot-oh"
 
 group :production do
 gem "mysql2", '< 0.3'

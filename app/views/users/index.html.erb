@@ -13,3 +13,6 @@
   </tr>
   <% end %>
 </table>
+
+
+Page: <%=  paginate_links(@per_page, @current_page, @users_count, request.path) %>
