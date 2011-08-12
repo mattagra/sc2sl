@@ -46,7 +46,7 @@ class Article < ActiveRecord::Base
   end
 
   def formatted_description
-    self.description.bbcode_to_html(Sc2sl::Application::CUSTOM_BBCODE).bbcode_to_html({}, false, :disable, false)
+    self.description.bbcode_to_html(Sc2sl::Application::CUSTOM_BBCODE) #.bbcode_to_html({}, false, :disable, false)
   end
 
 

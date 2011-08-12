@@ -41,10 +41,17 @@ class User < ActiveRecord::Base
 
   #Ratings
   ajaxful_rater
-
+  scope :newest, order('id asc')
+  scope :alphabetical, order('login asc')
+  scope :recent, order('updated_at desc')
   
 
   before_save :capitalize_names, :reset_tokens
+
+  def self.paginated(page=1,offset=50)
+    alphabetical.limit(offset).offset((page.to_i - 1) * offset.to_i)
+  end
+
 
   def self.find_by_login_or_email(login)
     find_by_login(login) || find_by_email(login)
@@ -78,7 +85,7 @@ class User < ActiveRecord::Base
   end
 
   def banned?
-    (Moderation.where(:user_id => self.id, :mod_type => "permaban").count > 0) or (Moderation.where(:user_id => self.id).where(:mod_type => "ban").where("date(moderations.created_at, moderations.length || 'days') > datetime('now') ").count > 0)
+    (Moderation.where(:user_id => self.id, :mod_type => "permaban").count > 0) or (Moderation.where(:user_id => self.id).where(:mod_type => "ban").where("ends_at > CURRENT_TIMESTAMP").count > 0)
   end
 
   def current_ban
