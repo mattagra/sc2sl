@@ -18,9 +18,9 @@
 <% end  %>
 
 
-<label for="label">Website</label>
+<label for="label">Login * </label>
 <br />
-<%= form.text_field :website, :class => "first_name_field" %>
+<%= form.text_field :login, :class => "first_name_field" %>
 
 
 <label>Password *
@@ -30,6 +30,7 @@
 
 <label for="user_password_confirmation">Password confirmation *</label>
 <%= form.password_field :password_confirmation %>
+<label style="width:100%"><p>&nbsp</p></label>
 
 <label for="user_bnet_name">Bnet Name</label>
 <%=  form.text_field :bnet_name, :class => "bnetid" %>

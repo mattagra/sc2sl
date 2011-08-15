@@ -25,7 +25,7 @@
       <!-- JAVASCRIPT  -->
 
       <%= auto_discovery_link_tag(:rss, "http://localhost:3001/articles.rss") %>
-
+	  <script type="text/javascript" src="/js/dddropdownpanel.js"></script>
       <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
       <script type="text/javascript" src="/js/slider.js"></script>
 
@@ -80,19 +80,20 @@
                 <%= link_to "Newsletters", newsletters_path %> | 
                 <%= link_to "Moderations", moderations_path %> |
                 <%= link_to "Users", users_path %>
-				</div>
+			
               <% end %>
+</div>
             <% end %>
 
           </div>
             <div class="login-content-right">
-              <a href="http://localhost:3001/articles.rss"><img src="/css/images/login/icones/rss.png" alt="RSS" onmouseover="this.src='/css/images/login/icones/rss.gif'" onmouseout="this.src='/css/images/login/icones/rss.png'" /></a>
-			  <a href="http://www.youtube.com/SC2SL/"><img src="/css/images/login/icones/youtube.png" onmouseover="this.src='/css/images/login/icones/youtube.gif'" onmouseout="this.src='/css/images/login/icones/youtube.png'"  alt="YOUTUBE" /></a>
-              <a href="http://twitter.com/#!/SC2SL"><img src="/css/images/login/icones/twitter.png" onmouseover="this.src='/css/images/login/icones/twitter.gif'" onmouseout="this.src='/css/images/login/icones/twitter.png'"  alt="TWITTER" /></a>
+              <a href="http://localhost:3001/articles.rss"><img width="21" height="20" src="/css/images/login/icones/rss.png" alt="RSS" onmouseover="this.src='/css/images/login/icones/rss.gif'" onmouseout="this.src='/css/images/login/icones/rss.png'" /></a>
+			  <a href="http://www.youtube.com/SC2SL/"><img width="21" height="20" src="/css/images/login/icones/youtube.png" onmouseover="this.src='/css/images/login/icones/youtube.gif'" onmouseout="this.src='/css/images/login/icones/youtube.png'"  alt="YOUTUBE" /></a>
+              <a href="http://twitter.com/#!/SC2SL"><img width="21" height="20" src="/css/images/login/icones/twitter.png" onmouseover="this.src='/css/images/login/icones/twitter.gif'" onmouseout="this.src='/css/images/login/icones/twitter.png'"  alt="TWITTER" /></a>
 
-              <a href="http://www.facebook.com/pages/SC2SL/258966677449790"><img src="/css/images/login/icones/facebook.png" onmouseover="this.src='/css/images/login/icones/facebook.gif'" onmouseout="this.src='/css/images/login/icones/facebook.png'" alt="FACEBOOK" /></a>
+              <a href="http://www.facebook.com/pages/SC2SL/258966677449790"><img width="21" height="20" src="/css/images/login/icones/facebook.png" onmouseover="this.src='/css/images/login/icones/facebook.gif'" onmouseout="this.src='/css/images/login/icones/facebook.png'" alt="FACEBOOK" /></a>
 
-              <a href="#"><img src="/css/images/login/icones/mirc2.png" onmouseover="this.src='/css/images/login/icones/mirc2.gif'" onmouseout="this.src='/css/images/login/icones/mirc2.png'" alt="MIRC" /></a>
+              <a href="#"><img width="21" height="20" src="/css/images/login/icones/mirc2.png" onmouseover="this.src='/css/images/login/icones/mirc2.gif'" onmouseout="this.src='/css/images/login/icones/mirc2.png'" alt="MIRC" /></a>
 
             </div>
 
@@ -229,11 +230,11 @@
 					</div>
 				<div id="hsm">
                                   <% @upcoming_matches.each do |match| %>
-                                  <img src="/css/images/content-bar/sponsors/fleche.gif" alt="" /><%= american_time match.scheduled_at %> - <%= image_tag match.team0.country.flag %> <%= link_to match.team0, team_path(match.team0.slug) %> vs <%= image_tag match.team0.country.flag %> <%= link_to match.team0, team_path(match.team0.slug) %>
+                                  <img src="/css/images/content-bar/sponsors/fleche.gif" alt="" /><%= american_time match.scheduled_at %> - <%= image_tag match.team0.country.flag %> <%= link_to match.team0, team_path(match.team0.slug) %> vs <%= image_tag match.team1.country.flag %> <%= link_to match.team1, team_path(match.team1.slug) %> <br/>
 				<% end %>
 				</div>
 			
-				<div id="hss"><img src="/css/images/content-bar/sponsors/pubKorea.png"></div>
+				<div id="hss"><a href="#"><img src="/css/images/content-bar/sponsors/pubKorea.png" border="0"></a></div>
 
 					</div>
 
@@ -306,7 +307,7 @@
 
 						<div class="menu-lien"><a href="mailto:contact@sc2sl.com">CONTACT</a></div>
 
-						<div class="menu-lien" style="float : right;"><a href="#" style="padding-top : 3px;"><img src="css/images/menu/accueil.png" alt="Retour à l'accueil" /></a></div>
+						<div class="menu-lien" style="float : right;"><a href="#" style="padding-top : 3px;"><img src="/css/images/menu/accueil.png" alt="Retour à l'accueil" /></a></div>
 
 					</div>
 
@@ -324,7 +325,7 @@
 				  </div>
 
 					<div id="footer-right">
-					  <div class="footer-right-image"><a href="http://www.p6e.org"><span class="footer-right-image"><img src="css/images/footer/p6e.png" alt="p6e"/></span></a></div>				
+					  <div class="footer-right-image"><a href="http://www.p6e.org"><span class="footer-right-image"><img src="/css/images/footer/p6e.png" alt="p6e"/></span></a></div>				
 
 				  </div>	
 
