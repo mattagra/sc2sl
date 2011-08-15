@@ -14,4 +14,6 @@ public/images/maps/*
 public/images/games/*
 public/images/seasons/*
 db/development.sqlite3
-
+vendor/*
+Gemfile.lock
+vendor/*/*

@@ -20,7 +20,10 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @current_page = (params[:page] || 1).to_i
+    @users_count = User.count
+    @per_page = 50
+    @users = User.paginated(@per_page, @current_page)
   end
 
   def show

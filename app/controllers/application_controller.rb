@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   before_filter :live_match
   before_filter :meta_tags
 
-  before_filter :require_http_auth
+  #before_filter :require_http_auth
 
   protected
   def require_http_auth
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
 
   def live_match
-    @live_match = Match.where(:live => true).order("matches.scheduled_at desc").limit(1)
+    @live_match = Match.where(:live => true).order("matches.scheduled_at desc").limit(1).first || Match.where("matches.scheduled_at > ?", Time.now).order("matches.scheduled_at asc").limit(1).first
   end
 
   def tag_cloud
@@ -127,3 +127,4 @@ class ApplicationController < ActionController::Base
 
 
 end
+

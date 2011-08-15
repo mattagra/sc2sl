@@ -14,9 +14,11 @@ class Moderation < ActiveRecord::Base
   validates :mod_type, :presence => true, :inclusion => {:in => TYPES}
   validates :reason, :presence => true, :length => {:minimum => 3, :maximum => 256}
 
+  before_save :set_ends_at
 
-  def ends_at
-    self.created_at + self.length.to_i.days
+
+  def set_ends_at
+    self.ends_at = (self.created_at || Time.now) + self.length.to_i.days
   end
 
 end
