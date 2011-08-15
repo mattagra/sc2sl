@@ -35,6 +35,8 @@ class ApplicationController < ActionController::Base
 
   def live_match
     @live_match = Match.where(:live => true).order("matches.scheduled_at desc").limit(1).first || Match.where("matches.scheduled_at > ?", Time.now).order("matches.scheduled_at asc").limit(1).first
+    @upcoming_matches =  Match.where("matches.scheduled_at > ?", Time.now).order("matches.scheduled_at asc").limit(4)
+
   end
 
   def tag_cloud

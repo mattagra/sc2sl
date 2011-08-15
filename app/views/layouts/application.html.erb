@@ -227,12 +227,10 @@
             <% cache("layout_advertising") do %>
          	<div id="head-sponsors"><div id="hsst"><div id="hsstt">NEXT MATCHES - CET</div>
 					</div>
-				<div id="hsm"> 
-				<img src="/css/images/content-bar/sponsors/fleche.gif"/>10/08/11 20:00 - <img src="css/images/drapeaux/fr.jpg" alt="francais" /> <a href="">Millenium</a> vs. <img src="css/images/drapeaux/fr.jpg" alt="francais" /> <a href="">Against All Authority</a> <br/>
-				<img src="/css/images/content-bar/sponsors/fleche.gif"/>10/08/11 20:00 - <img src="css/images/drapeaux/fr.jpg" alt="francais" /> <a href="">Millenium</a> vs. <img src="css/images/drapeaux/fr.jpg" alt="francais" /> <a href="">Against All Authority</a> <br/>
-				<img src="/css/images/content-bar/sponsors/fleche.gif"/>10/08/11 20:00 - <img src="css/images/drapeaux/fr.jpg" alt="francais" /> <a href="">Millenium</a> vs. <img src="css/images/drapeaux/fr.jpg" alt="francais" /> <a href="">Against All Authority</a> <br/>
-				<img src="/css/images/content-bar/sponsors/fleche.gif"/>10/08/11 20:00 - <img src="css/images/drapeaux/fr.jpg" alt="francais" /> <a href="">Millenium</a> vs. <img src="css/images/drapeaux/fr.jpg" alt="francais" /> <a href="">Against All Authority</a> 
-				
+				<div id="hsm">
+                                  <% @upcoming_matches.each do |match| %>
+                                  <img src="/css/images/content-bar/sponsors/fleche.gif" alt="" /><%= american_time match.scheduled_at %> - <%= image_tag match.team0.country.flag %> <%= link_to match.team0, team_path(match.team0.slug) %> vs <%= image_tag match.team0.country.flag %> <%= link_to match.team0, team_path(match.team0.slug) %>
+				<% end %>
 				</div>
 			
 				<div id="hss"><img src="/css/images/content-bar/sponsors/pubKorea.png"></div>
