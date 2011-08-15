@@ -42,14 +42,14 @@ class User < ActiveRecord::Base
   #Ratings
   ajaxful_rater
   scope :newest, order('id asc')
-  scope :alphabetical, order('login asc')
+  scope :alphabetical, order('LOWER(login) asc')
   scope :recent, order('updated_at desc')
   
 
   before_save :capitalize_names, :reset_tokens
 
   def self.paginated(page=1,offset=50)
-    alphabetical.limit(offset).offset((page.to_i - 1) * offset.to_i)
+    self.alphabetical.limit(offset).offset((page.to_i - 1) * offset.to_i)
   end
 
 

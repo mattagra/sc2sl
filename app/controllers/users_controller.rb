@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    authorize_resource
+  authorize_resource
 
   def new
     @user = User.new
@@ -21,9 +21,14 @@ class UsersController < ApplicationController
 
   def index
     @current_page = (params[:page] || 1).to_i
-    @users_count = User.count
     @per_page = 50
-    @users = User.paginated(@per_page, @current_page)
+    unless params[:search].blank?
+      @users = User.where("login LIKE ?", params[:search]).paginated(@current_page, @per_page)
+      @users_count = User.where("login LIKE ?", params[:search]).count
+    else
+      @users = User.paginated(@current_page, @per_page)
+      @users_count = User.count
+    end
   end
 
   def show
