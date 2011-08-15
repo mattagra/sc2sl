@@ -10,7 +10,7 @@ class Comment < ActiveRecord::Base
   validates :description, :presence => true, :length => {:minimum => 5, :maximum => 750}
 
   #Scopes
-  scope :newest, order('id asc')
+  scope :newest, order('id desc')
   scope :recent, lambda {|user|
     where(:user_id => user.id).where("comments.created_at > ?",30.seconds.ago).limit(1)
   }

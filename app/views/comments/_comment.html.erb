@@ -53,8 +53,10 @@
                 <% if comment.moderation %>
                   <span style="color:red">This User was <%= comment.moderation.mod_type  %> for this post<% if comment.moderation.length.to_i > 0 %> for <%= comment.moderation.length %> days<% end %>.<br />Reason: <%= comment.moderation.reason %> </span>
                 <% end %>
+                  <% unless comment.user.signature.blank? %>
                   <hr />
                   <span class="signature"><%= comment.user.signature %></span>
+                  <% end %>
               </td>
             </tr>
           </tbody></table>                                   </td>

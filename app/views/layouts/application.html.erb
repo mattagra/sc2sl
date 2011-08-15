@@ -170,7 +170,7 @@
 
               <div class="menu-live-left">NEXT LIVE ON SC2SL</div>
 
-              <div class="menu-live-right"><img src="/css/images/menu/clock.png" alt="NEXT LIVE" valign="absmiddle" /><span style="float : left ;height : 18px; margin-left : 8px; margin-top : 7px;"><%= Time.now.strftime("%d %b %H:%M").upcase  %> </span></div>
+              <div class="menu-live-right"><img src="/css/images/menu/clock.png" alt="NEXT LIVE" valign="absmiddle" /><span style="float : left ;height : 18px; margin-left : 8px; margin-top : 7px;"><%= @live_match.scheduled_at.strftime("%d %b %H:%M").upcase if @live_match  %> </span></div>
 
             </div>
 
@@ -220,7 +220,9 @@
 
                   <div id="live-ligne-right">
                     <% if @live_match %>
-                      <%= link_to @live_match.casters.collect {|c| c.login}.join(", "), @live_match.url %>
+                      <% @live_match.casters.each do |caster| %>
+                      <%= link_to caster.login, @live_match.url %>
+                    <% end %>
                     <% end %>
                   </div>
 

@@ -52,7 +52,7 @@ class Match < ActiveRecord::Base
 
   def casters
     unless self.caster_ids.nil?
-      User.find(self.caster_ids.split(","))
+      User.find(self.caster_ids)
     else
       []
     end
@@ -64,7 +64,7 @@ class Match < ActiveRecord::Base
  end
 
  def caster_ids
-   self["caster_ids"].split(",")
+   self["caster_ids"].split(",") if self["caster_ids"]
   end
 
   def casters=(new_casters)

@@ -6,9 +6,9 @@ class CommentsController < ApplicationController
   def index
     @current_page = (params[:page] || 1).to_i
     @per_page = 10
-    @comments= Comment.newest.paginated(@per_page, @current_page)
+    @comments= Comment.newest.paginated(@current_page, @per_page)
     @comments_count = Comment.count
-    @comment = Comment.new_of_type(@comment)
+    @comment = Comment.new
 
     respond_to do |format|
       format.html # index.html.erb
