@@ -1,23 +1,20 @@
-<h1>Listing seasons</h1>
+<center>Please select a season to get the results
+  <table>
+    <% @seasons.each do |season| %>
+      <tr>
+        <td><%= grayscale_banner_link(season.banner, season_path(season)) %></td>
+      </tr>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+      <% if can? :edit, season %>
+        <tr><td>
+            <%= link_to "Edit " + season.name, edit_season_path(season) %>
+          </td></tr>
+      <% end %>
+    <% end %>
+  </table>
 
-<% @seasons.each do |season| %>
-  <tr>
-    <td><%= season.name %></td>
-    <td><%= link_to 'Show', season %></td>
-    <td><% if can? :edit, season %><%= link_to 'Edit', edit_season_path(season) %><% end %></td>
-    <td><% if can? :destroy, season %><%= link_to 'Destroy', season, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
-  </tr>
-<% end %>
-</table>
+  <br />
 
-<br />
+  <% if can? :create, Season %><%= link_to 'New Season', new_season_path %><% end %>
 
-<% if can? :create, Season %><%= link_to 'New Season', new_season_path %><% end %>
+</center>

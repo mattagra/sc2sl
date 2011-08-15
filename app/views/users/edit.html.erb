@@ -1,18 +1,26 @@
-<h1>Update My Account</h1>
-
 <% form_for @user, :url => user_path(@user), :html => {:multipart => true} do |f| %>
-<% if @user.errors.any? %>
-  <div id="errorExplanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
+  <% if @user.errors.any? %>
+    <div id="errorExplanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div id="user_form">
+    <br/>
+    <div id="rform" class="rform">
+      <h1>Join the SC2SL Community!</h1>
+      <p>The fields with a * are obligatory.</p>
+      <%= render :partial => "form", :object => f %>
+      <div class="clearwidth">&nbsp;</div>
+      <div align="center" style="float: left;">
+        <%= f.submit "Update", :class => "register_button" %>
+      </div>
+    </div>
   </div>
-  <% end %>  
-  <%= render :partial => "form", :object => f %>
-  <%= f.submit "Update" %>
 <% end %>
 
 <br /><%= link_to "My Profile", account_path %>

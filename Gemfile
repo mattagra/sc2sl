@@ -25,15 +25,15 @@ gem 'yaml_db'
 gem "memcache-client"
 gem 'delayed_job'
 gem 'sprockets', :git => "git://github.com/sstephenson/sprockets"
-gem 'forem', :git => "git://github.com/radar/forem.git", :branch => "three-dot-oh"
 
-group :production do
-gem "mysql2", '< 0.3'
-end
 
-group :development do
-  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
-end
+#group :production do
+#gem "mysql2", '< 0.3'
+#end
+
+#group :development do
+#  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
+#end
 
 # Use unicorn as the web server
 # gem 'unicorn'

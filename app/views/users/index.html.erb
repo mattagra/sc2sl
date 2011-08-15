@@ -1,3 +1,8 @@
+<%= form_tag users_path, :method => :get do %>
+Find By Username: <%= text_field_tag :search, params[:search] || "" %>
+<%= submit_tag "Search" %>
+<% end %>
+
 <table>
   <tr>
     <th>Username</th>
@@ -5,7 +10,7 @@
     <th>Email</th>
     <th></th>
   </tr>
-  <% @users.each do |user|  %>
+  <%- @users.each do |user|  %>
   <tr>
     <td><%= link_to user.login, profile_path(user.login) %></td>
     <td><%= user.created_at %></td>
@@ -13,6 +18,5 @@
   </tr>
   <% end %>
 </table>
-
 
 Page: <%=  paginate_links(@per_page, @current_page, @users_count, request.path) %>
