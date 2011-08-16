@@ -85,6 +85,14 @@ class Match < ActiveRecord::Base
     Match::POINTS[i]
   end
 
+  def winner
+    if self.results.to_i != 0
+      self.results > 0 ? self.team0 : self.team1
+    else
+      nil
+    end
+  end
+
   
 
 end

@@ -7,16 +7,18 @@
     <tr>
       <td width="240" valign="top">  <%= image_tag(@team.photo.url(:normal)) if @team.photo.exists?  %></td>
       <td valign="top"><span class="votenowtxt style1"><span class="votenowtxt  style3"><%= image_tag @team.country.flag %>  <%= @team.name %> </span></span> <br/>
-        <img src="/css/images/content-bar/live/star2.gif" alt="" width="12" height="12" /><em> Coached by <a href="#"><%= @team.user %></a></em><br/>
-        <p>Official website: <a href=""><%= @team.website %></a><br/>
+        <% if @team.user %><img src="/css/images/content-bar/live/star2.gif" alt="" width="12" height="12" /><em> Coached by <%= link_to @team.user, profile_path(@team.user.login) %></em><br/><% end %>
+        <p>Official website: <a href=""><%= link_to @team.website, @team.website %></a><br/>
           <br/>
-          <% if false %>
-            <a href="#">Browse <%= @team.short_name %>  replays</a>.</p>
-          <%= @team.players.each do |player| %>
-            <%= image_tag player.user.country.flag %>
-              <a href="#"><%= player.user.name %></a><br/>
-            <% end %>
-          <% end %>
+
+          <a href="#">Browse <%= @team.short_name %>  replays</a>.</p>
+        <% @team.players.each do |player| %>
+          <%= image_tag player.user.country.flag if player.user.country %>
+          <%= image_tag race_icon_url(player.user.race), :align => "top", :width => 21, :height => 13, :hspace => 4, :vspace => 3 %>
+          <%= link_to player, player_path(player) %>
+        <br />
+        <% end %>
+
       </td>
     </tr>
   </table>
@@ -24,49 +26,48 @@
   <blockquote>
     <span class="ntitle ntitle style7"><strong>Bio:</strong> <%= @team.description %> <br/>
     </span><br/>
- <span class="votenowtimeleft ntitle style7"></span><span class="votenowtimeleft">			        <strong><%= @team.short_name %> History: </strong> <br/>
-  <br/>
-  <strong>12/09/2010</strong>                    <img src="/css/images/user/small_green_arrow.png" alt="" width="10" height="9" /> New player <a href="#">Tod </a><br/>
-  <strong>01/06/2010</strong> <strong>Win</strong> against <a href="#">Mouz </a><br/>
-  <strong>01/06/2010</strong> <strong>Lose</strong> against <a href="#">EG</a> <br/>
-  <strong>01/06/2010</strong> Lose against <a href="#">Tintin </a><br/>
-  <strong>12/03/2010</strong> <img src="/css/images/user/small_red_arrow.png" alt="" width="10" height="9" /> Player left : <a href="#">JeanPaul </a></span>				  </blockquote>
-<div id="historic" class="ddpanel">
-  <div id="historiccontent" class="ddpanelcontent">
-    <span class="votenowtimeleft votenowtimeleft"><br/>
+    <span class="votenowtimeleft ntitle style7"></span>
+    <span class="votenowtimeleft">
+      <strong><%= @team.short_name %> History: </strong> <br/>
+      <br/>
+      <% @team.events.sort_by{|t| t[0]}.reverse[0..4].each do |event| %>
+        <strong><%= american_date event[0] %></strong>&nbsp;<%=raw describe_team_event(event) %><br />
+      <% end %>
     </span>
-    <blockquote>  <span class="ddpanelcontent votenowtimeleft votenowtimeleft"><strong>12/09/2010</strong>
-      </span><span class="ntitle votenowtimeleft votenowtimeleft"><img src="/css/images/user/small_green_arrow.png" alt="" width="10" height="9" /> New player <a href="#">Tod </a><br/>
-        <strong>01/06/2010</strong> <strong>Win</strong> against <a href="#">Mouz </a><br/>
-        <strong>01/06/2010</strong> <strong>Lose</strong> against <a href="#">EG</a> <br/>
-        <strong>01/06/2010</strong> Lose against <a href="#">Tintin </a><br/>
-        <strong>12/03/2010</strong> <img src="/css/images/user/small_red_arrow.png" alt="" width="10" height="9" /> Player left : <a href="#">JeanPaul </a></span><span class="votenowtimeleft votenowtimeleft"></span><br/>
-    </blockquote>
+  </blockquote>
+  <div id="historic" class="ddpanel">
+    <div id="historiccontent" class="ddpanelcontent">
+      <br/>
+      <blockquote>  
+        <% @team.events.sort_by{|t| t[0]}.reverse[5..25].to_a.each do |event| %>
+          <strong><%= american_date event[0] %></strong>&nbsp;<%=raw describe_team_event(event) %><br />
+        <% end %>
+      </blockquote>
+    </div>
+    <div id="historictab" class="ddpaneltab">
+      <a href="#"><span>SHOW MORE </span></a>				</div>
   </div>
-  <div id="historictab" class="ddpaneltab">
-    <a href="#"><span>SHOW MORE </span></a>				</div>
-</div>
-<div align="right">
-  <script type="text/javascript">
+  <div align="right">
+    <script type="text/javascript">
 
-    var testpanel=new ddpanel({
-      ids: ["historic", "historiccontent", "historictab"], // id of main panel DIV, content DIV, and tab DIV
-      stateconfig: {initial: "5px", persiststate: true}, // initial: initial reveal amount in pixels (ie: 5px)
-      animate: {enabled: true, steps: 5}, //steps: number of animation steps. Int between 1-20. Smaller=faster.
-      pointerimage: {enabled: true, src: ["/css/images/arrow-down.gif", "/css/images/arrow-up.gif"]},
-      closepanelonclick: {enabled: true} // close panel when links or elements with CSS class="closepanel" within container is clicked on?
-    })
+      var testpanel=new ddpanel({
+        ids: ["historic", "historiccontent", "historictab"], // id of main panel DIV, content DIV, and tab DIV
+        stateconfig: {initial: "5px", persiststate: true}, // initial: initial reveal amount in pixels (ie: 5px)
+        animate: {enabled: true, steps: 5}, //steps: number of animation steps. Int between 1-20. Smaller=faster.
+        pointerimage: {enabled: true, src: ["/css/images/arrow-down.gif", "/css/images/arrow-up.gif"]},
+        closepanelonclick: {enabled: true} // close panel when links or elements with CSS class="closepanel" within container is clicked on?
+      })
 
-  </script>
-</div>
-<h3>Comments:</h3>
-<%= render  @team.comments.order('id desc') %>
-<% if @team.comments.size > 0 %>
-  <%= render :partial => "comments/comment_footer" %>
-<% end %>
+    </script>
+  </div>
+  <h3>Comments:</h3>
+  <%= render  @team.comments %>
+  <% if @team.comments.size > 0 %>
+    <%= render :partial => "comments/comment_footer" %>
+  <% end %>
 
-<p>
-  <%= render :partial => "comments/form" %>
-</p>
+  <p>
+    <%= render :partial => "comments/form" %>
+  </p>
 
 </div>

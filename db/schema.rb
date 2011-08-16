@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110804154842) do
+ActiveRecord::Schema.define(:version => 20110816213252) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -83,6 +83,13 @@ ActiveRecord::Schema.define(:version => 20110804154842) do
     t.string   "replay_content_type"
     t.integer  "replay_file_size"
     t.decimal  "rating_average",      :precision => 6, :scale => 2, :default => 0.0
+  end
+
+  create_table "languages", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "maps", :force => true do |t|
