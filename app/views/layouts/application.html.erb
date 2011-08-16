@@ -1,36 +1,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
+  <head>
 
 
-      <%= javascript_include_tag :defaults %>
-      <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>
+    <%= javascript_include_tag :defaults %>
+    <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>
 
-      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
-      <meta name="author" content="p6e" />
+    <meta name="author" content="p6e" />
 
-      <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow" />
 
-      <meta name="googlebot" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
 
-      <meta name="language" content="english" />
+    <meta name="language" content="english" />
 
-      <!-- STYLES  -->
+    <!-- STYLES  -->
 
-      <link href="/favicon.gif" rel="shortcut icon" />
+    <link href="/favicon.gif" rel="shortcut icon" />
 
-      <link href="/css/styles.css" rel="stylesheet" type="text/css"/>
-      <%= ajaxful_rating_style %>
+    <link href="/css/styles.css" rel="stylesheet" type="text/css"/>
+    <%= ajaxful_rating_style %>
 
-      <!-- JAVASCRIPT  -->
+    <!-- JAVASCRIPT  -->
 
-      <%= auto_discovery_link_tag(:rss, "http://localhost:3001/articles.rss") %>
-	  <script type="text/javascript" src="/js/dddropdownpanel.js"></script>
-      <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-      <script type="text/javascript" src="/js/slider.js"></script>
+    <%= auto_discovery_link_tag(:rss, "http://localhost:3001/articles.rss") %>
+    <script type="text/javascript" src="/js/dddropdownpanel.js"></script>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    <script type="text/javascript" src="/js/slider.js"></script>
 
-      <script type="text/javascript" src="/js/slider-news.js"></script>
-
+    <script type="text/javascript" src="/js/slider-news.js"></script>
     <title><%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>PokerStrategy.com SC2SL!</title>
     <meta name="title" content="<%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>PokerStrategy.com SC2SL!" />
 
@@ -40,126 +39,126 @@
 
   </head>
   <body>
-<div id="global">
+    <div id="global">
 
-		<div id="structure-ombre">
+      <div id="structure-ombre">
 
-			<div id="structure">
-    <div id="structure-login2">
+        <div id="structure">
+          <div id="structure-login2">
 
-      <div id="login">
+            <div id="login">
 
-        <div id="login-content">
+              <div id="login-content">
 
-          <div class="login-content-left">
+                <div class="login-content-left">
 
-           <img src="/css/images/login/icones/Login.png" alt="login formulary" align="left" />
-            <% unless current_user %>
-              <div class="login-content-texte">
-                <%= link_to "REGISTER", register_path %> or LOGIN</div>
-              <%= form_for UserSession.new, :url => user_session_path do |f| %>
-                <%= f.text_field :login, :placeholder => "Login", :class => "input-login" %>
-                <%= f.password_field :password, :placeholder => "Password", :class => "input-login" %>
-                <%= f.hidden_field :remember_me, :value => true %>
-                <%= f.submit "OK", :class => "submit-login" %>
-              <% end %>
-            <% else %>
-			 <div class="login-content-texte2">
-              Welcome <b><%= current_user.login %></b><br />
-              <%= link_to "My Account", account_path %> |
-              <%= link_to "Logout", logout_path %>
-              <% if current_user.is_moderator? %>
+                  <img src="/css/images/login/icones/Login.png" alt="login formulary" align="left" />
+                  <% unless current_user %>
+                    <div class="login-content-texte">
+                      <%= link_to "REGISTER", register_path %> or LOGIN</div>
+                    <%= form_for UserSession.new, :url => user_session_path do |f| %>
+                      <%= f.text_field :login, :placeholder => "Login", :class => "input-login" %>
+                      <%= f.password_field :password, :placeholder => "Password", :class => "input-login" %>
+                      <%= f.hidden_field :remember_me, :value => true %>
+                      <%= f.submit "OK", :class => "submit-login" %>
+                    <% end %>
+                  <% else %>
+                    <div class="login-content-texte2">
+                      Welcome <b><%= current_user.login %></b><br />
+                      <%= link_to "My Account", account_path %> |
+                      <%= link_to "Logout", logout_path %>
+                      <% if current_user.is_moderator? %>
 
-                <%= link_to "Articles", articles_path %> |
-                <%= link_to "Comments", comments_path %> |
-                <%= link_to "Players", players_path %> |
-                <%= link_to "Teams", teams_path %> |
-                <%= link_to "Seasons", seasons_path %> |
-                <%= link_to "Matches", matches_path %> |
-                <%= link_to "Maps", maps_path %> |
-                <%= link_to "Newsletters", newsletters_path %> |
-                <%= link_to "Moderations", moderations_path %> |
-                <%= link_to "Users", users_path %>
+                        <%= link_to "Articles", articles_path %> |
+                        <%= link_to "Comments", comments_path %> |
+                        <%= link_to "Players", players_path %> |
+                        <%= link_to "Teams", teams_path %> |
+                        <%= link_to "Seasons", seasons_path %> |
+                        <%= link_to "Matches", matches_path %> |
+                        <%= link_to "Maps", maps_path %> |
+                        <%= link_to "Newsletters", newsletters_path %> |
+                        <%= link_to "Moderations", moderations_path %> |
+                        <%= link_to "Users", users_path %>
 
-              <% end %>
-</div>
-            <% end %>
+                      <% end %>
+                    </div>
+                  <% end %>
 
-          </div>
-            <div class="login-content-right">
-              <a href="http://localhost:3001/articles.rss"><img width="21" height="20" src="/css/images/login/icones/rss.png" alt="RSS" onmouseover="this.src='/css/images/login/icones/rss.gif'" onmouseout="this.src='/css/images/login/icones/rss.png'" /></a>
-			  <a href="http://www.youtube.com/SC2SL/"><img width="21" height="20" src="/css/images/login/icones/youtube.png" onmouseover="this.src='/css/images/login/icones/youtube.gif'" onmouseout="this.src='/css/images/login/icones/youtube.png'"  alt="YOUTUBE" /></a>
-              <a href="http://twitter.com/#!/SC2SL"><img width="21" height="20" src="/css/images/login/icones/twitter.png" onmouseover="this.src='/css/images/login/icones/twitter.gif'" onmouseout="this.src='/css/images/login/icones/twitter.png'"  alt="TWITTER" /></a>
+                </div>
+                <div class="login-content-right">
+                  <a href="http://localhost:3001/articles.rss"><img width="21" height="20" src="/css/images/login/icones/rss.png" alt="RSS" onmouseover="this.src='/css/images/login/icones/rss.gif'" onmouseout="this.src='/css/images/login/icones/rss.png'" /></a>
+                  <a href="http://www.youtube.com/SC2SL/"><img width="21" height="20" src="/css/images/login/icones/youtube.png" onmouseover="this.src='/css/images/login/icones/youtube.gif'" onmouseout="this.src='/css/images/login/icones/youtube.png'"  alt="YOUTUBE" /></a>
+                  <a href="http://twitter.com/#!/SC2SL"><img width="21" height="20" src="/css/images/login/icones/twitter.png" onmouseover="this.src='/css/images/login/icones/twitter.gif'" onmouseout="this.src='/css/images/login/icones/twitter.png'"  alt="TWITTER" /></a>
 
-              <a href="http://www.facebook.com/pages/SC2SL/258966677449790"><img width="21" height="20" src="/css/images/login/icones/facebook.png" onmouseover="this.src='/css/images/login/icones/facebook.gif'" onmouseout="this.src='/css/images/login/icones/facebook.png'" alt="FACEBOOK" /></a>
+                  <a href="http://www.facebook.com/pages/SC2SL/258966677449790"><img width="21" height="20" src="/css/images/login/icones/facebook.png" onmouseover="this.src='/css/images/login/icones/facebook.gif'" onmouseout="this.src='/css/images/login/icones/facebook.png'" alt="FACEBOOK" /></a>
 
-              <a href="#"><img width="21" height="20" src="/css/images/login/icones/mirc2.png" onmouseover="this.src='/css/images/login/icones/mirc2.gif'" onmouseout="this.src='/css/images/login/icones/mirc2.png'" alt="MIRC" /></a>
+                  <a href="#"><img width="21" height="20" src="/css/images/login/icones/mirc2.png" onmouseover="this.src='/css/images/login/icones/mirc2.gif'" onmouseout="this.src='/css/images/login/icones/mirc2.png'" alt="MIRC" /></a>
+
+                </div>
+
+              </div>
 
             </div>
 
           </div>
 
-        </div>
-
-      </div>
-
           <div id="header">
 
-					<div id="header-logo">
+            <div id="header-logo">
 
 
-					<div id="header-logo">
-						<div id="hlogo"><a href="http://www.sc2sl.com"><img src="/css/images/header/logo.png"></a></div>
-					</div>
-
-					</div>
-
-					<div id="header-pub">
-
-						<div id="header-pub-left"></div>
-
-						<div id="header-pub-content"><a href="#"><img src="/css/images/header/pub/logi1.gif" alt="Get the SC2SL discount !" width="570" height="92" /></a></div>
-
-						<div id="header-pub-right"></div>
-
-					</div>
-
-				</div>
-
-
-            <div id="menu">
-
-              <div id="menu-lien">
-
-                <div class="menu-lien"><a href="/" style="padding-top : 3px;"><img src="/css/images/menu/accueil.png" alt="Retour à l'accueil" /></a></div>
-
-                <div class="menu-separation"></div>
-
-                <div class="menu-lien"><%= link_to "NEWS", articles_path %> </div>
-
-                <div class="menu-separation"></div>
-
-                <div class="menu-lien"><%= link_to "LEAGUE RESULTS", seasons_path %></div>
-
-                <div class="menu-separation"></div>
-
-                <div class="menu-lien"><%= link_to "REPLAYS", matches_path %> </div>
-
-                <div class="menu-separation"></div>
-
-                <div class="menu-lien"><%= link_to "FAQ", faq_path %> </div>
-
-                <div class="menu-separation"></div>
-
-                <div class="menu-lien"><a href="http://www.youtube.com/sc2sl/" rel="nofollow">VODS</a></div>
-
-				<div class="menu-separation"></div>
-
-                <div class="menu-lien"><a href="#" rel="nofollow">SHOP</a></div>
-
-                <div class="menu-separation"></div>
-
+              <div id="header-logo">
+                <div id="hlogo"><a href="http://www.sc2sl.com"><img src="/css/images/header/logo.png" /></a></div>
               </div>
+
+            </div>
+
+            <div id="header-pub">
+
+              <div id="header-pub-left"></div>
+
+              <div id="header-pub-content"><a href="#"><img src="/css/images/header/pub/logi1.gif" alt="Get the SC2SL discount !" width="570" height="92" /></a></div>
+
+              <div id="header-pub-right"></div>
+
+            </div>
+
+          </div>
+
+
+          <div id="menu">
+
+            <div id="menu-lien">
+
+              <div class="menu-lien"><a href="/" style="padding-top : 3px;"><img src="/css/images/menu/accueil.png" alt="Retour à l'accueil" /></a></div>
+
+              <div class="menu-separation"></div>
+
+              <div class="menu-lien"><%= link_to "NEWS", articles_path %> </div>
+
+              <div class="menu-separation"></div>
+
+              <div class="menu-lien"><%= link_to "LEAGUE RESULTS", seasons_path %></div>
+
+              <div class="menu-separation"></div>
+
+              <div class="menu-lien"><%= link_to "REPLAYS", matches_path %> </div>
+
+              <div class="menu-separation"></div>
+
+              <div class="menu-lien"><%= link_to "FAQ", faq_path %> </div>
+
+              <div class="menu-separation"></div>
+
+              <div class="menu-lien"><a href="http://www.youtube.com/sc2sl/" rel="nofollow">VODS</a></div>
+
+              <div class="menu-separation"></div>
+
+              <div class="menu-lien"><a href="#" rel="nofollow">SHOP</a></div>
+
+              <div class="menu-separation"></div>
+
+            </div>
 
             <div id="menu-live">
 
@@ -167,23 +166,22 @@
 
               <div class="menu-live-left">NEXT LIVE ON SC2SL</div>
 
-              <div class="menu-live-right"><img src="/css/images/menu/clock.png" alt="NEXT LIVE" valign="absmiddle" /><span style="float : left ;height : 18px; margin-left : 8px; margin-top : 7px;"><%= Time.now.strftime("%d %b %H:%M").upcase  %> </span></div>
+              <div class="menu-live-right"><img src="/css/images/menu/clock.png" alt="NEXT LIVE" valign="absmiddle" /><span style="float : left ;height : 18px; margin-left : 8px; margin-top : 7px;"><%= @live_match.scheduled_at.strftime("%d %b %H:%M").upcase if @live_match  %> </span></div>
 
             </div>
 
           </div>
 
           <div id="content-bar">
-            <% cache("articles_banner") do %>
-              <div id="slider" class="nivoSlider">
-                <%- @articles.each_with_index do |article, i| %>
-                  <%= render :partial => "articles/article_banner", :locals => {:article => article, :i => i} %>
-                <% end %>
+            <div id="slider" class="nivoSlider">
+              <%- @articles.each_with_index do |article, i| %>
+                <%= render :partial => "articles/article_banner", :locals => {:article => article, :i => i} %>
+              <% end %>
+            </div>
 
-              </div>
-            <% end %>
 
-            <% cache("live_section") do %>
+
+
               <div id="live">
 
                 <div id="live-haut">
@@ -212,72 +210,74 @@
 
                 </div>
 
-				<div id="live-ligne">
+                <div id="live-ligne">
                   <div id="live-ligne-left" align="left">Commentated by</div>
 
                   <div id="live-ligne-right">
                     <% if @live_match %>
-                      <%= link_to @live_match.casters.collect {|c| c.login}.join(", "), @live_match.url %>
+                      <% @live_match.caster.each do |caster| %>
+                        <%= link_to caster, @live_match.url %>
+                      <% end %>
                     <% end %>
                   </div>
 
                 </div>
 
               </div>
-            <% end %>
-            <% cache("layout_advertising") do %>
-         	<div id="head-sponsors"><div id="hsst"><div id="hsstt">NEXT MATCHES - CET</div>
-					</div>
-				<div id="hsm">
-                                  <% @upcoming_matches.each do |match| %>
-                                  <img src="/css/images/content-bar/sponsors/fleche.gif" alt="" /><%= american_time match.scheduled_at %> - <%= image_tag match.team0.country.flag %> <%= link_to match.team0, team_path(match.team0.slug) %> vs <%= image_tag match.team1.country.flag %> <%= link_to match.team1, team_path(match.team1.slug) %> <br/>
-				<% end %>
-				</div>
 
-				<div id="hss"><a href="#"><img src="/css/images/content-bar/sponsors/pubKorea.png" border="0"></a></div>
 
-					</div>
+              <div id="head-sponsors"><div id="hsst"><div id="hsstt">NEXT MATCHES - CET</div>
+                </div>
+                <div id="hsm">
+                  <% @upcoming_matches.each do |match| %>
+                    <img src="/css/images/content-bar/sponsors/fleche.gif" alt="" /><%= american_time(match.scheduled_at, false) %> - <%= image_tag match.team0.country.flag %> <%= link_to match.team0.short_name, team_path(match.team0.slug) %> vs <%= image_tag match.team1.country.flag %> <%= link_to match.team1.short_name, team_path(match.team1.slug) %> <br/>
+                  <% end %>
+                </div>
 
-				</div>
+                <div id="hss"><a href="#"><img src="/css/images/content-bar/sponsors/pubKorea.png" border="0" /></a></div>
 
-			</div>
-<div id="structure-sponsors2">
-			<table width="1004" height="94" border="0" cellspacing="0" cellpadding="0">
-  <tr valign="middle" align="center">
-    <td><a href="default.aspx">
-                <img src="/css/images/slider/logo.png" alt="Profit of a special SC2SL offer with logitech!" border="0"
-                     onmouseover="this. src='/css/images/slider/logo.png';"
-                     onmouseout="this.src= src='/css/images/slider/logo.png';" />
-              </a></td>
-    <td><a href="default.aspx">
-                <img src="/css/images/slider/logitech.png" alt="Profit of a special SC2SL offer with logitech!" border="0"
-                     onmouseover="this. src='/css/images/slider/logitech2.png';"
-                     onmouseout="this.src= src='/css/images/slider/logitech.png';" />
-              </a></td>
-	 <td><a href="default.aspx">
-                <img src="/css/images/slider/logo.png" alt="Profit of a special SC2SL offer with logitech!" border="0"
-                     onmouseover="this. src='/css/images/slider/logo.png';"
-                     onmouseout="this.src= src='/css/images/slider/logo.png';" />
-              </a></td>
-  </tr>
-</table>
-</div>
-        <% end %>
+              </div>
 
-        <div id="structure">
-		<div id="fullpage">
-            <%=raw show_flash %>
-        <%= yield %>
+            </div>
 
-          <% cache("footer") do %>
-		  </div>
+          </div>
+          <div id="structure-sponsors2">
+            <table width="1004" height="94" border="0" cellspacing="0" cellpadding="0">
+              <tr valign="middle" align="center">
+                <td><a href="default.aspx">
+                    <img src="/css/images/slider/logo.png" alt="Profit of a special SC2SL offer with logitech!" border="0"
+                         onmouseover="this. src='/css/images/slider/logo.png';"
+                         onmouseout="this.src= src='/css/images/slider/logo.png';" />
+                  </a></td>
+                <td><a href="default.aspx">
+                    <img src="/css/images/slider/logitech.png" alt="Profit of a special SC2SL offer with logitech!" border="0"
+                         onmouseover="this. src='/css/images/slider/logitech2.png';"
+                         onmouseout="this.src= src='/css/images/slider/logitech.png';" />
+                  </a></td>
+                <td><a href="default.aspx">
+                    <img src="/css/images/slider/logo.png" alt="Profit of a special SC2SL offer with logitech!" border="0"
+                         onmouseover="this. src='/css/images/slider/logo.png';"
+                         onmouseout="this.src= src='/css/images/slider/logo.png';" />
+                  </a></td>
+              </tr>
+            </table>
+          </div>
+
+
+          <div id="structure">
+            <div id="fullpage">
+              <%=raw show_flash %>
+              <%= yield %>
+
+
+            </div>
             <div id="right">
 
-	<div id="advertissement">
-	<div id="right-titre">
+              <div id="advertissement">
+                <div id="right-titre">
 
-							<div id="right-titre-texte">ADVERTISEMENT</div>
-							</div>
+                  <div id="right-titre-texte">ADVERTISEMENT</div>
+                </div>
 
                 <div id="advertissement-image"><a href="#"><img src="/css/images/header/pub/logi2.gif" alt="logitech offer for starcraft fans!" width="120" height="600" /></a></div>
 
@@ -285,59 +285,57 @@
             </div>
           </div>
 
-			<div id="footer">
+          <div id="footer">
 
-				<div id="footer-menu">
+            <div id="footer-menu">
 
-					<div id="menu-lien" style="width : 1000px;">
+              <div id="menu-lien" style="width : 1000px;">
 
-						<div class="menu-lien"><a href="#">NEWS</a></div>
+                <div class="menu-lien"><a href="#">NEWS</a></div>
 
-						<div class="menu-lien"><a href="#">LEAGUE</a></div>
+                <div class="menu-lien"><a href="#">LEAGUE</a></div>
 
-						<div class="menu-lien"><a href="#">REPLAYS</a></div>
+                <div class="menu-lien"><a href="#">REPLAYS</a></div>
 
-						<div class="menu-lien"><a href="#">VODS</a></div>
+                <div class="menu-lien"><a href="#">VODS</a></div>
 
-						<div class="menu-lien"><a href="#">BETS</a></div>
+                <div class="menu-lien"><a href="#">BETS</a></div>
 
-						<div class="menu-lien"><a href="#">FAQ</a></div>
-						<div class="menu-lien"><a href="#">GET SPECIAL OFFERS WITH LOGITECH</a></div>
-						<div class="menu-lien"><a href="#">WANT TO SEE THE GSL FINALS?</a></div>
+                <div class="menu-lien"><a href="#">FAQ</a></div>
+                <div class="menu-lien"><a href="#">GET SPECIAL OFFERS WITH LOGITECH</a></div>
+                <div class="menu-lien"><a href="#">WANT TO SEE THE GSL FINALS?</a></div>
 
-						<div class="menu-lien"><a href="mailto:contact@sc2sl.com">CONTACT</a></div>
+                <div class="menu-lien"><a href="mailto:contact@sc2sl.com">CONTACT</a></div>
 
-						<div class="menu-lien" style="float : right;"><a href="#" style="padding-top : 3px;"><img src="/css/images/menu/accueil.png" alt="Retour à l'accueil" /></a></div>
+                <div class="menu-lien" style="float : right;"><a href="#" style="padding-top : 3px;"><img src="/css/images/menu/accueil.png" alt="Retour à l'accueil" /></a></div>
 
-					</div>
+              </div>
 
-				</div>
+            </div>
 
-				<div id="footer-content">
+            <div id="footer-content">
 
-					<div id="footer-left">
-					  <p>SC2SL Copyright © 2011 / ALL RIGHTS RESERVED<br />
-					     website created by P6E - names and graphics are the property of their respective publishers and studios
+              <div id="footer-left">
+                <p>SC2SL Copyright © 2011 / ALL RIGHTS RESERVED<br />
+                  website created by P6E - names and graphics are the property of their respective publishers and studios
 
-									All other copyrights or trademarks are the property of their respective owners.
+                  All other copyrights or trademarks are the property of their respective owners.
 
-					  SIRET n°xxx - xxx - xxx - xxx </p>
-				  </div>
+                  SIRET n°xxx - xxx - xxx - xxx </p>
+              </div>
 
-					<div id="footer-right">
-					  <div class="footer-right-image"><a href="http://www.p6e.org"><span class="footer-right-image"><img src="/css/images/footer/p6e.png" alt="p6e"/></span></a></div>
+              <div id="footer-right">
+                <div class="footer-right-image"><a href="http://www.p6e.org"><span class="footer-right-image"><img src="/css/images/footer/p6e.png" alt="p6e"/></span></a></div>
 
-				  </div>
+              </div>
 
-				</div>
+            </div>
 
-			</div>
+          </div>
 
-		</div>
+        </div>
 
-	</div>
-
-</body>
+      </div>
+  </body>
 
 </html>
- <% end %>

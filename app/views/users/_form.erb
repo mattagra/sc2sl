@@ -74,4 +74,6 @@
   <b><%= form.label :roles %></b>
   <%= form.collection_select :roles, User::ROLES, :to_s, :to_s, {}, {:multiple => true, :size => 3, :style=> "width: 200px;"} %>
   <br />
+  <b><%= form.label :caster %></b>
+  <%= form.check_box :caster, :class => "form-dd" %>
 <% end %>

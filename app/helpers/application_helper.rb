@@ -7,9 +7,15 @@ module ApplicationHelper
     end.join
   end
   
-  def american_time(time)
-    time.strftime("%m-%d-%Y %H:%M")
+  def american_time(time, year = true)
+    if year
+      time.strftime("%m-%d-%Y %H:%M")
+    else
+      time.strftime("%m-%d %H:%M")
+    end
   end
+
+
 
   def tags_to_links(tags)
     result = []
