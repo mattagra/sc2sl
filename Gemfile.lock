@@ -117,14 +117,7 @@ GEM
     recaptcha (0.3.1)
     rrschedule (0.2.6)
     sanitize (2.0.3)
-<<<<<<< HEAD
       nokogiri (< 1.6, >= 1.4.4)
-    simple_form (1.4.2)
-      actionpack (~> 3.0)
-      activemodel (~> 3.0)
-=======
-      nokogiri (>= 1.4.4, < 1.6)
->>>>>>> e4f0c4312682b7b8a1921218c0ea63902deb6ed1
     sqlite3 (1.3.4)
     sqlite3 (1.3.4-x86-mingw32)
     sqlite3-ruby (1.3.3)
@@ -150,13 +143,8 @@ DEPENDENCIES
   cancan
   capistrano
   delayed_job
-  forem!
   jquery-rails (>= 1.0.3)
   memcache-client
-<<<<<<< HEAD
-  mysql2 (< 0.3)
-=======
->>>>>>> e4f0c4312682b7b8a1921218c0ea63902deb6ed1
   nokogiri
   paperclip
   rails

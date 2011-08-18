@@ -1,50 +1,30 @@
-<p id="notice"><%= notice %></p>
+<div id="newsmain">					
+				  <div class="newscontent">
+								
+									<div id="titrenews">
+										<div id="titrecom">
+											<a href=""><img src="/css/images/comment/add.png" alt="add a comment"/></a>
+										</div>
+										<div id=textcom align=right>
+											<a href="">2</a>
+										</div>
+										(p) <a href="#"><%= @game.player0.user.login %></a>  Vs. (z) <a href="#"><%= @game.player1.user.login %></a><br/>
+										<div id="undertitle">
+											March 25th, 2011 17:40
+										</div>
+									</div>
+									
+				                    <div align="center">
+				                      <p><img src="\css\images\Replay\maps\<%= @game.map.name %>.jpg" alt="" width="250" height="250" border="1" />
+									  <br />				                      <%= @game.map.name %> - <%= link_to "Match Sheet", match_path(@game.match) %>
+									  <br /> 
+									   <img src='/css/images/Replay/disk.jpg' align='top'> <strong><%= link_to "Download", replay_match_game_path(@game.match_id, @game) %> </strong>  (<%= @game.downloads %>) <br  /> <br /><%= ratings_for @game %><br/>
+  <%=raw @game.formatted_spoiler %><br/>
+      </div>
+				
+	</div>					
 
-<p>
-  <b>Player1:</b>
-  <%= @game.player0.user.login %>
-</p>
-
-<p>
-  <b>Player2:</b>
-  <%= @game.player1.user.login %>
-</p>
-
-<p>
-  <b>Result:</b>
-  <%=raw @game.formatted_spoiler %>
-</p>
-
-<p>
-  <b>Replay: </b>
-  <%= link_to "Replay", replay_match_game_path(@game.match_id, @game) %>
-</p>
-
-
-<p>
-  <b>Downloads:</b>
-  <%= @game.downloads %>
-</p>
-
-<p>
-  <b>Map:</b>
-  <%= @game.map.name %>
-</p>
-
-<p>
-  <b>Match:</b>
-  <%= link_to "View Match", match_path(@game.match) %>
-</p>
-
-<p>
-  <b>Match order:</b>
-  <%= @game.match_order %>
-</p>
-
-<p>
-  <b>Rating</b>
-  <%= ratings_for @game %>
-</p>
+<% if can? :destroy, @game %><%= link_to 'Destroy', match_game_path(@game.match_id, @game), :method => :delete, :confirm => "Are you sure you wish to delete this game?" %> | <% end %>
 
   <h3>Comments: </h3>
   <div id="comments">
@@ -56,6 +36,4 @@
   <p>
     <%= render :partial => "comments/form" %>
   </p>
-
-<% if can? :destroy, @game %><%= link_to 'Destroy', match_game_path(@game.match_id, @game), :method => :delete, :confirm => "Are you sure you wish to delete this game?" %> | <% end %>
-<%= link_to 'View Match', match_games_path(@game.match_id) %>
+  </div>

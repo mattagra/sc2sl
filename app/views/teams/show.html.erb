@@ -1,20 +1,23 @@
 <div id="newsmain"><br/>
-
 <p id="notice"><%= notice %></p>
 <% if can? :edit, @team %><%= link_to 'Edit', edit_team_path(@team) %><% end %>
 
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                       <td width="240" valign="top">  <%= image_tag(@team.photo.url(:normal)) if @team.photo.exists?  %></td>
-                      <td valign="top"><span class="votenowtxt style1"><span class="votenowtxt  style3"><%= image_tag @team.country.flag %>  <%= @team.name %> </span></span> <br/>
-                        <img src="/css/images/content-bar/live/star2.gif" alt="" width="12" height="12" /><em> Coached by <a href="#"><%= @team.user %></a></em><br/>
-                      </p>
-                        <p>Official website: <a href=""><%= @team.website %></a><br/>
+                      <td valign="top">
+					  <span class="votenowtxt"><%= image_tag @team.country.flag %>  <%= @team.name %> </span> 
+					  <br/>
+                       <img src="/css/images/content-bar/live/star2.gif" alt="" width="12" height="12" />
+					   <em> <span class="ntitle">Coached by <a href="#"><%= @team.user %></span></a></em>
+					   <br/>
+                       <br/> 
+                       Official website: <a href=""><%= @team.website %></a><br/>
 						 <br/> 
 					 <% if false %>
-						   <a href="#">Browse <%= @team.short_name %>  replays</a>.</p>
+						   <a href="#">Browse <%= @team.short_name %>  replays</a>.<br/><br/>
 						<%= @team.players.each do |player| %>
-						<p><%= image_tag player.user.country.flag %>
+						<%= image_tag player.user.country.flag %>
 						<a href="#"><%= player.user.name %></a><br/>
 						<% end %>
 						<% end %>
@@ -23,9 +26,9 @@
                   </table>
 				  
 				  <blockquote>
-				    <span class="ntitle ntitle style7"><strong>Bio:</strong> <%= @team.description %> <br/>
-		            </span><br/>
-				    </span><span class="votenowtimeleft ntitle style7"></span><span class="votenowtimeleft">			        <strong><%= @team.short_name %> History: </strong> <br/>
+				    <strong>Bio:</strong> <%= @team.description %> <br/>
+		            <br/>
+				    </span><span class="votenowtimeleft">			        <strong><%= @team.short_name %> History: </strong> <br/>
 			        <br/>
                     <strong>12/09/2010</strong>                    <img src="/css/images/user/small_green_arrow.png" alt="" width="10" height="9" /> New player <a href="#">Tod </a><br/>
 			        <strong>01/06/2010</strong> <strong>Win</strong> against <a href="#">Mouz </a><br/>
