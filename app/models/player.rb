@@ -11,6 +11,11 @@ class Player < ActiveRecord::Base
   validates :user, :presence => true
   validates :date_joined, :presence => true
 
+
+  def self.alphabetical
+    self.joins(:user).order("LOWER(users.login) asc")
+  end
+
   def games
     Game.where("games.player0_id = ? or games.player1_id = ?",self.id,self.id)
   end

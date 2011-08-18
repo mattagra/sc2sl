@@ -17,24 +17,24 @@
 
             <div class="ranking-ligne-titre-id">#</div>
 
-            <div class="ranking-ligne-titre-name">Name</div>
+            <div class="ranking-ligne-titre-name">Team</div>
 
             <div class="ranking-ligne-titre-points">Points</div>
 
-            <div class="ranking-ligne-titre-win">Win</div>
+            <div class="ranking-ligne-titre-win">Wins</div>
 
-            <div class="ranking-ligne-titre-loose">Loose</div>
+            <div class="ranking-ligne-titre-loose">Loses</div>
 
-            <div class="ranking-ligne-titre-mw">MW</div>
+            <div class="ranking-ligne-titre-mw">GW</div>
 
-            <div class="ranking-ligne-titre-ml">ML</div>
+            <div class="ranking-ligne-titre-ml">GL</div>
 
           </div>
           <% @season = Season.first %>
           <% if @season %>
             <% @season.teams.sort_by{|t| -1 * @season.points(t)}.each_with_index do |team, i| %>
               <div class="ranking-ligne" <%- if i % 2 == 1 %>style="background-color : #e8e8e8;"<%- end %>>
-                <div class="ranking-ligne-id"><%= i%>.</div>
+                <div class="ranking-ligne-id"><%= i + 1 %>.</div>
 
                 <div class="ranking-ligne-name"><%= image_tag team.country.flag%> <%= link_to team.name, team_path(team.slug) %></div>
 
@@ -96,7 +96,7 @@
         <div id="calendar">
           <% calendar_for Array(@matches), :year => @date.year, :month => @date.month do |calendar| %>
             <%= calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
-          </div>
+
           <% calendar.day(:day_method => :scheduled_at) do |date, matches| %>
             <% if date.month == @date.month %>
               <% if matches.size == 0 %>
@@ -177,4 +177,3 @@
 
 </div>
 </div>
-

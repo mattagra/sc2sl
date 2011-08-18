@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   #STATIC
   ROLES = %w[admin moderator superadmin]
 
+  SERVERS = %w[Americas Europe Korea SEA China]
+
   #Scopes
   scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0"} }
   scope :subscription, where(:subscription => true)

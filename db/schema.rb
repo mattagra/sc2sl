@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110816213252) do
+ActiveRecord::Schema.define(:version => 20110818220838) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -265,6 +265,7 @@ ActiveRecord::Schema.define(:version => 20110816213252) do
     t.boolean  "photo_approved"
     t.integer  "roles_mask"
     t.boolean  "subscription"
+    t.string   "bnet_server"
   end
 
   create_table "vote_events", :force => true do |t|

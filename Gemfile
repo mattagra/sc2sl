@@ -15,7 +15,7 @@ gem 'paperclip'
 gem 'acts-as-taggable-on'
 gem 'jquery-rails', '>= 1.0.3'
 gem "sanitize"
-gem "bb-ruby"
+gem "bb-ruby", '0.9.5', :path => "vendor/bundle/ruby/1.8/gems/bb-ruby-0.9.5"
 gem "recaptcha", :require => "recaptcha/rails"
 
 gem "rrschedule"

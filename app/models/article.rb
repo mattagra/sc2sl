@@ -8,11 +8,19 @@ class Article < ActiveRecord::Base
   validates :url, :uniqueness => true
   validates :summary, :length => {:minimum => 5, :maximum => 128}
   validates :description, :length => {:minimum => 5}
-  
+  validates_attachment_presence :photo                    
+  validates_attachment_size :photo, :less_than=>1.megabyte
+  validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']                 
+  validates_attachment_size :featured_photo, :less_than=>1.megabyte, :if => Proc.new { |o| !o.featured_photo_file_name.blank? }
+  validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif'], :if => Proc.new { |o| !o.featured_photo_file_name.blank? }
+  validates_presence_of :featured_photo, :if => Proc.new{|o| o.featured == true}
 
   #attached
   has_attached_file :photo, {:styles => { :normal => "643x253!" }, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
   has_attached_file :featured_photo, {:styles => {:normal => "524x140"}, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
+
+
+
 
   #Associations
   belongs_to :user

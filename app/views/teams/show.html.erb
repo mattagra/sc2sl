@@ -8,7 +8,7 @@
       <td width="240" valign="top">  <%= image_tag(@team.photo.url(:normal)) if @team.photo.exists?  %></td>
       <td valign="top"><span class="votenowtxt style1"><span class="votenowtxt  style3"><%= image_tag @team.country.flag %>  <%= @team.name %> </span></span> <br/>
         <% if @team.user %><img src="/css/images/content-bar/live/star2.gif" alt="" width="12" height="12" /><em> Coached by <%= link_to @team.user, profile_path(@team.user.login) %></em><br/><% end %>
-        <p>Official website: <a href=""><%= link_to @team.website, @team.website %></a><br/>
+        <p>Official website: <%= link_to @team.website, @team.website %><br/>
           <br/>
           <a href="#">Browse <%= @team.short_name %>  replays</a>.</p>
         <% @team.players.each do |player| %>

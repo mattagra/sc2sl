@@ -18,8 +18,8 @@ Maps:<br />
 
 <table>
   <tr>
-    <th>Team0</th>
     <th>Team1</th>
+    <th>Team2</th>
     <th>Date</th>
     <th></th>
     <th></th>
@@ -28,7 +28,7 @@ Maps:<br />
 
   <% week = 1 %>
   <tr>
-    <td colspan="6"><b>Week 0</b></td>
+    <td colspan="6"><b>Week 1</b></td>
   </tr>
 <% @season.matches.order("weeks_id asc").each do |match| %>
   <% if week != match.weeks_id %>

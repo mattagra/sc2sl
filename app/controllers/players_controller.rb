@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.xml
   def index
-    @players = Player.all
+    @players = Player.alphabetical
     @page = "Players"
     @description = "Find out about your favorite players in the SC2SL"
     @keywords += ["players"]

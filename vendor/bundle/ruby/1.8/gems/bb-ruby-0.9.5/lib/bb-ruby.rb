@@ -243,7 +243,7 @@ module BBRuby
     #   BBRuby.to_html(text, {}, true, :enable, :image, :bold, :quote)
     #   BBRuby.to_html(text, {}, true, :disable, :image, :video, :color)
     #
-    def to_html(text, tags_alternative_definition={}, escape_html=true, method=:disable, parse_breaks=true, *tags)
+    def to_html(text, tags_alternative_definition={}, escape_html=true, parse_breaks=true, method=:disable, *tags)
       text = process_tags(text, tags_alternative_definition, escape_html, method, *tags)
       
       # parse spacing
@@ -357,13 +357,13 @@ class String
   #
   #   output = text.bbcode_to_html({}, false)
   #
-  def bbcode_to_html(tags_alternative_definition = {}, escape_html=true, method=:disable, parse_breaks = true, *tags)
-    BBRuby.to_html(self, tags_alternative_definition, escape_html, method, parse_breaks, *tags)
+  def bbcode_to_html(tags_alternative_definition = {}, escape_html=true, parse_breaks = true, method=:disable, *tags)
+    BBRuby.to_html(self, tags_alternative_definition, escape_html, parse_breaks, method,  *tags)
   end
 
   # Replace the string contents with the HTML-converted markup
-  def bbcode_to_html!(tags_alternative_definition = {}, escape_html=true, method=:disable, parse_breaks = true, *tags)
-    self.replace(BBRuby.to_html(self, tags_alternative_definition, escape_html, method, parse_breaks, *tags))
+  def bbcode_to_html!(tags_alternative_definition = {}, escape_html=true, parse_breaks = true, method=:disable, *tags)
+    self.replace(BBRuby.to_html(self, tags_alternative_definition, escape_html,parse_breaks, method,  *tags))
   end
 
   def bbcode_to_html_with_formatting(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
