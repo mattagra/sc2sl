@@ -1,9 +1,0 @@
-# pack-refs with: peeled 
-8c71a756bc6731d2e46992f4a90dde83bfa476fe refs/heads/ref-speed
-7a27090f6849f598fb79f4aaa9e610d6f9583bd7 refs/heads/rails-2-3
-be4376bb7895d16a611f7d6e6d9e3d2be15fac80 refs/heads/rails-2-2-slow-templates
-6b602b8cae4eb044a6b9e0e9a7c97e9e0c2e5373 refs/heads/rails-2-2
-46fd99659f6a192f0a60557f459ca70dbfac3e6e refs/heads/master
-a6691087899ad2b10099e9740559578b322db7dd refs/heads/interdependencies
-83a79182a9c2dcef95d38d544953e41d7a531b99 refs/heads/encoding-fix
-54ad48fe175a59dee15901ef8ef319030f703750 refs/heads/activeadmin-fix
