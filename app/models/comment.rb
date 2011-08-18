@@ -11,12 +11,13 @@ class Comment < ActiveRecord::Base
 
   #Scopes
   scope :newest, order('id desc')
+  scope :oldest, order('id asc')
   scope :recent, lambda {|user|
     where(:user_id => user.id).where("comments.created_at > ?",30.seconds.ago).limit(1)
   }
 
   def self.paginated(page=1,offset=10)
-    newest.limit(offset).offset((page.to_i - 1) * offset.to_i)
+    oldest.limit(offset).offset((page.to_i - 1) * offset.to_i)
   end
 
 

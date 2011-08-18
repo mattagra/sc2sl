@@ -22,6 +22,7 @@ class Player < ActiveRecord::Base
   def to_s
     self.login if self.login
   end
-
+  
+  
 
 end

@@ -4,7 +4,11 @@ class Team < ActiveRecord::Base
   belongs_to :country
   belongs_to :user
   has_and_belongs_to_many :seasons
-  has_many :players
+  has_many :players, :conditions => ["date_quit is null"]
+
+  has_many :retired_players, :class_name => "Player", :conditions => ["date_quit is not null"]
+
+  has_many :all_players, :class_name => "Player"
 
   #Validations
   validates :name, :presence => true
@@ -14,6 +18,7 @@ class Team < ActiveRecord::Base
   def matches
     Match.where("team0_id = ? or team1_id = ?", self.id, self.id)
   end
+
 
   
 
@@ -39,6 +44,14 @@ class Team < ActiveRecord::Base
 
   def self.deslug(name)
     name.gsub(/\_/,' ')
+  end
+
+  def events
+    e = []
+    e += self.all_players.collect{|p| [p.date_joined.to_datetime, "join", p]}
+    e += self.retired_players.collect{|p| [p.date_quit.to_datetime, "quit", p]}
+    e += self.matches.reject{|m| m.results.nil? or m.results == 0}.collect{|m| [m.scheduled_at.to_datetime, "match", m, self]}
+    e
   end
   
 
