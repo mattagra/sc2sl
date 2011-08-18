@@ -215,7 +215,7 @@
 
                   <div id="live-ligne-right">
                     <% if @live_match %>
-                      <% @live_match.caster.each do |caster| %>
+                      <% @live_match.casters.each do |caster| %>
                         <%= link_to caster, @live_match.url %>
                       <% end %>
                     <% end %>

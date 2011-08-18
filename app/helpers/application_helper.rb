@@ -17,7 +17,7 @@ module ApplicationHelper
 
   def american_date(time, year = true)
     if year
-      time.strftime("%b %d, Y")
+      time.strftime("%b %d, %Y")
     else
       time.strftime("%b %d")
     end
