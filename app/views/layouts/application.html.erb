@@ -234,6 +234,8 @@
 
               <div id="hss"><a href="#"><img src="/css/images/content-bar/sponsors/pubKorea.png" border="0" /></a></div>
 
+              <div id="hss"><a href="#"><img src="/css/images/content-bar/sponsors/pubKorea.png" border="0" /></a></div>
+
             </div>
 
           </div>
@@ -264,9 +266,13 @@
 
         <div id="structure">
           <div id="fullpage">
+<<<<<<< Updated upstream
             <% flash.each do |key, msg| %>
               <%= content_tag :div, msg, :class => ["flash_#{key}"], :id => "notice_#{key}" %>
             <% end %>
+=======
+            <% show_flash %>
+>>>>>>> Stashed changes
             <%= yield %>
 
 
@@ -286,6 +292,7 @@
         </div>
 
         <div id="footer">
+<<<<<<< Updated upstream
 
           <div id="footer-menu">
 
@@ -307,6 +314,29 @@
 
               <div class="menu-lien"><a href="mailto:contact@sc2sl.com">CONTACT</a></div>
 
+=======
+
+          <div id="footer-menu">
+
+            <div id="menu-lien" style="width : 1000px;">
+
+              <div class="menu-lien"><a href="#">NEWS</a></div>
+
+              <div class="menu-lien"><a href="#">LEAGUE</a></div>
+
+              <div class="menu-lien"><a href="#">REPLAYS</a></div>
+
+              <div class="menu-lien"><a href="#">VODS</a></div>
+
+              <div class="menu-lien"><a href="#">BETS</a></div>
+
+              <div class="menu-lien"><a href="#">FAQ</a></div>
+              <div class="menu-lien"><a href="#">GET SPECIAL OFFERS WITH LOGITECH</a></div>
+              <div class="menu-lien"><a href="#">WANT TO SEE THE GSL FINALS?</a></div>
+
+              <div class="menu-lien"><a href="mailto:contact@sc2sl.com">CONTACT</a></div>
+
+>>>>>>> Stashed changes
               <div class="menu-lien" style="float : right;"><a href="#" style="padding-top : 3px;"><img src="/css/images/menu/accueil.png" alt="Retour à l'accueil" /></a></div>
 
             </div>
