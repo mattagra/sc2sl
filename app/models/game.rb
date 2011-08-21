@@ -24,6 +24,10 @@ class Game < ActiveRecord::Base
      (self.player0.team.short_name + "." + self.player0.user.login + " vs " + self.player1.team.short_name + "."  + self.player1.user.login + " on " + self.map.name)
   end
 
+  def scheduled_at
+    self.match.scheduled_at
+  end
+
   before_create :set_defaults
 
   def set_defaults
@@ -36,6 +40,10 @@ class Game < ActiveRecord::Base
 
   def team1
     self.player1.team if player1
+  end
+
+  def players
+    [player0, player1]
   end
 
   def result_s

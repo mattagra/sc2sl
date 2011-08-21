@@ -4,10 +4,24 @@ class GamesController < ApplicationController
   authorize_resource
   cache_sweeper :game_sweeper
   def index
-    @games = Game.where("games.result is not null")
-    @page = "Games List"
-    @description = "List of all recent game results."
+    
+    @page = "Replay List"
+    @description = "List of all recent replays."
     @keywords += ["games", "replays"]
+
+    if params[:filter] and params[:filter][:team_id]
+      @team = Team.find(params[:filter][:team_id])
+      @games = @team.games
+      @keywords += [@team.name]
+    elsif params[:filter] and params[:filter][:player_id]
+      @player = Player.find(params[:filter][:player_id])
+      @games = @player.games
+      @keywords += [@player.login]
+    else
+      @games = Game.where("games.result is not null")
+    end
+
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @games }

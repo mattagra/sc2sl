@@ -6,12 +6,12 @@
 </p>
 Teams:<br />
 <% @season.teams.each do |team| %>
-<%= link_to team.name, team_path(team.slug) %><br />
+  <%= link_to team.name, team_path(team.slug) %><br />
 <% end %>
 <br />
 Maps:<br />
 <% @season.maps.each do |map| %>
-<%= link_to map.name, map_path(map) %><br />
+  <%= link_to map.name, map_path(map) %><br />
 <% end %>
 
 <h1>Listing matches</h1>
@@ -30,26 +30,51 @@ Maps:<br />
   <tr>
     <td colspan="6"><b>Week 1</b></td>
   </tr>
-<% @season.matches.order("weeks_id asc").each do |match| %>
-  <% if week != match.weeks_id %>
-  <tr>
-    <td colspan="6"><b>Week <%= match.weeks_id %></b></td>
-  </tr>
-  <% week = match.weeks_id.to_i %>
-  <% end %>
-  <tr>
-    <td><%= match.team0.short_name %></td>
-    <td><%= match.team1.short_name %></td>
-    <td><%= match.scheduled_at %></td>
+  <% @season.regular_matches.order("weeks_id asc").each do |match| %>
+    <% if week != match.weeks_id %>
+      <tr>
+        <td colspan="6"><b>Week <%= match.weeks_id %></b></td>
+      </tr>
+      <% week = match.weeks_id.to_i %>
+    <% end %>
+    <tr>
+      <td><%= match.team0.short_name %></td>
+      <td><%= match.team1.short_name %></td>
+      <td><%= match.scheduled_at %></td>
 
-    <td><%= link_to 'Show', match %></td>
-    <td><% if can? :edit, match %><%= link_to 'Edit', edit_match_path(match) %><% end  %></td>
-    <td><% if can? :destroy, match %><%= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
-  </tr>
-<% end %>
+      <td><%= link_to 'Show', match %></td>
+      <td><% if can? :edit, match %><%= link_to 'Edit', edit_match_path(match) %><% end  %></td>
+      <td><% if can? :destroy, match %><%= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
+    </tr>
+  <% end %>
+  <% count = @season.playoff_matches.count - 1  %>
+  <% round = 0 %>
+  <% while count > -1 %>
+    <% if (count + 2) & (count + 1) == 0 %>
+      <tr>
+        <td colspan="6"><b>Round <%= round + 1 %><% round += 1 %></b></td>
+      </tr>
+    <% end %>
+    <% m = @season.playoff_matches.detect{|m| m.playoff_id == count} %>
+      <% if m %>
+    <tr>
+      <td><%= m.team0 || "TBA" %></td>
+      <td><%= m.team1 || "TBA" %></td>
+      <td><%= m.scheduled_at || "TBD" %></td>
+
+      <td><%= link_to 'Show', m %></td>
+      <td><% if can? :edit, m %><%= link_to 'Edit', edit_match_path(m) %><% end  %></td>
+      <td><% if can? :destroy, m %><%= link_to 'Destroy', m, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
+    </tr>
+    <% end %>
+    <% count -= 1 %>
+  <% end %>
+
 </table>
 
-<br />
+
+
+
 
 <% if can? :create, Match %><%= link_to 'New Match', new_match_path(:season_id => @season.id) %><% end %>
 

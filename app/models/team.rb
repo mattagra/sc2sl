@@ -10,6 +10,7 @@ class Team < ActiveRecord::Base
 
   has_many :all_players, :class_name => "Player"
 
+
   #Validations
   validates :name, :presence => true
   validates :country, :presence => true
@@ -17,6 +18,10 @@ class Team < ActiveRecord::Base
 
   def matches
     Match.where("team0_id = ? or team1_id = ?", self.id, self.id)
+  end
+
+  def games
+    self.matches.collect{|m| m.completed_games}.flatten.uniq
   end
 
 

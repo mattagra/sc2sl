@@ -27,6 +27,46 @@ class Player < ActiveRecord::Base
   def to_s
     self.login if self.login
   end
+
+  def events
+    e = []
+    e += self.user.players.collect{|p| [p.date_joined.to_datetime, "join", p]}
+    e += self.user.retired_players.collect{|p| [p.date_quit.to_datetime, "quit", p]}
+    e += self.games.reject{|m| m.result.nil?}.collect{|m| [m.scheduled_at.to_datetime, "game", m, self]}
+    e
+  end
+
+  def wins_total
+
+  end
+
+  def games_total
+    
+  end
+
+  def wins_vs_protoss
+
+  end
+
+  def games_vs_protoss
+
+  end
+
+  def wins_vs_zerg
+
+  end
+
+  def games_vs_zerg
+
+  end
+
+  def wins_vs_terran
+
+  end
+
+  def games_vs_terran
+    
+  end
   
   
 

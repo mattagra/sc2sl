@@ -78,7 +78,7 @@
                         <%= link_to "Moderations", moderations_path %> |
                         <%= link_to "Users", users_path %> |
                       <% end %>
-                        <%= link_to "Logout", logout_path %>
+                      <%= link_to "Logout", logout_path %>
                     </div>
                   <% end %>
 
@@ -244,21 +244,13 @@
         <div id="structure-sponsors2">
           <table width="1004" height="94" border="0" cellspacing="0" cellpadding="0">
             <tr valign="middle" align="center">
-              <td><a href="default.aspx">
-                  <img src="/css/images/slider/logo.png" alt="Profit of a special SC2SL offer with logitech!" border="0"
-                       onmouseover="this. src='/css/images/slider/logo.png';"
-                       onmouseout="this.src= src='/css/images/slider/logo.png';" />
-                </a></td>
-              <td><a href="default.aspx">
-                  <img src="/css/images/slider/logitech.png" alt="Profit of a special SC2SL offer with logitech!" border="0"
-                       onmouseover="this. src='/css/images/slider/logitech2.png';"
-                       onmouseout="this.src= src='/css/images/slider/logitech.png';" />
-                </a></td>
-              <td><a href="default.aspx">
-                  <img src="/css/images/slider/logo.png" alt="Profit of a special SC2SL offer with logitech!" border="0"
-                       onmouseover="this. src='/css/images/slider/logo.png';"
-                       onmouseout="this.src= src='/css/images/slider/logo.png';" />
-                </a></td>
+              <% @advertisements_show.each do |advertisement| %>
+                <td>
+                  <a href="<%= advertisement.url %>">
+                    <%= image_tag advertisement.photo.url(:normal_gray), :alt => advertisement.title, :border => "0", :onmouseover => "this.src='#{advertisement.photo.url(:normal)}'", :onmouseout => "this.src='#{advertisement.photo.url(:normal_gray)}'" %>
+                  </a>
+                </td>
+              <% end %>
             </tr>
           </table>
         </div>

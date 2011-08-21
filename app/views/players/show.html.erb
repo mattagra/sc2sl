@@ -20,6 +20,48 @@
   <%= @player.date_quit %>
 </p>
 
+<blockquote>
+    <span class="ntitle ntitle style7"><strong>Bio:</strong> <%= @player.user.profile_text %> <br/>
+    </span><br/>
+    <span class="votenowtimeleft ntitle style7"></span>
+    <span class="votenowtimeleft">
+      <strong><%= @player.login %> History: </strong> <br/>
+      <br/>
+      <% @player.events.sort_by{|t| t[0]}.reverse[0..4].each do |event| %>
+        <strong><%= american_date event[0] %></strong>&nbsp;<%=raw describe_player_event(event) %><br />
+      <% end %>
+    </span>
+  </blockquote>
+  <div id="historic" class="ddpanel">
+    <div id="historiccontent" class="ddpanelcontent">
+      <br/>
+      <blockquote>
+        <% @player.events.sort_by{|t| t[0]}.reverse[5..25].to_a.each do |event| %>
+          <strong><%= american_date event[0] %></strong>&nbsp;<%=raw describe_player_event(event) %><br />
+        <% end %>
+      </blockquote>
+    </div>
+    <div id="historictab" class="ddpaneltab">
+      <a href="#"><span>SHOW MORE </span></a>				</div>
+  </div>
+  <div align="right">
+    <script type="text/javascript">
+
+      var testpanel=new ddpanel({
+        ids: ["historic", "historiccontent", "historictab"], // id of main panel DIV, content DIV, and tab DIV
+        stateconfig: {initial: "5px", persiststate: true}, // initial: initial reveal amount in pixels (ie: 5px)
+        animate: {enabled: true, steps: 5}, //steps: number of animation steps. Int between 1-20. Smaller=faster.
+        pointerimage: {enabled: true, src: ["/css/images/arrow-down.gif", "/css/images/arrow-up.gif"]},
+        closepanelonclick: {enabled: true} // close panel when links or elements with CSS class="closepanel" within container is clicked on?
+      })
+
+    </script>
+  </div>
+
+
+
+
+
 <h3>Comments:</h3>
   <%= render  @player.comments.order('id asc') %>
   <% if @player.comments.count > 0 %>

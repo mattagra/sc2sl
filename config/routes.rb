@@ -1,6 +1,8 @@
 Sc2sl::Application.routes.draw do
 
 
+  resources :advertisements
+
   resources :newsletters
 
   get "admin/index"

@@ -19,7 +19,9 @@ class MatchSweeper < ActionController::Caching::Sweeper
   def expire_cache_for(match)
     # Expire a fragment
     expire_fragment('season_rankings')
-    expire_fragment("calendar_#{match.scheduled_at.year}_#{match.scheduled_at.month}")
+    if match.scheduled_at
+      expire_fragment("calendar_#{match.scheduled_at.year}_#{match.scheduled_at.month}")
+    end
     expire_fragment("live_section")
   end
 end

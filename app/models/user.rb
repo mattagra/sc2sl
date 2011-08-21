@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
   has_many :moderations
   has_one :player, :conditions => ["players.date_quit is null"]
   has_many :players
+  has_many :retired_players, :class_name => "Player", :conditions => ["date_quit is not null"]
   #has_many :games, :through => :players
 
   #Ratings
