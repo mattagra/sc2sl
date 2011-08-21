@@ -150,8 +150,8 @@
             <% @games.each do |game| %>
               <tr>
                 <td height="26" width="34" valign="middle">&nbsp;&nbsp;<img src="/css/images/last-replays/goldstar.png" alt="download the replay" /></td>
-                <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} #{game.player0.team.short_name} <b>#{game.player0.login}</b>".html_safe, game_path(game)).html_safe %></td>
-                <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} #{game.player1.team.short_name} <b>#{game.player1.login}</b>".html_safe, game_path(game)).html_safe %></td>
+                <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} #{game.player0.team.short_name} <b>#{game.player0.login}</b>".html_safe, replay_path(game)).html_safe %></td>
+                <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} #{game.player1.team.short_name} <b>#{game.player1.login}</b>".html_safe, replay_path(game)).html_safe %></td>
                 <td width="27" valign="middle" vspace="2"><%= link_to(image_tag("/css/images/last-replays/dl2.gif"), replay_match_game_path(game.match_id, game)).html_safe %></td>
               </tr>
             <% end %>
@@ -164,8 +164,8 @@
           <% @games.each do |game| %>
             <tr>
               <td height="26" width="34" valign="middle">&nbsp;&nbsp;<img src="/css/images/last-replays/goldstar.png" alt="download the replay" /></td>
-              <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} #{game.player0.team.short_name}<b>#{game.player0.login}</b>".html_safe, game_path(game)).html_safe %></td>
-              <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} #{game.player0.team.short_name}<b>#{game.player0.login}</b>".html_safe, game_path(game)).html_safe %></td>
+              <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} #{game.player0.team.short_name}<b>#{game.player0.login}</b>".html_safe, replay_path(game)).html_safe %></td>
+              <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} #{game.player0.team.short_name}<b>#{game.player0.login}</b>".html_safe, replay_path(game)).html_safe %></td>
               <td width="27" valign="middle" vspace="2"><%= link_to(image_tag("/css/images/last-replays/dl2.gif"), replay_match_game_path(game.match_id, game)).html_safe %></td>
             </tr>
           <% end %>
