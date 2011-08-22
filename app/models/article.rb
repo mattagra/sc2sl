@@ -16,8 +16,8 @@ class Article < ActiveRecord::Base
   validates :featured_photo, :presence => true, :if => Proc.new{|o| o.featured == true}
 
   #attached
-  has_attached_file :photo, {:styles => { :normal => "643x253!" }, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
-  has_attached_file :featured_photo, {:styles => {:normal => "524x140"}, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
+  has_attached_file :photo, {:styles => { :normal => "643x253!" }, :url => "/shared/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
+  has_attached_file :featured_photo, {:styles => {:normal => "524x140"}, :url => "/shared/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
 
 
 

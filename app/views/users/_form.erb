@@ -55,7 +55,7 @@
 <label for="user_photo">Photo</label>
 
 <%= form.file_field :photo %> <div align="center">
-  <%= image_tag form.object.avatar  %>
+  <%= image_tag form.object.photo.url(:normal)  %>
 </div>
 
 <label for="user_signature">Signature</label>

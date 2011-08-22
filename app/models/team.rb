@@ -30,7 +30,7 @@ class Team < ActiveRecord::Base
       :large => "180x180!",
       :normal => "100x100!",
       :thumb => "32x32!"
-    }, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
+    }, :url => "/shared/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
 
   alias :coach :user
 

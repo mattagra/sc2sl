@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     {:styles => {
       :normal => "96x96",
       :thumb => "32x32"
-    }, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url", :default_url => "/css/images/comment/avatar.jpg"}
+    }, :url => "/shared/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url", :default_url => "/css/images/comment/avatar.jpg"}
 
 
   #Attributes
@@ -58,16 +58,6 @@ class User < ActiveRecord::Base
 
   def self.find_by_login_or_email(login)
     find_by_login(login) || find_by_email(login)
-  end
-
-
-
-  def avatar
-    if self.photo.exists?
-      self.photo.url(:normal)
-    else
-      "/css/images/comment/avatar.jpg"
-    end
   end
 
 

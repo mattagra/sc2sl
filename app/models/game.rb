@@ -8,7 +8,7 @@ class Game < ActiveRecord::Base
   has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Game.to_s}'"
 
   #Attachments
-  has_attached_file :replay, {:url => "/images/:class/:attachment/:id/:customname.:extension", :path => ":rails_root/public:url"}
+  has_attached_file :replay, {:url => "/shared/:class/:attachment/:id/:customname.:extension", :path => ":rails_root/public:url"}
 
   #Rating
   ajaxful_rateable :stars => 5

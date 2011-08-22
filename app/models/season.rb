@@ -18,7 +18,7 @@ class Season < ActiveRecord::Base
       :normal_gray => "815x129!",
       :small => "780x124!"
     },
-    :url => "/images/:class/:attachment/:id/:style_:basename.:extension",
+    :url => "/shared/:class/:attachment/:id/:style_:basename.:extension",
     :path => ":rails_root/public:url",
     :convert_options => {
       :normal_gray => "-colorspace gray"
