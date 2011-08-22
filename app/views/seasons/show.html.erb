@@ -1,62 +1,15 @@
 <p id="notice"><%= notice %></p>
-<%=  grayscale_banner_link(@season.banner, season_path(@season)) %>
-<p>
-  <b>Name:</b>
-  <%= @season.name %>
-</p>
-Teams:<br />
-<% @season.teams.each do |team| %>
-  <%= link_to team.name, team_path(team.slug) %><br />
-<% end %>
-<br />
-Maps:<br />
-<% @season.maps.each do |map| %>
-  <%= link_to map.name, map_path(map) %><br />
-<% end %>
 
-<h1>Listing matches</h1>
-
-<table>
-  <tr>
-    <th>Team1</th>
-    <th>Team2</th>
-    <th>Date</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-  <% week = 1 %>
-  <tr>
-    <td colspan="6"><b>Week 1</b></td>
-  </tr>
-  <% @season.regular_matches.order("weeks_id asc").each do |match| %>
-    <% if week != match.weeks_id %>
-      <tr>
-        <td colspan="6"><b>Week <%= match.weeks_id %></b></td>
-      </tr>
-      <% week = match.weeks_id.to_i %>
-    <% end %>
+<% count = @season.playoff_matches.count - 1  %>
+<% round = 0 %>
+<% while count > -1 %>
+  <% if (count + 2) & (count + 1) == 0 %>
     <tr>
-      <td><%= match.team0.short_name %></td>
-      <td><%= match.team1.short_name %></td>
-      <td><%= match.scheduled_at %></td>
-
-      <td><%= link_to 'Show', match %></td>
-      <td><% if can? :edit, match %><%= link_to 'Edit', edit_match_path(match) %><% end  %></td>
-      <td><% if can? :destroy, match %><%= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
+      <td colspan="6"><b>Round <%= round + 1 %><% round += 1 %></b></td>
     </tr>
   <% end %>
-  <% count = @season.playoff_matches.count - 1  %>
-  <% round = 0 %>
-  <% while count > -1 %>
-    <% if (count + 2) & (count + 1) == 0 %>
-      <tr>
-        <td colspan="6"><b>Round <%= round + 1 %><% round += 1 %></b></td>
-      </tr>
-    <% end %>
-    <% m = @season.playoff_matches.detect{|m| m.playoff_id == count} %>
-      <% if m %>
+  <% m = @season.playoff_matches.detect{|m| m.playoff_id == count} %>
+  <% if m %>
     <tr>
       <td><%= m.team0 || "TBA" %></td>
       <td><%= m.team1 || "TBA" %></td>
@@ -66,18 +19,146 @@ Maps:<br />
       <td><% if can? :edit, m %><%= link_to 'Edit', edit_match_path(m) %><% end  %></td>
       <td><% if can? :destroy, m %><%= link_to 'Destroy', m, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
     </tr>
-    <% end %>
-    <% count -= 1 %>
   <% end %>
-
-</table>
-
-
+  <% count -= 1 %>
+<% end %>
 
 
+<div id="newsmain">
 
-<% if can? :create, Match %><%= link_to 'New Match', new_match_path(:season_id => @season.id) %><% end %>
+  <div class="newscontent">
+    <br />
+    <%=  grayscale_banner_link(@season.banner, season_path(@season)) %>
+    <br />
+								Current status : <span class="style1"><%= @season.status_text %> </span> (Playday3) / <span class="style2">Finished</span><br />
+    <br />
+
+    <div class="season_tabs">
+      <div id="tabs" style="float:left;">
+        <ul>
+          <li><a href="#rankings">Rankings</a></li>
+          <li><a href="#week1" >Week 1</a></li>
+          <li><a href="#week2" >Week 2</a></li>
+          <li><a href="#week3" >Week 3</a></li>
+          <li><a href="#week4" >Week 4</a></li>
+          <li><a href="#week5" >Week 5</a></li>
+          <li><a href="#week6" >Week 6</a></li>
+          <li><a href="#week7" >Week 7</a></li>
+          <li><a href="#playoff" >Playoffs</a></li>
+        </ul>
 
 
-<% if can? :edit, @season %><%= link_to 'Edit', edit_season_path(@season) %> |<% end %>
-<%= link_to 'Back', seasons_path %>
+
+
+
+        <div id="rankings">
+          <div style="border:none; width:524px;float: left;">
+            <div id="ranking-content" style="border:1px solid gray; float: left;">
+
+              <div id="ranking-ligne-titre">
+
+                <div class="ranking-ligne-titre-id">#</div>
+
+                <div class="ranking-ligne-titre-name">Name</div>
+
+                <div class="ranking-ligne-titre-points">Points</div>
+
+                <div class="ranking-ligne-titre-win">Game Wins</div>
+
+                <div class="ranking-ligne-titre-loose">Game Losses</div>
+
+                <div class="ranking-ligne-titre-mw">Match Wins</div>
+
+                <div class="ranking-ligne-titre-ml">Match Losses</div>
+
+              </div>
+
+              <% @season.teams.sort_by{|t| @season.points(t)}.each_with_index do |team, i| %>
+                <div class="ranking-ligne" style="background-color : <%= cycle("#FFFFFF", "#E7E2E2") %>;">
+
+                  <div class="ranking-ligne-id"><%= i + 1 %>.</div>
+
+                  <div class="ranking-ligne-name"><%= image_tag team.country.flag %><%= link_to team, team_path(team.slug) %></div>
+
+                  <div class="ranking-ligne-points"><%= @season.points(team) %> pts</div>
+
+                  <div class="ranking-ligne-win"><%= @season.game_wins(team) %></div>
+
+                  <div class="ranking-ligne-loose"><%= @season.game_losses(team) %></div>
+
+                  <div class="ranking-ligne-mw"><%= @season.wins(team) %></div>
+
+                  <div class="ranking-ligne-ml"><%= @season.losses(team) %></div>
+
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <%  @season.regular_matches.group_by(&:weeks_id).each do |week| %>
+          <div id="week<%= week[0] -%>">
+
+            <table width="500" border="0" cellspacing="0" cellpadding="0">
+              <% week[1].each do |match| %>
+                <tr>
+                  <td width="100"><%= link_to(image_tag(match.team0.photo.url(:normal)), team_path(match.team0.slug)  ) %></td>
+                  <td width="300" align="center">
+                    <font class="scoreseason">[<%= match.team0_wins %> - <%= match.team1_wins %>]</font><br />
+                    <%= link_to "<font class='sresultm'>MATCH SHEET</font>".html_safe, match_path(match) %>
+                  </td>
+                  <td width="100"><%= link_to(image_tag(match.team1.photo.url(:normal)), team_path(match.team1.slug)  ) %></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        <% end %>
+
+        <div id="playoff">
+          <%  if @season.playoff_matches.size > 0 %>
+            <div style="float:left;">
+
+              <% rounds = ((Math.log([@season.playoff_matches.size + 1.0,2.0].max.to_f))/(Math.log(2.0))).ceil %>
+              <% current_round = 0 %>
+              <% while current_round < rounds %>
+                <div style="width:90px;float:left;">
+                  <div style="height:<%= 30 * (2 ** current_round - 1) / 2.0 %>px;width:100%;float:left;">&nbsp;</div>
+                  <% (2 ** (rounds - current_round - 1)).times do |i| %>
+                    <% match = @season.playoff_matches.where(:playoff_id => (2 ** (rounds - current_round -1)) + (i) - 1).first %>
+                    <% if match %>
+                      <div style="float:left;width:90px;">
+                        <a href="<%= match_path(match) %>">
+                          <div style="border-bottom: thin solid black;float:left;width:100%;height:30px;position:relative;"><div style="position: absolute; bottom: 0; left: 0;padding-left:5px;"><span class="<%= (match.results.to_i > 0 ? "bold" : "normal")  %> "> <%= match.team0 || "" %></span> </div></div>
+                          <div style="height:<%= 30 * (2 ** current_round - 1) %>px;width:100%;float:left;border-right:solid thin black;"></div>
+                          <div style="border-bottom: thin solid black;border-right: thin solid black;float:left;width:100%;height:30px;position:relative;"><div style="position: absolute; bottom: 0; left: 0;padding-left:5px;"><span class="<%= (match.results.to_i < 0 ? "bold" : "normal")   %> "><%= match.team1 || "" %></span></div></div>
+                          <div style="height:<%= 30 * (2 ** current_round - 1) %>px;width:100%;float:left;"></div>
+                        </a>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+                <% current_round += 1 %>
+              <% end %>
+              <div style="width:90px;float:left;">
+                <div style="height:<%= 30 * (2 ** current_round - 1) / 2.0 %>px;width:100%;float:left;">&nbsp;</div>
+                <div style="border-bottom: thin solid black;float:left;width:100%;height:30px;position:relative;"><div style="position: absolute; bottom: 0; left: 0;padding-left:5px;"></div></div>
+              </div>
+            </div>
+          <% else %>
+            Playoffs Not yet Determined
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    $("#tabs").tabs();
+    $("#tabs > div").addClass('clearfix');
+  });
+</script>
+
+
+<% if can? :edit, @season %><%= link_to 'Edit', edit_season_path(@season) %><% end %>

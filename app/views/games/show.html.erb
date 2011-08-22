@@ -3,10 +3,10 @@
 
     <div id="titrenews">
       <div id="titrecom">
-        <a href=""><img src="/css/images/comment/add.png" alt="add a comment"/></a>
+        <a href="#newcomment"><img src="/css/images/comment/add.png" alt="add a comment"/></a>
       </div>
       <div id=textcom align=right>
-        <a href="">2</a>
+        <a href="#comments">2</a>
       </div>
       (p) <a href="#"><%= @game.player0.user.login %></a>  Vs. (z) <a href="#"><%= @game.player1.user.login %></a><br/>
       <div id="undertitle">
@@ -15,16 +15,15 @@
     </div>
 
     <div align="center">
-      <p><img src="\css\images\Replay\maps\<%= @game.map.name %>.jpg" alt="" width="250" height="250" border="1" />
+      <p><%= image_tag @game.map.photo.url(:normal), :border => "1" %>
         <br />	 <%= @game.map.name %> - <%= link_to "Match Sheet", match_path(@game.match) %>
         <br />
-        <img src='/css/images/Replay/disk.jpg' align='top'> <strong><%= link_to "Download", replay_match_game_path(@game.match_id, @game) %> </strong>  (<%= @game.downloads %>) <br  /> <br /><%= ratings_for @game, :remote_options => {:url => rate_replay_path(@game)} %><br/>
+        <img src='/css/images/Replay/disk.jpg' align='top' /> <strong><%= link_to "Download", replay_match_game_path(@game.match_id, @game) %> </strong>  (<%= @game.downloads %>) <br  /> <br /><%= ratings_for @game, :remote_options => {:url => rate_replay_path(@game)} %><br/>
         <%=raw @game.formatted_spoiler %><br/>
+      </p>
     </div>
 
   </div>
-
-  <% if can? :destroy, @game %><%= link_to 'Destroy', match_game_path(@game.match_id, @game), :method => :delete, :confirm => "Are you sure you wish to delete this game?" %> | <% end %>
 
   <h3>Comments: </h3>
   <div id="comments">

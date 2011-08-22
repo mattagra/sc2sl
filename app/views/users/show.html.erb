@@ -1,93 +1,57 @@
 <div id="fullpage2">
-				<div id="newsmain">
-				<br><table id="user" width="880">
-				<tr width="95">
-					<td rowspan="3">
-						<%= image_tag @user.avatar, :align => "left" %></td><td class="votenowtxt"> <%= image_tag race_icon_url(@user.race), :alt => "race"%> <%= @user.login %></span> 							 					<strong> 
-						<% if @user.banned? %>
-						Ban Type: <%= @user.current_ban.mod_type %> -  <%= @user.current_ban.length %> days - Ends: <%= @user.current_ban.ends_at %>
-						<% end %> </strong>
-					</td>
-				</tr>
-				<tr><td class="playertab">
-					Player for <a href="#">team</a>
-				</td></tr>
-				  <tr> <td class="playertab">
-					  </span><br/>
-												<% if @user.country  %>
-							  <%= @user.country %> <%= image_tag @user.country.flag %>
-							  <% end %>   Yohan Merlo</br>
-											  26 years old | 0 msg <% if @user == current_user or current_admin %>
-							 | Email: <%=h @user.email %> | 
-							<% if @user == current_user %>
-							
-							<%= link_to 'Update Information', edit_account_path %>
-							<% elsif current_user and current_user.is_admin? %>
-							<%= link_to "Update Information", edit_user_path(@user) %>
-							<% end %>
-							
-							<br/>
-											  <%= @user.website %>				 
-											   </span>
-					</td></tr>
-					   </table>
-		          <br/>
-				    <span class="style1">Helli i  used to be one of the most successful Warcraft III players.I have lived and competed in China and in South Korea, and holds an impressive amount of achievements, including podiums in WCG, CPL, and BlizzCon. </span><br/> 
-				    <br/> <br/>
-				   <strong>STATISTICS</strong><br><br>
-				  		PvZ 70% (10-5) <br />
-				        PvP 30% (5-10) <br />
-				        PvT 100% (22-2)<br />
-				        <br />
-				                          <img src="/css/images/last-replays/dl2.gif" alt="" align="top" /> <a href="#">See ToD replays.</a>   <br />  <br />
-				 	   <strong>HISTORIC</strong><br/><br>
-				    <blockquote>
-				      <p><strong>12/05/2010</strong> <img src="/css/images/user/small_green_arrow.png" alt="" width="10" height="9" /> Joined millenium <br/>
-                          <strong>01/06/2010</strong> Win against Thorzain ( M vs Mouz ) <br/>
-                          <strong>01/06/2010</strong> Lose against pipo ( M vs Mouz ) <br/>
-                          <strong>12/09/2010</strong> <img src="/css/images/user/small_red_arrow.png" alt="" width="10" height="9" /> Left Millenium </p>
-			        </blockquote>
-				  </blockquote>
-				 <div id="historic" class="ddpanel">
-				<div id="historiccontent" class="ddpanelcontent"><br>
-                      <p class="ntitle"><span class="ddpanelcontent votenowtimeleft votenowtimeleft"><strong>12/09/2010</strong>
-                       </span><span class="ntitle votenowtimeleft votenowtimeleft"><img src="/css/images/user/small_green_arrow.png" alt="" width="10" height="9" /> New player <a href="#">Tod </a><br/>
-                       <strong>01/06/2010</strong> <strong>Win</strong> against <a href="#">Mouz </a><br/>
-                       <strong>01/06/2010</strong> <strong>Lose</strong> against <a href="#">EG</a> <br/>
-                       <strong>01/06/2010</strong> Lose against <a href="#">Tintin </a><br/>
-                       <strong>12/03/2010</strong> <img src="/css/images/user/small_red_arrow.png" alt="" width="10" height="9" /> Player left : <a href="#">JeanPaul </a></span><span class="votenowtimeleft votenowtimeleft"></span></span><br/>
-                      </p>
-				</div>
-				<div id="historictab" class="ddpaneltab">
-				<a href="#"><span>SHOW MORE </span></a>				</div>
-				</div>
-			
-				    <script type="text/javascript">
+  <div id="newsmain">
+    <br><table id="user" width="880">
+      <tr width="95">
+        <td rowspan="3">
+          <%= image_tag @user.avatar, :align => "left" %></td><td class="votenowtxt"> <%= image_tag race_icon_url(@user.race), :alt => "race"%> <%= @user.login %></span> 							 					<strong>
+          <% if @user.banned? %>
+Ban Type: <%= @user.current_ban.mod_type %> -  <%= @user.current_ban.length %> days - Ends: <%= @user.current_ban.ends_at %>
+            <% end %> </strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="playertab">
+Player for <a href="#">team</a>
+        </td>
+      </tr>
+      <tr>
+        <td class="playertab">
+          <br/>
+          <% if @user.country  %>
+            <%= @user.country %> <%= image_tag @user.country.flag %>
+          <% end %>
+          <%= @user.full_name%> </br>
+          <%= @user.age %>  years old |
+          <% if @user == current_user or current_admin %>Email: <%=h @user.email %> | <% end %>
+          <% if @user == current_user %>
+            <%= link_to 'Update Information', edit_account_path %>
+          <% elsif current_admin %>
+            <%= link_to "Update Information", edit_user_path(@user) %>
+          <% end %>
 
-var testpanel=new ddpanel({
-ids: ["historic", "historiccontent", "historictab"], // id of main panel DIV, content DIV, and tab DIV
-stateconfig: {initial: "5px", persiststate: true}, // initial: initial reveal amount in pixels (ie: 5px)
-animate: {enabled: true, steps: 5}, //steps: number of animation steps. Int between 1-20. Smaller=faster.
-pointerimage: {enabled: true, src: ["/css/images/arrow-down.gif", "/css/images/arrow-up.gif"]},
-closepanelonclick: {enabled: true} // close panel when links or elements with CSS class="closepanel" within container is clicked on?
-})
+          <br/>
+          <%= @user.website %>
+        </td>
+      </tr>
+    </table>
+    <br/>
+    <span class="style1"><%= @user.profile_text %> </span><br/>
 
-  </script>
-				 
-  <br/>  <br/>  <br/>
 
-<br />
 
-<% end %>
+    <br/>  <br/>  <br/>
 
-<h3>Comments:</h3>
-  <%= render  @user.comments.order('id asc') %>
+    <br />
+
+
+    <h3>Comments:</h3>
+  <%= render  @user.comments %>
   <% if @user.comments.count > 0 %>
-  <%= render :partial => "comments/comment_footer" %>
- <% end %>
-<p>
-  <%= render :partial => "comments/form" %>
-</p>
+    <%= render :partial => "comments/comment_footer" %>
+  <% end %>
+    <p>
+    <%= render :partial => "comments/form" %>
+    </p>
 
-</div>
+  </div>
 </div>

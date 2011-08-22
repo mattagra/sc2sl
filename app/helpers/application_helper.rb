@@ -104,6 +104,17 @@ module ApplicationHelper
         link_to(image_tag(banner.url(:normal_gray), :class => "img_grayscale"), path) + "</div>").html_safe
   end
 
+
+  def rating_star_image(rating)
+    if rating > 4.5
+      "/css/images/last-replays/goldstar.png"
+    elsif rating > 3.5
+      "/css/images/last-replays/silverstar.png"
+    else
+      "/css/images/last-replays/bronzestar.png"
+    end
+  end
+
   
 
   

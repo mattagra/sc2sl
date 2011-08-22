@@ -13,7 +13,7 @@ module Sc2sl
     # -- all .rb files in that directory are automatically loaded.
     Dir.glob("./lib/*.{rb}").each { |file| require file }
     config.filter_parameters << :password << :password_confirmation
-    config.action_view.javascript_expansions[:defaults] = %w(jquery jquery_ujs application)
+    config.action_view.javascript_expansions[:defaults] = %w(jquery.min jquery_ujs application)
     config.action_mailer.default_url_options = {:host => "sc2sl.com"}
     IMGUR_API_KEY = "edb81443e23154af166573652a25544a"
     CUSTOM_BBCODE = {

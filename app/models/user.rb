@@ -75,6 +75,19 @@ class User < ActiveRecord::Base
     self.first_name = self.first_name.capitalize
     self.last_name = self.last_name.capitalize
   end
+
+  def full_name
+    self.first_name.to_s + " " + self.last_name.to_s
+  end
+
+  def age
+    now = Time.now.utc.to_date
+    if self.birthdate
+    now.year - birthdate.year - ((now.month > birthdate.month || (now.month == birthdate.month && now.day >= birthdate.day)) ? 0 : 1)
+    else
+      "Unknown"
+    end
+  end
   
 
   def set_defaults

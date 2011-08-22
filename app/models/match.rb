@@ -66,6 +66,14 @@ class Match < ActiveRecord::Base
       end
     end
   end
+
+  def team0_wins
+    self.games.select{|g| g.result == 0}.size
+  end
+
+  def team1_wins
+    self.games.select{|g| g.result == 1}.size
+  end
   
   def title
     self.team0.name + " VS " + self.team1.name

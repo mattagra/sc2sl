@@ -25,8 +25,6 @@ class Team < ActiveRecord::Base
   end
 
 
-  
-
   has_attached_file :photo,
     {:styles => {
       :large => "180x180!",
@@ -36,7 +34,7 @@ class Team < ActiveRecord::Base
 
   alias :coach :user
 
-    has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Team.to_s}'"
+  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Team.to_s}'"
 
 
   def to_s

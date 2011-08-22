@@ -13,6 +13,7 @@ public/images/users/*
 public/images/maps/*
 public/images/games/*
 public/images/seasons/*
+public/images/advertisements/*
 db/development.sqlite3
 vendor/*
 Gemfile.lock

@@ -10,7 +10,7 @@
         <% if @team.user %><img src="/css/images/content-bar/live/star2.gif" alt="" width="12" height="12" /><em> Coached by <%= link_to @team.user, profile_path(@team.user.login) %></em><br/><% end %>
         <p>Official website: <%= link_to @team.website, @team.website %><br/>
           <br/>
-          <a href="#">Browse <%= @team.short_name %>  replays</a>.</p>
+          <%= link_to "Browse #{@team.short_name} replays.", replays_path(:team_id => @team.id) %></p>
         <% @team.players.each do |player| %>
           <%= image_tag player.user.country.flag if player.user.country %>
           <%= image_tag race_icon_url(player.user.race), :align => "top", :width => 21, :height => 13, :hspace => 4, :vspace => 3 %>
