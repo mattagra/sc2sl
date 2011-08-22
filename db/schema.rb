@@ -10,7 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110804154842) do
+ActiveRecord::Schema.define(:version => 20110821092537) do
+
+  create_table "advertisements", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.integer  "weight"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -83,6 +94,13 @@ ActiveRecord::Schema.define(:version => 20110804154842) do
     t.string   "replay_content_type"
     t.integer  "replay_file_size"
     t.decimal  "rating_average",      :precision => 6, :scale => 2, :default => 0.0
+  end
+
+  create_table "languages", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "maps", :force => true do |t|
@@ -258,6 +276,7 @@ ActiveRecord::Schema.define(:version => 20110804154842) do
     t.boolean  "photo_approved"
     t.integer  "roles_mask"
     t.boolean  "subscription"
+    t.string   "bnet_server"
   end
 
   create_table "vote_events", :force => true do |t|

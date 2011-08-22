@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   #STATIC
   ROLES = %w[admin moderator superadmin]
 
+  SERVERS = %w[Americas Europe Korea SEA China]
+
   #Scopes
   scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0"} }
   scope :subscription, where(:subscription => true)
@@ -17,7 +19,7 @@ class User < ActiveRecord::Base
     {:styles => {
       :normal => "96x96",
       :thumb => "32x32"
-    }, :url => "/images/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url", :default_url => "/css/images/comment/avatar.jpg"}
+    }, :url => "/shared/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url", :default_url => "/css/images/comment/avatar.jpg"}
 
 
   #Attributes
@@ -37,19 +39,20 @@ class User < ActiveRecord::Base
   has_many :moderations
   has_one :player, :conditions => ["players.date_quit is null"]
   has_many :players
+  has_many :retired_players, :class_name => "Player", :conditions => ["date_quit is not null"]
   #has_many :games, :through => :players
 
   #Ratings
   ajaxful_rater
   scope :newest, order('id asc')
-  scope :alphabetical, order('login asc')
+  scope :alphabetical, order('LOWER(login) asc')
   scope :recent, order('updated_at desc')
   
 
   before_save :capitalize_names, :reset_tokens
 
   def self.paginated(page=1,offset=50)
-    alphabetical.limit(offset).offset((page.to_i - 1) * offset.to_i)
+    self.alphabetical.limit(offset).offset((page.to_i - 1) * offset.to_i)
   end
 
 
@@ -58,19 +61,22 @@ class User < ActiveRecord::Base
   end
 
 
-
-  def avatar
-    if self.photo.exists?
-      self.photo.url(:normal)
-    else
-      "/css/images/comment/avatar.jpg"
-    end
-  end
-
-
   def capitalize_names
     self.first_name = self.first_name.capitalize
     self.last_name = self.last_name.capitalize
+  end
+
+  def full_name
+    self.first_name.to_s + " " + self.last_name.to_s
+  end
+
+  def age
+    now = Time.now.utc.to_date
+    if self.birthdate
+    now.year - birthdate.year - ((now.month > birthdate.month || (now.month == birthdate.month && now.day >= birthdate.day)) ? 0 : 1)
+    else
+      "Unknown"
+    end
   end
   
 

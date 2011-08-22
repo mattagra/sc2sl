@@ -1,0 +1,37 @@
+<%= form_for(@advertisement, :html => { :multipart => true }) do |f| %>
+  <% if @advertisement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@advertisement.errors.count, "error") %> prohibited this advertisement from being saved:</h2>
+
+      <ul>
+      <% @advertisement.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </div>
+  <div class="field">
+    <%= f.label :weight %><br />
+    <%= f.text_field :weight %>
+  </div>
+  <div class="field">
+    <%= f.label :photo %>209x64*
+    <%= f.file_field :photo %>
+    <br />
+    <% if @advertisement.photo.exists? then %>
+      <%= image_tag @advertisement.photo.url(:normal) %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

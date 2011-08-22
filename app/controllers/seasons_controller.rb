@@ -50,6 +50,7 @@ class SeasonsController < ApplicationController
     respond_to do |format|
       if @season.save
         schedule_matches(@season, params[:weeks], params[:days], params[:hour], params[:minute])
+        add_playoff_matches(@season, params[:num_teams])
         format.html { redirect_to(@season, :notice => 'Season was successfully created.') }
         format.xml  { render :xml => @season, :status => :created, :location => @season }
       else
@@ -67,6 +68,7 @@ class SeasonsController < ApplicationController
     respond_to do |format|
       if @season.update_attributes(params[:season])
         schedule_matches(@season, params[:weeks], params[:days], params[:hour], params[:minute])
+        add_playoff_matches(@season, params[:num_teams])
         format.html { redirect_to(@season, :notice => 'Season was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -114,6 +116,17 @@ class SeasonsController < ApplicationController
         end
         w += 1
       end
+    end
+  end
+
+  def add_playoff_matches(season, num_teams)
+    season.playoff_matches.each {|m| m.destroy}
+    maps = season.maps
+    num_teams = num_teams.to_i
+    if num_teams and num_teams > 0
+    (num_teams - 1).times do |i|
+      Match.new(:season_id => season.id, :best_of => 7, :maps => maps, :playoff_id => i).save
+    end
     end
   end
 

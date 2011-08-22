@@ -1,4 +1,86 @@
-<% if current_user %>
+<% if current_user and @comment %>
+  <script type="text/javascript">
+var UBB_prompt = new Array();
+UBB_prompt["b"] = "Enter the text to appear in bold:";
+UBB_prompt["u"] = "Enter the text to appear underlined:";
+UBB_prompt["i"] = "Enter the text to appear italicized:";
+UBB_prompt["img"] = "Enter the full URL or web address of the image:";
+UBB_prompt["url"] = "Enter the text to appear as the link:";
+UBB_prompt["youtube"] = "Enter the URL of the video:";
+UBB_prompt["spoiler"] = "Enter the text you want to be in the spoiler:";
+
+function addUBB_selected(b,a){
+  var e=document.getElementById(b);
+  var c=e.scrollTop;
+  var d=e.scrollLeft;
+  var f=getUserSelection(e);
+  if(f.length==0){
+    e.value=e.value+"["+a+"][/"+a+"]"
+  }
+  else{
+    setUserSelection(e,"["+a+"]"+f+"[/"+a+"]")
+  }
+  e.scrollTop=c;
+  e.scrollLeft=d
+}
+function getUserSelection(a){var a=getElement(a);var b=a.value.substring(a.selectionStart,a.selectionEnd);return b}
+function setUserSelection(a,b){var a=getElement(a);a.value=a.value.substring(0,a.selectionStart)+b+a.value.substring(a.selectionEnd)}
+function getElement(c){var d,e;if(typeof(document.selection)!="undefined"&&!window.opera){var a=document.selection.createRange();var b=a.duplicate();b.moveToElementText(c);b.setEndPoint("EndToEnd",a);c.selectionStart=b.text.length-a.text.length;c.selectionEnd=c.selectionStart+a.text.length}return c}
+function addUBB(code)
+{
+	var url = ""; var urlp = "";
+	if(code=="url")
+	{
+		urlp = prompt("Enter the full URL or web address of the link:","");
+		if(urlp.substring(0,4)=="www.")
+			urlp = "http://" + urlp;
+		url = "="+urlp;
+	}
+	var str = prompt(UBB_prompt[code], urlp);
+
+	var txtarea = document.getElementById('bbcode');
+	if(!str){
+		textarea.focus();
+		return;
+	}
+	var ubb = "["+code+url+"]"+str+"[/"+code+"]";
+
+	var txtarea = document.getElementById('bbcode');
+
+	var scrollPos = txtarea.scrollTop;
+	var strPos = 0;
+	var br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ?
+		"ff" : (document.selection ? "ie" : false ) );
+	if (br == "ie") {
+		txtarea.focus();
+		var range = document.selection.createRange();
+		range.moveStart ('character', -txtarea.value.length);
+		strPos = range.text.length;
+	}
+	else if (br == "ff") strPos = txtarea.selectionStart;
+
+	var front = (txtarea.value).substring(0,strPos);
+	var back = (txtarea.value).substring(strPos,txtarea.value.length);
+	txtarea.value=front+ubb+back;
+	strPos = strPos + text.length;
+	if (br == "ie") {
+		txtarea.focus();
+		var range = document.selection.createRange();
+		range.moveStart ('character', -txtarea.value.length);
+		range.moveStart ('character', strPos);
+		range.moveEnd ('character', 0);
+		range.select();
+	}
+	else if (br == "ff") {
+		txtarea.selectionStart = strPos;
+		txtarea.selectionEnd = strPos;
+		txtarea.focus();
+	}
+	txtarea.scrollTop = scrollPos;
+
+}
+
+</script>
   <div id="newcomment">
     <%= form_for(@comment) do |f| %>
       <% if @comment.errors.any? %>
@@ -17,16 +99,21 @@
         <%= f.label :locked %><br />
         <%= f.check_box :locked %>
       </div>
-    <% end %>
-      <div class="field">
-        <%= f.label :description %><br />
-        <%= f.text_area :description, :cols => 75, :rows => 10, :id => :bbcode %>
-      </div>
-      <div class="actions">
+    <% end %> <br/><div align="center">
+	<table width="500" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><a href="javascript:addUBB_selected('bbcode','b')"><img src="/css/images/comment/bold.png" hspace="2" alt="Bold" /></a><a href="javascript:addUBB_selected('bbcode','i')"><img hspace="2" src="/css/images/comment/italic.png" alt="italic" /></a><a href="javascript:addUBB_selected('bbcode','u')"><img hspace="2" src="/css/images/comment/underline.png" alt="underline" /></a><a href="javascript:addUBB_selected('bbcode','spoiler')"><img hspace="2" src="/css/images/comment/spoiler.png" alt="spoiler" /></a><a href="javascript:addUBB('url')"><img hspace="2" src="/css/images/comment/link.png" alt="link" /></a><a href="javascript:addUBB('youtube')"><img hspace="2" src="/css/images/comment/youtube.png" alt="youtube" /></a><a href="javascript:addUBB('img')"><img hspace="2" src="/css/images/comment/image.png" alt="image" /></a>
+  <%= link_to "Upload Image", upload_image_articles_path, :onclick => "window.open(this.href, 'Upload Image', 'status=0,toolbar=0,location=0,menubar=0,resizable=0,scrollbars=0,height=500,width=400');return false;" %></td>
+  </tr>
+  <tr>
+    <td><%= f.text_area :description, :cols => 75, :rows => 10, :id => :bbcode %></td>
+  </tr>
+</table></div>
+      <div class="actions" align="center">
         <%= f.submit %>
-      </div>
+      </div><br/>
     <% end %>
   </div>
 <% else %>
-  You must <%= link_to "register", register_path %> or <%= link_to "login", login_path %> to comment.
+  <div align="center"><br/>You must <%= link_to "register", register_path %> or <%= link_to "login", login_path %> to comment.<br/> <br/></div>
 <% end %>

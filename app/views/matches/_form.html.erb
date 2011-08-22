@@ -18,7 +18,7 @@
 
   <div class="field">
     <b><%= f.label :team0_id %></b><br />
-    <% if f.object.new_record? %>
+    <% if f.object.new_record? || f.object.team0.nil? %>
       <%= f.select :team0_id, Team.all.collect{|t| [t.short_name, t.id]} %>
     <% else %>
       <%= f.object.team0.name %>
@@ -27,7 +27,7 @@
   <br />
   <div class="field">
     <b><%= f.label :team1_id %></b><br />
-    <% if f.object.new_record? %>
+    <% if f.object.new_record? || f.object.team1.nil? %>
       <%= f.select :team1_id, Team.all.collect{|t| [t.short_name, t.id]} %>
     <% else %>
       <%= f.object.team1.name %>

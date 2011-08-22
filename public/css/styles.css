@@ -46,53 +46,142 @@ blockquote {
   margin: 0px;
 }
 
+
+/* ######### CSS for Shade Tabs. Remove if not using ######### */
+
+.shadetabs{
+padding: 3px 0;
+margin-left: 0;
+margin-top: 1px;
+margin-bottom: 0;
+font: bold 12px Verdana;
+list-style-type: none;
+color: white;
+text-align: left; /*set to left, center, or right to align the menu as desired*/
+}
+
+.shadetabs li{
+display: inline;
+margin: 0;
+}
+
+.shadetabs li a{
+text-decoration: none;
+position: relative;
+z-index: 1;
+padding: 3px 7px;
+margin-right: 3px;
+border: 1px solid #778;
+color: white;
+background: white url(/css/images/js/shade.gif) top left repeat-x;
+}
+
+.shadetabs li a:visited{
+color: white;
+}
+
+.shadetabs li a:hover{
+text-decoration: none;
+color: white;
+}
+
+.shadetabs li a.selected{ /*selected main tab style */
+position: relative;
+top: 1px;
+}
+
+.shadetabs li a.selected{ /*selected main tab style */
+background-image: url(/css/images/js/shadeactive.gif);
+border-bottom-color: white;
+}
+
+.shadetabs li a.selected:hover{ /*selected main tab style */
+text-decoration: none;
+}
+
+.tabcontent{
+display:none;
+height: auto;
+}
+
+@media print {
+.tabcontent {
+display:block !important;
+}
+}
+
 /* Drop down CSS */
 
 .ddpanel .ddpanelcontent{ /*CSS for "content" DIV of Drop Down Panel*/
-                          color: black;
-                          background: transparent; /*background of Drop Down Panel*/
-                          /*Do NOT add any "padding" or "margin" properties here! Any padding/margin should be added to your content's container within this DIV instead */
+color: black;
+background: transparent; /*background of Drop Down Panel*/
+/*Do NOT add any "padding" or "margin" properties here! Any padding/margin should be added to your content's container within this DIV instead */
 }
 
 .ddpanel .ddpaneltab{ /*CSS for "toggle" tab DIV of Drop Down Panel*/
-                      float:left;
-                      font: normal 12px Arial;
+float:left;
+margin-left:40px;
+font: normal 12px Arial;
 }
 
 .ddpanel .ddpaneltab a{ /*"toggle" tab related CSS*/
-                        float: right;
-                        color: white;
-                        background: #333333 url(/css/images/toggleleft.gif) no-repeat left bottom; /*background of toggle tab*/
-                        text-decoration: none;
-                        letter-spacing: 1px;
+float: right;
+color: white;
+background: #333333 url(/css/images/toggleleft.gif) no-repeat left bottom; /*background of toggle tab*/
+text-decoration: none;
+letter-spacing: 1px;
 }
 
 .ddpanel .ddpaneltab a span{ /*"toggle" tab related CSS*/
-                             float: left;
-                             display: block;
-                             background: transparent url(/css/images/toggleright.gif) no-repeat right bottom;
-                             padding: 1px 12px 4px 13px;
-                             cursor: pointer;
+float: left;
+display: block;
+background: transparent url(/css/images/toggleright.gif) no-repeat right bottom;
+padding: 1px 12px 4px 13px;
+cursor: pointer;
 }
 
 .ddpanel .ddpaneltab a span img.pointerimage{ /*CSS for pointer image within toggle tab*/
-                                              margin-top: 2px;
-                                              margin-left: 5px;
+margin-top: 2px;
+margin-left: 5px;
 }
 
 .ddpanel .ddpaneltab a:hover{ /*"toggle" tab related CSS*/
-                              background-color: navy; /*background of toggle tab onMouseover*/
+background-color: navy; /*background of toggle tab onMouseover*/
 }
 
 .ddpanel .ddpaneltab a:active, .ddpanel .ddpaneltab a:focus{ /*"toggle" tab related CSS*/
-                                                             outline: 0;
+outline: 0;
 }
 
 .ddpanel .ddpaneltab a:hover span{ /*"toggle" tab related CSS*/
-                                   background-color: transparent;
+background-color: transparent;
+}
+/* Playoff season */
+
+table.bracket {
+    border-collapse: collapse;
+    border: none;
 }
 
-/* LOGIN */
+.bracket td {
+    vertical-align: middle;
+    width: 40em;
+    margin: 0;
+    padding: 10px;
+}
+
+.bracket td p {
+    border-bottom: solid 1px black;
+    margin: 0;
+    padding: 5px 5px 5px 5px;
+}
+
+.bracket th{
+    text-align:center;
+}
+
+
+
 /* LOGIN */
 #structure-login {
 float : left;
@@ -352,21 +441,22 @@ margin-right : 8px;
   height : 22px; /* 30 */
 }
 #content-bar {
-  float : left;
-  width : 1000px;
-  height : 257px;
+float : left;
+width : 1000px;
+height : 257px;
+background-color: #808080;
+border-top : 1px solid black;
+
 }
 
 #slider {
 	float: left;
 	position:relative;
-    width:641px;
-    height:253px;    
+    width:643px;
+    height:257px;    
 	background:url(images/content-bar/slider/loading.gif) no-repeat 50% 50%;
-	border : 1px solid black;
-	margin : 1px;
+	margin : 0px;
 }
-
 #slider img {
 	position:absolute;
 	top:0px;
@@ -693,18 +783,21 @@ background : url(images/content-bar/slider/lire-la-suite.gif) no-repeat;
 	font-weight:bold;
 }
 #live {
-  float : left;
-  width : 350px;
-  height : 68px;
-  border : 1px solid #888888;
-  margin-top : 1px;
-  margin-left : 1px;
+float : left;
+width : 355px;
+height : 68px;
+border-left : 1px solid #626262;
+
+margin-top : 0px;
+margin-left : 0px;
+background-color: white;
 }
 #live-haut{
-  float : left;
-  width : 350px;
-  height : 44px;
+float : left;
+width : 350px;
+height : 44px;
 }
+
 #live-haut-status{
   float : left;
   width : 112px;
@@ -805,28 +898,35 @@ text-transform:uppercase;
   margin-right : 4px;
 }
 #head-sponsors {
-  float : left;
-  width : 350px;
-  height : 182px;
-  border : 1px solid #000000;
-  margin-top : 1px;
-  margin-left : 1px;
+float : left;
+width : 355px;
+height : 189px;
+border-left : 1px solid #636363;
+background-color:#FFFFFF;
+margin-top : 0px;
+margin-left : 0px;
 }
-#head-sponsors-left {
-  float : left;
-  width : 18px;
-  height : 182px;
-  background : url(images/content-bar/sponsors/left.jpg) no-repeat;
+#hsm{
+font-size:12px;
+height : 80px;
+color: black;
+margin-left:5px;
+margin-top:12px;
 }
-#head-sponsors-content {
-  float : left;
-  vertical-align: middle;
-  width : 331px;
-  height : 182px;
-  background-color:#26282b;
-
-  text-align : center;
-
+#hsstt{
+padding-top:3px;
+}
+#hsst{
+background-image: url(images/content-bar/sponsors/fond.png);
+width: 355px;
+height : 20px;
+text-align:center;
+color: white;
+border-bottom: solid thin #636363;
+}
+#hss{
+margin-left:1px;
+height: 80px;
 }
 #structure-sponsors{
   float : left;
@@ -861,7 +961,9 @@ text-transform:uppercase;
   padding-top: 0px;
   float: left;
   width : 879px;
-  border-right: 1px solid grey;
+  border-right: 1px solid #808080;
+  border-bottom: 1px solid #808080;
+  
 }
 #fullpage2{
   float: left;
@@ -955,9 +1057,6 @@ text-transform:uppercase;
 
 #right{
 	float : left;
-	border-left-style:	solid;
-	border-width:thin;
-	border-color: #808080;
 	height: 627px;
 }
 #right-titre {
@@ -1240,7 +1339,7 @@ text-transform:uppercase;
   float : left;
   width : 524px;
   margin-top : 3px;
-  height : 470px;
+  /*height : 470px;*/
 
 }
 .article-image {
@@ -1313,6 +1412,12 @@ text-transform:uppercase;
 .ntitle2
 {
   color: #333333;
+}
+table#user{
+}
+.playertab {
+ font-size:12px;
+ color: #333333;
 }
 #middle-full{
 	float : left;
@@ -1741,4 +1846,219 @@ img:hover.img_grayscale {
 
  BORDER-RIGHT: #f00 4px solid; PADDING-RIGHT: 10px; BACKGROUND-POSITION: 5px 50%; BORDER-TOP: #f00 4px solid; PADDING-LEFT: 10px; BACKGROUND-IMAGE: url(/images/icon_error_lrg.gif); PADDING-BOTTOM: 10px; MARGIN: 2px; BORDER-LEFT: #f00 4px solid; TEXT-INDENT: 40px; PADDING-TOP: 10px; BORDER-BOTTOM: #f00 4px solid; BACKGROUND-REPEAT: no-repeat
 
+}
+
+.first_name_field { size: 30px}
+
+
+
+/* Register Form */
+.rformtitle
+{
+font-size:20px;
+font-face:verdana;
+}
+.terms A:link {text-decoration: underline; color: white;}
+.terms A:visited {text-decoration: non; color: white;}
+.terms A:active {text-decoration: non; color: white;}
+.terms A:hover {text-decoration: non; color: white;}
+
+#rform
+{
+	width: 750px;
+	color: black;
+	font-size: 13px;
+	text-align : justify;
+	margin-top: 2px;
+	margin-left: 50px;
+    float: left;
+}
+
+
+p, h1, form, button{border:0; margin:0; padding:0;}
+.spacer{clear:both; height:1px;}
+/* ----------- My Form ----------- */
+.rform{
+padding:14px;
+}
+
+/* ----------- register form  ----------- */
+#rform{
+border:solid 1px #333333;
+background: #CCCCCC;
+margin-bottom:15px;
+}
+
+#rform h1 {
+font-size:14px;
+font-weight:bold;
+margin-bottom:8px;
+}
+
+#rform p{
+font-size:11px;
+color:#333333;
+margin-bottom:20px;
+border-bottom:solid 1px #333333;
+padding-bottom:10px;
+}
+
+
+
+#rform label{
+font-weight:bold;
+text-align:left;
+width: 125px;
+float:left;
+}
+
+
+#rform .small{
+color:#333333;
+display:block;
+font-size:11px;
+font-weight:normal;
+text-align:left;
+width:125px;
+}
+
+#rform2{
+color:#666666;
+font-size:11px;
+font-weight:normal;
+text-align:left;
+width:8000px;
+height:40px;
+}
+
+#rform input{
+float:left;
+font-size:12px;
+padding:4px 2px;
+border:solid 1px #333333;
+width:200px;
+margin:2px 10px 20px 10px;
+}
+
+#rform input.terms_box{
+float:none;
+font-size:12px;
+padding: 0px;
+border:none;
+width:20px;
+margin: 0px;
+}
+
+#rform input.register_button{
+float:none;
+font-size:12px;
+width:100px;
+margin: 10px 0px;
+}
+
+
+#rform textarea{
+float:left;
+font-size:12px;
+padding:4px 2px;
+border:solid 1px #333333;
+width:200px;
+margin:2px 10px 20px 10px;
+}
+#rform select{
+float:left;
+font-size:12px;
+padding:4px 2px;
+border:solid 1px #333333;
+margin:2px 10px 20px 10px;
+}
+
+#rform .form-dd
+{
+margin-right:300px;
+}
+
+#rform .rform-dd2
+{
+margin-right:150px;
+}
+#rform .form-dd4
+{
+width: 10px;
+margin-left:150px;
+}
+
+#rform .form-dd5
+{
+width: 100px;
+margin-left:150px;
+}
+
+#formspace
+{
+height: 10px;
+width: 100%;
+}
+
+#rform .test{
+font-weight:bold;
+text-align:center;
+width: 400px;
+float:left;
+}
+
+
+
+#rform button{
+clear:both;
+margin-left:150px;
+width:125px;
+height:31px;
+background:#666666 url(img/button.png) no-repeat;
+text-align:center;
+line-height:31px;
+color:#FFFFFF;
+font-size:11px;
+font-weight:bold;
+}
+
+.bnetid{
+width:20;
+}
+
+.newsmonth{
+font-size: 14px;
+text-transform:uppercase;
+font-weight:bold;
+}
+
+.newslist{
+font-size: 13px;
+margin-left: 20px;
+}
+
+.clearwidth
+{
+    width: 100%;
+    float: left;
+    height: 1px;
+}
+
+.pagination
+{
+text-transform:uppercase;
+font-size:12px;
+}
+
+.tteam
+{
+font-size:14px;
+}
+table#replays_table{
+font-size:11px;
+color: black;
+}
+
+table#replays_table a{
+color: black;
 }

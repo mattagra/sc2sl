@@ -1,57 +1,57 @@
 <div id="fullpage2">
-				<div id="newsmain"><br>
-<%= image_tag @user.avatar %>
+  <div id="newsmain">
+    <br><table id="user" width="880">
+      <tr width="95">
+        <td rowspan="3">
+          <%= image_tag @user.avatar, :align => "left" %></td><td class="votenowtxt"> <%= image_tag race_icon_url(@user.race), :alt => "race"%> <%= @user.login %></span> 							 					<strong>
+          <% if @user.banned? %>
+Ban Type: <%= @user.current_ban.mod_type %> -  <%= @user.current_ban.length %> days - Ends: <%= @user.current_ban.ends_at %>
+            <% end %> </strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="playertab">
+Player for <a href="#">team</a>
+        </td>
+      </tr>
+      <tr>
+        <td class="playertab">
+          <br/>
+          <% if @user.country  %>
+            <%= @user.country %> <%= image_tag @user.country.flag %>
+          <% end %>
+          <%= @user.full_name%> </br>
+          <%= @user.age %>  years old |
+          <% if @user == current_user or current_admin %>Email: <%=h @user.email %> | <% end %>
+          <% if @user == current_user %>
+            <%= link_to 'Update Information', edit_account_path %>
+          <% elsif current_admin %>
+            <%= link_to "Update Information", edit_user_path(@user) %>
+          <% end %>
 
-<%= @user.login %>
-<br />
-<% if @user == current_user or current_admin %>
-<p>
-  <b>Email:</b>
-  <%=h @user.email %>
-</p>
-<% end %>
+          <br/>
+          <%= @user.website %>
+        </td>
+      </tr>
+    </table>
+    <br/>
+    <span class="style1"><%= @user.profile_text %> </span><br/>
 
-<% if @user.banned? %>
-<p>
-  <b>Ban Type: </b><br />
-  <%= @user.current_ban.mod_type %>
-  <br />
-  <b>Length: </b><br />
-  <%= @user.current_ban.length %> days
-  <br />
-  <b>Ends: </b><br />
-  <%= @user.current_ban.ends_at %>
-  <br />
 
-</p>
-<% end %>
 
-<p>
-  <b>Country:</b>
-  <% if @user.country  %>
-  <%= @user.country %> <%= image_tag @user.country.flag %>
-  <% end %>
-</p>
+    <br/>  <br/>  <br/>
 
-<p>
-  <b>Race: </b>
-  <%= image_tag race_icon_url(@user.race), :alt => "protoss" %>
-</p>
-<% if @user == current_user %>
+    <br />
 
-<%= link_to 'Update Information', edit_account_path %>
-<% elsif current_user and current_user.is_admin? %>
-<%= link_to "Update Information", edit_user_path(@user) %>
-<% end %>
 
-<h3>Comments:</h3>
-  <%= render  @user.comments.order('id asc') %>
+    <h3>Comments:</h3>
+  <%= render  @user.comments %>
   <% if @user.comments.count > 0 %>
-  <%= render :partial => "comments/comment_footer" %>
- <% end %>
-<p>
-  <%= render :partial => "comments/form" %>
-</p>
+    <%= render :partial => "comments/comment_footer" %>
+  <% end %>
+    <p>
+    <%= render :partial => "comments/form" %>
+    </p>
 
-</div>
+  </div>
 </div>

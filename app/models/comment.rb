@@ -10,13 +10,14 @@ class Comment < ActiveRecord::Base
   validates :description, :presence => true, :length => {:minimum => 5, :maximum => 750}
 
   #Scopes
-  scope :newest, order('id asc')
+  scope :newest, order('id desc')
+  scope :oldest, order('id asc')
   scope :recent, lambda {|user|
     where(:user_id => user.id).where("comments.created_at > ?",30.seconds.ago).limit(1)
   }
 
   def self.paginated(page=1,offset=10)
-    newest.limit(offset).offset((page.to_i - 1) * offset.to_i)
+    oldest.limit(offset).offset((page.to_i - 1) * offset.to_i)
   end
 
 
@@ -32,7 +33,7 @@ class Comment < ActiveRecord::Base
   end
 
   def formatted_description
-    self.description.bbcode_to_html(Sc2sl::Application::CUSTOM_BBCODE).bbcode_to_html({}, false, :disable, false)
+    self.description.bbcode_to_html(Sc2sl::Application::CUSTOM_BBCODE).bbcode_to_html({}, false, false, :disable)
   end
 
   has_one :moderation

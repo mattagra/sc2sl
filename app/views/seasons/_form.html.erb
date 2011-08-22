@@ -23,7 +23,7 @@
 
 
   <div class="field">
-    <%= f.label :banner %><br />
+    <%= f.label :banner %> 815*129 <br />
     <%= f.file_field :banner %>
   </div>
 
@@ -48,6 +48,10 @@
   Please Pick a Time
   <br />
   Time: <%= select_hour Time.now %>:<%= select_minute Time.now %>
+
+  <br />
+  <p><b>Add Playoff Matches</b><br />
+  Number of Teams: <%= text_field_tag :num_teams, @season.playoff_matches.size, :size => 4 %></p>
 
   <div class="actions">
     <%= f.submit %>

@@ -7,9 +7,23 @@ module ApplicationHelper
     end.join
   end
   
-  def american_time(time)
-    time.strftime("%m-%d-%Y %H:%M")
+  def american_time(time, year = true)
+    if year
+      time.strftime("%b %d, %Y %H:%M")
+    else
+      time.strftime("%b %d %H:%M")
+    end
   end
+
+  def american_date(time, year = true)
+    if year
+      time.strftime("%b %d, %Y")
+    else
+      time.strftime("%b %d")
+    end
+  end
+
+
 
   def tags_to_links(tags)
     result = []
@@ -88,6 +102,17 @@ module ApplicationHelper
     ("<div style='height: 129px;'>" +
         link_to(image_tag(banner.url(:normal), :class => "img_colorscale"), path) +
         link_to(image_tag(banner.url(:normal_gray), :class => "img_grayscale"), path) + "</div>").html_safe
+  end
+
+
+  def rating_star_image(rating)
+    if rating > 4.5
+      "/css/images/last-replays/goldstar.png"
+    elsif rating > 3.5
+      "/css/images/last-replays/silverstar.png"
+    else
+      "/css/images/last-replays/bronzestar.png"
+    end
   end
 
   

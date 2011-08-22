@@ -12,16 +12,16 @@
         </div>
       </div>
       <div id="titrecom">
-        <div id="textcom"><a href="#comments"><%= @article.comments.count %> </a></div>
-        <a href="#newcomment"><img src="/css/images/comment/add.png" alt="add a comment" /></a>
+        <div id="textcom"><a href="#comments"><%= @article.comments.count %></a></div>
+        <a href="#newcomment"><img src="/css/images/comment/add.png" style="margin-left:3px;" alt="add a comment" /></a>
       </div>
     </div>
     <br />
     <br />
-    <p>
+	<br />
       <%- r = /([^a-z0-9_]|^)@([a-z0-9_]+)/i %>
       <%= raw  auto_link(@article.formatted_description).gsub(r) {|m| "#{$1}<a href='http://twitter.com/#{$2}'>@#{$2}</a>#{$3}" }  %>
-    </p>
+	  <br />&nbsp;
   </div>
   <div id="footernews" align="right">
     <script type="text/javascript">var switchTo5x=false;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'03241b11-6315-49ee-98d8-7b7d13dcc018'});</script>
@@ -29,15 +29,14 @@
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
     <!-- Place this tag where you want the +1 button to render -->
-    <table>
+    <table border="0">
       <tr>
-        <td valign="top"><span  class='st_reddit' displayText='Reddit'></span></td>
-        <td valign="top"><span  class='st_twitter' displayText='Tweet'></span></td>
-        <td valign="top"><g:plusone size="small"></g:plusone></td>
-      <td valign="top"><iframe src="http://www.facebook.com/plugins/like.php?app_id=150751279615&amp;href&amp;send=false&amp;layout=button_count&amp;width=85&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe></td>
+        <td valign="middle"><span  class='st_reddit' displayText='Reddit'></span></td>
+        <td valign="middle"><span  class='st_twitter' displayText='Tweet'></span></td>
+        <td valign="middle"><g:plusone size="small"></g:plusone></td>
+      <td valign="top"><iframe src="http://www.facebook.com/plugins/like.php?app_id=150751279615&amp;href&amp;send=false&amp;layout=button_count&amp;width=85&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:45px; height:21px;" allowTransparency="true"></iframe></td>
       </tr>
     </table>
-    <br />
     <span class="style7" style="color: #000000">
       <font style="text-transform:uppercase;font-size:10px;font-color:#333333">
         <%= @article.comments.count %>  comments | <%= link_to "Add a comment", "#newcomment" %></font>

@@ -13,7 +13,7 @@ module Sc2sl
     # -- all .rb files in that directory are automatically loaded.
     Dir.glob("./lib/*.{rb}").each { |file| require file }
     config.filter_parameters << :password << :password_confirmation
-    config.action_view.javascript_expansions[:defaults] = %w(jquery jquery_ujs application)
+    config.action_view.javascript_expansions[:defaults] = %w(jquery.min jquery_ujs application)
     config.action_mailer.default_url_options = {:host => "sc2sl.com"}
     IMGUR_API_KEY = "edb81443e23154af166573652a25544a"
     CUSTOM_BBCODE = {
@@ -32,25 +32,43 @@ module Sc2sl
         :spoiler
       ],
       'YouTube' => [
-      /\[youtube\](.*?)\?v=([\w\d\-]+).*\[\/youtube\]/im,
-      # '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
-      '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="400" height="330"></embed></object>',
-      'Display a video from YouTube.com',
-      '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]',
-      :video],
-    'YouTube (Alternative)' => [
-      /\[youtube\](.*?)\/v\/([\w\d\-]+)\[\/youtube\]/im,
-      # '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
-      '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="400" height="330"></embed></object>',
-      'Display a video from YouTube.com (alternative format)',
-      '[youtube]http://youtube.com/watch/v/E4Fbk52Mk1w[/youtube]',
-      :video],
-    'Panda' => [
-      /\[panda\](.*?)\/v\/([\w\d\-]+)\[\/panda\]/im,
-      '',
-      '',
-      '',
-    :panda]
+        /\[youtube\](.*?)\?v=([\w\d\-]+).*\[\/youtube\]/im,
+        # '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
+        '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="400" height="330"></embed></object>',
+        'Display a video from YouTube.com',
+        '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]',
+        :video],
+      'YouTube (Alternative)' => [
+        /\[youtube\](.*?)\/v\/([\w\d\-]+)\[\/youtube\]/im,
+        # '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
+        '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="400" height="330"></embed></object>',
+        'Display a video from YouTube.com (alternative format)',
+        '[youtube]http://youtube.com/watch/v/E4Fbk52Mk1w[/youtube]',
+        :video],
+      'Panda' => [
+        /\[panda\](.*?)\/v\/([\w\d\-]+)\[\/panda\]/im,
+        '',
+        '',
+        '',
+        :panda],
+      'Link' => [
+        /\[url=(.*?)\](.*?)\[\/url\]/mi,
+        '<a href="\1" rel="nofollow">\2</a>',
+        'Hyperlink to somewhere else',
+        'Maybe try looking on [url=http://google.com]Google[/url]?',
+        :link],
+      'Link (Implied)' => [
+        /\[url\](.*?)\[\/url\]/mi,
+        '<a href="\1" rel="nofollow">\1</a>',
+        'Hyperlink (implied)',
+        "Maybe try looking on [url]http://google.com[/url]",
+        :link],
+      'Link (Automatic)' => [
+        /(\A|\s)((https?:\/\/|www\.)[^\s<]+)/,
+        ' <a href="\2" rel="nofollow">\2</a>',
+        'Hyperlink (automatic)',
+        'Maybe try looking on http://www.google.com',
+        :link]
 
     }
 

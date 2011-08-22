@@ -1,6 +1,8 @@
 Sc2sl::Application.routes.draw do
 
 
+  resources :advertisements
+
   resources :newsletters
 
   get "admin/index"
@@ -12,7 +14,7 @@ Sc2sl::Application.routes.draw do
   get "/vote" => "vote_events#show_current"
 
 
-  resources :games do
+  resources :replays, :controller => :games do
     member do
       get 'replay'
       post 'rate'

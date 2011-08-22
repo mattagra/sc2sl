@@ -1,72 +1,82 @@
-<b><%= form.label :email %></b><br />
+<label>First Name *
+  <span class="small"></span>
+</label>
+<%= form.text_field :first_name, :class => "first_name_field" %>
+
+<label>Last Name *
+  <span class="small"></span>
+</label>
+<%=  form.text_field :last_name, :class => "first_name_field" %>
+
+<label>Email *
+  <span class="small">Add a valid address</span>
+</label>
 <% if form.object.new_record? or (current_user and current_user.is_admin?) %>
   <%=  form.text_field :email %>
 <% else %>
-  <%=  form.object.email %>
+  <span style="float:left; width: 200px; margin: 2px 10px 20px 10px;"><%=  form.object.email %></span>
 <% end  %>
-<br />
-<b><%= form.label :login %></b><br />
-<% if form.object.new_record? or (current_user and current_user.is_admin?) %>
-  <%=  form.text_field :login %>
-<% else %>
-  <%= form.object.login %>
-<% end  %>
-<br />
-<b><%= form.label :first_name %></b><br />
-<%=  form.text_field :first_name %>
-<br />
-<b><%= form.label :last_name %></b><br />
-<%=  form.text_field :last_name %>
-<br />
-<b><%= form.label :password, form.object.new_record? ? nil : "Change password" %></b><br />
-<%= form.password_field :password %><br />
-<br />
-<b><%= form.label :password_confirmation %></b><br />
-<%= form.password_field :password_confirmation %><br />
-<br />
-<b><%= form.label :birthdate %></b><br />
-<%=  form.date_select :birthdate, :start_year => Time.now.year - 100, :end_year => Time.now.year %>
-<br />
-<b><%= form.label :Country %></b><br />
-<%=  form.select :country_id, Country.all.collect {|c| [c.name, c.id]},  { :prompt => true }  %>
-<br />
 
-<b><%= form.label :race %></b><br />
-<%=  form.select :race, ["protoss", "zerg", "terran", "random"] %>
+
+<label for="label">Login * </label>
 <br />
-<% if current_user and current_user.is_admin? %>
-  <b><%= form.label :caster %></b><br />
-  <%= form.check_box :caster %>
-  <br />
-  <b><%= form.label :website %></b><br />
-  <%= form.text_field :website %>
-  <br />
-<% end %>
-<b><%= form.label :bnet_name %></b><b><%= form.label :bent_code %></b><br />
-Name: <%=  form.text_field :bnet_name %> Identifier <%= form.text_field :bent_code %>
-<br />
-<b><%= form.label :photo %> </b><br />
-<%= form.file_field :photo %>
-<%= image_tag form.object.avatar  %>
-<br />
-<b><%= form.label :profile_text %></b><br />
-<%=  form.text_area :profile_text %>
-<br />
-<b><%= form.label :signature %></b><br />
-<%=  form.text_field :signature %>
-<br />
-<% if current_super_admin %>
-  <p>
-    <%= form.label :roles %><br />
-    <% for role in User::ROLES %>
-      <%= check_box_tag "user[roles][]", role, form.object.roles.include?(role) %>
-      <%=h role.humanize %><br />
-    <% end %>
-    <%= hidden_field_tag "user[roles][]", "" %>
-  </p>
-  <br />
-<% end %>
+<%= form.text_field :login, :class => "first_name_field" %>
+
+
+<label>Password *
+  <span class="small">Min. size 6 chars</span>
+</label>
+<%= form.password_field :password %>
+
+<label for="user_password_confirmation">Password confirmation *</label>
+<%= form.password_field :password_confirmation %>
+<label style="width:100%"><p>&nbsp</p></label>
+
+<label for="user_bnet_name">Bnet Name</label>
+<%=  form.text_field :bnet_name, :class => "bnetid" %>
+
+. <label>Code <span class="small"> Ex: 805</span></label>
+<%= form.text_field :bent_code, :class => "rform2" %>
+
+<label for="user_bnet_server">Bnet Server</label>
+<%=  form.select :bnet_server, User::SERVERS %>
+
+<label for="user_country">Country
+  <span class="small">Native country</span></label>
+<%=  form.select :country_id,Country.all.collect {|c| [c.name, c.id]},  { :prompt => true }, :class => "form-dd"%>
+
+<label for="user_birthdate"> Birthdate <span class="small">Year / Month / day</span></label>
+<%=  form.date_select :birthdate, :start_year => Time.now.year - 100, :end_year => Time.now.year %>
+
+<label for="user_bnet_name"></label>
+<label for="user_race">Main race</label>
+<%=  form.select :race, ["protoss", "zerg", "terran", "random"], {}, {:class => "rform-dd2"} %>
+
+<label for="user_photo">Photo</label>
+
+<%= form.file_field :photo %> <div align="center">
+  <%= image_tag form.object.photo.url(:normal)  %>
+</div>
+
+<label for="user_signature">Signature</label>
+<%=  form.text_field :signature, :class => "form-dd"  %>
+
 <% unless form.object.new_record? %>
-  <b><%= form.label :subscription %></b><br />
-  <%=  form.check_box :subscription %>
+  <b><%= form.label :subscription %></b>
+  <%=  form.check_box :subscription, :class => "form-dd" %>
+  <br />
 <% end  %>
+
+<b>
+  <label for="user_profile_text">Profile text</label>
+</b>
+<%=  form.text_area :profile_text, :rows => 8 %>
+<br/>
+
+<% if current_super_admin %>
+  <b><%= form.label :roles %></b>
+  <%= form.collection_select :roles, User::ROLES, :to_s, :to_s, {}, {:multiple => true, :size => 3, :style=> "width: 200px;"} %>
+  <br />
+  <b><%= form.label :caster %></b>
+  <%= form.check_box :caster, :class => "form-dd" %>
+<% end %>

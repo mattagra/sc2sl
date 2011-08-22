@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.xml
   def index
-    @players = Player.all
+    @players = Player.alphabetical
     @page = "Players"
     @description = "Find out about your favorite players in the SC2SL"
     @keywords += ["players"]
@@ -19,7 +19,15 @@ class PlayersController < ApplicationController
   # GET /players/1
   # GET /players/1.xml
   def show
-    @player = Player.find(params[:id])
+    if params[:id].to_i != 0
+      @player = Player.find(params[:id].to_i)
+    else
+      user = User.find_by_login(params[:id])
+      unless user
+         raise ActionController::RoutingError.new('Not Found')
+      end
+      @player = user.player
+    end
     @comment = Comment.new_of_type(@player)
     @current_page = (params[:page]|| 1).to_i
     @comments_count = @player.comments.count

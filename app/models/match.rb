@@ -2,6 +2,7 @@ class Match < ActiveRecord::Base
 
   #Associations
   has_many :games
+  has_many :completed_games, :class_name => "Game", :conditions => "result is not null and result <> 0"
   has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Match.to_s}'"
   belongs_to :team1, :class_name => "Team"
   belongs_to :team0, :class_name => "Team"
@@ -21,8 +22,8 @@ class Match < ActiveRecord::Base
 
   #validations
   validates :best_of, :presence => true, :numericality => true
-  validates :team0, :presence => true
-  validates :team1, :presence => true
+  validates :team0, :presence => true, :if => Proc.new { |match| match.playoff_id.nil?}
+  validates :team1, :presence => true, :if => Proc.new { |match| match.playoff_id.nil?}
   
 
   #triggers
@@ -41,9 +42,37 @@ class Match < ActiveRecord::Base
   def determine_status
     if self.games.select{|g| g.result == 0}.size == (self.best_of + 1) / 2
       self.results  = self.games.select{|g| g.result == 0}.size -  self.games.select{|g| g.result == 1}.size
+      #If playoff Match, set team to next round.
+      unless self.playoff_id.nil? or self.playoff_id == 0
+        m = Match.find_by_season_id_and_playoff_id(self.season_id, (self.playoff_id / 2 - 1).ceil)
+        if self.playoff_id % 2 == 0
+          m.team0 = self.team0
+        else
+          m.team1 = self.team0
+        end
+        m.save
+      end
     elsif self.games.select{|g| g.result == 1}.size == (self.best_of + 1) / 2
       self.results  = self.games.select{|g| g.result == 0}.size -  self.games.select{|g| g.result == 1}.size
+      #If playoff Match, set team to next round.
+      unless self.playoff_id.nil? or self.playoff_id == 0
+        m = Match.find_by_season_id_and_playoff_id(self.season_id, (self.playoff_id / 2 - 1).ceil)
+        if self.playoff_id % 2 == 0
+          m.team0 = self.team1
+        else
+          m.team1 = self.team1
+        end
+        m.save
+      end
     end
+  end
+
+  def team0_wins
+    self.games.select{|g| g.result == 0}.size
+  end
+
+  def team1_wins
+    self.games.select{|g| g.result == 1}.size
   end
   
   def title
@@ -52,7 +81,7 @@ class Match < ActiveRecord::Base
 
   def casters
     unless self.caster_ids.nil?
-      User.find(self.caster_ids.split(","))
+      User.find(self.caster_ids)
     else
       []
     end
@@ -64,7 +93,7 @@ class Match < ActiveRecord::Base
  end
 
  def caster_ids
-   self["caster_ids"].split(",")
+   self["caster_ids"].split(",") if self["caster_ids"]
   end
 
   def casters=(new_casters)
@@ -85,6 +114,15 @@ class Match < ActiveRecord::Base
     Match::POINTS[i]
   end
 
+  def winner
+    if self.results.to_i != 0
+      self.results > 0 ? self.team0 : self.team1
+    else
+      nil
+    end
+  end
+
   
 
 end
+
