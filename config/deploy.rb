@@ -7,6 +7,8 @@ set :scm, "git"
 set :scm_verbose, true
 set :user, "root"
 
+
+
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 role :app, domain
