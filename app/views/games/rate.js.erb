@@ -1,0 +1,2 @@
+$('#<%=  @game.wrapper_dom_id(params) %>').html('<%=  ratings_for(@game, params.merge(:wrap => false), :remote_options => {:url => rate_replay_path(@game)}) %> ')
+$('#<%=  @game.wrapper_dom_id(params) %>').effect("highlight", {}, 3000)

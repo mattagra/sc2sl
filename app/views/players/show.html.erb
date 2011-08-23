@@ -1,0 +1,95 @@
+<p id="notice"><%= notice %></p>
+
+<table id="user" width="880">
+  <tr width="95">
+    <td rowspan="3">
+      <%= image_tag @player.user.avatar, :align => "left" %></td><td class="votenowtxt"> <%= image_tag race_icon_url(@player.user.race), :alt => "race"%> <%= @player.login %></span> 							 					<strong>
+      <% if @player.user.banned? %>
+                                                  Ban Type: <%= @player.user.current_ban.mod_type %> -  <%= @player.user.current_ban.length %> days - Ends: <%= @player.user.current_ban.ends_at %>
+        <% end %> </strong>
+    </td>
+  </tr>
+  <tr><td class="playertab">
+					Player for <%= link_to @player.team, team_path(@player.team.slug) %>
+    </td></tr>
+  <tr> <td class="playertab">
+      </span><br/>
+      <% if @player.user.country  %>
+        <%= @player.user.country %> <%= image_tag @player.user.country.flag %>
+      <% end %>   <%= @player.user.full_name %></br>
+											  <%= @player.user.age %>  years old  <% if @player.user == current_user or current_admin %>
+                                                           | Email: <%=h @player.user.email %> | <% end %>
+        <% if @player.user == current_user %>
+
+          <%= link_to 'Update Information', edit_account_path %>
+        <% elsif current_admin %>
+          <%= link_to "Update Information", edit_user_path(@player.user) %>
+        <% end %>
+
+        <br/>
+        <%= @player.user.website %>
+        </span>
+      </td></tr>
+  </table>
+  <br/>
+  <span class="style1">Uhm, how is this different than the bio? </span><br/>
+  <br/> <br/>
+  <strong>STATISTICS</strong><br><br>
+                                                  PvZ 70% (10-5) <br />
+                                          PvP 30% (5-10) <br />
+                                          PvT 100% (22-2)<br />
+  <br />
+  <img src="/css/images/last-replays/dl2.gif" alt="" align="top" /> <%= link_to "See TOD replays.", replays_path(:player_id => 1) %><br />  <br />
+  <blockquote>
+    <span class="ntitle ntitle style7"><strong>Bio:</strong> <%= @player.user.profile_text %> <br/>
+    </span><br/>
+    <span class="votenowtimeleft ntitle style7"></span>
+    <span class="votenowtimeleft">
+      <strong><%= @player.login %> History: </strong> <br/>
+      <br/>
+      <% @player.events.sort_by{|t| t[0]}.reverse[0..4].each do |event| %>
+        <strong><%= american_date event[0] %></strong>&nbsp;<%=raw describe_player_event(event) %><br />
+      <% end %>
+    </span>
+  </blockquote>
+  <div id="historic" class="ddpanel">
+    <div id="historiccontent" class="ddpanelcontent">
+      <br/>
+      <blockquote>
+        <% @player.events.sort_by{|t| t[0]}.reverse[5..25].to_a.each do |event| %>
+          <strong><%= american_date event[0] %></strong>&nbsp;<%=raw describe_player_event(event) %><br />
+        <% end %>
+      </blockquote>
+    </div>
+    <div id="historictab" class="ddpaneltab">
+      <a href="#"><span>SHOW MORE </span></a>				</div>
+  </div>
+  <div align="right">
+    <script type="text/javascript">
+
+      var testpanel=new ddpanel({
+        ids: ["historic", "historiccontent", "historictab"], // id of main panel DIV, content DIV, and tab DIV
+        stateconfig: {initial: "5px", persiststate: true}, // initial: initial reveal amount in pixels (ie: 5px)
+        animate: {enabled: true, steps: 5}, //steps: number of animation steps. Int between 1-20. Smaller=faster.
+        pointerimage: {enabled: true, src: ["/css/images/arrow-down.gif", "/css/images/arrow-up.gif"]},
+        closepanelonclick: {enabled: true} // close panel when links or elements with CSS class="closepanel" within container is clicked on?
+      })
+
+    </script>
+  </div>
+
+  <br /><br /><br /><br />
+
+  <h3>Comments:</h3>
+  <%= render  @player.comments %>
+  <% if @player.comments.count > 0 %>
+    <%= render :partial => "comments/comment_footer" %>
+  <% end %>
+  <p>
+    <%= render :partial => "comments/form" %>
+  </p>
+
+
+
+  <% if can? :edit, @player %><%= link_to 'Edit', edit_player_path(@player) %> |<% end %>
+  <%= link_to 'Back', players_path %>

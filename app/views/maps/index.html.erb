@@ -1,0 +1,27 @@
+<h1>Listing maps</h1>
+
+<table>
+  <tr>
+    <th>Photo</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @maps.each do |map| %>
+  <tr>
+    <td><%= image_tag map.photo.url(:thumb) %> </td>
+    <td><%= map.name %></td>
+    <td><%= map.description %></td>
+    <td><%= link_to 'Show', map %></td>
+    <td><% if can? :edit, map %><%= link_to 'Edit', edit_map_path(map) %><% end %> </td>
+    <td><% if can? :destroy, map %><%= link_to 'Destroy', map, :confirm => 'Are you sure?', :method => :delete %><% end %> </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if can? :create, Map %><%= link_to 'New Map', new_map_path %><% end %>

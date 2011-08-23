@@ -1,0 +1,29 @@
+
+
+<% form_for @user, :url => account_path, :multipart => true do |f| %>
+  <% if @user.errors.any? %>
+    <div id="errorExplanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div><div style="width:100%" />
+  <% end %>
+  <div id="user_form">
+    <br/>
+    <div id="rform" class="rform">
+      <h1>Join the SC2SL Community!</h1>
+      <p>The fields with a * are obligatory.</p>
+
+      <%= render :partial => "form", :object => f %>
+      <div align="center">
+      <%= recaptcha_tags %>
+      <strong><%= f.check_box :terms, :class => "terms_box"  %> By Clicking the box, you agree to our <%= link_to "Terms and Conditions", terms_path, "data-popup" => "menubar=0,resizable=1,width=600,height=800" %>.</strong><br />
+      <%= f.submit "Register", :class => "register_button" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+  <br/>&nbsp;

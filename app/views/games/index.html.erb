@@ -1,0 +1,30 @@
+<h1>Listing games</h1>
+
+<table>
+  <tr>
+    <th>Player0</th>
+    <th>Player1</th>
+    <th>Result</th>
+    <th>Downloads</th>
+    <th>Map</th>
+    <th>Match</th>
+    <th>Match order</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @games.each do |game| %>
+  <tr>
+    <td><%= game.player0 %></td>
+    <td><%= game.player1 %></td>
+    <td><%= game.result %></td>
+    <td><%= game.downloads %></td>
+    <td><%= game.map %></td>
+    <td><%= game.match.id %></td>
+    <td><%= game.match_order %></td>
+    <td><%= link_to 'Show', match_game_path(game.match.id, game.id) %></td>
+    <td><%= if can? :destroy, game then link_to 'Destroy', match_game_path(game.match.id, game.id), :confirm => 'Are you sure?', :method => :delete end %></td>
+  </tr>
+<% end %>
+</table>
+

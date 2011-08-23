@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  type: MyString
+  external_id: 1
+  user: 
+  description: MyText
+
+two:
+  type: MyString
+  external_id: 1
+  user: 
+  description: MyText

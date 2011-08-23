@@ -1,0 +1,20 @@
+<center>Please select a season to get the results
+  <table>
+    <% @seasons.each do |season| %>
+      <tr>
+        <td><%= grayscale_banner_link(season.banner, season_path(season)) %></td>
+      </tr>
+
+      <% if can? :edit, season %>
+        <tr><td>
+            <%= link_to "Edit " + season.name, edit_season_path(season) %>
+          </td></tr>
+      <% end %>
+    <% end %>
+  </table>
+
+  <br />
+
+  <% if can? :create, Season %><%= link_to 'New Season', new_season_path %><% end %>
+
+</center>

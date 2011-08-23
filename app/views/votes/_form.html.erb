@@ -1,0 +1,7 @@
+New Vote
+
+<% form_for @vote, :url => match_vote_event_votes_path(:match_id => @vote.vote_event.match.id, :vote_event_id => @vote.vote_event.id) do |f| %>
+<%= f.select :player_id, @vote.vote_event.players.collect{|p| [p, p.id] } %>
+<%= f.submit "Vote" %>
+<% end %>
+

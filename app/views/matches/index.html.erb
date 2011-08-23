@@ -1,0 +1,44 @@
+
+<h1>Listing matches</h1>
+
+<table>
+  <tr>
+    <th>Team0</th>
+    <th>Team1</th>
+    <th>Date</th>
+    <th>Stream Url</th>
+    <th>Casters</th>
+    <th>Live</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% week = 1 %>
+  <tr>
+    <td colspan="6"><b>Week 0</b></td>
+  </tr>
+<% @matches.each do |match| %>
+  <% if week != match.weeks_id %>
+  <tr>
+    <td colspan="6"><b>Week <%= match.weeks_id %></b></td>
+  </tr>
+  <% week = match.weeks_id.to_i %>
+  <% end %>
+  <tr>
+    <td><%= match.team0.short_name %></td>
+    <td><%= match.team1.short_name %></td>
+    <td><%= match.scheduled_at %></td>
+        <td><%= link_to match.url, match.url %> </td>
+    <td><%= match.casters.collect{|c| c.login}.join(" ") %></td>
+    <td><%= match.live %></td>
+    <td><%= link_to 'Show', match %></td>
+    <td><% if can? :edit, match %><%= link_to 'Edit', edit_match_path(match) %><% end %></td>
+    <td><% if can? :destroy, match %><%= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if can? :create, Match %><%= link_to 'New Match', new_match_path %><% end %>

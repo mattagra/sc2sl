@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  match_id: 1
+  started_at: 2011-07-11 12:45:23
+  ended_at: 2011-07-11 12:45:23
+  team_id: 1
+
+two:
+  match_id: 1
+  started_at: 2011-07-11 12:45:23
+  ended_at: 2011-07-11 12:45:23
+  team_id: 1

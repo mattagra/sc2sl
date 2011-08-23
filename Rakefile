@@ -1,14 +1,8 @@
-require 'rubygems'
+# Add your own tasks in files placed in lib/tasks ending in .rake,
+# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
+
+require File.expand_path('../config/application', __FILE__)
 require 'rake'
-require 'echoe'
 
-Echoe.new('ajaxful_rating', '2.2.8.2') do |p|
-  p.description    = "Provides a simple way to add rating functionality to your application."
-  p.url            = "http://github.com/edgarjs/ajaxful-rating"
-  p.author         = "Edgar J. Suarez"
-  p.email          = "edgar.js@gmail.com"
-  p.ignore_pattern = ["tmp/*", "script/*"]
-  p.development_dependencies = []
-end
+Sc2sl::Application.load_tasks
 
-Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }

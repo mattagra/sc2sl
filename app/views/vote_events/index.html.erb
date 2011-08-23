@@ -1,0 +1,27 @@
+Voting Event
+
+
+<table>
+  <tr>
+    <th>Match</th>
+    <th>Team</th>
+    <th>Starts</th>
+    <th>Ends</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @vote_events.each do |vote_event| %>
+    <tr>
+      <td><%=  vote_event.match.title %></td>
+      <td><%=  vote_event.team.name %></td>
+      <td><%=  vote_event.started_at %></td>
+      <td><%= vote_event.ended_at %></td>
+      <td><% if Time.now > vote_event.ended_at %>Completed<% elsif Time.now > vote_event.started_at %>Currently Running<% else %> Future <% end %>    </td>
+      <td><%= link_to "View", match_vote_event_path(vote_event, :match_id => params[:match_id]) %></td>
+      <td><%= link_to "Destroy", match_vote_event_path(vote_event,  :match_id => params[:match_id]), :method => :delete, :confirm => "Are you sure?" %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "New Vote Event", new_match_vote_event_path(params[:match_id]) %>

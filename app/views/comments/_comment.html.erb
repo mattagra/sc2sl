@@ -1,0 +1,66 @@
+
+<table width="780" border="0" cellpadding="0" cellspacing="0" id="comtab">
+  <tbody><tr>
+      <td colspan="2">
+        <div class="commentup" id="comment_<%= comment.id %>">
+          <div id="thumbs">
+            <div align="right">
+              <%= link_to "Quote", new_comment_path(:comment_id => comment.id, :back_url => request.fullpath) %> -
+              <% if can? :edit, comment %><%= link_to "Edit", edit_comment_path(comment, :back_url => request.fullpath) %> -<% end %>
+              <% if can? :edit, Moderation %>
+                <%- if comment.moderation %>
+                  <%= link_to "Warn", edit_moderation_path(comment.moderation) %>
+                <% else %>
+                  <%= link_to "Warn", new_moderation_path(:user_id => comment.user.id, :comment_id => comment.id) %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <% if comment.user.country %><%=  image_tag comment.user.country.flag, :alt => comment.user.country.name %> <% end %>  <%= link_to comment.user.login, profile_path(comment.user.login) %> <span class="commentuptime"><%= comment.formatted_time %> </span></div></td>
+    </tr>
+    <tr>
+      <td width="104" valign="top">
+        <div id="div">
+          <%= link_to (image_tag comment.user.photo.url(:normal), :alt => "", :width => 90, :height => 96, :vspace => 4, :hspace => 4, :border => 1), profile_path(comment.user.login) %>
+          <% if comment.user.race %>
+          <br />
+          <%= image_tag race_icon_url(comment.user.race), :align => "top", :width => 21, :height => 13, :hspace => 4, :vspace => 3 %><span class="lineup" style="font-size: 10px"><%= comment.user.race.capitalize %> </span>
+          <% end %>
+          <% if comment.user.is_moderator? %>
+            <br />
+            <span class="lineup">
+              <img src="/css/images/comment/staff.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" /><span><%= comment.user.roles.last.to_s.capitalize %></span>
+            </span>
+          <% end %>
+          <% if comment.user.player %>
+            <br />
+            <span class="lineup">
+              <img src="/css/images/comment/player.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" /><span style="overflow: visible"><%= link_to comment.user.player.team.short_name, named_team_path(comment.user.player.team.slug) %></span>
+            </span>
+          <% end %>
+          <% if comment.user.caster %>
+            <br />
+            <span class="lineup">
+              <img src="/css/images/comment/caster.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" /><%= link_to "Caster", comment.user.website, :rel => "nofollow" %>
+            </span>
+          <% end %>
+
+
+        </div>
+      </td>
+      <td width="714" valign="top" padding="10" align="center"><table width="690" height="146" border="0" cellpadding="0">
+          <tbody><tr valign="top">
+              <td><%=raw comment.formatted_description %><br />
+                <% if comment.moderation %>
+                  <span style="color:red">This User was <%= comment.moderation.mod_type  %> for this post<% if comment.moderation.length.to_i > 0 %> for <%= comment.moderation.length %> days<% end %>.<br />Reason: <%= comment.moderation.reason %> </span>
+                <% end %>
+                  <% unless comment.user.signature.blank? %>
+                  <hr />
+                  <span class="signature"><%= comment.user.signature %></span>
+                  <% end %>
+              </td>
+            </tr>
+          </tbody></table>                                   </td>
+    </tr>
+  </tbody></table>
+

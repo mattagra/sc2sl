@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  stream_embed: MyText
+  url: MyString
+  caster_ids: MyString
+  enabled: false
+  match_id: 1
+
+two:
+  stream_embed: MyText
+  url: MyString
+  caster_ids: MyString
+  enabled: false
+  match_id: 1

@@ -1,0 +1,114 @@
+Testing branching and merging
+
+Mike's Changes
+Changes from bobo
+
+Allowed codes
+
+b
+:bold
+
+i
+:italics
+
+u
+:underline
+
+s
+:strikeout
+
+del
+:delete
+
+ins
+:insert
+
+code
+:code
+
+size
+:size
+
+color
+:color
+
+ol
+:orderedlist
+
+ul
+:unorderedlist
+
+li
+:listitem
+
+*
+:listitem
+
+list
+:listitem
+
+list=1
+:listitem
+
+list=a
+:listitem
+
+dl
+:definelist
+
+dt
+:defineterm
+
+dd
+:definition
+
+quote
+:quote
+
+quote=source
+:quote
+
+url=link
+:link
+
+url
+:link
+
+img size=
+:image
+
+img=
+:image
+
+img
+:image
+
+youtube
+:video
+
+gvideo
+:video
+
+vimeo
+:video
+
+email
+:email
+
+
+rake tmp:cache:clear to clear cache
+
+Caches and dependancies
+#recent_articles article, Player
+#recent_news Article
+#calendar_:year_:month article, Team
+#featured_article Article
+#season_rankings Season, Team, articlees, articles
+#html_header static
+#footer @tags
+#layout_advertising static
+#header static
+#articles_banner Article
+#live_section @live_article
+
+Testing new branch
