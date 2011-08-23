@@ -3,7 +3,7 @@
     <br><table id="user" width="880">
       <tr width="95">
         <td rowspan="3">
-          <%= image_tag @user.avatar, :align => "left" %></td><td class="votenowtxt"> <%= image_tag race_icon_url(@user.race), :alt => "race"%> <%= @user.login %></span> 							 					<strong>
+          <%= image_tag @user.photo.url(:normal), :align => "left" %></td><td class="votenowtxt"> <%= image_tag race_icon_url(@user.race), :alt => "race"%> <%= @user.login %></span> 							 					<strong>
           <% if @user.banned? %>
 Ban Type: <%= @user.current_ban.mod_type %> -  <%= @user.current_ban.length %> days - Ends: <%= @user.current_ban.ends_at %>
             <% end %> </strong>
