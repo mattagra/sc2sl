@@ -46,4 +46,4 @@ end
 
 after "deploy:update_code", "delayed_job:restart"
 
-#after 'deploy:update_code', 'deploy:symlink_shared'
+after 'deploy:update_code', 'deploy:symlink_shared'
