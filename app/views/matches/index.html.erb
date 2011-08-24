@@ -26,8 +26,8 @@
   <% week = match.weeks_id.to_i %>
   <% end %>
   <tr>
-    <td><%= match.team0.short_name %></td>
-    <td><%= match.team1.short_name %></td>
+    <td><%= match.team0 || "TBD" %></td>
+    <td><%= match.team1 || "TBD" %></td>
     <td><%= match.scheduled_at %></td>
         <td><%= link_to match.url, match.url %> </td>
     <td><%= match.casters.collect{|c| c.login}.join(" ") %></td>

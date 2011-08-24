@@ -12,6 +12,8 @@ Sc2sl::Application.configure do
   # Specifies the header that your server uses for sending files
   config.action_dispatch.x_sendfile_header = "X-Sendfile"
 
+  config.cache_store = :mem_cache_store #enabled
+
   # For nginx:
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
 
@@ -36,6 +38,16 @@ Sc2sl::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => "localhost.localdomain",
+    :authentication => :plain,
+    :user_name => "michael.darmousseh@gmail.com",
+    :password => "mi12ke25"
+  }
 
   # Enable threaded mode
   # config.threadsafe!

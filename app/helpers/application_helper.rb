@@ -99,9 +99,10 @@ module ApplicationHelper
   end
 
   def grayscale_banner_link(banner, path)
-    ("<div style='height: 129px;'>" +
-        link_to(image_tag(banner.url(:normal), :class => "img_colorscale"), path) +
-        link_to(image_tag(banner.url(:normal_gray), :class => "img_grayscale"), path) + "</div>").html_safe
+    link_to(image_tag(banner.url(:normal_gray), :border => "0", :onmouseover => "this.src='#{banner.url(:normal)}'", :onmouseout => "this.src='#{banner.url(:normal_gray)}'"), path)
+    #("<div style='height: 129px;'>" +
+    #    link_to(image_tag(banner.url(:normal), :class => "img_colorscale"), path) +
+    #    link_to(image_tag(banner.url(:normal_gray), :class => "img_grayscale"), path) + "</div>").html_safe
   end
 
 

@@ -1,3 +1,4 @@
+
 .bundle
 .sqlite3
 log/*
@@ -19,3 +20,4 @@ Gemfile.lock
 vendor/*/*
 RAILS_ENV=development
 RAILS_ENV=development/*
+
