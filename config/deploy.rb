@@ -42,7 +42,8 @@ namespace :deploy do
 namespace :delayed_job do
     desc "Restart the delayed_job process"
     task :restart, :roles => :app do
-        run "cd #{current_path};ruby script/delayed_job restart RAILS_ENV=#{rails_env}"
+
+        run "cd #{current_path};chmod 755 script/delayed_job;RAILS_ENV=#{rails_env} script/delayed_job restart"
     end
 end
 

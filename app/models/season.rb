@@ -46,13 +46,13 @@ class Season < ActiveRecord::Base
   end
 
   def game_wins(team)
-    self.games.where("matches.team0_id = #{team.id}").where("games.result == 0").count +
-      self.games.where("matches.team1_id = #{team.id}").where("games.result == 1").count
+    self.games.where("(matches.team0_id = #{team.id} and games.result = 0)").count +
+      self.games.where("(matches.team1_id = #{team.id} and games.result = 1)").count
   end
 
   def game_losses(team)
-    self.games.where("matches.team0_id = #{team.id}").where("games.result == 1").count +
-      self.games.where("matches.team1_id = #{team.id}").where("games.result == 0").count
+    self.games.where("(matches.team0_id = #{team.id} and games.result = 1)").count +
+      self.games.where("(matches.team1_id = #{team.id} and games.result = 0)").count
   end
 
 

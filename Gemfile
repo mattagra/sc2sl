@@ -6,6 +6,7 @@ gem 'rails'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem "mysql2", '< 0.3'
 gem 'authlogic'
+gem 'daemons'
 
 gem 'stringex'
 gem 'paperclip'
