@@ -1,7 +1,15 @@
-New Vote
+<%  if @vote.new_record? %>
+  VOTE
+  <% form_for @vote, :url => match_vote_event_votes_path(:match_id => @vote.vote_event.match.id, :vote_event_id => @vote.vote_event.id) do |f| %>
+    <% @vote.vote_event.players.each do |p| %>
+      <%= f.radio_button :player_id, p.id %>
+      <%= f.label :player_id, p.login %>
+  <br />
+    <% end %><br />
+    <%= f.submit "Vote" %>
+  <% end %>
 
-<% form_for @vote, :url => match_vote_event_votes_path(:match_id => @vote.vote_event.match.id, :vote_event_id => @vote.vote_event.id) do |f| %>
-<%= f.select :player_id, @vote.vote_event.players.collect{|p| [p, p.id] } %>
-<%= f.submit "Vote" %>
+<% else %>
+  You have already voted.
 <% end %>
 

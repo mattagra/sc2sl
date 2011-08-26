@@ -14,9 +14,8 @@ class VoteEventsController < ApplicationController
 
   def show_current
     @vote_event = VoteEvent.last
-    @vote = Vote.new
-    @vote.vote_event = @vote_event
-    render :action => :show
+    @vote = Vote.find_by_vote_event_id_and_user_id(@vote_event.id, current_user.id) || Vote.new(:vote_event_id => @vote_event.id)
+    render :layout => false, :action => :show
   end
 
   def new

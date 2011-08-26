@@ -172,11 +172,15 @@
           </div>
 
           <div id="content-bar">
+            <% if @live_match and @live_match.live %>
+               LIVE DISPLAY HERE.
+            <% else %>
             <div id="slider" class="nivoSlider">
               <%- @articles.each_with_index do |article, i| %>
                 <%= render :partial => "articles/article_banner", :locals => {:article => article, :i => i} %>
               <% end %>
             </div>
+            <% end %>
 
 
 
@@ -189,10 +193,10 @@
 
                   <% if @live_match and @live_match.live %>
                     <div id="live-haut-status-image"><img src="/css/images/content-bar/live/live.jpg" alt="Live" /></div>
-                    <div id="live-haut-status-texte"><%= link_to "LIVE IS ONLINE", live_path %></div>
+                    <div id="live-haut-status-texte">LIVE IS ONLINE</div>
                   <% else %>
                     <div id="live-haut-status-image"><img src="/css/images/content-bar/live/offline.jpg" alt="Offline" /></div>
-                    <div id="live-haut-status-texte"><a href=#>LIVE IS OFFLINE</a></div>
+                    <div id="live-haut-status-texte">LIVE IS OFFLINE</div>
                   <% end %>
 
                 </div>

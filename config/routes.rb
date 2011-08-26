@@ -9,7 +9,7 @@ Sc2sl::Application.routes.draw do
 
   get "admin/newsletter"
 
-  get "/live" => "site#live", :as => :live
+  #get "/live" => "site#live", :as => :live
 
   get "/vote" => "vote_events#show_current"
 

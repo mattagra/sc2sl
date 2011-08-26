@@ -4,7 +4,13 @@ gem 'rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+group :production do
 gem "mysql2", '< 0.3'
+end
+
+group :development do
+  gem 'sqlite3-ruby', :require => 'sqlite3'
+end
 gem 'authlogic'
 gem 'daemons'
 

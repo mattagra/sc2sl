@@ -1,9 +1,6 @@
 <table>
   <tr><td>Match</td><td><%=  @vote_event.match.title %></td></tr>
   <tr><td>Team</td><td><%=  @vote_event.team.name %></td></tr>
-  <tr><td>Started</td><td><%=  @vote_event.started_at %></td></tr>
-  <tr><td>Ended</td><td><%=  @vote_event.ended_at %></td></tr>
-  <tr><td>Status</td><td><% if Time.now < @vote_event.started_at %>Not Yet Started<% elsif Time.now < @vote_event.ended_at %>Currently Running<% else %> Completed <% end %>    </td></tr>
 </table>
 
 Current Votes
