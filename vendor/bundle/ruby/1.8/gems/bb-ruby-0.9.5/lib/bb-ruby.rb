@@ -1,5 +1,5 @@
 $:.unshift(File.dirname(__FILE__)) unless
-  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
+$:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
 module BBRuby
   VERSION = '0.9.5'
@@ -284,6 +284,9 @@ module BBRuby
         text.gsub!( '<', '&lt;' )
         text.gsub!( '>', '&gt;' )
       end
+      text.gsub!(/\[quote\]/, '<fieldset><legend>Quote:</legend><blockquote>')
+      text.gsub!(/\[quote(:.*)?="?(.*?)"?\]/, '<fieldset><legend>Quote: \2</legend><blockquote>')
+      text.gsub!(/\[\/quote\]/, '</blockquote></fieldset>')
       
       tags_definition = @@tags.merge(tags_alternative_definition)
 

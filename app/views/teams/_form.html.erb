@@ -20,7 +20,7 @@
     <%= f.text_field :short_name %>
   </div>
   <div class="field">
-    <%= f.label :photo %><br />
+    <%= f.label :photo %>180x180*<br />
     <%= f.file_field :photo %>
     <%= image_tag(f.object.photo.url(:normal)) if f.object.photo.exists?  %>
   </div>

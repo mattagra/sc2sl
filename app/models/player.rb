@@ -11,6 +11,10 @@ class Player < ActiveRecord::Base
   validates :user, :presence => true
   validates :date_joined, :presence => true
 
+  def active?
+    self.date_quit == nil
+  end
+
 
   def self.alphabetical
     self.joins(:user).order("LOWER(users.login) asc")

@@ -172,15 +172,11 @@
           </div>
 
           <div id="content-bar">
-            <% if @live_match and @live_match.live %>
-               LIVE DISPLAY HERE.
-            <% else %>
             <div id="slider" class="nivoSlider">
               <%- @articles.each_with_index do |article, i| %>
                 <%= render :partial => "articles/article_banner", :locals => {:article => article, :i => i} %>
               <% end %>
             </div>
-            <% end %>
 
 
 
@@ -219,7 +215,7 @@
                 <div id="live-ligne-right">
                   <% if @live_match %>
                     <% @live_match.casters.each do |caster| %>
-                      <%= link_to caster, @live_match.url %>
+                      <%= link_to caster, profile_path(caster.login) %>&nbsp;
                     <% end %>
                   <% end %>
                 </div>

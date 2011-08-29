@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   validates_acceptance_of :terms, :on => :create
   after_validation :set_defaults, :on => :create
   validates :signature, :length => {:within => 0..255}
+  validates :profile_text, :length => {:maximum => 546}
 
   #Associations
   has_many :my_comments, :class_name => "Comment"
