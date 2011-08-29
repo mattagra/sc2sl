@@ -31,7 +31,6 @@ gem 'yaml_db'
 gem "memcache-client"
 gem 'delayed_job'
 gem 'sprockets', :git => "git://github.com/sstephenson/sprockets"
-gem 'sqlite3-ruby', :require => 'sqlite3'
 
 #group :production do
 #gem "mysql2", '< 0.3'

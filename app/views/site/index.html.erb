@@ -40,13 +40,13 @@
 
                 <div class="ranking-ligne-points"><%= @season.points(team) %> pts</div>
 
-                <div class="ranking-ligne-win"><%= @season.game_wins(team) %></div>
+                <div class="ranking-ligne-win"><%= @season.wins(team) %></div>
 
-                <div class="ranking-ligne-loose"><%= @season.game_losses(team) %></div>
+                <div class="ranking-ligne-loose"><%= @season.losses(team) %></div>
 
-                <div class="ranking-ligne-mw"><%= @season.wins(team) %></div>
+                <div class="ranking-ligne-mw"><%= @season.game_wins(team) %></div>
 
-                <div class="ranking-ligne-ml"><%= @season.losses(team) %></div>
+                <div class="ranking-ligne-ml"><%= @season.game_losses(team) %></div>
 
               </div>
 

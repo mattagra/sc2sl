@@ -30,6 +30,13 @@
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
     <script type="text/javascript" src="/js/slider.js"></script>
     <script type="text/javascript" src="/js/slider-news.js"></script>
+    <script type="text/javascript" src="/js/jquery.placeheld.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("input[placeholder]").placeHeld();
+      });
+
+    </script>
     <title><%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>PokerStrategy.com SC2SL!</title>
     <meta name="title" content="<%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>PokerStrategy.com SC2SL!" />
 
@@ -173,13 +180,13 @@
 
           <div id="content-bar">
             <% if @live_match and @live_match.live %>
-               LIVE DISPLAY HERE.
+              <%= render :partial => "matches/live", :locals => {:live_match => @live_match} %>
             <% else %>
-            <div id="slider" class="nivoSlider">
-              <%- @articles.each_with_index do |article, i| %>
-                <%= render :partial => "articles/article_banner", :locals => {:article => article, :i => i} %>
-              <% end %>
-            </div>
+              <div id="slider" class="nivoSlider">
+                <%- @articles.each_with_index do |article, i| %>
+                  <%= render :partial => "articles/article_banner", :locals => {:article => article, :i => i} %>
+                <% end %>
+              </div>
             <% end %>
 
 
@@ -290,9 +297,9 @@
 
             <div id="menu-lien" style="width : 1000px;">
 
-              <div class="menu-lien"><a href="#">NEWS</a></div>
+              <div class="menu-lien"><%= link_to "NEWS", articles_path %></div>
 
-              <div class="menu-lien"><a href="#">LEAGUE</a></div>
+              <div class="menu-lien"><%= link_to "LEAGUE", seasons_path %></div>
 
               <div class="menu-lien"><%= link_to "REPLAYS", replays_path %></div>
 

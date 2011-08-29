@@ -8,17 +8,23 @@ class GamesController < ApplicationController
     @page = "Replay List"
     @description = "List of all recent replays."
     @keywords += ["games", "replays"]
+    @current_page = (params[:page]|| 1).to_i
+    @per_page = 20
+
 
     if params[:filter] and params[:filter][:team_id]
       @team = Team.find(params[:filter][:team_id])
-      @games = @team.games
+      @games = @team.games.paginated(@current_page, @per_page)
+      @games_count = @team.games.count
       @keywords += [@team.name]
     elsif params[:filter] and params[:filter][:player_id]
       @player = Player.find(params[:filter][:player_id])
-      @games = @player.games
+      @games = @player.games.paginated(@current_page, @per_page)
+      @games_count = @player.games.count
       @keywords += [@player.login]
     else
-      @games = Game.where("games.result is not null")
+      @games = Game.where("games.result is not null").paginated(@current_page, @per_page)
+      @games_count = Game.where("games.result is not null").count
     end
 
 
@@ -63,10 +69,15 @@ class GamesController < ApplicationController
   end
 
   def replay
-    @game = Game.find(params[:id])
-    @game.downloads += 1
-    @game.save
-    send_file @game.replay.path, :disposition => 'attachment'
+    if current_user
+      @game = Game.find(params[:id])
+      @game.downloads += 1
+      @game.save
+      send_file @game.replay.path, :disposition => 'attachment'
+    else
+      flash[:notice] = "You must be registered in order to download replays."
+      redirect_to :action => :show, :id => params[:id]
+    end
   end
 
   def rate

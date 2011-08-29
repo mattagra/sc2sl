@@ -37,35 +37,35 @@ class Player < ActiveRecord::Base
   end
 
   def wins_total
-
+    self.games.reject { |game| game.winning_player != self  }.count
   end
 
   def games_total
-    
+    self.games.count
   end
 
   def wins_vs_protoss
-
+    self.games.reject{ |game| (game.players - [self]).first.user.race != "protoss" }.reject { |game| game.winning_player != self  }.count
   end
 
   def games_vs_protoss
-
+    self.games.reject{ |game| (game.players - [self]).first.user.race != "protoss" }.count
   end
 
   def wins_vs_zerg
-
+    self.games.reject{ |game| (game.players - [self]).first.user.race != "zerg" }.reject { |game| game.winning_player != self  }.count
   end
 
   def games_vs_zerg
-
+    self.games.reject{ |game| (game.players - [self]).first.user.race != "zerg" }.count
   end
 
   def wins_vs_terran
-
+    self.games.reject{ |game| (game.players - [self]).first.user.race != "terran" }.reject { |game| game.winning_player != self  }.count
   end
 
   def games_vs_terran
-    
+    self.games.reject{ |game| (game.players - [self]).first.user.race != "terran" }.count
   end
   
   
