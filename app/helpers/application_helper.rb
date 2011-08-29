@@ -82,19 +82,19 @@ module ApplicationHelper
       end
     end
     boxes = []
-    boxes << link_to_unless_current("<< Previous", url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current, 1].max}").collect{|k,v| "#{k}=#{v}"}.join("&"))))
+    boxes << link_to("<< Previous", url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current, 1].max}").collect{|k,v| "#{k}=#{v}"}.join("&"))))
     
     c = 0
     final_pages.each do |page|
       if (c - page).abs > 1
         boxes << " | ..."
-        boxes << " | " + link_to_unless_current(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")))
+        boxes << " | " + link_to(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")))
       else
-        boxes << " | " + link_to_unless_current(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")))
+        boxes << " | " + link_to(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")))
       end
       c = page
     end
-    boxes << " | " + link_to_unless_current("Next >>",url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")))
+    boxes << " | " + link_to("Next >>",url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")))
     return sanitize(boxes.join("")) # + "per_page: #{per_page}, current: #{current}, total: #{total}"
   end
 

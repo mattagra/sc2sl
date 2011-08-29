@@ -133,4 +133,8 @@ class User < ActiveRecord::Base
     roles.include? role.to_s
   end
 
+
+
+  
+
 end

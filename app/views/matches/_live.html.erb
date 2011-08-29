@@ -1,0 +1,59 @@
+<div id="LiveM">
+  <div id="LiveMTeam1logo">
+    <%= link_to(image_tag(@live_match.team0.photo.url(:normal)), team_path(@live_match.team0.slug)) %>
+    
+  </div>
+  <div id="livemteam1">
+    <div align="left">
+      <p>
+        <strong><%= link_to @live_match.team0.name, team_path(@live_match.team0.slug) %></strong><br>
+        <span class="soustitre"><img src="/css/images/content-bar/live/star2.gif" alt="teamcaptain" width="12" height="12" hspace="0" vspace="0" align="texttop"> Shiba - 6th</span><br>
+        <br> <span class="lineup">
+          <% @live_match.team0.players.each do |player|  %>
+          <%= link_to player.login, player_path(player.login) %>&nbsp;
+          <% end %>
+        </span>
+      </p>
+    </div>
+  </div>
+  <div id="LiveMScore">
+    <div id="scoretext"><%= link_to(@live_match.team0_wins.to_s + " - " + @live_match.team1_wins.to_s, match_path(@live_match)) %></div>
+  </div>
+  <div id="LiveMTeam2logo">
+    <%= link_to(image_tag(@live_match.team1.photo.url(:normal)), team_path(@live_match.team1.slug)) %>
+  </div>
+  <div id="LiveMTeam2">
+    <div align="right" class="soustitre"><strong><%= link_to @live_match.team1.name, team_path(@live_match.team1.slug) %></strong><br>
+      <div vertical-align="middle"><img src="/css/images/content-bar/live/star2.gif" alt="teamcaptain" width="12" height="12" hspace="0" vspace="0" align="texttop"> Lewellys - 4th </div>
+      <br>
+      <span class="lineup">
+        <% @live_match.team1.players.each do |player|  %>
+          <%= link_to player.login, player_path(player.login) %>&nbsp;
+          <% end %>
+      </span> </div>
+  </div>
+  <div id="LiveMEncountersList">
+    <br>
+    <p class="closeup">
+      <% @live_match.games.order('id asc').each do |game| %>
+      <% if game.player0 and game.player1 %>
+      <strong><%= link_to(image_tag(race_icon_url(game.player0.user.race)).to_s + game.player0.user.login, player_path(game.player0.login) ) %><% if game.winning_player == game.player0 %>&gt;<% else %>&lt;<% end %><%= link_to(image_tag(race_icon_url(game.player1.user.race)).to_s + game.player1.user.login,  player_path(game.player1.login) ) %></strong><br />
+      <% end %>
+      <% end %>
+      <a href="#">Adelscott Revived ! (200 votes)</a><br>
+       </p>
+    <div class="votenowcad" id="vcad">
+      <div id="votenow">
+        <div align="center" class="live-vote">
+          <a href="#"><span class="votenowtxt">VOTE NOW</span> -  <span class="votenowtimeleft">7:20 left </span></a>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+  <div id="livefaq">
+    <span class="votenowtimeleft"><strong><a href="#">WATCH THE LIVE STREAM  </a></strong></span><br>
+    <span class="votenowfaq"><a href="#">How can i vote ?</a> - <a href="#">How does a match proceeds ?</a> - <a href="#">FAQ </a></span>
+  </div>
+
+</div>
