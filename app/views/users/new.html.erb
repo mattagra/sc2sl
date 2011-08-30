@@ -20,7 +20,7 @@
       <%= render :partial => "form", :object => f %>
       <div align="center">
       <%= recaptcha_tags %>
-      <strong><%= f.check_box :terms, :class => "terms_box"  %> By Clicking the box, you agree to our <%= link_to "Terms and Conditions", terms_path, "data-popup" => "menubar=0,resizable=1,width=600,height=800" %>.</strong><br />
+      <strong><%= f.check_box :terms, :class => "terms_box"  %> By Clicking the box, you agree to our <%= link_to "Terms and Conditions", terms_path, :class => "popupwindow", :rel => "resizable:1,width:600,height:800" %>.</strong><br />
       <%= f.submit "Register", :class => "register_button" %>
       </div>
     </div>
