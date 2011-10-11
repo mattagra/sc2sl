@@ -10,7 +10,7 @@ class Article < ActiveRecord::Base
   validates :description, :length => {:minimum => 5}
   validates_attachment_presence :photo                    
   validates_attachment_size :photo, :less_than=>1.megabyte
-  validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']                 
+  validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif', 'image/pjpeg', 'image/x-png']
   validates_attachment_size :featured_photo, :less_than=>1.megabyte, :if => Proc.new { |o| !o.featured_photo_file_name.blank? }
   validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif'], :if => Proc.new { |o| !o.featured_photo_file_name.blank? }
   validates :featured_photo, :presence => true, :if => Proc.new{|o| o.featured == true}
