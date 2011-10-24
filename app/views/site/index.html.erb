@@ -130,7 +130,7 @@
         </div>
 
         <% @articles.each do |article| %>
-          <%= link_to content_tag(:font, article.created_at.strftime(" %m/%d/%Y") + " - ", :class => "ntitle2") + content_tag(:font, article.title, :class => "ntitle"), view_article_path(article) %><br/>
+          <%= link_to content_tag(:font, article.created_at.strftime(" %m/%d") + " - ", :class => "ntitle2") + content_tag(:font, article.title, :class => "ntitle"), view_article_path(article) %><br/>
         <% end %>
       </div>
 
@@ -150,8 +150,8 @@
             <% @games.each do |game| %>
               <tr>
                 <td height="26" width="34" valign="middle">&nbsp;&nbsp;<%= image_tag rating_star_image(game.rating_average) %></td>
-                <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} #{game.player0.team.short_name} <b>#{game.player0.login}</b>".html_safe, replay_path(game)).html_safe %></td>
-                <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} #{game.player1.team.short_name} <b>#{game.player1.login}</b>".html_safe, replay_path(game)).html_safe %></td>
+                <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} <span style='font-weight: normal;'>#{game.player0.team.short_name}</span> <b>#{game.player0.login}</b>".html_safe, replay_path(game)).html_safe %></td>
+                <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} <span style='font-weight: normal;'>#{game.player1.team.short_name}</span> <b>#{game.player1.login}</b>".html_safe, replay_path(game)).html_safe %></td>
                 <td width="27" valign="middle" vspace="2"><%= link_to(image_tag("/css/images/last-replays/dl2.gif"), replay_path(game)).html_safe %></td>
               </tr>
             <% end %>

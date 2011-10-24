@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :team %><br />
-    <%= f.select :team_id, Team.all.collect {|t| [t.name, t.id]} %>
+    <%= f.select :team_id, Team.alphabetical.collect {|t| [t.name, t.id]} %>
   </div>
   <div class="field">
     <%= f.label :user %><br />
-    <%= f.select :user_id, User.all.collect {|c| [c.login, c.id]} %>
+    <%= f.select :user_id, User.alphabetical.collect {|c| [c.login, c.id]} %>
   </div>
   <div class="field">
     <%= f.label :date_joined %><br />

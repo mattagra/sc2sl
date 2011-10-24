@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
 
-    authorize_resource
-    cache_sweeper :player_sweeper
+  authorize_resource
+  cache_sweeper :player_sweeper
   # GET /players
   # GET /players.xml
   def index
@@ -24,7 +24,7 @@ class PlayersController < ApplicationController
     else
       user = User.find_by_login(params[:id])
       unless user
-         raise ActionController::RoutingError.new('Not Found')
+        raise ActionController::RoutingError.new('Not Found')
       end
       @player = user.player
     end
@@ -63,14 +63,14 @@ class PlayersController < ApplicationController
   # POST /players.xml
   def create
     @player = Player.new(params[:player])
-
-    respond_to do |format|
+    if params[:user_id] and Player.find_by_user_id(params[:user_id]) and Player.find_by_user_id(params[:user_id]).active?
+      flash[:warning] = "That User already is on a team. Please remove that user before you create a new one."
+      render :action => "new"
+    else
       if @player.save
-        format.html { redirect_to(@player, :notice => 'Player was successfully created.') }
-        format.xml  { render :xml => @player, :status => :created, :location => @player }
+        redirect_to(@player, :notice => 'Player was successfully created.') 
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @player.errors, :status => :unprocessable_entity }
+        render :action => "new"
       end
     end
   end

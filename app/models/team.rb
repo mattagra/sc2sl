@@ -15,6 +15,8 @@ class Team < ActiveRecord::Base
   validates :name, :presence => true
   validates :country, :presence => true
   validates :short_name, :presence => true
+  validates :description, :length => {:maximum => 546}
+  scope :alphabetical, order('LOWER(name) asc')
 
   def matches
     Match.where("team0_id = ? or team1_id = ?", self.id, self.id)
@@ -56,6 +58,8 @@ class Team < ActiveRecord::Base
     e += self.matches.reject{|m| m.results.nil? or m.results == 0}.collect{|m| [m.scheduled_at.to_datetime, "match", m, self]}
     e
   end
+
+
   
 
 

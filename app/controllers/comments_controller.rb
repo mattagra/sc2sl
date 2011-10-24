@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.new
     c = Comment.find(params[:comment_id])
-    @comment.description = "[quote:#{c.id}=\"On #{c.formatted_time} #{c.user.login} said:\"]#{c.description.to_s}[/quote:#{c.id}]"
+    @comment.description = "[quote=\"On #{c.formatted_time} #{c.user.login} said:\"]#{c.description.to_s}[/quote]"
     @comment.external_id = c.external_id
     @comment.external_type = c.external_type
 

@@ -1,29 +1,4 @@
 <p id="notice"><%= notice %></p>
-
-<% count = @season.playoff_matches.count - 1  %>
-<% round = 0 %>
-<% while count > -1 %>
-  <% if (count + 2) & (count + 1) == 0 %>
-    <tr>
-      <td colspan="6"><b>Round <%= round + 1 %><% round += 1 %></b></td>
-    </tr>
-  <% end %>
-  <% m = @season.playoff_matches.detect{|m| m.playoff_id == count} %>
-  <% if m %>
-    <tr>
-      <td><%= m.team0 || "TBA" %></td>
-      <td><%= m.team1 || "TBA" %></td>
-      <td><%= m.scheduled_at || "TBD" %></td>
-
-      <td><%= link_to 'Show', m %></td>
-      <td><% if can? :edit, m %><%= link_to 'Edit', edit_match_path(m) %><% end  %></td>
-      <td><% if can? :destroy, m %><%= link_to 'Destroy', m, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
-    </tr>
-  <% end %>
-  <% count -= 1 %>
-<% end %>
-
-
 <div id="newsmain">
 
   <div class="newscontent">

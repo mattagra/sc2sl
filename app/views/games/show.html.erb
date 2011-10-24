@@ -8,7 +8,7 @@
       <div id=textcom align=right>
         <a href="#comments">2</a>
       </div>
-      (<%= @game.player0.user.race[0,1] %>) <%= link_to @game.player0.login, player_path(@game.player0.login) %> Vs. (<%= @game.player1.user.race[0,1] %>) <%= link_to @game.player1.user.login, player_path(@game.player1.login) %><br/>
+      (<%= @game.player0.user.race[0,1] %>) <%= link_to @game.player0.login, profile_path(@game.player0.login) %> Vs. (<%= @game.player1.user.race[0,1] %>) <%= link_to @game.player1.user.login, profile_path(@game.player1.login) %><br/>
       <div id="undertitle">
         March 25th, 2011 17:40
       </div>

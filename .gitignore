@@ -20,5 +20,7 @@ Gemfile.lock
 vendor/*/*
 RAILS_ENV=development
 RAILS_ENV=development/*
+development
+developmet/*
 public/shared/*
 

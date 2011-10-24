@@ -4,4 +4,23 @@ $('a[data-popup]').live('click', function(e) {
   //window.open($(this)[0].href );
   e.preventDefault();
 });
+var profiles =
+{
+
+  windowStandard:
+  {
+    height:500,
+    width:400,
+    center:1
+  }
+
+        
+
+};
+$(function()
+{
+  $(".popupwindow").popupwindow(profiles);
+});
+
+
 
