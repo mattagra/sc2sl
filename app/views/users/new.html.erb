@@ -11,19 +11,30 @@
       </ul>
     </div><div style="width:100%" />
   <% end %>
-  <div id="user_form">
-    <br/>
-    <div id="rform" class="rform">
-      <h1>Join the SC2SL Community!</h1>
-      <p>The fields with a * are obligatory.</p>
-
-      <%= render :partial => "form", :object => f %>
-      <div align="center">
-      <%= recaptcha_tags %>
-      <strong><%= f.check_box :terms, :class => "terms_box"  %> By Clicking the box, you agree to our <%= link_to "Terms and Conditions", terms_path, :class => "popupwindow", :rel => "resizable:1,width:600,height:800" %>.</strong><br />
-      <%= f.submit "Register", :class => "register_button" %>
-      </div>
+  <div id="newsmain">
+    <div align="center">
+      <table width="800" border="0" cellpadding="2" cellspacing="2" bordercolor="#FFFFFF">
+        <tbody><tr>
+            <td colspan="4"><p>&nbsp;</p>
+              <p><span class="votenowtxt">Join the SC2SL Community!</span></p>
+              <p>The fields with a * are obligatory. </p>
+              <hr align="left" width="755" />
+              <p><br />
+              </p></td>
+          </tr>
+          <%= render :partial => "form", :object => f %>
+          <tr>
+            <td colspan="4" valign="top" align="center"><div align="center">
+                <p>&nbsp;</p>
+                <p><%= recaptcha_tags %></p>
+                <p>&nbsp;</p>
+                <strong><%= f.check_box :terms, :class => "terms_box"  %> By Clicking the box, you agree to our <%= link_to "Terms and Conditions", terms_path, :class => "popupwindow", :rel => "resizable:1,width:600,height:800" %>.</strong> <br>
+                <%= f.submit "Register", :class => "register_button" %>
+                <p>&nbsp;</p>
+              </div></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 <% end %>
-  <br/>&nbsp;
