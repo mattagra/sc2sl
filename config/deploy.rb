@@ -1,5 +1,5 @@
 set :application, "sc2sl"
-set :domain,      "vps11537.ovh.net"
+set :domain,      "vps13407.ovh.net"
 set :repository,  "git@github.com:turlockmike/sc2sl.git"
 set :deploy_to,   "/apps/#{application}"
 set :branch, "master"
@@ -7,7 +7,9 @@ set :scm, "git"
 set :scm_verbose, true
 set :user, "root"
 
-
+set :default_environment, {
+  'PATH' => "/var/lib/gems/1.8/bin:$PATH"
+}
 
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
@@ -47,6 +49,5 @@ namespace :delayed_job do
     end
 end
 
-after "deploy:update_code", "delayed_job:restart"
-
 after 'deploy:update_code', 'deploy:symlink_shared'
+after "deploy:restart", "delayed_job:restart"
