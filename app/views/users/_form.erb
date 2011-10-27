@@ -3,12 +3,11 @@
   <td width="260" valign="top"><%= form.text_field :first_name, :size => 30 %></td>
   <td width="140" valign="top"><p><strong>Last Name  *</strong></p>
     <p>&nbsp;</p></td>
-  <td width="260" valign="top"><%= form.text_field :first_name, :size => 30 %></td>
+  <td width="260" valign="top"><%= form.text_field :last_name, :size => 30 %></td>
 </tr>
 <tr>
-  <td width="140" valign="top"><p><strong>Email *</strong></p></td>
+  <td width="140" valign="top"><p><strong>Email *</strong></p><p class="ntitle2">Add a valid address </p></td>
   <% if (form.object.new_record? or (current_user and current_user.is_admin?)) %>
-  <p class="ntitle2">Add a valid address </p>
   <td width="260" valign="top"><%=  form.text_field :email, :size => 30 %></td>
 <% else %>
   <td width="260" valign="top"><%=  form.object.email %></td>
