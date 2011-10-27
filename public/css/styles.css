@@ -1422,7 +1422,7 @@ table#user{
 #middle-full{
     float : left;
     width : 353px;
-    heigth: 164px;
+    height: 164px;
     background-color:white;
     margin-bottom : 2px;
     font-size:12px;
@@ -1430,7 +1430,6 @@ table#user{
 
 #middle-full a{
     color : #083964;
-    font-weight:bold;
 }
 #middle-titre {
     float : left;

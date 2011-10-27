@@ -58,6 +58,8 @@ class Team < ActiveRecord::Base
     e += self.matches.reject{|m| m.results.nil? or m.results == 0}.collect{|m| [m.scheduled_at.to_datetime, "match", m, self]}
     e
   end
+
+
   
 
 

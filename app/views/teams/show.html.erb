@@ -14,7 +14,7 @@
         <% @team.players.each do |player| %>
           <%= image_tag player.user.country.flag if player.user.country %>
           <%= image_tag race_icon_url(player.user.race), :align => "top", :width => 21, :height => 13, :hspace => 4, :vspace => 3 %>
-          <%= link_to player, player_path(player) %>
+          <%= link_to player, profile_path(player) %>
         <br />
         <% end %>
 

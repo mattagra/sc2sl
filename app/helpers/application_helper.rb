@@ -82,7 +82,7 @@ module ApplicationHelper
       end
     end
     boxes = []
-    boxes << link_to("<< Previous", url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current, 1].max}").collect{|k,v| "#{k}=#{v}"}.join("&"))))
+    boxes << link_to(image_tag("arrow_left.png"), url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current, 1].max}").collect{|k,v| "#{k}=#{v}"}.join("&"))))
     
     c = 0
     final_pages.each do |page|
@@ -94,7 +94,7 @@ module ApplicationHelper
       end
       c = page
     end
-    boxes << " | " + link_to("Next >>",url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")))
+    boxes << " | " + link_to(image_tag("arrow_right.png"),url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")))
     return sanitize(boxes.join("")) # + "per_page: #{per_page}, current: #{current}, total: #{total}"
   end
 
@@ -114,6 +114,27 @@ module ApplicationHelper
     else
       "/css/images/last-replays/bronzestar.png"
     end
+  end
+
+
+  def describe_player_event(event)
+    ret = ""
+    case event[1]
+    when 'join'
+      ret = "<img src='/css/images/user/small_green_arrow.png' alt='' width='10' height='9' /> Joined #{link_to(event[2].team.to_s, team_path(event[2].team.slug))}"
+    when 'quit'
+      ret = "<img src='/css/images/user/small_red_arrow.png' alt='' width='10' height='9' /> Left #{link_to(event[2].team.to_s, team_path(event[2].team.slug))}"
+    when "game"
+      other = (event[2].players - [event[3]]).first
+      if event[2].winning_player == event[3]
+        ret = "<strong>Win</strong> against #{link_to other.to_s, profile_path(other.to_s)}"
+      else
+        ret = "<strong>Loss</strong> against #{link_to other.to_s, profile_path(other.to_s)}"
+      end
+    else
+      ret = event[1].to_s
+    end
+    ret.html_safe
   end
 
   

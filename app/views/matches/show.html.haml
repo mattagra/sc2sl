@@ -1,0 +1,255 @@
+#newsmain
+  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "800"}
+    %tbody
+      %tr
+        %td{:rowspan => "2", :width => "356"}
+          %img{:align => "middle", :alt => "", :height => "100", :hspace => "10", :src => "/css/images/teams/aaa.jpg", :width => "100"}
+            %span.matchtitre
+              %strong
+                = link_to @match.team0.name, team_path(@match.team0.slug) 
+        %td{:height => "41", :width => "124"}
+          %div{:align => "center"}
+            %p.playoffteam  
+        %td{:rowspan => "2", :width => "320"}
+          %div{:align => "right"}
+            %span.playoffteam
+              %strong
+                = link_to @match.team1.name, team_path(@match.team1.slug)
+            %img{:align => "middle", :alt => "", :height => "100", :hspace => "10", :src => "/css/images/teams/eg.jpg", :width => "100"}
+      %tr
+        %td
+          %div{:align => "center"}
+            %p.playoffteam
+              %strong VS
+            %p.playoffteam
+              %span.matchpre
+                %a{:href => "#"}= @match.weeks_id
+            %p.playoffteam  
+            %p.playoffteam  
+      %tr
+        %td{:colspan => "2", :height => "500", :rowspan => "2", :valign => "top"}
+          %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "479"}
+            %tbody
+              %tr
+                %td{:colspan => "2"}
+                  %p.matchpre  
+                  %p.matchpre Date: Aug. 15 22:20 CET
+                  %p.matchpre
+                    Vod:
+                    %a{:href => "#"} Yes
+                  %p.matchpre  
+              %tr
+                %td{:width => "101"}
+                  %a{:href => "#"}
+                    %img{:align => "left", :alt => "shakuras", :border => "1", :height => "75", :src => "/css/images/maps/shakuras2.jpg", :width => "91"}/
+                %td{:valign => "top", :width => "378"}
+                  %p.matchlist{:align => "left"}
+                    %span.playoffteam.playoffteam
+                      %a{:href => "#"}
+                        %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}
+                          %strong Player 1
+                      %strong >
+                      %a{:href => "#"}
+                        %img{:alt => "terran", :height => "13", :src => "/css/images/races/jaune.jpg", :width => "21"} Player 21
+                  %p.matchlist{:align => "left"}  
+                  %p.matchlist.ntitle2{:align => "left"} Map: Shakuras plateau
+                  %p.matchlist{:align => "left"}
+                    %span.ntitle2
+                      Replay:  3.5/5 -
+                      %a{:href => "#"} 0 com - 0 dl
+              %tr
+                %td  
+                %td  
+              %tr
+                %td
+                  %a{:href => "#"}
+                    %img{:align => "left", :alt => "shakuras", :border => "1", :height => "75", :src => "/css/images/maps/cavern2.jpg", :width => "91"}/
+                %td{:valign => "top"}
+                  %p.matchlist{:align => "left"}
+                    %a{:href => "#"}
+                      %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}
+                        %strong Player 1
+                    %strong >
+                    %a{:href => "#"}
+                      %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}/
+                    %a{:href => "#"} Player 22
+                  %p.matchlist{:align => "left"}  
+                  %p.matchlist.ntitle2{:align => "left"} Map: Xel Naga Caverns
+                  %p.matchlist{:align => "left"}
+                    %span.ntitle2
+                      Replay:  3.5/5 -
+                      %a{:href => "#"} 0 com - 0 dl
+              %tr
+                %td  
+                %td  
+              %tr
+                %td
+                  %a{:href => "#"}
+                    %img{:align => "left", :alt => "shakuras", :border => "1", :height => "75", :src => "/css/images/maps/shakuras2.jpg", :width => "91"}/
+                %td{:valign => "top"}
+                  %p.matchlist{:align => "left"}
+                    %a{:href => "#"}
+                      %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}
+                        %strong Player 1
+                    %strong >
+                    %a{:href => "#"}
+                      %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}/
+                    %a{:href => "#"} Player 23
+                  %p.matchlist{:align => "left"}  
+                  %p.matchlist.ntitle2{:align => "left"} Map: Shakuras plateau
+                  %p.matchlist{:align => "left"}
+                    %span.ntitle2
+                      Replay:  3.5/5 -
+                      %a{:href => "#"} 0 com - 0 dl
+              %tr
+                %td  
+                %td  
+              %tr
+                %td{:bgcolor => "#CCCCCC"}
+                  %a{:href => "#"}
+                    %img{:align => "left", :alt => "shakuras", :border => "1", :height => "75", :src => "/css/images/maps/shakuras2.jpg", :width => "91"}/
+                %td{:bgcolor => "#CCCCCC", :valign => "top"}
+                  %p.matchlist{:align => "left"}
+                    %a{:href => "#"}
+                      %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"} Player 1
+                    %strong <
+                    = succeed "*" do
+                      %strong
+                        %a{:href => "#"}
+                          %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}/
+                        %a{:href => "#"} Player 21
+                    REVIVE *
+                  %p.matchlist{:align => "left"}  
+                  %p.matchlist.ntitle2{:align => "left"} Map: Shakuras plateau
+                  %p.matchlist{:align => "left"}
+                    %span.ntitle2
+                      Replay:  3.5/5 -
+                      %a{:href => "#"} 0 com - 0 dl
+              %tr
+                %td  
+                %td  
+              %tr
+                %td
+                  %a{:href => "#"}
+                    %img{:align => "left", :alt => "shakuras", :border => "1", :height => "75", :src => "/css/images/maps/shakuras2.jpg", :width => "91"}/
+                %td{:valign => "top"}
+                  %p.matchlist{:align => "left"}
+                    %a{:href => "#"}
+                      %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"} Player 2
+                    %strong <
+                    %strong
+                      %a{:href => "#"}
+                        %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}/
+                      %a{:href => "#"} Player 21
+                  %p.matchlist{:align => "left"}  
+                  %p.matchlist.ntitle2{:align => "left"} Map: Shakuras plateau
+                  %p.matchlist{:align => "left"}
+                    %span.ntitle2
+                      Replay:  3.5/5 -
+                      %a{:href => "#"} 0 com - 0 dl
+              %tr
+                %td  
+                %td  
+              %tr
+                %td
+                  %a{:href => "#"}
+                    %img{:align => "left", :alt => "shakuras", :border => "1", :height => "75", :src => "/css/images/maps/shakuras2.jpg", :width => "91"}/
+                %td{:valign => "top"}
+                  %p.matchlist{:align => "left"}
+                    %a{:href => "#"}
+                      %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"} Player 3
+                    %strong <
+                    %strong
+                      %a{:href => "#"}
+                        %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}/
+                      %a{:href => "#"} Player 21
+                  %p.matchlist{:align => "left"}  
+                  %p.matchlist.ntitle2{:align => "left"} Map: Shakuras plateau
+                  %p.matchlist{:align => "left"}
+                    %span.ntitle2
+                      Replay:  3.5/5 -
+                      %a{:href => "#"} 0 com - 0 dl
+              %tr
+                %td  
+                %td  
+              %tr
+                %td{:bgcolor => "#CCCCCC"}
+                  %a{:href => "#"}
+                    %img{:align => "left", :alt => "shakuras", :border => "1", :height => "75", :src => "/css/images/maps/shakuras2.jpg", :width => "91"}/
+                %td{:bgcolor => "#CCCCCC", :valign => "top"}
+                  %p.matchlist{:align => "left"}
+                    %a{:href => "#"}
+                      %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}
+                        %strong Player 3 >
+                    %strong
+                      %a{:href => "#"}
+                        %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}/
+                    %a{:href => "#"} Player 21
+                    * REVIVE *
+                  %p.matchlist{:align => "left"}  
+                  %p.matchlist.ntitle2{:align => "left"} Map: Shakuras plateau
+                  %p.matchlist{:align => "left"}
+                    %span.ntitle2
+                      Replay:  3.5/5 -
+                      %a{:href => "#"} 0 com - 0 dl
+              %tr
+                %td  
+                %td  
+          %p  
+          %p.matchlist{:align => "center"}
+            %strong>
+              %a{:href => "#"} Against All Authority
+            4 - 3
+            %a{:href => "#"} Evil Geniuses
+        %td{:height => "72", :valign => "top"}
+          %p.matchlist{:align => "left"}  
+      %tr
+        %td{:valign => "top"}
+          %p.matchlist{:align => "left"}
+            %a{:href => "#"} Against All Authority
+            revive (200 votes)
+          %blockquote
+            %p.matchlist{:align => "left"}
+              %strong
+                %a{:href => "#"}
+                  %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}/
+                Player 1 (100)
+            %p.matchlist{:align => "left"}
+              %a{:href => "#"}
+                %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}/
+              Player 2 (60)
+            %p.matchlist{:align => "left"}
+              %a{:href => "#"}
+                %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}/
+              Player 3 (40)
+          %p{:align => "left"}  
+          %p.matchlist{:align => "left"}
+            %a{:href => "#"} Evil Geniuses
+            revive (200 votes)
+          %blockquote
+            %p.matchlist{:align => "left"}
+              %strong
+                %a{:href => "#"}
+                  %img{:alt => "terran", :height => "13", :src => "/css/images/races/jaune.jpg", :width => "21"}/
+                Player 21 (100)
+            %p.matchlist{:align => "left"}
+              %a{:href => "#"}
+                %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}/
+              Player 22 (60)
+            %p.matchlist{:align => "left"}
+              %a{:href => "#"}
+                %img{:alt => "terran", :height => "13", :src => "/css/images/races/rouge.jpg", :width => "21"}/
+              Player 23 (40)
+
+%h3 Comments:
+#comments
+  = render @match.comments
+  - if @match.comments.size > 0
+    = render :partial => "comments/comment_footer"
+%p= render :partial => "comments/form"
+= link_to "Start Live Voting", new_match_vote_event_path(@match.id)
+|
+- if can? :edit, @match
+  = link_to 'Edit', edit_match_path(@match)
+  |
+= link_to 'Back', matches_path 

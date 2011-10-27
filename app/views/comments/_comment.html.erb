@@ -5,7 +5,7 @@
         <div class="commentup" id="comment_<%= comment.id %>">
           <div id="thumbs">
             <div align="right">
-              <%= link_to "Quote", new_comment_path(:comment_id => comment.id, :back_url => request.fullpath) %> -
+              <% if can? :create, Comment %><%= link_to "Quote", new_comment_path(:comment_id => comment.id, :back_url => request.fullpath) %> -<% end %>
               <% if can? :edit, comment %><%= link_to "Edit", edit_comment_path(comment, :back_url => request.fullpath) %> -<% end %>
               <% if can? :edit, Moderation %>
                 <%- if comment.moderation %>

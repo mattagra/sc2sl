@@ -58,7 +58,7 @@ class ArticlesController < ApplicationController
       @comment = Comment.new_of_type(@article)
       @current_page = (params[:page] || 1).to_i
       @comments_count = @article.comments.count
-      @per_page = 1
+      @per_page = 20
       @comments= @article.comments.paginated(@current_page, @per_page)
 
       @page = "SC2SL News"
