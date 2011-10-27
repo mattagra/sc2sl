@@ -14,7 +14,7 @@ end
 
 gem 'authlogic'
 gem 'daemons'
-
+gem 'activeadmin'
 gem 'stringex'
 gem 'paperclip'
 gem 'acts-as-taggable-on'
