@@ -1,6 +1,7 @@
 class Match < ActiveRecord::Base
 
   #Associations
+  has_many :bets
   has_many :games
   has_many :completed_games, :class_name => "Game", :conditions => "result is not null and result <> 0"
   has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Match.to_s}'"

@@ -1,6 +1,7 @@
 class Team < ActiveRecord::Base
 
   #Associations
+  has_many :bet
   belongs_to :country
   belongs_to :user
   has_and_belongs_to_many :seasons

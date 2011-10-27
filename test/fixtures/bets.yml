@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  bet: MyString
+  match_id: 1
+  user_id: 1
+  bet_score: 1
+  bet_team_id: 1
+  bet_player_id: 1
+
+two:
+  bet: MyString
+  match_id: 1
+  user_id: 1
+  bet_score: 1
+  bet_team_id: 1
+  bet_player_id: 1
