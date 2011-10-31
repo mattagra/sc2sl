@@ -95,5 +95,5 @@
 
 
 
-  <% if @user.player and can? :edit, @user.player %><%= link_to 'Edit', edit_player_path(@user.player) %> |<% end %>
+  <% if @user.player and can? :edit, @user.player %><%= link_to 'Edit', edit_player_path(@user.player) %> | <% elsif can? :create, Player %><%= link_to "Create Player", new_player_path(:user_id => @user.id) %><% end %>
   <%= link_to 'Back', players_path %>

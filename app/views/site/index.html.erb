@@ -30,7 +30,7 @@
             <div class="ranking-ligne-titre-ml">GL</div>
 
           </div>
-          <% @season = Season.first %>
+          <% @season = Season.published.last %>
           <% if @season %>
             <% @season.teams.sort_by{|t| -1 * @season.points(t)}.each_with_index do |team, i| %>
               <div class="ranking-ligne" <%- if i % 2 == 1 %>style="background-color : #e8e8e8;"<%- end %>>

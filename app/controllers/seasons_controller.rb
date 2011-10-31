@@ -49,7 +49,7 @@ class SeasonsController < ApplicationController
 
     respond_to do |format|
       if @season.save
-        schedule_matches(@season, params[:weeks], params[:days], params[:hour], params[:minute])
+        schedule_matches(@season, params[:weeks], params[:days], params[:date][:hour], params[:date][:minute])
         add_playoff_matches(@season, params[:num_teams])
         format.html { redirect_to(@season, :notice => 'Season was successfully created.') }
         format.xml  { render :xml => @season, :status => :created, :location => @season }
@@ -67,7 +67,7 @@ class SeasonsController < ApplicationController
 
     respond_to do |format|
       if @season.update_attributes(params[:season])
-        schedule_matches(@season, params[:weeks], params[:days], params[:hour], params[:minute])
+        schedule_matches(@season, params[:weeks], params[:days], params[:date][:hour], params[:date][:minute])
         add_playoff_matches(@season, params[:num_teams])
         format.html { redirect_to(@season, :notice => 'Season was successfully updated.') }
         format.xml  { head :ok }
@@ -98,7 +98,7 @@ class SeasonsController < ApplicationController
       days.each do |day|
         rules << RRSchedule::Rule.new(:wday => day.to_i, :ps => "1")
       end
-      schedule=RRSchedule::Schedule.new(:teams => season.teams,
+      schedule=RRSchedule::Schedule.new(:teams => season.teams.collect{|t| t.id},
         :rules => rules,
         :cycles => 1,
         :shuffle => true
@@ -112,7 +112,7 @@ class SeasonsController < ApplicationController
         days.each do |day|
           t = Time.now.end_of_week + (week.to_i).week + day.to_i.days + h.to_i.hours + m.to_i.minutes + 1.second
           game = games.shift
-          Match.new(:team0 => game[0].team_a, :team1 => game[0].team_b, :season_id => season.id, :weeks_id => w, :scheduled_at => t, :best_of => 7, :maps => week_maps).save
+          Match.new(:team0_id => game[0].team_a, :team1_id => game[0].team_b, :season_id => season.id, :weeks_id => w, :scheduled_at => t, :best_of => 7, :maps => week_maps).save
         end
         w += 1
       end

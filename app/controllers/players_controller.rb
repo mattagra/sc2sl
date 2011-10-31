@@ -46,7 +46,7 @@ class PlayersController < ApplicationController
   # GET /players/new
   # GET /players/new.xml
   def new
-    @player = Player.new
+    @player = Player.new(:user_id => params[:user_id])
 
     respond_to do |format|
       format.html # new.html.erb
