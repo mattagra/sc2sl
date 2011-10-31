@@ -20,5 +20,6 @@ class GameSweeper < ActionController::Caching::Sweeper
     # Expire a fragment
     expire_fragment('recent_games')
     expire_fragment('season_rankings')
+    expire_fragment('season_rankings')
   end
 end
