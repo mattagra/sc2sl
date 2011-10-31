@@ -46,7 +46,7 @@ namespace :deploy do
       require 'erb'
       on_rollback { run "rm #{shared_path}/system/maintenance.html" }
 
-      reason = ENV['REASON']
+      reason = ENV['REASON'] || "Down for scheduled maintenance"
       deadline = ENV['UNTIL']
       template = File.read('app/views/layouts/maintenance.html.erb')
       page = ERB.new(template).result(binding)
@@ -79,7 +79,7 @@ namespace :delayed_job do
 end
 
 
-before 'deploy:restart', 'deploy:web:disable REASON="Adding new features!" '
+before 'deploy:restart', 'deploy:web:disable'
 after 'deploy:update_code', 'deploy:symlink_shared'
 after "deploy:restart", "delayed_job:restart"
 after "delayed_job:restart", 'deploy:web:enable'
