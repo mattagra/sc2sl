@@ -34,5 +34,17 @@ ActiveAdmin::Dashboards.build do
   #   section "Recent User", :priority => 1
   #
   # Will render the "Recent Users" then the "Recent Posts" sections on the dashboard.
+section "New Users" do
+  table_for User.order("created_at desc").limit(100) do
+    column :login do |user|
+      link_to user.login, admin_user_path(user)
+    end
+    column :email
+    column :country
+    column :current_login_ip
+  end
+  strong { link_to "View All Users", admin_users_path }
+end
+
 
 end

@@ -14,7 +14,7 @@ end
 
 gem 'authlogic'
 gem 'daemons'
-gem 'activeadmin'
+gem 'activeadmin', :git => 'git://github.com/turlockmike/active_admin.git'
 gem 'stringex'
 gem 'paperclip'
 gem 'acts-as-taggable-on'

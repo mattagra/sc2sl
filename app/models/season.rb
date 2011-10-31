@@ -3,7 +3,7 @@ class Season < ActiveRecord::Base
   #Associations
   has_and_belongs_to_many :teams
   has_and_belongs_to_many :maps,  :join_table => "seasons_maps"
-  has_many :matches
+  has_many :matches, :dependent => :destroy
   has_many :regular_matches, :class_name => "Match", :conditions => "playoff_id is null"
   has_many :playoff_matches, :class_name => "Match", :conditions => "playoff_id is not null"
   has_many :games, :through => :matches

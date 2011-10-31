@@ -137,3 +137,4 @@
 
 
 <% if can? :edit, @season %><%= link_to 'Edit', edit_season_path(@season) %><% end %>
+<% if can? :destroy, @season %><%= link_to 'Delete', season_path(@season), :method => :delete, :confirm => "Are you sure you wish to destroy this season and all matches asssociated with it?" %><% end %>

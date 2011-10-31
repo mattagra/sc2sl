@@ -122,7 +122,7 @@ module BBRuby
       /\[dd\](.*?)\[\/dd\]/mi,
       '<dd>\1</dd>',
       'Definition definitions',
-      '[dd]my definition[/dd',
+      '[dd]my definition[/dd]',
       :definition],
     'Quote' => [
       /\[quote(:.*)?="?(.*?)"?\](.*?)\[\/quote\1?\]/mi,
@@ -247,9 +247,9 @@ module BBRuby
       text = process_tags(text, tags_alternative_definition, escape_html, method, *tags)
       
       # parse spacing
-      if parse_breaks
+      if true # parse_breaks
         text.gsub!( /\r\n?/, "\n" )
-        text.gsub!( /\n/, "<br />\n" )
+        text.gsub!( /\n/, "<br />" )
       end
       # return markup
       text
@@ -286,7 +286,7 @@ module BBRuby
       end
       text.gsub!(/\[quote\]/, '<fieldset><legend>Quote:</legend><blockquote>')
       text.gsub!(/\[quote(:.*)?="?(.*?)"?\]/, '<fieldset><legend>Quote: \2</legend><blockquote>')
-      text.gsub!(/\[\/quote\]/, '</blockquote></fieldset>')
+      text.gsub!(/\[\/quote\]/, '</blockquote></fieldset><br />')
       
       tags_definition = @@tags.merge(tags_alternative_definition)
 
