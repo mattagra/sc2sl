@@ -1,3 +1,4 @@
+default_run_options[:pty] = true
 set :application, "sc2sl"
 set :domain,      "vps13407.ovh.net"
 set :repository,  "git@github.com:turlockmike/sc2sl.git"
@@ -6,6 +7,7 @@ set :branch, "master"
 set :scm, "git"
 set :scm_verbose, true
 set :user, "root"
+set :password, "MAzrdNzV"
 
 set :default_environment, {
   'PATH' => "/var/lib/gems/1.8/bin:$PATH"
