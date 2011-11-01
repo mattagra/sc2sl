@@ -6,7 +6,7 @@
         <a href="#newcomment"><img src="/css/images/comment/add.png" alt="add a comment"/></a>
       </div>
       <div id=textcom align=right>
-        <a href="#comments">2</a>
+        <a href="#comments"><%= @game.comments.count %></a>
       </div>
       (<%= @game.player0.user.race[0,1] %>) <%= link_to @game.player0.login, profile_path(@game.player0.login) %> Vs. (<%= @game.player1.user.race[0,1] %>) <%= link_to @game.player1.user.login, profile_path(@game.player1.login) %><br/>
       <div id="undertitle">

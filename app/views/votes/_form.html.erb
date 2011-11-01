@@ -1,7 +1,7 @@
 <%  if @vote.new_record? %>
   VOTE
   <% form_for @vote, :url => match_vote_event_votes_path(:match_id => @vote.vote_event.match.id, :vote_event_id => @vote.vote_event.id) do |f| %>
-    <% @vote.vote_event.players.each do |p| %>
+    <% @vote.vote_event.players.uniq.each do |p| %>
       <%= f.radio_button :player_id, p.id %>
       <%= f.label :player_id, p.login %>
   <br />

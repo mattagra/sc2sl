@@ -111,8 +111,10 @@ module ApplicationHelper
       "/css/images/last-replays/goldstar.png"
     elsif rating > 3.5
       "/css/images/last-replays/silverstar.png"
-    else
+    elsif rating > 0
       "/css/images/last-replays/bronzestar.png"
+    else
+      "/css/images/last-replays/emptystar.png"
     end
   end
 

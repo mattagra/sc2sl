@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       UserMailer.delay.activation(@user)
       redirect_to finish_registration_url
     else
-      flash[:notice] = "Some errors prevented you from registering "
+      flash[:warning] = "Some errors prevented you from registering "
       render :action => :new
     end
   end

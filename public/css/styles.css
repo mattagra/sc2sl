@@ -17,7 +17,7 @@ body2 {
     text-align : center;
     color : #000000;
     font-size: 11px;
-    background-repeat: no-repeat;
+    background-repeat: no-repFeat;
     background-position : 50% 0%;
     background-color : #606060;;
 }
@@ -444,7 +444,7 @@ table.bracket {
     float : left;
     width : 1000px;
     height : 257px;
-    background-color: #808080;
+    /* background-color: #808080; */
     border-top : 1px solid black;
 
 }
