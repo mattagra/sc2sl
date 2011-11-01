@@ -69,8 +69,6 @@
 // NOTE: the hour is in 24 hour format. 0=12am, 15=3pm etc
 // format: dateFuture1 = new Date(year,month-1,day,hour,min,sec)
 // example: dateFuture1 = new Date(2003,03,26,14,15,00) = April 26, 2003 - 2:15:00 pm
-<% v = VoteEvent.last %>
-dateFuture1 = new Date(<%= v.ended_at.in_time_zone.year  %>,<%= v.ended_at.in_time_zone.month - 1  %>,<%= v.ended_at.in_time_zone.day   %>,<%= v.ended_at.in_time_zone.hour   %>,<%= v.ended_at.in_time_zone.min   %>,<%= v.ended_at.in_time_zone.sec   %>);
 
 // TESTING: comment out the line below to print out the "dateFuture" for testing purposes
 //document.write(dateFuture +"<br />");
@@ -115,11 +113,15 @@ function GetCount(ddate,iid){
 		setTimeout(function(){GetCount(ddate,iid)}, 1000);
 	}
 }
+<% v = VoteEvent.last %>
+  <% if v %>
+dateFuture1 = new Date(<%= v.ended_at.in_time_zone.year  %>,<%= v.ended_at.in_time_zone.month - 1  %>,<%= v.ended_at.in_time_zone.day   %>,<%= v.ended_at.in_time_zone.hour   %>,<%= v.ended_at.in_time_zone.min   %>,<%= v.ended_at.in_time_zone.sec   %>);
 
 window.onload=function(){
 	GetCount(dateFuture1, 'countbox1');
 	//you can add additional countdowns here (just make sure you create dateFuture2 and countbox2 etc for each)
 };
+<% end  %>
 </script>
 <%= Time.zone %>
 <%= v.ended_at.in_time_zone %>
