@@ -12,13 +12,13 @@ class GamesController < ApplicationController
     @per_page = 20
 
 
-    if [:team_id].to_i > 0
-      @team = Team.find([:team_id].to_i)
+    if params[:team_id]
+      @team = Team.find(params[:team_id])
       @games = @team.games.paginated(@current_page, @per_page)
       @games_count = @team.games.count
       @keywords += [@team.name]
-    elsif [:player_id]
-      @player = Player.find([:player_id])
+    elsif params[:player_id]
+      @player = Player.find(params[:player_id])
       @games = @player.games.paginated(@current_page, @per_page)
       @games_count = @player.games.count
       @keywords += [@player.login]
