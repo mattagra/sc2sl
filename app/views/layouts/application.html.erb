@@ -145,7 +145,7 @@
 
               <div class="menu-separation"></div>
               <% @season = Season.published.last %>
-              <div class="menu-lien"><%= link_to "LEAGUE RESULTS", (if @season then season_path(@season) else seasons_path end ) %></div>
+              <div class="menu-lien"><%= link_to "LEAGUE RESULTS", seasons_path ) %></div>
 
               <div class="menu-separation"></div>
 
