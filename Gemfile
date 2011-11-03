@@ -29,6 +29,7 @@ gem "cancan"
 gem 'yaml_db'
 gem "memcache-client"
 gem 'delayed_job'
+
 #gem 'sprockets', :git => "git://github.com/sstephenson/sprockets"
 
 #group :production do
