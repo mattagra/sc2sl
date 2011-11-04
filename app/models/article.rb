@@ -11,15 +11,10 @@ class Article < ActiveRecord::Base
   validates_attachment_presence :photo                    
   validates_attachment_size :photo, :less_than=>1.megabyte
   validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif', 'image/pjpeg', 'image/x-png']
-  validates_attachment_size :featured_photo, :less_than=>1.megabyte, :if => Proc.new { |o| !o.featured_photo_file_name.blank? }
-  validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif'], :if => Proc.new { |o| !o.featured_photo_file_name.blank? }
-  validates :featured_photo, :presence => true, :if => Proc.new{|o| o.featured == true}
+
 
   #attached
   has_attached_file :photo, {:styles => { :normal => "643x253!" }, :url => "/shared/articles/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
-  has_attached_file :featured_photo, {:styles => {:normal => "524x140"}, :url => "/shared/articles/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
-
-
 
 
   #Associations

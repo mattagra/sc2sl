@@ -1407,7 +1407,7 @@ a.nivo-prevNav {
 }
 .ntitle
 {
-    font-size:12px;
+    font-size:13px;
 }
 .ntitle2
 {
@@ -1752,6 +1752,11 @@ table#user{
     color:blue;
     cursor:pointer;
     background-color: lightgoldenrodyellow;
+}
+
+#calendar {
+  float:left;
+  width: 353px;
 }
 
 #calendar table {

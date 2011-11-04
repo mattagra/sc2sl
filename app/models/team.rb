@@ -12,7 +12,7 @@ class Team < ActiveRecord::Base
 
 
   #Validations
-  validates :name, :presence => true, :format => {:with =>  /^[0-9a-zA-Z\s\-]+$/}
+  validates :name, :presence => true, :format => {:with =>  /^[0-9a-zA-Z\s\-]+$/}, :length => {:minimum => 2, :maximum => 18}
   validates :country, :presence => true
   validates :short_name, :presence => true, :format => {:with =>  /^[0-9a-zA-Z\s\-]+$/}
   validates :description, :length => {:maximum => 546}

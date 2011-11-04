@@ -93,18 +93,6 @@
   </div>
 
   <div class="field">
-    <%= f.label :featured %>
-    <%= f.check_box :featured %>
-  </div>
-  <div class="field">
-    <%= f.label :featured_photo %>524x140*
-    <%= f.file_field :featured_photo %>
-    <br />
-    <% if @article.featured_photo.exists? then %>
-      <%= image_tag @article.featured_photo.url(:normal) %>
-    <% end %>
-  </div>
-  <div class="field">
     <%= f.label :tag_list %><br />
     <%= f.text_field :tag_list %>
   </div>

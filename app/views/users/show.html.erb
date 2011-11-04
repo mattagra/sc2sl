@@ -17,7 +17,7 @@
   <tr> <td class="playertab">
       <br/>
       <% if @user.country  %>
-        <%= @user.country %> <%= image_tag @user.country.flag %>
+         <%= image_tag @user.country.flag %>
       <% end %>   <%= @user.full_name %></br>
       <%= @user.age %>  years old  <% if @user == current_user or current_admin %>
         | Email: <%=h @user.email %> | <% end %>
@@ -67,6 +67,8 @@
     <div id="historictab" class="ddpaneltab">
       <a href="#"><span>SHOW MORE </span></a>				</div>
   </div>
+  <% else %>
+  <span class="ntitle ntitle style7"><strong>Bio:</strong> <%= @user.profile_text %> <br/></span>
   <% end %>
   <div align="right">
     <script type="text/javascript">

@@ -87,7 +87,7 @@ cache_sweeper :match_sweeper
 
     respond_to do |format|
       if @match.update_attributes(params[:match])
-        format.html { redirect_to(@match, :notice => 'Match was successfully updated.') }
+        format.html { render(:action => "edit" , :notice => 'Match was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

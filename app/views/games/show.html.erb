@@ -10,7 +10,7 @@
       </div>
       (<%= @game.player0.user.race[0,1] %>) <%= link_to @game.player0.login, profile_path(@game.player0.login) %> Vs. (<%= @game.player1.user.race[0,1] %>) <%= link_to @game.player1.user.login, profile_path(@game.player1.login) %><br/>
       <div id="undertitle">
-        March 25th, 2011 17:40
+        <%= american_time(@game.updated_at, true) %>
       </div>
     </div>
 
