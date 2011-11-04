@@ -123,12 +123,6 @@ class ApplicationController < ActionController::Base
   end
 
 
-  def set_timezone
-    min = cookies[:timezone].to_i
-    Time.zone = ActiveSupport::TimeZone[-min.minutes] || "UTC"
-  end
-
-
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
@@ -210,6 +204,14 @@ class ApplicationController < ActionController::Base
     @subpage = ""
     @description = "Welcome to SC2 Survivor League. The top international league that involves you, the fan."
     @keywords = ["Starcraft 2", "sc2", "Survivor League", "p6e", "protoss", "zerg", "terran"]
+  end
+
+  def set_timezone
+    logger.debug "Setting the time zone."
+    logger.debug "Current User #{current_user.id}"
+    logger.debug "User's time zone #{current_user.time_zone}"
+    Time.zone = current_user.time_zone || SC2SL::Application.config.time_zone
+    
   end
 
 

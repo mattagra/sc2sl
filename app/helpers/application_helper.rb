@@ -9,9 +9,9 @@ module ApplicationHelper
   
   def american_time(time, year = true)
     if year
-      time.strftime("%b %d, %Y %H:%M")
+      time.strftime("%b %d, %Y %H:%M %Z")
     else
-      time.strftime("%b %d %H:%M")
+      time.strftime("%b %d %H:%M %Z")
     end
   end
 

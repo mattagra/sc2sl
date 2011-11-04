@@ -32,6 +32,13 @@
   </td>
 </tr>
 <tr>
+  <td valign="top"><p><strong>Timezone</strong> *</p>
+    <p class="ntitle2">Time Zone</p></td>
+  <td colspan="3" valign="top">
+    <%=  form.select :time_zone  , ActiveSupport::TimeZone.all.collect{|t| [t.to_s, t.name]},  { :prompt => true }, :class => "form-dd" %>
+  </td>
+</tr>
+<tr>
   <td valign="top"><strong><label for="user_birthdate"> Birthdate <span class="small">Year / Month / day</span></label></strong></td>
   <td colspan="3" valign="top"><%=  form.date_select :birthdate, :start_year => Time.now.year - 100, :end_year => Time.now.year %></td>
 </tr>
