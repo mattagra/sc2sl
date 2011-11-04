@@ -90,76 +90,77 @@
             <%= link_to ">", :month => (@date.end_of_month+1).strftime("%m"), :year => (@date.end_of_month+1).strftime("%Y") %>
           </div>
         </div>
+        <div id="calendar">
+          <% calendar_for Array(@matches), :year => @date.year, :month => @date.month do |calendar| %>
+            <%= calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
 
-        <% calendar_for Array(@matches), :year => @date.year, :month => @date.month do |calendar| %>
-          <%= calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
-
-          <% calendar.day(:day_method => :scheduled_at) do |date, matches| %>
-            <% if date.month == @date.month %>
-              <% if matches.size == 0 %>
-                <%= date.day %>
-              <% else %>
-                <% str = "" %>
-                <% id = 0 %>
-                <% for match in matches %>
-                  <% str += match.title + "\n" %>
-                  <% id = match.id %>
+            <% calendar.day(:day_method => :scheduled_at) do |date, matches| %>
+              <% if date.month == @date.month %>
+                <% if matches.size == 0 %>
+                  <%= date.day %>
+                <% else %>
+                  <% str = "" %>
+                  <% id = 0 %>
+                  <% for match in matches %>
+                    <% str += match.title + "\n" %>
+                    <% id = match.id %>
+                  <% end %>
+                  <%= link_to date.day, match_path(id), :title => str %>
                 <% end %>
-                <%= link_to date.day, match_path(id), :title => str %>
               <% end %>
             <% end %>
           <% end %>
-        <% end %>
+        </div>
 
 
 
-    <% end %>
+      <% end %>
 
-    <% cache("recent_news") do %>
+      <% cache("recent_news") do %>
 
-      <div id="middlenews">
+        <div id="middlenews">
 
-        <div id="middle-titre" style="margin-bottom:3px">
+          <div id="middle-titre" style="margin-bottom:3px">
 
-          <div id="middle-titre-texte">LAST NEWS</div>
-          <div id="middle-titre-texte-right"><%= link_to "+see all", articles_path %></div>
+            <div id="middle-titre-texte">LAST NEWS</div>
+            <div id="middle-titre-texte-right"><%= link_to "+see all", articles_path %></div>
+
+          </div>
+
+          <% @articles.each do |article| %>
+            <%= link_to content_tag(:font, article.created_at.strftime(" %m/%d") + " - ", :class => "ntitle2") + content_tag(:font, article.title, :class => "ntitle"), view_article_path(article) %><br/>
+          <% end %>
+        </div>
+
+      <% end %>
+
+
+      <% cache("recent_games") do %>
+        <div id="middle">
+
+          <div id="middle-titre">
+
+            <div id="middle-titre-texte">LAST REPLAYS</div>
+
+            <div id="middle-titre-texte-right">+see all</div>
+
+            <table width="353" cellpadding="0" cellspacing="0" border="0" id="replays_table">
+              <% @games.each do |game| %>
+                <tr>
+                  <td height="26" width="34" valign="middle">&nbsp;&nbsp;<%= image_tag rating_star_image(game.rating_average) %></td>
+                  <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} <span style='font-weight: normal;'>#{game.player0.team.short_name}</span> <b>#{game.player0.login}</b>".html_safe, replay_path(game)).html_safe %></td>
+                  <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} <span style='font-weight: normal;'>#{game.player1.team.short_name}</span> <b>#{game.player1.login}</b>".html_safe, replay_path(game)).html_safe %></td>
+                  <td width="27" valign="middle" vspace="2"><%= link_to(image_tag("/css/images/last-replays/dl2.gif"), replay_path(game)).html_safe %></td>
+                </tr>
+              <% end %>
+            </table>
+
+          </div>
 
         </div>
 
-        <% @articles.each do |article| %>
-          <%= link_to content_tag(:font, article.created_at.strftime(" %m/%d") + " - ", :class => "ntitle2") + content_tag(:font, article.title, :class => "ntitle"), view_article_path(article) %><br/>
-        <% end %>
-      </div>
+      <% end %>
+    </div>
 
-    <% end %>
-
-
-    <% cache("recent_games") do %>
-      <div id="middle">
-
-        <div id="middle-titre">
-
-          <div id="middle-titre-texte">LAST REPLAYS</div>
-
-          <div id="middle-titre-texte-right">+see all</div>
-
-          <table width="353" cellpadding="0" cellspacing="0" border="0" id="replays_table">
-            <% @games.each do |game| %>
-              <tr>
-                <td height="26" width="34" valign="middle">&nbsp;&nbsp;<%= image_tag rating_star_image(game.rating_average) %></td>
-                <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} <span style='font-weight: normal;'>#{game.player0.team.short_name}</span> <b>#{game.player0.login}</b>".html_safe, replay_path(game)).html_safe %></td>
-                <td  width="150"  valign="absmiddle"><%= link_to("#{image_tag(race_icon_url(game.player0.user.race), :align => :top)} <span style='font-weight: normal;'>#{game.player1.team.short_name}</span> <b>#{game.player1.login}</b>".html_safe, replay_path(game)).html_safe %></td>
-                <td width="27" valign="middle" vspace="2"><%= link_to(image_tag("/css/images/last-replays/dl2.gif"), replay_path(game)).html_safe %></td>
-              </tr>
-            <% end %>
-          </table>
-
-        </div>
-
-      </div>
-
-    <% end %>
   </div>
-
-</div>
 </div>

@@ -1754,6 +1754,11 @@ table#user{
     background-color: lightgoldenrodyellow;
 }
 
+#calendar {
+  float:left;
+  width: 353px;
+}
+
 #calendar table {
     border-collapse: collapse;
     width: 100%;
