@@ -1,31 +1,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
 
-
-    <%= javascript_include_tag :defaults %>
-    <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-
+    <META NAME="ROBOTS" CONTENT="NOODP">
+    <meta http-equiv="Content-Language" content="EN-US">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="Description" content="The Starcraft 2 Survivor League is a Starcraft 2 team league event in survivor mode. Vote for your favorite player during a match and bring him back  to life!">
     <meta name="author" content="p6e" />
-
     <meta name="robots" content="index, follow" />
-
     <meta name="googlebot" content="index, follow" />
-
     <meta name="language" content="english" />
-
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />        
+    
     <!-- STYLES  -->
 
     <link href="/favicon.gif" rel="shortcut icon" />
-
     <link href="/css/styles.css" rel="stylesheet" type="text/css"/>
     <link href="/css/smoothness/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
+		<link href="css/images/logo.ico" rel="shortcut icon" />
     <%= ajaxful_rating_style %>
 
     <!-- JAVASCRIPT  -->
 
     <%= auto_discovery_link_tag(:rss, "http://localhost:3000/articles.rss") %>
+    <%= javascript_include_tag :defaults %>
+    <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>
     <script type="text/javascript" src="/js/dddropdownpanel.js"></script>
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
     <script type="text/javascript" src="/js/slider.js"></script>
@@ -36,108 +35,106 @@
       $(document).ready(function() {
         $("input[placeholder]").placeHeld();
       });
-
     </script>
-    <title><%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>SC2SL!</title>
-    <meta name="title" content="<%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>SC2SL" />
+    
+    <script type="text/JavaScript">
+      <!--
+      function MM_swapImgRestore() { //v3.0
+      var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+      }
 
-    <meta name="description" content="<%= (@description + " | ") %> <%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>SC2SL" />
+      function MM_preloadImages() { //v3.0
+        var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+          var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+          if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+      }
 
+      function MM_findObj(n, d) { //v4.01
+        var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+          d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+        if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+        for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+        if(!x && d.getElementById) x=d.getElementById(n); return x;
+      }
+
+      function MM_swapImage() { //v3.0
+        var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+         if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+      }
+      //-->
+    </script>    
+    
+    <title><%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>Starcraft 2 Survivor League</title>
+    <meta name="title" content="<%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>Starcraft 2 Survivor League" />
+    <meta name="description" content="<%= (@description + " | ") %> <%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>Starcraft 2 Survivor League" />
     <meta name="keywords" content="<%= @keywords.join(", ") %>" lang="en" xml:lang="en" />
 
   </head>
-  <body>
-    <div id="global">
-
-      <div id="structure-ombre">
-
-        <div id="structure">
-          <div id="structure-login2">
-
-            <div id="login">
-
-              <div id="login-content">
-
-                <div class="login-content-left">
-
-                  <img src="/css/images/login/icones/Login.png" alt="login formulary" align="left" />
-                  <% unless current_user %>
-                    <div class="login-content-texte">
-                      <%= link_to "REGISTER", register_path %> or LOGIN</div>
-                    <%= form_for UserSession.new, :url => user_session_path do |f| %>
-                      <%= f.text_field :login, :placeholder => "Login", :class => "input-login" %>
+  
+  <body onload="MM_preloadImages('/sc2sl/css/images/login/icones/facebook.png','/sc2sl/css/images/login/icones/twitter.gif','/css/images/login/icones/rss.gif','/sc2sl/css/images/login/icones/mirc2.gif','/sc2sl/css/images/slider/justin2.png')">
+	
+	<div id="structure-login2">
+		<div id="login">
+			<div id="login-content">
+				<div class="login-content-left">					
+					<img src="css/images/login/icones/login.png" alt="Formulaire de connexion" align="left"/>
+             <% unless current_user %>
+               <div class="login-content-texte">
+                 <%= link_to "REGISTER", register_path %> or LOGIN</div>
+                   <%= form_for UserSession.new, :url => user_session_path do |f| %>
+                     <%= f.text_field :login, :placeholder => "Login", :class => "input-login" %>
                       <%= f.password_field :password, :placeholder => "Password", :class => "input-login" %>
                       <%= f.hidden_field :remember_me, :value => true %>
                       <%= f.submit "OK", :class => "submit-login" %>
+                   <% end %>
+              <% else %>
+                </div>
+                <div class="login-content-texte2">
+                  Welcome <b><%= current_user.login %></b><br />
+                  <%= link_to "My Account", account_path %> |
+                    <% if current_user.is_moderator? %>
+                      <%= link_to "Advertisements", advertisements_path %> |
+                      <%= link_to "Articles", articles_path %> |
+                      <%= link_to "Comments", comments_path %> |
+                      <%= link_to "Players", players_path %> |
+                      <%= link_to "Teams", teams_path %> |
+                      <%= link_to "Seasons", seasons_path %> |
+                      <%= link_to "Matches", matches_path %> |
+                      <%= link_to "Maps", maps_path %> |
+                      <%= link_to "Newsletters", newsletters_path %> |
+                      <%= link_to "Moderations", moderations_path %> |
+                      <%= link_to "Users", users_path %> |
                     <% end %>
-                  <% else %>
-                    <div class="login-content-texte2">
-                      Welcome <b><%= current_user.login %></b><br />
-                      <%= link_to "My Account", account_path %> |
-                      <% if current_user.is_moderator? %>
-                        <%= link_to "Advertisements", advertisements_path %> |
-                        <%= link_to "Articles", articles_path %> |
-                        <%= link_to "Comments", comments_path %> |
-                        <%= link_to "Players", players_path %> |
-                        <%= link_to "Teams", teams_path %> |
-                        <%= link_to "Seasons", seasons_path %> |
-                        <%= link_to "Matches", matches_path %> |
-                        <%= link_to "Maps", maps_path %> |
-                        <%= link_to "Newsletters", newsletters_path %> |
-                        <%= link_to "Moderations", moderations_path %> |
-                        <%= link_to "Users", users_path %> |
-                      <% end %>
-                      <%= link_to "Logout", logout_path %>
-                    </div>
-                  <% end %>
-
+                    <%= link_to "Logout", logout_path %>
                 </div>
-                <div class="login-content-right">
-                  <a href="/articles.rss"><img width="21" height="20" src="/css/images/login/icones/rss.png" alt="RSS" onmouseover="this.src='/css/images/login/icones/rss.gif'" onmouseout="this.src='/css/images/login/icones/rss.png'" /></a>
-                  <a href="http://www.youtube.com/SC2SL/"><img width="21" height="20" src="/css/images/login/icones/youtube.png" onmouseover="this.src='/css/images/login/icones/youtube.gif'" onmouseout="this.src='/css/images/login/icones/youtube.png'"  alt="YOUTUBE" /></a>
-                  <a href="http://twitter.com/#!/SC2SL"><img width="21" height="20" src="/css/images/login/icones/twitter.png" onmouseover="this.src='/css/images/login/icones/twitter.gif'" onmouseout="this.src='/css/images/login/icones/twitter.png'"  alt="TWITTER" /></a>
+              <% end %>
 
-                  <a href="http://www.facebook.com/pages/SC2SL/258966677449790"><img width="21" height="20" src="/css/images/login/icones/facebook.png" onmouseover="this.src='/css/images/login/icones/facebook.gif'" onmouseout="this.src='/css/images/login/icones/facebook.png'" alt="FACEBOOK" /></a>
+				<div class="login-content-right">
+    			<img src="/css/images/menu/join.png" alt="youtube" border="0" align="top"/>	
+  				<a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('youtube','','/css/images/login/icones/youtube.gif',1)"><img src="/css/images/login/icones/youtube.png" alt="youtube" width="21" height="20" border="0" align="top" id="youtube" /></a>
+			    <a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image62','','/css/images/login/icones/facebook.gif',1)"><img src="/css/images/login/icones/facebook.png" alt="fb" width="21" height="20" border="0" id="Image62" /></a>	
+  				<a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image63','','/css/images/login/icones/twitter.gif',1)"><img src="/css/images/login/icones/twitter.png" alt="twitter" width="21" height="20" border="0" id="Image63" /></a>		
+  				<a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image64','','/css/images/login/icones/rss.gif',1)"><img src="/css/images/login/icones/rss.png" border="0" id="Image64" /></a>				 
+  				<a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image65','','/css/images/login/icones/mirc2.gif',1)"><img src="/css/images/login/icones/mirc2.png" alt="mirc" width="21 height="20" border="0" id="Image65" /></a>				 
+  		</div>
 
-                  <a href="#"><img width="21" height="20" src="/css/images/login/icones/mirc2.png" onmouseover="this.src='/css/images/login/icones/mirc2.gif'" onmouseout="this.src='/css/images/login/icones/mirc2.png'" alt="MIRC" /></a>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-          <div id="header">
-
-            <div id="header-logo">
-
-
-              <div id="header-logo">
-                <div id="hlogo"><a href="http://www.sc2sl.com"><img src="/css/images/header/logo.png" /></a></div>
-              </div>
-
-            </div>
-
-            <div id="header-pub">
-
-              <div id="header-pub-left"></div>
-
-              <div id="header-pub-content"><a href="#"><img src="/css/images/header/pub/logi1.gif" alt="Get the SC2SL discount !" width="570" height="92" /></a></div>
-
-              <div id="header-pub-right"></div>
-
-            </div>
-
-          </div>
+      </div>
+    </div>
+  </div>		
+	
+	<table width="1000" height="92" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="380" align="center" valign="middle"><img src="/css/images/logo2.png" alt="logo" /></td>
+    <td width="620" align="center" valign="middle"><div id="pubhaut"><a href="#"><img src="css/images/header/pub/logi1.gif" alt="Get the SC2SL discount !" width="570" height="92" /></a></div></td>
+  </tr>
+  </table>
 
 
           <div id="menu">
 
             <div id="menu-lien">
 
-              <div class="menu-lien"><a href="/" style="padding-top : 3px;"><img src="/css/images/menu/accueil.png" alt="Retour à l'accueil" /></a></div>
+              <div class="menu-lien"><%= link_to "HOME", root_path %></div>
 
               <div class="menu-separation"></div>
 
@@ -211,7 +208,7 @@
 
                 <div id="live-haut-infos">
 
-                  <div id="live-haut-infos-competition">Week <%= @live_match.weeks_id if @live_match %></div>
+                  <div id="live-haut-infos-competition">Playday <%= @live_match.weeks_id if @live_match %></div>
 
                   <div id="live-haut-infos-team"><%= @live_match.title if @live_match  %></div>
 
@@ -220,14 +217,10 @@
               </div>
 
               <div id="live-ligne">
-                <div id="live-ligne-left" align="left">Commentated by</div>
-
-                <div id="live-ligne-right">
-                  <% if @live_match %>
-                    <% @live_match.casters.each do |caster| %>
-                      <%= link_to caster, profile_path(caster.login) %>&nbsp;
-                    <% end %>
-                  <% end %>
+                <div id="live-ligne-left" align="left">
+  							  <div align="left"><img src="/css/images/flags/fr.png" alt="" width="16" height="11" /> <a href="#">Millenium </a>
+	  						  <img src="/css/images/flags/gb.png" alt="" width="16" height="11" /> <a href="#">GLHF.TV </a>
+  							  <img src="/css/images/flags/ru.png" alt="" width="16" height="11" /> <a href="#">CyberArena </a> </div>                
                 </div>
 
               </div>
@@ -235,23 +228,46 @@
             </div>
 
 
-            <div id="head-sponsors"><div id="hsst"><div id="hsstt">NEXT MATCHES - CET</div>
-              </div>
-              <div id="hsm">
-                <% @upcoming_matches.each do |match| %>
-                  <img src="/css/images/content-bar/sponsors/fleche.gif" alt="" /><%= american_time(match.scheduled_at, false) %> - <%= image_tag match.team0.country.flag %> <%= link_to match.team0.short_name, match_path(match) %> vs <%= image_tag match.team1.country.flag %> <%= link_to match.team1.short_name, match_path(match) %> <br/>
+            <div id="head-sponsors" align="center">
+  					  <table width="353" height="12" border="0" cellpadding="0" cellspacing="2" bordercolor="#000000">
+                <thead>
+                  <tr height="11" align="center" class="month" bgcolor="#f5f5f5">
+                    <td height="20" colspan="5" bgcolor="#FFFFFF"><div align="left" class="ntitle2" style="margin-left:2px"></div></td>
+                    <td height="20" colspan="2" bgcolor="#FFFFFF"><span class="ntitle2">
+                    <%= link_to image_tag("/css/images/content-bar/sponsors/flecheg.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"), 
+                    :month => (@date.beginning_of_month-1).strftime("%m"),  :year => (@date.beginning_of_month-1).strftime("%Y") %>
+                    <%= @date.strftime("%B - %Y")  %> 
+                    <%= link_to image_tag("/css/images/content-bar/sponsors/fleche.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"), 
+                    :month => (@date.beginning_of_month-1).strftime("%m"),  :year => (@date.beginning_of_month-1).strftime("%Y") %></td>
+                  </tr>
+                </thead>
+              </table>            
+              <div id="calendar">
+                <% calendar_for Array(@matches), :year => @date.year, :month => @date.month do |calendar| %>
+                  <%= calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
+                  <% calendar.day(:day_method => :scheduled_at) do |date, matches| %>
+                    <% if date.month == @date.month %>
+                      <% if matches.size == 0 %>
+                        <%= date.day %>
+                      <% else %>
+                        <% str = "" %>
+                        <% id = 0 %>
+                        <% for match in matches %>
+                          <% str += match.title + "\n" %>
+                          <% id = match.id %>
+                        <% end %>
+                        <%= link_to date.day, match_path(id), :title => str %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
                 <% end %>
               </div>
-
-              <div id="hss"><a href="#"><img src="/css/images/content-bar/sponsors/pubKorea.png" border="0" /></a></div>
-
-              <div id="hss"><a href="#"><img src="/css/images/content-bar/sponsors/pubKorea.png" border="0" /></a></div>
-
             </div>
 
-          </div>
 
-        </div>
+
+
+
         <div id="structure-sponsors2">
           <table width="1004" height="94" border="0" cellspacing="0" cellpadding="0">
             <tr valign="middle" align="center">
