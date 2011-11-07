@@ -48,9 +48,15 @@ class PlayersController < ApplicationController
   def new
     @player = Player.new(:user_id => params[:user_id])
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @player }
+    if @player
+
+      respond_to do |format|
+        format.html # new.html.erb
+        format.xml  { render :xml => @player }
+      end
+    else
+      flash[:warning] = "To create a player, find the users profile, then click on new player."
+      redirect_to players_path
     end
   end
 
