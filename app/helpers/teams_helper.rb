@@ -11,9 +11,9 @@ module TeamsHelper
     when "match"
       other = (event[2].teams - [event[3]]).first
       if event[2].winner == event[3]
-        ret = "<strong>Win</strong> against #{link_to other.to_s, team_path(other.slug)}"
+        ret = link_to("<strong>Win</strong> against #{other.to_s}".html_safe, match_path(event[2].id))
       else
-        ret = "<strong>Loss</strong> against #{link_to other.to_s, team_path(other.slug)}"
+        ret = link_to("<strong>Loss</strong> against #{other.to_s}".html_safe, match_path(event[2].id))
       end
     else
       ret = event[1].to_s
