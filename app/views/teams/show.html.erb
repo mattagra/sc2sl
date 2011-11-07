@@ -15,7 +15,7 @@
           <%= image_tag player.user.country.flag if player.user.country %>
           <%= image_tag race_icon_url(player.user.race), :align => "top", :width => 21, :height => 13, :hspace => 4, :vspace => 3 %>
           <%= link_to player, profile_path(player.login) %>
-        <br />
+          <br />
         <% end %>
 
       </td>
@@ -35,18 +35,21 @@
       <% end %>
     </span>
   </blockquote>
-  <div id="historic" class="ddpanel">
-    <div id="historiccontent" class="ddpanelcontent">
-      <br/>
-      <blockquote>  
-        <% @team.events.sort_by{|t| t[0]}.reverse[5..25].to_a.each do |event| %>
-          <strong><%= american_date event[0] %></strong>&nbsp;<%=raw describe_team_event(event) %><br />
-        <% end %>
-      </blockquote>
+  <% if @team.events.count > 5 %>
+    <div id="historic" class="ddpanel">
+      <div id="historiccontent" class="ddpanelcontent">
+        <br/>
+        <blockquote>
+          <% @team.events.sort_by{|t| t[0]}.reverse[5..25].to_a.each do |event| %>
+            <strong><%= american_date event[0] %></strong>&nbsp;<%=raw describe_team_event(event) %><br />
+          <% end %>
+        </blockquote>
+      </div>
+      <div id="historictab" class="ddpaneltab">
+        <a href="#"><span>SHOW MORE</span></a>
+      </div>
     </div>
-    <div id="historictab" class="ddpaneltab">
-      <a href="#"><span>SHOW MORE</span></a>				</div>
-  </div>
+  <% end %>
   <div align="right">
     <script type="text/javascript">
 
