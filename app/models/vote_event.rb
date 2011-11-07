@@ -13,5 +13,18 @@ class VoteEvent < ActiveRecord::Base
     end
   end
 
+  def current_winner
+    tcount = 0
+    tplayer = nil
+    self.players.each do |player|
+      count = self.votes.where(:player_id => player.id).count
+      if count > tcount
+        tcount = count
+        tplayer = player
+      end
+    end
+    tplayer
+  end
+
 
 end
