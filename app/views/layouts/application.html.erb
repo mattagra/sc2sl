@@ -239,7 +239,7 @@
               </div>
               <div id="hsm">
                 <% @upcoming_matches.each do |match| %>
-                  <img src="/css/images/content-bar/sponsors/fleche.gif" alt="" /><%= american_time(match.scheduled_at, false) %> - <%= image_tag match.team0.country.flag %> <%= link_to match.team0.short_name, match_path(match) %> vs <%= image_tag match.team1.country.flag %> <%= link_to match.team1.short_name, match_path(match) %> <br/>
+                  <img src="/css/images/content-bar/sponsors/fleche.gif" alt="" /><%= link_to((american_time(match.scheduled_at, false) + " - " + image_tag(match.team0.country.flag) + " " + match.team0.short_name + " vs " + image_tag(match.team1.country.flag) + " " + match.team1.short_name).html_safe, match_path(match)) %> <br/>
                 <% end %>
               </div>
 

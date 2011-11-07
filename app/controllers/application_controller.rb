@@ -207,11 +207,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_timezone
-    logger.debug "Setting the time zone."
-    logger.debug "Current User #{current_user.id}"
-    logger.debug "User's time zone #{current_user.time_zone}"
-    Time.zone = current_user.time_zone || SC2SL::Application.config.time_zone
-    
+    Time.zone = (current_user.time_zone if current_user) || Sc2sl::Application.config.time_zone
   end
 
 
