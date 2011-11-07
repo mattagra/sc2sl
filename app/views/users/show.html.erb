@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<div id="newsmain">
 <table id="user" width="880">
   <tr width="95">
     <td rowspan="3">
@@ -99,3 +99,5 @@
 
   <% if @user.player and can? :edit, @user.player %><%= link_to 'Edit', edit_player_path(@user.player) %> | <% elsif can? :create, Player %><%= link_to "Create Player", new_player_path(:user_id => @user.id) %><% end %>
   <%= link_to 'Back', players_path %>
+
+</div>
