@@ -85,6 +85,7 @@ class ApplicationController < ActionController::Base
   before_filter :meta_tags
   before_filter :advertisements
   before_filter :current_voting
+  before_filter :set_date_object
 
   #before_filter :require_http_auth
   
@@ -97,6 +98,10 @@ class ApplicationController < ActionController::Base
 
 
   private
+
+  def set_date_object
+    @date = params[:month] ? Date.new(params[:year].to_i,params[:month].to_i, 1) : Date.today
+  end
 
 
   def mailer_set_url_options

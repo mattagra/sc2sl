@@ -5,7 +5,7 @@ class SiteController < ApplicationController
   def index
     @article = Article.latest.featured.published.first
     @games = Game.where("games.result is not null").order("updated_at desc").limit(10).includes({:player0 => :team, :player1 => :team})
-    @date = params[:month] ? Date.new(params[:year].to_i,params[:month].to_i, 1) : Date.today
+    
     @matches = Match.where(:scheduled_at => (@date.beginning_of_month - 1)..(@date.end_of_month + 1)).includes([:team0, :team1])
     @season = Season.where(:published => true).limit(1)
   end
