@@ -265,43 +265,20 @@
             </div>
 
 
-
-
-
-        <div id="structure-sponsors2">
-          <table width="1004" height="94" border="0" cellspacing="0" cellpadding="0">
-            <tr valign="middle" align="center">
-              <% @advertisements_show.each do |advertisement| %>
-                <td>
-                  <a href="<%= advertisement.url %>">
-                    <%= image_tag advertisement.photo.url(:normal_gray), :alt => advertisement.title, :border => "0", :onmouseover => "this.src='#{advertisement.photo.url(:normal)}'", :onmouseout => "this.src='#{advertisement.photo.url(:normal_gray)}'" %>
-                  </a>
-                </td>
-              <% end %>
-            </tr>
-          </table>
-        </div>
-
-
         <div id="structure">
-          <div id="fullpage">
+          <div id="fullpage3">
             <% flash.each do |key, msg| %>
               <%= content_tag :div, msg, :class => ["flash_#{key}"], :id => "notice_#{key}" %>
             <% end %>
             <%= yield %>
-
-
           </div>
           <div id="right">
-
             <div id="advertissement">
-              <div id="right-titre">
 
+              <div id="right-titre">
                 <div id="right-titre-texte">ADVERTISEMENT</div>
               </div>
-
               <div id="advertissement-image"><a href="#"><img src="/css/images/header/pub/logi2.gif" alt="logitech offer for starcraft fans!" width="120" height="600" /></a></div>
-
             </div>
           </div>
         </div>
@@ -310,51 +287,28 @@
 
           <div id="footer-menu">
 
-            <div id="menu-lien" style="width : 1000px;">
+					<table width="1000" height="34" border="0" cellpadding="0" cellspacing"0">
+					  <tr>
+					    <td width="100" align="center" valign="middle" class="menu-lien"><a href="mailto:contact@sc2sl.com">CONTACT</a></td>
+					    <td width="770" align="center"><font color="#333333">Website and league created by P6E - names and graphics are the property of their respective publishers and studios.<br/> All other copyrights or trademarks are the property of their respective owners.</font></td>
+					    <td align="right" width="130" align="right" valign="middle" class="menu-lien"><a href="#">BACK TO THE TOP</a></td>
+					  </tr>
+					</table>	
 
-              <div class="menu-lien"><%= link_to "NEWS", articles_path %></div>
+					</div>
 
-              <div class="menu-lien"><%= link_to "LEAGUE", seasons_path %></div>
+				</div>
 
-              <div class="menu-lien"><%= link_to "REPLAYS", replays_path %></div>
+				
 
-              <div class="menu-lien"><a href="#">VODS</a></div>
+				</div>
+<div>&nbsp;</div>
 
-              <div class="menu-lien"><a href="#">BETS</a></div>
-
-              <div class="menu-lien"><a href="#">FAQ</a></div>
-              <div class="menu-lien"><a href="#">GET SPECIAL OFFERS WITH LOGITECH</a></div>
-              <div class="menu-lien"><a href="#">WANT TO SEE THE GSL FINALS?</a></div>
-              <div class="menu-lien"><a href="mailto:contact@sc2sl.com">CONTACT</a></div>
-              <div class="menu-lien" style="float : right;"><a href="#" style="padding-top : 3px;"><img src="/css/images/menu/accueil.png" alt="Retour à l'accueil" /></a></div>
-
-            </div>
-
-          </div>
-
-          <div id="footer-content">
-
-            <div id="footer-left">
-              <p>SC2SL Copyright © 2011 / ALL RIGHTS RESERVED<br />
-                website created by P6E - names and graphics are the property of their respective publishers and studios
-
-                All other copyrights or trademarks are the property of their respective owners.
-
-                SIRET n°xxx - xxx - xxx - xxx </p>
-            </div>
-
-            <div id="footer-right">
-              <div class="footer-right-image"><a href="http://www.p6e.org"><span class="footer-right-image"><img src="/css/images/footer/p6e.png" alt="p6e"/></span></a></div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
+			</div>	
+					
+		</div>
+		
+</div>
   </body>
 
 </html>

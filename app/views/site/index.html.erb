@@ -1,149 +1,85 @@
-<div id="fullpage3">
+
   <div id="left">
 
     <div id="ranking">
-
       <% cache('season_rankings') do %>
         <div id="ranking-titre">
-
           <div id="ranking-titre-texte">Ranking season I</div>
-
           <div id="ranking-titre-texte-right">+ see statistics</div>
-
         </div>
-        <div id="ranking-content">
-
+         <div id="ranking-content">
           <div id="ranking-ligne-titre">
-
             <div class="ranking-ligne-titre-id">#</div>
-
             <div class="ranking-ligne-titre-name">Team</div>
-
             <div class="ranking-ligne-titre-points">Points</div>
-
             <div class="ranking-ligne-titre-win">Wins</div>
-
             <div class="ranking-ligne-titre-loose">Losses</div>
-
             <div class="ranking-ligne-titre-mw">GW</div>
-
             <div class="ranking-ligne-titre-ml">GL</div>
-
           </div>
           <% @season = Season.published.last %>
           <% if @season %>
             <% @season.teams.sort_by{|t| -1 * @season.points(t)}.each_with_index do |team, i| %>
               <div class="ranking-ligne" <%- if i % 2 == 1 %>style="background-color : #e8e8e8;"<%- end %>>
                 <div class="ranking-ligne-id"><%= i + 1 %>.</div>
-
                 <div class="ranking-ligne-name"><%= image_tag team.country.flag%> <%= link_to team.name, team_path(team.slug) %></div>
-
                 <div class="ranking-ligne-points"><%= @season.points(team) %> pts</div>
-
                 <div class="ranking-ligne-win"><%= @season.wins(team) %></div>
-
                 <div class="ranking-ligne-loose"><%= @season.losses(team) %></div>
-
                 <div class="ranking-ligne-mw"><%= @season.game_wins(team) %></div>
-
                 <div class="ranking-ligne-ml"><%= @season.game_losses(team) %></div>
-
               </div>
-
             <% end %>
           <% end %>
-
-
-
-
         </div>
       <% end %>
     </div>
-    <% cache("featured_article") do  %>
-      <div class="article">
-        <% if @article %>
-          <div class="article-titre"><%= link_to @article.title, view_article_path(@article) %> </div>
 
+    <div class="article">
+      <% cache("featured_article") do  %>
+        <% if @article %>
+          <div class="article-titre2">
+            <p><%= link_to @article.title, view_article_path(@article) %></p>
+            <p><span class="style6">
+              <%= @article.created_at.strftime("%b #{@article.created_at.day.ordinalize}") %>, 
+              <%= @article.comments.count %>
+            </span> 
+              <img src="/css/images/comment/com.gif" alt="" />
+            </p>
+          </div>
           <div class="article-texte"><%=raw auto_link(truncate_words(@article.formatted_description, 200, "(..)", 1327)) %>
             <br/> &nbsp;
-
             <div align="right">
               <%= @article.created_at.strftime("%b %d") %>,  <%= @article.user.login %> <br/><b><%= link_to "Read More", view_article_path(@article) %></b>
             </div>
           </div>
         <% end %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>      
 
   </div>
 
   <div id="center">
-    <% cache("calendar_#{@date.year.to_s}_#{@date.month.to_s}") do  %>
-      <div id="middle-full">
-
-        <div id="middle-titre">
-
-          <div id="middle-titre-texte">SC2SL CALENDAR</div>
-
-          <div id="middle-titre-texte-right"><%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%m"),  :year => (@date.beginning_of_month-1).strftime("%Y") %>
-            <%= @date.strftime("%B - %Y")  %>
-            <%= link_to ">", :month => (@date.end_of_month+1).strftime("%m"), :year => (@date.end_of_month+1).strftime("%Y") %>
-          </div>
-        </div>
-        <div id="calendar">
-          <% calendar_for Array(@matches), :year => @date.year, :month => @date.month do |calendar| %>
-            <%= calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
-
-            <% calendar.day(:day_method => :scheduled_at) do |date, matches| %>
-              <% if date.month == @date.month %>
-                <% if matches.size == 0 %>
-                  <%= date.day %>
-                <% else %>
-                  <% str = "" %>
-                  <% id = 0 %>
-                  <% for match in matches %>
-                    <% str += match.title + "\n" %>
-                    <% id = match.id %>
-                  <% end %>
-                  <%= link_to date.day, match_path(id), :title => str %>
-                <% end %>
-              <% end %>
-            <% end %>
-          <% end %>
-        </div>
-
-
-
-      <% end %>
-
       <% cache("recent_news") do %>
-
         <div id="middlenews">
-
-          <div id="middle-titre" style="margin-bottom:3px">
-
+          <div id="middle-titre">
             <div id="middle-titre-texte">LAST NEWS</div>
-            <div id="middle-titre-texte-right"><%= link_to "+see all", articles_path %></div>
-
+              <div id="middle-titre-texte-right"><%= link_to "+see all", articles_path %></div>
           </div>
-
-          <% @articles.each do |article| %>
-            <%= link_to content_tag(:font, article.created_at.strftime(" %m/%d") + " - ", :class => "ntitle2") + content_tag(:font, article.title, :class => "ntitle"), view_article_path(article) %><br/>
-          <% end %>
-        </div>
-
+          <div style="margin-left:2px; margin-top:2px">
+            <% @articles.each do |article| %>
+              <%= link_to content_tag(:font, article.created_at.strftime(" %m/%d") + " - ", :class => "ntitle2") + 
+              content_tag(:font, article.title, :class => "ntitle"), view_article_path(article) %><br/>
+            <% end %>
+          </div>
       <% end %>
-
-
+  </div>
+  
       <% cache("recent_games") do %>
         <div id="middle">
-
           <div id="middle-titre">
-
             <div id="middle-titre-texte">LAST REPLAYS</div>
-
-            <div id="middle-titre-texte-right">+see all</div>
-
+              <div id="middle-titre-texte-right">+see all</div>
             <table width="353" cellpadding="0" cellspacing="0" border="0" id="replays_table">
               <% @games.each do |game| %>
                 <tr>
@@ -154,13 +90,9 @@
                 </tr>
               <% end %>
             </table>
-
           </div>
-
         </div>
+      <% end %>     
 
-      <% end %>
-    </div>
-
-  </div>
 </div>
+
