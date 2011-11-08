@@ -42,13 +42,16 @@
       <% end %>
       <br />
     </p>
+    <% if @current_vote_event and Time.now > @current_vote_event.started_at and Time.now < @current_vote_event.ended_at %>
     <div class="votenowcad" id="vcad">
       <div id="votenow">
         <div align="center" class="live-vote">
-          <a href="/vote" class="popupwindow" rel="resizable:1,width:200,height:300"><span class="votenowtxt">VOTE NOW</span> -  <span class="votenowtimeleft"><div id="countbox1"></div> left </span></a>
+          <a href="/vote" class="popupwindow" rel="resizable:1,width:200,height:300"><span class="votenowtxt">VOTE NOW</span> - <span id="countbox1" class="votenowtimeleft"></span> <span class="votenowtimeleft">left</span></a>
+          
         </div>
       </div>
     </div>
+    <% end %>
     <br />
   </div>
   <div id="livefaq">
@@ -115,7 +118,7 @@
   }
 <% v = VoteEvent.last %>
 <% if v %>
-    dateFuture1 = new Date(<%= v.ended_at.in_time_zone.year  %>,<%= v.ended_at.in_time_zone.month - 1  %>,<%= v.ended_at.in_time_zone.day   %>,<%= v.ended_at.in_time_zone.hour   %>,<%= v.ended_at.in_time_zone.min   %>,<%= v.ended_at.in_time_zone.sec   %>);
+    dateFuture1 = new Date(<%= v.ended_at.year  %>,<%= v.ended_at.month - 1  %>,<%= v.ended_at.day   %>,<%= v.ended_at.hour   %>,<%= v.ended_at.min   %>,<%= v.ended_at.sec   %>);
 
     window.onload=function(){
       GetCount(dateFuture1, 'countbox1');

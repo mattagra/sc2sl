@@ -84,6 +84,7 @@ class ApplicationController < ActionController::Base
   before_filter :live_match
   before_filter :meta_tags
   before_filter :advertisements
+  before_filter :current_voting
 
   #before_filter :require_http_auth
 
@@ -110,6 +111,10 @@ class ApplicationController < ActionController::Base
     @live_match = Match.where(:live => true).order("matches.scheduled_at desc").limit(1).first || Match.where("matches.scheduled_at > ?", Time.now).order("matches.scheduled_at asc").limit(1).first
     @upcoming_matches =  Match.where("matches.scheduled_at > ?", Time.now).order("matches.scheduled_at asc").limit(4)
 
+  end
+
+  def current_voting
+    @current_vote_event = VoteEvent.last
   end
 
   def advertisements
