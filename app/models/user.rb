@@ -34,13 +34,13 @@ class User < ActiveRecord::Base
   validates :profile_text, :length => {:maximum => 546}
 
   #Associations
-  has_many :my_comments, :class_name => "Comment"
-  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{User.to_s}'"
+  has_many :my_comments, :class_name => "Comment", :dependent => :destroy
+  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{User.to_s}'", :dependent => :destroy
   belongs_to :country
-  has_many :moderations
+  has_many :moderations, :dependent => :destroy
   has_one :player, :conditions => ["players.date_quit is null"]
-  has_many :players
-  has_many :retired_players, :class_name => "Player", :conditions => ["date_quit is not null"]
+  has_many :players, :dependent => :destroy
+  has_many :retired_players, :class_name => "Player", :conditions => ["date_quit is not null"], :dependent => :destroy
   #has_many :games, :through => :players
 
   #Ratings

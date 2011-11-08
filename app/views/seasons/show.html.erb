@@ -48,7 +48,7 @@
 
               </div>
 
-              <% @season.teams.sort_by{|t| @season.points(t)}.each_with_index do |team, i| %>
+              <% @season.teams.sort_by{|t| -@season.points(t)}.each_with_index do |team, i| %>
                 <div class="ranking-ligne" style="background-color : <%= cycle("#FFFFFF", "#E7E2E2") %>;">
 
                   <div class="ranking-ligne-id"><%= i + 1 %>.</div>
@@ -103,9 +103,9 @@
                     <% if match %>
                       <div style="float:left;width:90px;">
                         <a href="<%= match_path(match) %>">
-                          <div style="border-bottom: thin solid black;float:left;width:100%;height:30px;position:relative;"><div style="position: absolute; bottom: 0; left: 0;padding-left:5px;"><span class="<%= (match.results.to_i > 0 ? "bold" : "normal")  %> "> <%= match.team0 || "" %></span> </div></div>
+                          <div style="border-bottom: thin solid black;float:left;width:100%;height:30px;position:relative;"><div style="position: absolute; bottom: 0; left: 0;padding-left:5px;"><span class="<%= (match.results.to_i > 0 ? "bold" : "normal")  %> "> <%= match.team0 || "TBD" %></span> </div></div>
                           <div style="height:<%= 30 * (2 ** current_round - 1) %>px;width:100%;float:left;border-right:solid thin black;"></div>
-                          <div style="border-bottom: thin solid black;border-right: thin solid black;float:left;width:100%;height:30px;position:relative;"><div style="position: absolute; bottom: 0; left: 0;padding-left:5px;"><span class="<%= (match.results.to_i < 0 ? "bold" : "normal")   %> "><%= match.team1 || "" %></span></div></div>
+                          <div style="border-bottom: thin solid black;border-right: thin solid black;float:left;width:100%;height:30px;position:relative;"><div style="position: absolute; bottom: 0; left: 0;padding-left:5px;"><span class="<%= (match.results.to_i < 0 ? "bold" : "normal")   %> "><%= match.team1 || "TBD" %></span></div></div>
                           <div style="height:<%= 30 * (2 ** current_round - 1) %>px;width:100%;float:left;"></div>
                         </a>
                       </div>

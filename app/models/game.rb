@@ -5,7 +5,7 @@ class Game < ActiveRecord::Base
   belongs_to :match
   belongs_to :player0, :class_name => "Player"
   belongs_to :player1, :class_name => "Player"
-  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Game.to_s}'"
+  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Game.to_s}'", :dependent => :destroy
 
   #Attachments
   has_attached_file :replay, {:url => "/shared/:class/:attachment/:id/:customname.:extension", :path => ":rails_root/public:url"}

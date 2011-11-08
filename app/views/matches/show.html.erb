@@ -1,0 +1,119 @@
+
+<div id="newsmain">
+  <% if can? :update, @match %><%= link_to 'Edit Match', edit_match_path(@match) %><% end %>
+  <table width="800" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tbody><tr>
+        <td width="356" rowspan="2">
+          <%= image_tag(@match.team0.photo.url(:normal), :hspace => 10, :align => "middle") if @match.team0 and @match.team0.photo.exists?  %>
+          <span class="matchtitre"><strong><%= link_to @match.team0.name, team_path(@match.team0.slug) %></strong></span>
+        </td>
+        <td width="124" height="41">
+          <div align="center">
+            <p class="playoffteam">&nbsp;</p>
+          </div>
+        </td>
+        <td width="320" rowspan="2">
+          <div align="right">
+            <span class="playoffteam"><%= link_to @match.team1.name, team_path(@match.team1.slug) %><strong> </strong></span>
+            <%= image_tag(@match.team1.photo.url(:normal), :hspace => 10, :align => "middle") if @match.team1 and @match.team1.photo.exists?  %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><div align="center">
+            <p class="playoffteam"><strong>VS</strong></p>
+            <p class="playoffteam"><span class="matchpre"><%= link_to "#{@match.season.name} week #{@match.weeks_id}", season_path(@match.season) + "#week#{@match.weeks_id}" %></span></p>
+            <p class="playoffteam">&nbsp;</p>
+            <p class="playoffteam">&nbsp;</p>
+          </div></td>
+      </tr>
+      <tr>
+        <td height="500" colspan="2" rowspan="2" valign="top"><table width="479" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+              <tr>
+                <td colspan="2"><p class="matchpre">&nbsp;</p>
+                  <p class="matchpre">Date: <%= american_time(@match.scheduled_at) %> </p>
+                  <p class="matchpre"><%= link_to_if !@match.url.blank?, "View VODS", @match.url  %></p>
+                  <p class="matchpre">&nbsp;</p></td>
+              </tr>
+              <% @match.games.each do |game| %>
+              <% if game.player0 and game.player1 %>
+                <tr>
+                  <td width="101">
+                    <%= link_to(image_tag(game.map.photo.url(:thumb)), replay_path(game)) %>
+                  </td>
+                  <td width="378" valign="top">
+                    <p align="left" class="matchlist"><span class="playoffteam playoffteam">
+                        <%= link_to((image_tag(race_icon_url(game.player0.user.race))+game.player0.login).html_safe,profile_path(game.player0.login)) %>
+                        <% if game.winning_player == game.player0 %>&nbsp;&gt;&nbsp;<% elsif game.winning_player == game.player1 %>&nbsp;&lt;&nbsp;<% else %>&nbsp;vs&nbsp;<% end %>
+                        <%= link_to((image_tag(race_icon_url(game.player1.user.race))+game.player1.login).html_safe,profile_path(game.player1.login)) %>
+                      </span>
+                    </p>
+                    <p align="left" class="matchlist">&nbsp;</p>
+                    <p align="left" class="matchlist ntitle2">Map: <%= game.map.name %></p>
+                    <p align="left" class="matchlist">
+                      <span class="ntitle2">
+                        <%= image_tag(rating_star_image(game.rating_average)) %>
+                        <%= link_to "View Replay", replay_path(game) %> |
+                        <%= pluralize(game.comments.count, 'comment') %> |
+                        <%= pluralize(game.downloads, 'downloads') %>
+                      </span>
+                    </p>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <% end %>
+              <% end %>
+
+            </tbody>
+          </table>
+          <p>&nbsp;</p>
+          <p align="center" class="matchlist">
+             <%= link_to @match.team0.name, team_path(@match.team0.slug) %>
+             <%= "#{@match.team0_wins} - #{@match.team1_wins}" %>
+             <%= link_to @match.team1.name, team_path(@match.team1.slug) %>
+          </p>
+        </td>
+        <td height="72" valign="top"><p align="left" class="matchlist">&nbsp;</p>
+        </td>
+      </tr>
+      <tr>
+
+        <td valign="top">
+          <%  @match.vote_events.each do |vote_event| %>
+          <p align="left" class="matchlist"><%= link_to vote_event.team.name, team_path(vote_event.team.slug) %> revive (<%= pluralize(vote_event.votes.count, "vote") %>)</p>
+          <blockquote>
+            <% vote_event.players.each do |player| %>
+            <p align="left" class="matchlist">
+              <%= link_to((image_tag(race_icon_url(player.user.race))+ player.login).html_safe,profile_path(player.login)) %> <%= "(#{pluralize(vote_event.votes.where(:player_id => player.id).count, 'vote')})" %>
+            </p>
+            <% end %>
+              </blockquote>
+          <% end %>
+        </td>
+      </tr>
+    </tbody></table>
+  <div align="center"><br />
+    &nbsp;    </div>
+</div>
+
+
+
+<h3>Comments: </h3>
+<div id="comments">
+  <%= render @match.comments %>
+  <% if @match.comments.size > 0 %>
+    <%= render :partial => "comments/comment_footer" %>
+  <% end %>
+</div>
+<p>
+  <%= render :partial => "comments/form" %>
+</p>
+
+<%= link_to "Start Live Voting", new_match_vote_event_path(@match.id) %> |
+<% if can? :edit, @match %><%= link_to 'Edit', edit_match_path(@match) %> |<% end %>
+<%= link_to 'Back', matches_path %>

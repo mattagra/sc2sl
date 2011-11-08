@@ -1,75 +1,78 @@
 <p id="notice"><%= notice %></p>
+<div id="newsmain">
+  <table id="user" width="880">
+    <tr width="95">
+      <td rowspan="3">
+        <%= image_tag @user.photo.url(:normal), :align => "left" %></td><td class="votenowtxt"> <%= image_tag race_icon_url(@user.race), :alt => "race"%> <%= @user.login %></span> 							 					<strong>
+        <% if @user.banned? %>
+            Ban Type: <%= @user.current_ban.mod_type %> -  <%= @user.current_ban.length %> days - Ends: <%= @user.current_ban.ends_at %>
+          <% end %> </strong>
+      </td>
+    </tr>
+    <% if @user.player %>
+      <tr><td class="playertab">
+          Player for <%= link_to @user.player.team, team_path(@user.player.team.slug) %>
+        </td></tr>
+    <% end %>
+    <tr> <td class="playertab">
+        <br/>
+        <% if @user.country  %>
+          <%= image_tag @user.country.flag %>
+        <% end %>   <%= @user.full_name %></br>
+        <%= @user.age %>  years old  <% if @user == current_user or current_admin %>
+          | Email: <%=h @user.email %> | <% end %>
+        <% if @user == current_user %>
 
-<table id="user" width="880">
-  <tr width="95">
-    <td rowspan="3">
-      <%= image_tag @user.photo.url(:normal), :align => "left" %></td><td class="votenowtxt"> <%= image_tag race_icon_url(@user.race), :alt => "race"%> <%= @user.login %></span> 							 					<strong>
-      <% if @user.banned? %>
-          Ban Type: <%= @user.current_ban.mod_type %> -  <%= @user.current_ban.length %> days - Ends: <%= @user.current_ban.ends_at %>
-        <% end %> </strong>
-    </td>
-  </tr>
-  <% if @user.player %>
-    <tr><td class="playertab">
-                                          Player for <%= link_to @user.player.team, team_path(@user.player.team.slug) %>
+          <%= link_to 'Update Information', edit_account_path %>
+        <% elsif current_admin %>
+          <%= link_to "Update Information", edit_user_path(@user) %>
+        <% end %>
+
+        <br/>
+        <%= @user.website %>
       </td></tr>
-  <% end %>
-  <tr> <td class="playertab">
-      <br/>
-      <% if @user.country  %>
-         <%= image_tag @user.country.flag %>
-      <% end %>   <%= @user.full_name %></br>
-      <%= @user.age %>  years old  <% if @user == current_user or current_admin %>
-        | Email: <%=h @user.email %> | <% end %>
-      <% if @user == current_user %>
-
-        <%= link_to 'Update Information', edit_account_path %>
-      <% elsif current_admin %>
-        <%= link_to "Update Information", edit_user_path(@user) %>
-      <% end %>
-
-      <br/>
-      <%= @user.website %>
-    </td></tr>
-</table>
-<br/>
-<br/> <br/>
-<% if @user.player %>
-  <strong>STATISTICS</strong><br><br>
-  <% race = "X" %>
-  <% race = @user.race[0,1].upcase if @user.race %>
-  <%= "#{race}vZ #{((@user.player.wins_vs_zerg.to_f / ([@user.player.games_vs_zerg.to_f, 1.0].max)) * 100).to_i}% (#{@user.player.wins_vs_zerg}-#{@user.player.games_vs_zerg - @user.player.wins_vs_zerg})" %><br />
-  <%= "#{race}vP #{((@user.player.wins_vs_protoss.to_f / ([@user.player.games_vs_protoss.to_f, 1.0].max)) * 100).to_i}% (#{@user.player.wins_vs_protoss}-#{@user.player.games_vs_protoss - @user.player.wins_vs_protoss})" %><br />
-  <%= "#{race}vT #{((@user.player.wins_vs_terran.to_f / ([@user.player.games_vs_terran.to_f, 1.0].max)) * 100).to_i}% (#{@user.player.wins_vs_terran}-#{@user.player.games_vs_terran - @user.player.wins_vs_terran})" %><br />
-  <br />
-  <img src="/css/images/last-replays/dl2.gif" alt="" align="top" /> <%= link_to "See #{@user.player.login} replays.", replays_path(:player_id => 1) %><br />  <br />
-  <blockquote>
-    <span class="ntitle ntitle style7"><strong>Bio:</strong> <%= @user.profile_text %> <br/>
-    </span><br/>
-    <span class="votenowtimeleft ntitle style7"></span>
-    <span class="votenowtimeleft">
-      <strong><%= @user.player.login %> History: </strong> <br/>
-      <br/>
-      <% @user.player.events.sort_by{|t| t[0]}.reverse[0..4].each do |event| %>
-        <strong><%= american_date event[0] %></strong>&nbsp;<%=raw describe_player_event(event) %><br />
-      <% end %>
-    </span>
-  </blockquote>
-  <div id="historic" class="ddpanel">
-    <div id="historiccontent" class="ddpanelcontent">
-      <br/>
-      <blockquote>
-        <% @user.player.events.sort_by{|t| t[0]}.reverse[5..25].to_a.each do |event| %>
+  </table>
+  <br/>
+  <br/> <br/>
+  <% if @user.player %>
+    <strong>STATISTICS</strong><br><br>
+    <% race = "X" %>
+    <% race = @user.race[0,1].upcase if @user.race %>
+    <%= "#{race}vZ #{((@user.player.wins_vs_zerg.to_f / ([@user.player.games_vs_zerg.to_f, 1.0].max)) * 100).to_i}% (#{@user.player.wins_vs_zerg}-#{@user.player.games_vs_zerg - @user.player.wins_vs_zerg})" %><br />
+    <%= "#{race}vP #{((@user.player.wins_vs_protoss.to_f / ([@user.player.games_vs_protoss.to_f, 1.0].max)) * 100).to_i}% (#{@user.player.wins_vs_protoss}-#{@user.player.games_vs_protoss - @user.player.wins_vs_protoss})" %><br />
+    <%= "#{race}vT #{((@user.player.wins_vs_terran.to_f / ([@user.player.games_vs_terran.to_f, 1.0].max)) * 100).to_i}% (#{@user.player.wins_vs_terran}-#{@user.player.games_vs_terran - @user.player.wins_vs_terran})" %><br />
+    <br />
+    <img src="/css/images/last-replays/dl2.gif" alt="" align="top" /> <%= link_to "See #{@user.player.login} replays.", replays_path(:player_id => @user.player.id) %><br />  <br />
+    <blockquote>
+      <span class="ntitle ntitle style7"><strong>Bio:</strong> <%= @user.profile_text %> <br/>
+      </span><br/>
+      <span class="votenowtimeleft ntitle style7"></span>
+      <span class="votenowtimeleft">
+        <strong><%= @user.player.login %> History: </strong> <br/>
+        <br/>
+        <% @user.player.events.sort_by{|t| t[0]}.reverse[0..4].each do |event| %>
           <strong><%= american_date event[0] %></strong>&nbsp;<%=raw describe_player_event(event) %><br />
         <% end %>
-      </blockquote>
-    </div>
-    <div id="historictab" class="ddpaneltab">
-      <a href="#"><span>SHOW MORE </span></a>				</div>
-  </div>
+      </span>
+    </blockquote>
+    <% if @user.player.events.count > 5 %>
+      <div id="historic" class="ddpanel">
+        <div id="historiccontent" class="ddpanelcontent">
+          <br/>
+          <blockquote>
+            <% @user.player.events.sort_by{|t| t[0]}.reverse[5..25].to_a.each do |event| %>
+              <strong><%= american_date event[0] %></strong>&nbsp;<%=raw describe_player_event(event) %><br />
+            <% end %>
+          </blockquote>
+        </div>
+        <div id="historictab" class="ddpaneltab">
+          <a href="#"><span>SHOW MORE </span></a>
+        </div>
+      </div>
+    <% end %>
   <% else %>
-  <span class="ntitle ntitle style7"><strong>Bio:</strong> <%= @user.profile_text %> <br/></span>
-  <% end %>
+    <span class="ntitle ntitle style7"><strong>Bio:</strong> <%= @user.profile_text %> <br/></span>
+    <% end %>
   <div align="right">
     <script type="text/javascript">
 
@@ -99,3 +102,5 @@
 
   <% if @user.player and can? :edit, @user.player %><%= link_to 'Edit', edit_player_path(@user.player) %> | <% elsif can? :create, Player %><%= link_to "Create Player", new_player_path(:user_id => @user.id) %><% end %>
   <%= link_to 'Back', players_path %>
+
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111027232659) do
+ActiveRecord::Schema.define(:version => 20111104203758) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -310,6 +310,7 @@ ActiveRecord::Schema.define(:version => 20111027232659) do
     t.integer  "roles_mask"
     t.boolean  "subscription"
     t.string   "bnet_server"
+    t.string   "time_zone"
   end
 
   create_table "vote_events", :force => true do |t|

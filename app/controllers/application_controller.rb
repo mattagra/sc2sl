@@ -84,6 +84,7 @@ class ApplicationController < ActionController::Base
   before_filter :live_match
   before_filter :meta_tags
   before_filter :advertisements
+  before_filter :current_voting
 
   #before_filter :require_http_auth
   
@@ -112,6 +113,10 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def current_voting
+    @current_vote_event = VoteEvent.last
+  end
+
   def advertisements
     advertisements = Advertisement.all
     @advertisements_show = advertisements.randomize(:weight)[0..2].randomize
@@ -120,12 +125,6 @@ class ApplicationController < ActionController::Base
 
   def tag_cloud
     @tags = Article.tag_counts_on(:tags)
-  end
-
-
-  def set_timezone
-    min = cookies[:timezone].to_i
-    Time.zone = ActiveSupport::TimeZone[-min.minutes] || "UTC"
   end
 
 
@@ -210,6 +209,10 @@ class ApplicationController < ActionController::Base
     @subpage = ""
     @description = "Welcome to SC2 Survivor League. The top international league that involves you, the fan."
     @keywords = ["Starcraft 2", "sc2", "Survivor League", "p6e", "protoss", "zerg", "terran"]
+  end
+
+  def set_timezone
+    Time.zone = (current_user.time_zone if current_user) || Sc2sl::Application.config.time_zone
   end
 
 

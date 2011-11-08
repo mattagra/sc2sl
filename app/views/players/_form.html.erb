@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :user %><br />
-    <%= f.select :user_id, User.alphabetical.collect {|c| [c.login, c.id]} %>
+    <%= f.hidden_tag :user_id %>
   </div>
   <div class="field">
     <%= f.label :date_joined %><br />

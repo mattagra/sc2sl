@@ -69,7 +69,7 @@ class CommentsController < ApplicationController
         format.html { render(:action => :new, :errors => @comment.errors) }
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
       elsif @comment.save
-        format.html { redirect_to(url_back+"#comment_#{@comment.id}") }
+        format.html { redirect_to(url_back+"?page=#{@comment.external_page}#comment_#{@comment.id}") }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
         

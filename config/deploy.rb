@@ -48,7 +48,7 @@ namespace :deploy do
       require 'erb'
       on_rollback { run "rm #{shared_path}/system/maintenance.html" }
 
-      reason = ENV['REASON'] || "Down for scheduled maintenance"
+      reason = ENV['REASON'] || "maintenance"
       deadline = ENV['UNTIL']
       template = File.read('app/views/layouts/maintenance.html.erb')
       page = ERB.new(template).result(binding)

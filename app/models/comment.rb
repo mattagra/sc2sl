@@ -20,6 +20,28 @@ class Comment < ActiveRecord::Base
     oldest.limit(offset).offset((page.to_i - 1) * offset.to_i)
   end
 
+  def external_object
+    case self.external_type
+    when "Article"
+      Article.find(self.external_id)
+    when "Team"
+      Team.find(self.external_id)
+    when "Game"
+      Game.find(self.external_id)
+    when "Match"
+      Match.find(self.external_id)
+    when "Player"
+      Player.find(self.external_id)
+    when "User"
+      User.find(self.external_id)
+    end
+  end
+
+  def external_page(order = :id, per_page = 10)
+    position = self.external_object.comments.where("#{order} <= ?", self.send(order)).count
+    (position.to_f/per_page).ceil
+  end
+
 
   def self.new_of_type(model)
     new_object = self.new
@@ -35,6 +57,7 @@ class Comment < ActiveRecord::Base
   def formatted_description
     self.description.bbcode_to_html(Sc2sl::Application::CUSTOM_BBCODE).bbcode_to_html({}, false, true, :disable)#.bbcode_to_html({}, false, true, :disable)
   end
+
 
   has_one :moderation
 

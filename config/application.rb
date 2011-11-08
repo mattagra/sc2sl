@@ -15,6 +15,9 @@ module Sc2sl
     config.filter_parameters << :password << :password_confirmation
     config.action_view.javascript_expansions[:defaults] = %w(jquery.min jquery_ujs application)
     config.action_mailer.default_url_options = {:host => "sc2sl.com"}
+    config.time_zone = "Paris"
+
+
     IMGUR_API_KEY = "edb81443e23154af166573652a25544a"
     CUSTOM_BBCODE = {
       'Spoiler' => [
@@ -85,7 +88,7 @@ module Sc2sl
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
-    config.time_zone = 'UTC'
+    #config.time_zone = 'UTC'
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
