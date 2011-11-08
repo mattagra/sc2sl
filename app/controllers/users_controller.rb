@@ -46,7 +46,6 @@ class UsersController < ApplicationController
     if @user
     @current_page = (params[:page] || 1).to_i
     @comments_count = @user.comments.count
-    @per_page = 10
     @comments= @user.comments.paginated(@per_page, @current_page)
     else
       flash[:params] = "Cannot Find a User with that name"

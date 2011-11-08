@@ -3,12 +3,12 @@ class Match < ActiveRecord::Base
   #Associations
   has_many :games, :dependent => :destroy
   has_many :completed_games, :class_name => "Game", :conditions => "result is not null and result <> 0"
-  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Match.to_s}'"
+  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Match.to_s}'", :dependent => :destroy
   belongs_to :team1, :class_name => "Team"
   belongs_to :team0, :class_name => "Team"
   belongs_to :season
-  has_many :vote_events
-  has_many :votes, :through => :vote_events
+  has_many :vote_events, :dependent => :destroy
+  has_many :votes, :through => :vote_events, :dependent => :destroy
 
 
   #Accessors

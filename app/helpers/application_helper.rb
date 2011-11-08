@@ -48,13 +48,29 @@ module ApplicationHelper
     end
   end
 
-  def view_article_path(article)
-    named_article_path(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url)
+  def view_article_path(article, page = 0)
+    if page > 0
+      named_article_path(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url, :page => page)
+    else
+      named_article_path(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url)
+    end
   end
 
-  def view_article_url(article)
-    named_article_url(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url)
+  def view_article_url(article, page = 0)
+    if page > 0
+      named_article_url(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url)
+    else
+      named_article_url(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url, :page => page)
+    end
   end
+
+  def view_comment_path(comment)
+    case comment.external_type
+    when "Article"
+      view_article_path(comment.external_object, comment.external_page)
+    end
+  end
+
 
   def sanitize_comments(comments)
     comments = comments ? comments.to_str : ''

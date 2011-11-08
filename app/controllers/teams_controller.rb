@@ -20,7 +20,6 @@ class TeamsController < ApplicationController
     @comment = Comment.new_of_type(@team)
     @current_page = (params[:page]|| 1).to_i
     @comments_count = @team.comments.count
-    @per_page = 10
     @comments= @team.comments.paginated(@per_page, @current_page)
     @page = "Teams"
     @subpage = @team.to_s

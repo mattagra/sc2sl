@@ -19,7 +19,7 @@ class Article < ActiveRecord::Base
 
   #Associations
   belongs_to :user
-  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Article.to_s}'"
+  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Article.to_s}'", :dependent => :destroy
 
   #Scopes
   scope :published, where(:published => true)

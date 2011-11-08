@@ -1,7 +1,7 @@
 class VoteEvent < ActiveRecord::Base
 
   #Associations
-  has_many :votes
+  has_many :votes, :dependent => :destroy
   belongs_to :match
   belongs_to :team
 
