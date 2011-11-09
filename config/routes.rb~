@@ -9,7 +9,7 @@ Sc2sl::Application.routes.draw do
 
   resources :newsletters
 
-  get "/admin" => "admin#index", :as => :admin
+
 
   #get "/live" => "site#live", :as => :live
 

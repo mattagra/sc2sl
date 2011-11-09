@@ -92,7 +92,6 @@
                 Welcome <b><%= current_user.login %></b> |
               <%= link_to "My Account", account_path %> |
               <% if current_user.is_moderator? %>
-                <%= link_to "Admin Panel", admin_path %> |
                 <%= link_to "Advertisements", advertisements_path %> |
                 <%= link_to "Articles", articles_path %> |
                 <%= link_to "Comments", comments_path %> |

@@ -101,11 +101,6 @@
     <%= f.check_box :published %>
   </div>
 
-  <div class="field">
-    <%= f.label :featured %><br />
-    <%= f.check_box :featured %>
-  </div>
-
   <div class="actions">
     <%= f.submit "Preview" %>
   </div>

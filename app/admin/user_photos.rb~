@@ -28,7 +28,7 @@ ActiveAdmin.register User, :as => "User Photos" do
     end  
   end
   
-  show :title => "Photo" do |user|
+  show :title => "Photo for #{user.login}" do |user|
     panel "Photo" do
       attributes_table_for user do
         row("Name") {user.name}

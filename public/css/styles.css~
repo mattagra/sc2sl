@@ -61,13 +61,6 @@ font-size:12px;
 font-family:verdana;
 }
 
-.style6 {
-color: black;
-font-size: 14px;
-font-weight: normal;
-text-transform: none;
-}
-
 /* ----------- register form  ----------- */
 #rform input{
 border:solid 1px #333333;

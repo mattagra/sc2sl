@@ -50,7 +50,7 @@
           <div class="article-texte"><%=raw auto_link(truncate_words(@article.formatted_description, 200, "(..)", 1327)) %>
             <br/> &nbsp;
             <div align="right">
-              <br/><%= link_to "Read More", view_article_path(@article), :style => "font-weight: bolder;font-size: 13px;" %>
+              <br/><%= link_to "Read More", view_article_path(@article), :style => "font-weight: bolder;" %>
             </div>
           </div>
         <% end %>
