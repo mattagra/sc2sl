@@ -1648,6 +1648,10 @@ border-bottom-style:solid;
 border-bottom-width:thin;
 }
 
+Table.footer-menu { 
+  font-size:11px; 
+}
+
 #bottom {
 float : left;
 width : 1000px;
