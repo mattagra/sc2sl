@@ -2,6 +2,7 @@ class Country < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :short, :presence => true
+  
 
 
   def flag

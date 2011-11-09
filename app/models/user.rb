@@ -12,6 +12,12 @@ class User < ActiveRecord::Base
   #Scopes
   scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0"} }
   scope :subscription, where(:subscription => true)
+  scope :with_photos, where("photo_file_size > 0")
+  scope :unapproved_photos, with_photos.where(:photo_approved => false)
+  scope :new_photos, with_photos.where(:photo_approved => nil)
+  scope :approved_photos, with_photos.where(:photo_approved => true)
+  
+  
 
 
   #Attachments
@@ -51,6 +57,7 @@ class User < ActiveRecord::Base
   
 
   before_save :capitalize_names, :reset_tokens
+  before_save :check_for_new_photo
 
   def self.paginated(page=1,offset=50)
     self.alphabetical.limit(offset).offset((page.to_i - 1) * offset.to_i)
@@ -65,6 +72,12 @@ class User < ActiveRecord::Base
   def capitalize_names
     self.first_name = self.first_name.capitalize
     self.last_name = self.last_name.capitalize
+  end
+  
+  def check_for_new_photo
+    if self.photo_file_size_changed?
+      self.photo_approved = nil
+    end
   end
 
   def full_name
