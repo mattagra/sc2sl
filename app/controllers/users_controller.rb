@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     if @user
     @current_page = (params[:page] || 1).to_i
     @comments_count = @user.comments.count
-    @comments= @user.comments.paginated(@per_page, @current_page)
+    @comments= @user.comments.paginated(@current_page, 10)
     else
       flash[:params] = "Cannot Find a User with that name"
       redirect_to root_url

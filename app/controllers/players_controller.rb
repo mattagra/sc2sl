@@ -31,8 +31,7 @@ class PlayersController < ApplicationController
     @comment = Comment.new_of_type(@player)
     @current_page = (params[:page]|| 1).to_i
     @comments_count = @player.comments.count
-    @per_page = 10
-    @comments= @player.comments.paginated(@per_page, @current_page)
+    @comments= @player.comments.paginated(@current_page, 10)
     @page = "Players"
     @subpage = @player.team.to_s + " " + @player.to_s
     @description = "Get all the information on your favorite players."
