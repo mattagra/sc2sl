@@ -20,7 +20,7 @@ class TeamsController < ApplicationController
     @comment = Comment.new_of_type(@team)
     @current_page = (params[:page]|| 1).to_i
     @comments_count = @team.comments.count
-    @comments= @team.comments.paginated(@per_page, @current_page)
+    @comments= @team.comments.paginated(10, @current_page)
     @page = "Teams"
     @subpage = @team.to_s
     @keywords += ["teams", @team, @team.short_name]

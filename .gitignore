@@ -24,4 +24,6 @@ RAILS_ENV=development/*
 development
 developmet/*
 public/shared/*
+.redcar
+.redcar/*
 

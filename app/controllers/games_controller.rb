@@ -41,7 +41,7 @@ class GamesController < ApplicationController
     @comment = Comment.new_of_type(@game)
     @current_page = (params[:page] || 1).to_i
     @comments_count = @game.comments.count
-    @comments= @game.comments.paginated(@per_page, @current_page)
+    @comments= @game.comments.paginated(@current_page, 10)
     @page = "Game"
     @subpage = @game.title
     @description = "Find Replays and VODS"
