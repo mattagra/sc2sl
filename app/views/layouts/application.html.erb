@@ -179,7 +179,7 @@
         <%= render :partial => "matches/live", :locals => {:live_match => @live_match} %>
       <% else %>
         <div id="slider" class="nivoSlider">
-          <%- @articles.each_with_index do |article, i| %>
+          <%- @frontpage_articles.each_with_index do |article, i| %>
             <%= render :partial => "articles/article_banner", :locals => {:article => article, :i => i} %>
           <% end %>
         </div>

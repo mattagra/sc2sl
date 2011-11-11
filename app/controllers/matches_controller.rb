@@ -31,7 +31,7 @@ cache_sweeper :match_sweeper
     @comment = Comment.new_of_type(@match)
     @current_page = (params[:page] || 1).to_i
     @comments_count = @match.comments.count
-    @comments= @match.comments.paginated(10, @current_page)
+    @comments= @match.comments.paginated(@current_page, 10)
     @page = "Matches"
     @subpage = @match.title
     @description = "Get the details about this match"

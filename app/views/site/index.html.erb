@@ -67,7 +67,7 @@
               <div id="middle-titre-texte-right"><%= link_to "+see all", articles_path %></div>
           </div>
           <div style="margin-left:2px; margin-top:2px">
-            <% @articles.each do |article| %>
+            <% @frontpage_articles.each do |article| %>
               <%= link_to content_tag(:font, article.created_at.strftime(" %m/%d") + " - ", :class => "ntitle2") + 
               content_tag(:font, article.title + " ", :class => "ntitle"), view_article_path(article) %>&nbsp;
               <%= link_to content_tag(:font, article.comments.count.to_s + " ", :class => "ntitle") +

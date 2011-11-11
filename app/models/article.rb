@@ -23,6 +23,7 @@ class Article < ActiveRecord::Base
 
   #Scopes
   scope :published, where(:published => true)
+  scope :unpublished, where(:published => false)
   scope :featured, where(:featured => true)
   scope :recent, order("articles.id desc").limit(20)
   scope :latest, order("articles.id desc").limit(1)

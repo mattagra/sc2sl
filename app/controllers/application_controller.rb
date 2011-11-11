@@ -109,7 +109,7 @@ class ApplicationController < ActionController::Base
   end
 
   def articles
-    @articles = Article.order("articles.id desc").published.limit(8)
+    @frontpage_articles = Article.order("articles.id desc").published.limit(8)
   end
   
   def live_match
