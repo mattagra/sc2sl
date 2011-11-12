@@ -10,20 +10,6 @@ class SiteController < ApplicationController
     @season = Season.where(:published => true).limit(1)
   end
 
-  def about
-  end
-
-  def contact
-  end
-
-  def privacy
-    
-  end
-
-  def faq
-    
-  end
-
   def finish_registration
 
   end

@@ -6,7 +6,7 @@ class MapsController < ApplicationController
   # GET /maps.xml
   def index
     @maps = Map.all
-    @page = "Maps"
+    @layout_page = "Maps"
     @description = "Maps used in the SC2SL League"
     @keywords += ["maps"]
 
@@ -20,8 +20,8 @@ class MapsController < ApplicationController
   # GET /maps/1.xml
   def show
     @map = Map.find(params[:id])
-    @page = "Maps"
-    @subpage = @map.name
+    @layout_page = "Maps"
+    @layout_subpage = @map.name
     
     @keywords += ["maps", @map.name]
 

@@ -21,8 +21,8 @@ class TeamsController < ApplicationController
     @current_page = (params[:page]|| 1).to_i
     @comments_count = @team.comments.count
     @comments= @team.comments.paginated(@current_page, 10)
-    @page = "Teams"
-    @subpage = @team.to_s
+    @layout_page = "Teams"
+    @layout_subpage = @team.to_s
     @keywords += ["teams", @team, @team.short_name]
     respond_to do |format|
       format.html # show.html.erb
