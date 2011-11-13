@@ -13,14 +13,15 @@
           <%= link_to "Browse #{@team.short_name} replays.", replays_path(:team_id => @team.id) %></p>
         <% @team.players.each do |player| %>
           <%= image_tag player.user.country.flag if player.user.country %>
-          <%= image_tag race_icon_url(player.user.race), :align => "top", :width => 21, :height => 13, :hspace => 4, :vspace => 3 %>
-          <%= link_to player, profile_path(player) %>
-        <br />
+          <%= image_tag race_icon_url(player.user.race),  :width => 16, :height => 11 %>
+          <%= link_to player, profile_path(player.login) %>
+          <br />
         <% end %>
 
       </td>
     </tr>
   </table>
+  <br />
 
   <blockquote>
     <span class="ntitle ntitle style7"><strong>Bio:</strong> <%= @team.description %> <br/>
@@ -34,18 +35,21 @@
       <% end %>
     </span>
   </blockquote>
-  <div id="historic" class="ddpanel">
-    <div id="historiccontent" class="ddpanelcontent">
-      <br/>
-      <blockquote>  
-        <% @team.events.sort_by{|t| t[0]}.reverse[5..25].to_a.each do |event| %>
-          <strong><%= american_date event[0] %></strong>&nbsp;<%=raw describe_team_event(event) %><br />
-        <% end %>
-      </blockquote>
+  <% if @team.events.count > 5 %>
+    <div id="historic" class="ddpanel">
+      <div id="historiccontent" class="ddpanelcontent">
+        <br/>
+        <blockquote>
+          <% @team.events.sort_by{|t| t[0]}.reverse[5..25].to_a.each do |event| %>
+            <strong><%= american_date event[0] %></strong>&nbsp;<%=raw describe_team_event(event) %><br />
+          <% end %>
+        </blockquote>
+      </div>
+      <div id="historictab" class="ddpaneltab">
+        <a href="#"><span>SHOW MORE</span></a>
+      </div>
     </div>
-    <div id="historictab" class="ddpaneltab">
-      <a href="#"><span>SHOW MORE </span></a>				</div>
-  </div>
+  <% end %>
   <div align="right">
     <script type="text/javascript">
 
@@ -59,6 +63,7 @@
 
     </script>
   </div>
+  <br /><br />
   <h3>Comments:</h3>
   <%= render  @team.comments %>
   <% if @team.comments.size > 0 %>

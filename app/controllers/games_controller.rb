@@ -12,13 +12,13 @@ class GamesController < ApplicationController
     @per_page = 20
 
 
-    if params[:filter] and params[:filter][:team_id]
-      @team = Team.find(params[:filter][:team_id])
+    if params[:team_id]
+      @team = Team.find(params[:team_id])
       @games = @team.games.paginated(@current_page, @per_page)
       @games_count = @team.games.count
       @keywords += [@team.name]
-    elsif params[:filter] and params[:filter][:player_id]
-      @player = Player.find(params[:filter][:player_id])
+    elsif params[:player_id]
+      @player = Player.find(params[:player_id])
       @games = @player.games.paginated(@current_page, @per_page)
       @games_count = @player.games.count
       @keywords += [@player.login]
@@ -41,8 +41,7 @@ class GamesController < ApplicationController
     @comment = Comment.new_of_type(@game)
     @current_page = (params[:page] || 1).to_i
     @comments_count = @game.comments.count
-    @per_page = 10
-    @comments= @game.comments.paginated(@per_page, @current_page)
+    @comments= @game.comments.paginated(@current_page, 10)
     @page = "Game"
     @subpage = @game.title
     @description = "Find Replays and VODS"

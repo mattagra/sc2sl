@@ -8,7 +8,7 @@ class Advertisement < ActiveRecord::Base
       :normal => "209x64!",
       :normal_gray => "209x64!",
     }, 
-    :url => "/shared/:class/:attachment/:id/:style_:basename.:extension",
+    :url => "/shared/advertisements/:attachment/:id/:style_:basename.:extension",
     :path => ":rails_root/public:url",
     :convert_options => {
       :normal_gray => "-colorspace gray"

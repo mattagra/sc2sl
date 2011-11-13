@@ -5,7 +5,7 @@ class Game < ActiveRecord::Base
   belongs_to :match
   belongs_to :player0, :class_name => "Player"
   belongs_to :player1, :class_name => "Player"
-  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Game.to_s}'"
+  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Game.to_s}'", :dependent => :destroy
 
   #Attachments
   has_attached_file :replay, {:url => "/shared/:class/:attachment/:id/:customname.:extension", :path => ":rails_root/public:url"}
@@ -21,11 +21,11 @@ class Game < ActiveRecord::Base
   end
 
   def customname
-    (self.player0.team.short_name + "." + self.player0.user.login + " vs " + self.player1.team.short_name + "."  + self.player1.user.login + " on " + self.map.name).gsub(/\s/,"_")
+    ("SC2SL " + self.player0.team.short_name + "." + self.player0.user.login + " vs " + self.player1.team.short_name + "."  + self.player1.user.login + " on " + self.map.name).gsub(/\s/,"_")
   end
 
   def title
-     (self.player0.team.short_name + "." + self.player0.user.login + " vs " + self.player1.team.short_name + "."  + self.player1.user.login + " on " + self.map.name)
+     ("SC2SL " + self.player0.team.short_name + "." + self.player0.user.login + " vs " + self.player1.team.short_name + "."  + self.player1.user.login + " on " + self.map.name)
   end
 
   def scheduled_at

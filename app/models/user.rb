@@ -12,6 +12,12 @@ class User < ActiveRecord::Base
   #Scopes
   scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0"} }
   scope :subscription, where(:subscription => true)
+  scope :with_photos, where("photo_file_size > 0")
+  scope :unapproved_photos, with_photos.where(:photo_approved => false)
+  scope :new_photos, with_photos.where(:photo_approved => nil)
+  scope :approved_photos, with_photos.where(:photo_approved => true)
+  
+  
 
 
   #Attachments
@@ -19,7 +25,7 @@ class User < ActiveRecord::Base
     {:styles => {
       :normal => "96x96",
       :thumb => "32x32"
-    }, :url => "/shared/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url", :default_url => "/css/images/comment/avatar.jpg"}
+    }, :url => "/shared/users/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url", :default_url => "/css/images/comment/avatar.jpg"}
 
 
   #Attributes
@@ -34,13 +40,13 @@ class User < ActiveRecord::Base
   validates :profile_text, :length => {:maximum => 546}
 
   #Associations
-  has_many :my_comments, :class_name => "Comment"
-  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{User.to_s}'"
+  has_many :my_comments, :class_name => "Comment", :dependent => :destroy
+  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{User.to_s}'", :dependent => :destroy
   belongs_to :country
-  has_many :moderations
+  has_many :moderations, :dependent => :destroy
   has_one :player, :conditions => ["players.date_quit is null"]
-  has_many :players
-  has_many :retired_players, :class_name => "Player", :conditions => ["date_quit is not null"]
+  has_many :players, :dependent => :destroy
+  has_many :retired_players, :class_name => "Player", :conditions => ["date_quit is not null"], :dependent => :destroy
   #has_many :games, :through => :players
 
   #Ratings
@@ -51,6 +57,7 @@ class User < ActiveRecord::Base
   
 
   before_save :capitalize_names, :reset_tokens
+  before_save :check_for_new_photo
 
   def self.paginated(page=1,offset=50)
     self.alphabetical.limit(offset).offset((page.to_i - 1) * offset.to_i)
@@ -65,6 +72,12 @@ class User < ActiveRecord::Base
   def capitalize_names
     self.first_name = self.first_name.capitalize
     self.last_name = self.last_name.capitalize
+  end
+  
+  def check_for_new_photo
+    if self.photo_file_size_changed?
+      self.photo_approved = nil
+    end
   end
 
   def full_name

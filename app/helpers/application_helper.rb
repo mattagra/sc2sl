@@ -9,9 +9,9 @@ module ApplicationHelper
   
   def american_time(time, year = true)
     if year
-      time.strftime("%b %d, %Y %H:%M")
+      time.strftime("%b %d, %Y %H:%M %Z")
     else
-      time.strftime("%b %d %H:%M")
+      time.strftime("%b %d %H:%M %Z")
     end
   end
 
@@ -48,13 +48,29 @@ module ApplicationHelper
     end
   end
 
-  def view_article_path(article)
-    named_article_path(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url)
+  def view_article_path(article, page = 0)
+    if page > 0
+      named_article_path(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url, :page => page)
+    else
+      named_article_path(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url)
+    end
   end
 
-  def view_article_url(article)
-    named_article_url(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url)
+  def view_article_url(article, page = 0)
+    if page > 0
+      named_article_url(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url)
+    else
+      named_article_url(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url, :page => page)
+    end
   end
+
+  def view_comment_path(comment)
+    case comment.external_type
+    when "Article"
+      view_article_path(comment.external_object, comment.external_page)
+    end
+  end
+
 
   def sanitize_comments(comments)
     comments = comments ? comments.to_str : ''
@@ -82,7 +98,7 @@ module ApplicationHelper
       end
     end
     boxes = []
-    boxes << link_to(image_tag("arrow_left.png"), url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current, 1].max}").collect{|k,v| "#{k}=#{v}"}.join("&"))))
+    boxes << link_to(image_tag("/css/images/paginationl.gif"), url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current, 1].max}").collect{|k,v| "#{k}=#{v}"}.join("&"))))
     
     c = 0
     final_pages.each do |page|
@@ -94,7 +110,7 @@ module ApplicationHelper
       end
       c = page
     end
-    boxes << " | " + link_to(image_tag("arrow_right.png"),url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")))
+    boxes << " | " + link_to(image_tag("/css/images/paginationr.gif"),url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")))
     return sanitize(boxes.join("")) # + "per_page: #{per_page}, current: #{current}, total: #{total}"
   end
 
@@ -111,8 +127,10 @@ module ApplicationHelper
       "/css/images/last-replays/goldstar.png"
     elsif rating > 3.5
       "/css/images/last-replays/silverstar.png"
-    else
+    elsif rating > 0
       "/css/images/last-replays/bronzestar.png"
+    else
+      "/css/images/last-replays/emptystar.png"
     end
   end
 

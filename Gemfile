@@ -5,7 +5,7 @@ gem 'rails', '= 3.0.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :production do
-gem "mysql2", '< 0.3'
+ gem "mysql2", '< 0.3'
 end
 
 group :development do
@@ -14,7 +14,7 @@ end
 
 gem 'authlogic'
 gem 'daemons'
-
+gem 'activeadmin', :git => 'git://github.com/turlockmike/active_admin.git'
 gem 'stringex'
 gem 'paperclip'
 gem 'acts-as-taggable-on'
@@ -29,6 +29,7 @@ gem "cancan"
 gem 'yaml_db'
 gem "memcache-client"
 gem 'delayed_job'
+
 #gem 'sprockets', :git => "git://github.com/sstephenson/sprockets"
 
 #group :production do

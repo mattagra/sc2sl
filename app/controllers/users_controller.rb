@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       UserMailer.delay.activation(@user)
       redirect_to finish_registration_url
     else
-      flash[:notice] = "Some errors prevented you from registering "
+      flash[:error] = "Some errors prevented you from registering."
       render :action => :new
     end
   end
@@ -46,8 +46,7 @@ class UsersController < ApplicationController
     if @user
     @current_page = (params[:page] || 1).to_i
     @comments_count = @user.comments.count
-    @per_page = 10
-    @comments= @user.comments.paginated(@per_page, @current_page)
+    @comments= @user.comments.paginated(@current_page, 10)
     else
       flash[:params] = "Cannot Find a User with that name"
       redirect_to root_url

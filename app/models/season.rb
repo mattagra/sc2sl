@@ -3,10 +3,13 @@ class Season < ActiveRecord::Base
   #Associations
   has_and_belongs_to_many :teams
   has_and_belongs_to_many :maps,  :join_table => "seasons_maps"
-  has_many :matches
+  has_many :matches, :dependent => :destroy
   has_many :regular_matches, :class_name => "Match", :conditions => "playoff_id is null"
   has_many :playoff_matches, :class_name => "Match", :conditions => "playoff_id is not null"
   has_many :games, :through => :matches
+
+
+  scope :published, where(:published => true)
 
   #Nested Attributes
   accepts_nested_attributes_for :teams, :reject_if => proc { |a| a['selected'].blank? }
@@ -53,6 +56,10 @@ class Season < ActiveRecord::Base
   def game_losses(team)
     self.games.where("(matches.team0_id = #{team.id} and games.result = 1)").count +
       self.games.where("(matches.team1_id = #{team.id} and games.result = 0)").count
+  end
+
+  def current_week
+    self.matches.where("matches.results <> 0").maximum("weeks_id") || 1
   end
 
 

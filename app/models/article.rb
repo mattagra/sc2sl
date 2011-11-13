@@ -11,23 +11,19 @@ class Article < ActiveRecord::Base
   validates_attachment_presence :photo                    
   validates_attachment_size :photo, :less_than=>1.megabyte
   validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif', 'image/pjpeg', 'image/x-png']
-  validates_attachment_size :featured_photo, :less_than=>1.megabyte, :if => Proc.new { |o| !o.featured_photo_file_name.blank? }
-  validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif'], :if => Proc.new { |o| !o.featured_photo_file_name.blank? }
-  validates :featured_photo, :presence => true, :if => Proc.new{|o| o.featured == true}
+
 
   #attached
-  has_attached_file :photo, {:styles => { :normal => "643x253!" }, :url => "/shared/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
-  has_attached_file :featured_photo, {:styles => {:normal => "524x140"}, :url => "/shared/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
-
-
+  has_attached_file :photo, {:styles => { :normal => "643x253!" }, :url => "/shared/articles/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
 
 
   #Associations
   belongs_to :user
-  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Article.to_s}'"
+  has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Article.to_s}'", :dependent => :destroy
 
   #Scopes
   scope :published, where(:published => true)
+  scope :unpublished, where(:published => false)
   scope :featured, where(:featured => true)
   scope :recent, order("articles.id desc").limit(20)
   scope :latest, order("articles.id desc").limit(1)

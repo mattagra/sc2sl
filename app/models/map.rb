@@ -9,7 +9,7 @@ class Map < ActiveRecord::Base
       :large => "256x256",
       :normal => "128x128",
       :thumb => "64x64"
-    }, :url => "/shared/:class/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
+    }, :url => "/shared/maps/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
 
   #Validations
   validates :name, :presence => true

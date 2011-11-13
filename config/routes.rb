@@ -1,13 +1,15 @@
 Sc2sl::Application.routes.draw do
 
 
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   resources :advertisements
 
   resources :newsletters
 
-  get "admin/index"
-
-  get "admin/newsletter"
+  get "/admin" => "admin#index", :as => :admin
 
   #get "/live" => "site#live", :as => :live
 

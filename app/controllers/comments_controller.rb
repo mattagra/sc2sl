@@ -60,12 +60,16 @@ class CommentsController < ApplicationController
     url_back = params[:back_url]
     
     respond_to do |format|
-      if Comment.recent(current_user).count > 0
+      if current_user.banned?
+        flash[:warning]= "Good try, but you are banned. You may not post until your ban is completed."
+        format.html { render(:action => :new, :errors => @comment.errors) }
+        format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
+      elsif Comment.recent(current_user).count > 0
         flash[:warning]= "You may only post 1 comment every 30 seconds. Please wait and try again."
         format.html { render(:action => :new, :errors => @comment.errors) }
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
       elsif @comment.save
-        format.html { redirect_to(url_back+"#comment_#{@comment.id}") }
+        format.html { redirect_to(url_back+"?page=#{@comment.external_page}#comment_#{@comment.id}") }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
         

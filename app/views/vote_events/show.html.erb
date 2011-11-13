@@ -1,3 +1,4 @@
+<% cache('vote_events_show') do %>
 <table>
   <tr><td>Match</td><td><%=  @vote_event.match.title %></td></tr>
   <tr><td>Team</td><td><%=  @vote_event.team.name %></td></tr>
@@ -8,4 +9,7 @@ Current Votes
 <%= player.login %>: <%= @vote_event.votes.where(:player_id => player.id).count %>
 <% end %>
 <br />
+<% end %>
+<% if Time.now > @vote_event.started_at and Time.now < @vote_event.ended_at %>
 <%= render :partial => 'votes/form' %>
+<% end %>

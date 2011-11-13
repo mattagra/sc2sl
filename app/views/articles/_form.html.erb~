@@ -1,0 +1,110 @@
+<% if params[:commit] == "Preview" %>
+  <div id="newsmain"><br>
+
+
+
+    <div class="newscontent">
+
+      <div id="titrenews">
+        <div style="float:left;">
+          <%= @article.title %> <br />
+          <div id="undertitle">
+            <%= @article.formatted_time %> | <%= link_to @article.user.login, profile_path(@article.user.login) %><% if (current_user and current_user.is_moderator?) %> | <%= link_to 'edit',"#" %><% end %>
+          </div>
+        </div>
+        <div id="titrecom">
+          <div id="textcom"><a href="#comments"><%= @article.comments.count %> </a></div>
+          <a href="#newcomment"><img src="/css/images/comment/add.png" alt="add a comment" /></a>
+        </div>
+      </div>
+      <br />
+      <br />
+      <p>
+        <%- r = /([^a-z0-9_]|^)@([a-z0-9_]+)/i %>
+        <%= raw  auto_link(@article.formatted_description).gsub(r) {|m| "#{$1}<a href='http://twitter.com/#{$2}'>@#{$2}</a>#{$3}" }  %>
+      </p>
+    </div>
+    <div id="footernews" align="right">
+      <script type="text/javascript">var switchTo5x=false;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'03241b11-6315-49ee-98d8-7b7d13dcc018'});</script>
+      <!-- Place this tag in your head or just before your close body tag -->
+      <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+
+      <!-- Place this tag where you want the +1 button to render -->
+      <table>
+        <tr>
+          <td valign="top"><span  class='st_reddit' displayText='Reddit'></span></td>
+          <td valign="top"><span  class='st_twitter' displayText='Tweet'></span></td>
+          <td valign="top"><g:plusone size="small"></g:plusone></td>
+        <td valign="top"><iframe src="http://www.facebook.com/plugins/like.php?app_id=150751279615&amp;href&amp;send=false&amp;layout=button_count&amp;width=85&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe></td>
+        </tr>
+      </table>
+      <br />
+      <span class="style7" style="color: #000000">
+        <font style="text-transform:uppercase;font-size:10px;font-color:#333333">
+          <%= @article.comments.count %>  comments | <%= link_to "Add a comment", "#newcomment" %></font>
+        <br />
+      </span>
+      <br />
+
+    </div>
+
+    <b>Tags:</b>
+    <%=raw tags_to_links(@article.tags) %>
+  </div>
+<hr />
+<% end %>
+
+
+<%= form_for(@article,  :html => { :multipart => true } ) do |f| %>
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+        <% @article.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :summary %><br />
+    <%= f.text_area :summary, :rows => 2, :cols => 50 %>
+  </div>
+  <div>
+    <%= link_to "Upload Image", upload_image_articles_path, :class => "popupwindow", :rel => 'height:500,width:400' %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :photo %>643x253*
+    <%= f.file_field :photo %>
+    <br />
+    <% if @article.photo.exists? then %>
+      <%= image_tag @article.photo.url(:normal) %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tag_list %><br />
+    <%= f.text_field :tag_list %>
+  </div>
+  <div class="field">
+    <%= f.label :published %><br />
+    <%= f.check_box :published %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Preview" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Post" %>
+  </div>
+<% end %>

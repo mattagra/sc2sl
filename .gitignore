@@ -6,7 +6,8 @@ log/*
 Gemfile.lock
 
 tmp/**/*
-
+config/database.yml
+.rvmrc
 public/images/advertisements/*
 public/images/articles/*
 public/images/games/*
@@ -23,6 +24,8 @@ RAILS_ENV=development/*
 development
 developmet/*
 public/shared/*
+.redcar
+.redcar/*
 
 .idea/
 thin/

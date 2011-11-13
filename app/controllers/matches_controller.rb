@@ -31,8 +31,7 @@ cache_sweeper :match_sweeper
     @comment = Comment.new_of_type(@match)
     @current_page = (params[:page] || 1).to_i
     @comments_count = @match.comments.count
-    @per_page = 10
-    @comments= @match.comments.paginated(@per_page, @current_page)
+    @comments= @match.comments.paginated(@current_page, 10)
     @page = "Matches"
     @subpage = @match.title
     @description = "Get the details about this match"
@@ -87,7 +86,7 @@ cache_sweeper :match_sweeper
 
     respond_to do |format|
       if @match.update_attributes(params[:match])
-        format.html { redirect_to(@match, :notice => 'Match was successfully updated.') }
+        format.html { render(:action => "edit" , :notice => 'Match was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

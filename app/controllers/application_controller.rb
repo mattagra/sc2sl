@@ -84,9 +84,11 @@ class ApplicationController < ActionController::Base
   before_filter :live_match
   before_filter :meta_tags
   before_filter :advertisements
+  before_filter :current_voting
+  before_filter :set_date_object
 
   #before_filter :require_http_auth
-
+  
   protected
   def require_http_auth
     authenticate_or_request_with_http_basic do |username, password|
@@ -97,19 +99,27 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def set_date_object
+    @date = params[:month] ? Date.new(params[:year].to_i,params[:month].to_i, 1) : Date.today
+  end
+
 
   def mailer_set_url_options
     ActionMailer::Base.default_url_options[:host] = request.host_with_port
   end
 
   def articles
-    @articles = Article.order("articles.id desc").published.limit(8)
+    @frontpage_articles = Article.order("articles.id desc").published.limit(8)
   end
-
+  
   def live_match
     @live_match = Match.where(:live => true).order("matches.scheduled_at desc").limit(1).first || Match.where("matches.scheduled_at > ?", Time.now).order("matches.scheduled_at asc").limit(1).first
     @upcoming_matches =  Match.where("matches.scheduled_at > ?", Time.now).order("matches.scheduled_at asc").limit(4)
 
+  end
+
+  def current_voting
+    @current_vote_event = VoteEvent.last
   end
 
   def advertisements
@@ -120,12 +130,6 @@ class ApplicationController < ActionController::Base
 
   def tag_cloud
     @tags = Article.tag_counts_on(:tags)
-  end
-
-
-  def set_timezone
-    min = cookies[:timezone].to_i
-    Time.zone = ActiveSupport::TimeZone[-min.minutes] || "UTC"
   end
 
 
@@ -181,6 +185,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authenticate_super_admin!
+    unless current_super_admin
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
 
 
   def store_location
@@ -204,6 +214,10 @@ class ApplicationController < ActionController::Base
     @subpage = ""
     @description = "Welcome to SC2 Survivor League. The top international league that involves you, the fan."
     @keywords = ["Starcraft 2", "sc2", "Survivor League", "p6e", "protoss", "zerg", "terran"]
+  end
+
+  def set_timezone
+    Time.zone = (current_user.time_zone if current_user) || Sc2sl::Application.config.time_zone
   end
 
 
