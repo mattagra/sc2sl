@@ -5,7 +5,7 @@ gem 'rails', '= 3.0.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :production do
- gem "mysql2", '< 0.3'
+ #gem "mysql2", '< 0.3'
 end
 
 group :development do
