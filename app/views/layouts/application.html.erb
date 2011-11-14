@@ -64,9 +64,9 @@
         //-->
     </script>    
 
-    <title><%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>Starcraft 2 Survivor League</title>
-    <meta name="title" content="<%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>Starcraft 2 Survivor League" />
-    <meta name="description" content="<%= (@description + " | ") %> <%= (@subpage + " - ") unless @subpage.empty? %><%= (@page + " - ") unless @page.empty? %>Starcraft 2 Survivor League" />
+    <title><%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League</title>
+    <meta name="title" content="<%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League" />
+    <meta name="description" content="<%= (@description + " | ") %> <%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League" />
     <meta name="keywords" content="<%= @keywords.join(", ") %>" lang="en" xml:lang="en" />
 
   </head>
@@ -122,8 +122,8 @@
 
     <table width="1000" height="92" border="0" align="center" cellpadding="0" cellspacing="0">
       <tr>
-        <td width="380" align="center" valign="middle"><img src="/css/images/logo2.png" alt="logo" /></td>
-        <td width="620" align="center" valign="middle"><div id="pubhaut"><a href="#"><img src="css/images/header/pub/logi1.gif" alt="Get the SC2SL discount !" width="570" height="92" /></a></div></td>
+        <td width="380" align="center" valign="middle"><%= cms_snippet_content('main_logo') %></td>
+        <td width="620" align="center" valign="middle"><div id="pubhaut"><%= cms_snippet_content('ad_top_right') %></div></td>
       </tr>
     </table>
 
@@ -148,7 +148,7 @@
 
         <div class="menu-separation"></div>
 
-        <div class="menu-lien"><%= link_to "FAQ", faq_path %> </div>
+        <div class="menu-lien"><%= link_to "FAQ", '/faq' %> </div>
 
         <div class="menu-separation"></div>
 
@@ -291,7 +291,7 @@
           <table class="footer-menu" width="1000" height="34" border="0" cellpadding="0" cellspacing"0">
                  <tr>
               <td width="100" align="center" valign="middle" class="menu-lien"><a href="mailto:contact@sc2sl.com">CONTACT</a></td>
-              <td width="770" align="center"><font color="#333333">Website and league created by P6E - names and graphics are the property of their respective publishers and studios.<br/> All other copyrights or trademarks are the property of their respective owners.</font></td>
+              <td width="770" align="center"><font color="#333333"><%= cms_snippet_content('footer') %></font></td>
               <td align="right" width="130" align="right" valign="middle" class="menu-lien"><a href="#">BACK TO THE TOP</a></td>
             </tr>
           </table>

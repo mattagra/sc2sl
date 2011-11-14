@@ -13,7 +13,7 @@ cache_sweeper :match_sweeper
     @matches = Match.order("id desc")
     end
 
-    @page = "Matches"
+    @layout_page = "Matches"
     @description = "See the latest matches"
 
     @keywords += ["matches"]
@@ -32,8 +32,8 @@ cache_sweeper :match_sweeper
     @current_page = (params[:page] || 1).to_i
     @comments_count = @match.comments.count
     @comments= @match.comments.paginated(@current_page, 10)
-    @page = "Matches"
-    @subpage = @match.title
+    @layout_page = "Matches"
+    @layout_subpage = @match.title
     @description = "Get the details about this match"
     @keywords += ["matches", @match.team0, @match.team1] + @match.team0.players + @match.team1.players
 

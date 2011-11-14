@@ -5,7 +5,7 @@ class GamesController < ApplicationController
   cache_sweeper :game_sweeper
   def index
     
-    @page = "Replay List"
+    @layout_page = "Replay List"
     @description = "List of all recent replays."
     @keywords += ["games", "replays"]
     @current_page = (params[:page]|| 1).to_i
@@ -42,8 +42,8 @@ class GamesController < ApplicationController
     @current_page = (params[:page] || 1).to_i
     @comments_count = @game.comments.count
     @comments= @game.comments.paginated(@current_page, 10)
-    @page = "Game"
-    @subpage = @game.title
+    @layout_page = "Game"
+    @layout_subpage = @game.title
     @description = "Find Replays and VODS"
     @keywords += ["games", "replays", "VOD"] + [@game.player0, @game.player1, @game.team0, @game.team1, @game.map]
     respond_to do |format|

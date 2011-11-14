@@ -26,7 +26,7 @@ class ArticlesController < ApplicationController
       end
     end
 
-    @page = "Sc2SL News"
+    @layout_page = "Sc2SL News"
     @keywords += ["News", "Articles"]
     respond_to do |format|
       format.html # index.html.erb
@@ -60,8 +60,8 @@ class ArticlesController < ApplicationController
       @comments_count = @article.comments.count
       @comments= @article.comments.paginated(@current_page, 10)
 
-      @page = "SC2SL News"
-      @subpage = @article.title
+      @layout_page = "SC2SL News"
+      @layout_subpage = @article.title
       @description = @article.summary
       @keywords += @article.tags
       respond_to do |format|

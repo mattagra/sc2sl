@@ -1,0 +1,4 @@
+--- 
+label: default
+parent: 
+app_layout: application.html.erb

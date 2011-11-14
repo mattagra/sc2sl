@@ -210,8 +210,8 @@ class ApplicationController < ActionController::Base
   end
 
   def meta_tags
-    @page = ""
-    @subpage = ""
+    @layout_page = ""
+    @layout_subpage = ""
     @description = "Welcome to SC2 Survivor League. The top international league that involves you, the fan."
     @keywords = ["Starcraft 2", "sc2", "Survivor League", "p6e", "protoss", "zerg", "terran"]
   end

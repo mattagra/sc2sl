@@ -6,7 +6,7 @@ class PlayersController < ApplicationController
   # GET /players.xml
   def index
     @players = Player.alphabetical
-    @page = "Players"
+    @layout_page = "Players"
     @description = "Find out about your favorite players in the SC2SL"
     @keywords += ["players"]
 
@@ -32,8 +32,8 @@ class PlayersController < ApplicationController
     @current_page = (params[:page]|| 1).to_i
     @comments_count = @player.comments.count
     @comments= @player.comments.paginated(@current_page, 10)
-    @page = "Players"
-    @subpage = @player.team.to_s + " " + @player.to_s
+    @layout_page = "Players"
+    @layout_subpage = @player.team.to_s + " " + @player.to_s
     @description = "Get all the information on your favorite players."
     @keywords += ["players", @player, @player.team]
     respond_to do |format|

@@ -30,6 +30,8 @@ gem 'yaml_db'
 gem "memcache-client"
 gem 'delayed_job'
 
+gem 'comfortable_mexican_sofa'
+
 #gem 'sprockets', :git => "git://github.com/sstephenson/sprockets"
 
 #group :production do
