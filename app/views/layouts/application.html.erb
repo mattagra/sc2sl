@@ -1,3 +1,5 @@
+<% cache("html_header") do %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
 
@@ -63,6 +65,8 @@
         }
         //-->
     </script>    
+    
+    <% end %>
 
     <title><%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League</title>
     <meta name="title" content="<%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League" />
@@ -213,6 +217,7 @@
             </tr>
           </thead>
         </table>
+        <% cache("calendar_#{@date.year.to_s}_#{@date.month.to_s}") do  %>
         <div id="calendar">
           <% calendar_for Array(@matches), :year => @date.year, :month => @date.month do |calendar| %>
             <%= calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
@@ -233,6 +238,7 @@
             <% end %>
           <% end %>
         </div>
+        <% end %>
       </div>
 
 
@@ -253,7 +259,6 @@
           </div>
         </div>
       </div>
-
       <div id="footer">
 
         <div id="footer-menu">
