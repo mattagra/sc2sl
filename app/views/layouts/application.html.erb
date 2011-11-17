@@ -1,3 +1,5 @@
+<% cache("html_header") do %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
 
@@ -17,7 +19,7 @@
     <link href="/css/styles.css" rel="stylesheet" type="text/css"/>
     <link href="/css/smoothness/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
     <link href="css/images/logo.ico" rel="shortcut icon" />
-    <%= ajaxful_rating_style %>
+    
 
     <!-- JAVASCRIPT  -->
 
@@ -63,6 +65,9 @@
         }
         //-->
     </script>    
+    
+    <% end %>
+	<%= ajaxful_rating_style %>
 
     <title><%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League</title>
     <meta name="title" content="<%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League" />
@@ -71,7 +76,7 @@
 
   </head>
 
-  <body onload="MM_preloadImages('/sc2sl/css/images/login/icones/facebook.png','/sc2sl/css/images/login/icones/twitter.gif','/css/images/login/icones/rss.gif','/sc2sl/css/images/login/icones/mirc2.gif','/sc2sl/css/images/slider/justin2.png')">
+  <body onload="MM_preloadImages('/css/images/login/icones/facebook.png','/css/images/login/icones/twitter.gif','/css/images/login/icones/rss.gif','/css/images/login/icones/mirc2.gif')">
 
     <div id="structure-login2">
       <div id="login">
@@ -213,6 +218,7 @@
             </tr>
           </thead>
         </table>
+        <% cache("calendar_#{@date.year.to_s}_#{@date.month.to_s}") do  %>
         <div id="calendar">
           <% calendar_for Array(@matches), :year => @date.year, :month => @date.month do |calendar| %>
             <%= calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
@@ -233,6 +239,7 @@
             <% end %>
           <% end %>
         </div>
+        <% end %>
       </div>
 
 
@@ -253,7 +260,6 @@
           </div>
         </div>
       </div>
-
       <div id="footer">
 
         <div id="footer-menu">
