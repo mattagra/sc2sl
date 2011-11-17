@@ -40,20 +40,20 @@
               <% if game.player0 and game.player1 %>
                 <tr>
                   <td width="101">
-                    <%= link_to(image_tag(game.map.photo.url(:thumb)), replay_path(game)) %>
+                    <%= link_to(image_tag(game.map.photo.url(:thumb), :height => "75"), replay_path(game)) %>
                   </td>
                   <td width="378" valign="top">
                     <p align="left" class="matchlist"><span class="playoffteam playoffteam">
-                        <%= link_to((image_tag(race_icon_url(game.player0.user.race))+game.player0.login).html_safe,profile_path(game.player0.login)) %>
+                        <%= link_to((image_tag(race_icon_url(game.player0.user.race))+" " +game.player0.login).html_safe,profile_path(game.player0.login)) %>
                         <% if game.winning_player == game.player0 %>&nbsp;&gt;&nbsp;<% elsif game.winning_player == game.player1 %>&nbsp;&lt;&nbsp;<% else %>&nbsp;vs&nbsp;<% end %>
-                        <%= link_to((image_tag(race_icon_url(game.player1.user.race))+game.player1.login).html_safe,profile_path(game.player1.login)) %>
+                        <%= link_to((image_tag(race_icon_url(game.player1.user.race))+" " +game.player1.login).html_safe,profile_path(game.player1.login)) %>
                       </span>
                     </p>
                     <p align="left" class="matchlist">&nbsp;</p>
                     <p align="left" class="matchlist ntitle2">Map: <%= game.map.name %></p>
                     <p align="left" class="matchlist">
                       <span class="ntitle2">
-                        <%= image_tag(rating_star_image(game.rating_average)) %>
+                        <%= image_tag(rating_star_image(game.rating_average), :align => "top") %>
                         <%= link_to "View Replay", replay_path(game) %> |
                         <%= pluralize(game.comments.count, 'comment') %> |
                         <%= pluralize(game.downloads, 'downloads') %>

@@ -1361,6 +1361,7 @@ margin-left: 1px;
 .ntitle2
 {
     color: #333333;
+    font-size: 11px;
 }
 table#user{
 }
@@ -2233,5 +2234,14 @@ border-width: thin;
 border-color: #AEAEAE;
 width: 570px;
 height: 92px;
+}
+
+.matchlist {
+font-size: 15px;
+text-decoration: none;
+}
+
+.playoffteam {
+font-size: 16px;
 }
 
