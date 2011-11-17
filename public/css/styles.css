@@ -219,6 +219,7 @@ margin : 0 auto;
     width: 1000px;
     /* padding-left: 25px; */
     background-color : #FFFFFF;
+    border-top: 1px solid #636363;
 }
 #header {
     float : left;
@@ -276,7 +277,7 @@ border-color:#000000;
 
 #menu {
     float : left;
-    width : 1000px;
+    width : 1002px;
     height : 35px;
     background : url(/css/images/menu/topfond.png) repeat-x;
 }
@@ -347,9 +348,8 @@ height : 36px; /* 30 */
 #content-bar {
     float : left;
     width : 1000px;
-    height : 257px;
      background-color: white;
-    border-top : 1px solid black;
+    border: 1px solid black;
 
 }
 
@@ -1728,8 +1728,9 @@ background-color : #26282B;
 }
 
 #calendar table {
-    border-collapse: collapse;
-    width: 100%;
+    width: 353px;
+    border-spacing: 2px;
+    border-color: white;
 }
 
 #calendar td,
@@ -1739,8 +1740,7 @@ background-color : #26282B;
     padding: 4px;
     border: none;
     text-align: center;
-    color: #333;
-    
+    color: #333;    
 
 }
 #calendar th {
@@ -1752,7 +1752,7 @@ background-color : #26282B;
 }
 
 #calendar tr{
-    height: 11px;
+    /* height: 11px; */
    
 }
 
@@ -1762,13 +1762,16 @@ background-color : #26282B;
 
 #calendar td a {
     text-decoration: none;
-    color: red;
+    color: #0D4986;
 }
 
 #calendar td a:hover {
     text-decoration: underline;
-    color: red;
+    color: #1D86F1;
 }
+
+
+
 
 .days {
     font-size: 11px;
@@ -2194,7 +2197,6 @@ a:hover {
 a img {
     border-width: 0;
     border-color: #999999;
-    vertical-align: text-top;
 }
 fieldset {
     margin: 0px 20px;
@@ -2224,3 +2226,12 @@ blockquote {
     height : 113px;
     background : url(/css/images/header/pub/right.jpg) no-repeat;
 }
+
+#pubhaut {
+border-style: solid;
+border-width: thin;
+border-color: #AEAEAE;
+width: 570px;
+height: 92px;
+}
+
