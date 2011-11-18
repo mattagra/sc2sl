@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
   scope :with_photos, where("photo_file_size > 0")
   scope :new_photos, with_photos.where(:photo_approved => nil)
   scope :approved_photos, with_photos.where(:photo_approved => true)
-  scope 
   
 
 
