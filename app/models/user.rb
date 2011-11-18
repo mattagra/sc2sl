@@ -12,9 +12,10 @@ class User < ActiveRecord::Base
   #Scopes
   scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0"} }
   scope :subscription, where(:subscription => true)
+  scope :with_photos, where("photo_file_size > 0")
   scope :new_photos, with_photos.where(:photo_approved => nil)
   scope :approved_photos, with_photos.where(:photo_approved => true)
-  
+  scope 
   
 
 
