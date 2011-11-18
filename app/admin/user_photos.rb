@@ -1,7 +1,5 @@
 ActiveAdmin.register User, :as => "User Photos" do
   scope :new_photos, :default => true
-  scope :with_photos
-  scope :unapproved_photos
   scope :approved_photos
   
   filter :login

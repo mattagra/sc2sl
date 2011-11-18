@@ -48,8 +48,8 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
-    unless current_user.is_moderator? or @comment.user == current_user
-      flash[:notice] = "You do not have permission to modify this. "
+    unless current_user.is_moderator? or (@comment.user == current_user and !@comment.locked)
+      flash[:notice] = "You do not have permission to modify this or it is locked."
       redirect_to root_url
     end
   end

@@ -12,8 +12,6 @@ class User < ActiveRecord::Base
   #Scopes
   scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0"} }
   scope :subscription, where(:subscription => true)
-  scope :with_photos, where("photo_file_size > 0")
-  scope :unapproved_photos, with_photos.where(:photo_approved => false)
   scope :new_photos, with_photos.where(:photo_approved => nil)
   scope :approved_photos, with_photos.where(:photo_approved => true)
   
@@ -78,6 +76,9 @@ class User < ActiveRecord::Base
     if self.photo_file_size_changed?
       self.photo_approved = nil
     end
+	if self.photo_approved == false
+	self.photo = nil
+	end
   end
 
   def full_name
