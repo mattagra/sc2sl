@@ -305,8 +305,11 @@ color: #1d86f1;
     float : left;
     width : 2px;
     height : 30px;
-    background : url(/css/images/menu/separation.png) no-repeat;
 }
+
+
+
+
 #menu-live {
 float: left;
 width: 354px;

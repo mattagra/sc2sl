@@ -105,7 +105,7 @@ class User < ActiveRecord::Base
   end
 
   def banned?
-    (Moderation.where(:user_id => self.id, :mod_type => "permaban").count > 0) or (Moderation.where(:user_id => self.id).where(:mod_type => "ban").where("ends_at > CURRENT_TIMESTAMP").count > 0)
+    (Moderation.where(:user_id => self.id, :mod_type => "permaban").count > 0) or (Moderation.where(:user_id => self.id).where(:mod_type => "banned").where("ends_at > CURRENT_TIMESTAMP").count > 0)
   end
 
   def current_ban

@@ -2,6 +2,8 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.xml
   authorize_resource
+  
+  before_filter :deny_banned, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
     @current_page = (params[:page] || 1).to_i
@@ -48,7 +50,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     unless current_user.is_moderator? or @comment.user == current_user
       flash[:notice] = "You do not have permission to modify this. "
-      redirect_to :root_url
+      redirect_to root_url
     end
   end
 
@@ -60,11 +62,7 @@ class CommentsController < ApplicationController
     url_back = params[:back_url]
     
     respond_to do |format|
-      if current_user.banned?
-        flash[:warning]= "Good try, but you are banned. You may not post until your ban is completed."
-        format.html { render(:action => :new, :errors => @comment.errors) }
-        format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
-      elsif Comment.recent(current_user).count > 0
+      if Comment.recent(current_user).count > 0
         flash[:warning]= "You may only post 1 comment every 30 seconds. Please wait and try again."
         format.html { render(:action => :new, :errors => @comment.errors) }
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
@@ -96,7 +94,7 @@ class CommentsController < ApplicationController
       end
     else
       flash[:notice] = "You do not have permission to modify this. "
-      redirect_to :root_url
+      redirect_to root_url
     end
   end
 
@@ -111,4 +109,15 @@ class CommentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+   protected
+
+  def deny_banned
+    if current_user.banned?
+        flash[:warning]= "Good try, but you are banned. You may not post until your ban is completed."
+        redirect_to root_url
+    end
+  end
+  
+  
 end
