@@ -27,7 +27,7 @@ cache_sweeper :match_sweeper
   # GET /matches/1
   # GET /matches/1.xml
   def show
-    @match = Match.find(params[:id])
+    @match = Match.find(params[:id], :include => [:games, {:team0 => :players}, {:team1 => :players}, :vote_events])
     @comment = Comment.new_of_type(@match)
     @current_page = (params[:page] || 1).to_i
     @comments_count = @match.comments.count

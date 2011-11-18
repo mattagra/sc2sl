@@ -3,10 +3,11 @@
 
     <div id="ranking">
       <% cache('season_rankings') do %>
-        <div id="ranking-titre">
-          <div id="ranking-titre-texte">Ranking season I</div>
-          <div id="ranking-titre-texte-right">+ see statistics</div>
-        </div>
+	    <% @season = Season.published.last %>
+        <% if @season %>
+          <div id="ranking-titre">
+            <div id="ranking-titre-texte">- Ranking <%= @season.name %></div>
+          </div>
          <div id="ranking-content">
           <div id="ranking-ligne-titre">
             <div class="ranking-ligne-titre-id">#</div>
@@ -17,8 +18,7 @@
             <div class="ranking-ligne-titre-mw">GW</div>
             <div class="ranking-ligne-titre-ml">GL</div>
           </div>
-          <% @season = Season.published.last %>
-          <% if @season %>
+          
             <% @season.teams.sort_by{|t| -1 * @season.points(t)}.each_with_index do |team, i| %>
               <div class="ranking-ligne" <%- if i % 2 == 1 %>style="background-color : #e8e8e8;"<%- end %>>
                 <div class="ranking-ligne-id"><%= i + 1 %>.</div>

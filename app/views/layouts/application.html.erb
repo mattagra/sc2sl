@@ -1,3 +1,5 @@
+<% cache("html_header") do %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
 
@@ -16,8 +18,8 @@
     <link href="/favicon.gif" rel="shortcut icon" />
     <link href="/css/styles.css" rel="stylesheet" type="text/css"/>
     <link href="/css/smoothness/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
-    <link href="css/images/logo.ico" rel="shortcut icon" />
-    <%= ajaxful_rating_style %>
+    <link href="/css/images/logo.ico" rel="shortcut icon" />
+    
 
     <!-- JAVASCRIPT  -->
 
@@ -63,6 +65,9 @@
         }
         //-->
     </script>    
+    
+    <% end %>
+	<%= ajaxful_rating_style %>
 
     <title><%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League</title>
     <meta name="title" content="<%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League" />
@@ -71,13 +76,13 @@
 
   </head>
 
-  <body onload="MM_preloadImages('/css/images/login/icones/facebook.png','/css/images/login/icones/twitter.gif','/css/images/login/icones/rss.gif','/css/images/login/icones/mirc2.gif','/css/images/slider/justin2.png')">
+  <body onload="MM_preloadImages('/css/images/login/icones/facebook.png','/css/images/login/icones/twitter.gif','/css/images/login/icones/rss.gif','/css/images/login/icones/mirc2.gif')">
 
     <div id="structure-login2">
       <div id="login">
         <div id="login-content">
           <div class="login-content-left">
-            <img src="css/images/login/icones/login.png" alt="Formulaire de connexion" align="left" />
+            <img src="/css/images/login/icones/login.png" alt="Formulaire de connexion" align="left" />
               
                 <% unless current_user %>
                   <div class="login-content-texte"><%= link_to "REGISTER", register_path %> or LOGIN</div>
@@ -130,37 +135,7 @@
 
     <div id="menu">
 
-      <div id="menu-lien">
-
-        <div class="menu-lien"><%= link_to "HOME", root_path %></div>
-
-        <div class="menu-separation"></div>
-
-        <div class="menu-lien"><%= link_to "NEWS", articles_path %> </div>
-
-        <div class="menu-separation"></div>
-        <% @season = Season.published.last %>
-        <div class="menu-lien"><%= link_to "LEAGUE RESULTS", seasons_path  %></div>
-
-        <div class="menu-separation"></div>
-
-        <div class="menu-lien"><%= link_to "REPLAYS", replays_path %> </div>
-
-        <div class="menu-separation"></div>
-
-        <div class="menu-lien"><%= link_to "FAQ", '/faq' %> </div>
-
-        <div class="menu-separation"></div>
-
-        <div class="menu-lien"><a href="http://www.youtube.com/sc2sl/" rel="nofollow">VODS</a></div>
-
-        <div class="menu-separation"></div>
-
-        <div class="menu-lien"><a href="/shop/" rel="nofollow">SHOP</a></div>
-
-        <div class="menu-separation"></div>
-
-      </div>
+      <%= cms_snippet_content('main_menu') %>
 
       <div id="menu-live">
 
@@ -231,18 +206,19 @@
           <thead>
             <tr height="11" align="center" class="month" bgcolor="#f5f5f5">
               <td height="20" colspan="5" bgcolor="#FFFFFF"><div align="left" class="ntitle2" style="margin-left:2px"></div></td>
-              <td height="20" colspan="2" bgcolor="#FFFFFF">
+              <td height="20" colspan="2" bgcolor="#FFFFFF" style="text-align: right;">
                 <span class="ntitle2">
                   <%= link_to image_tag("/css/images/content-bar/sponsors/flecheg.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"),
                     :month => (@date.beginning_of_month-1).strftime("%m"),  :year => (@date.beginning_of_month-1).strftime("%Y") %>
-                  <%= @date.strftime("%B - %Y")  %>
+                  <%= @date.strftime("%B %Y")  %>
                   <%= link_to image_tag("/css/images/content-bar/sponsors/fleche.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"),
-                    :month => (@date.beginning_of_month-1).strftime("%m"),  :year => (@date.beginning_of_month-1).strftime("%Y") %>
+                    :month => (@date.end_of_month+1).strftime("%m"),  :year => (@date.end_of_month+1).strftime("%Y") %>
                 </span>
               </td>
             </tr>
           </thead>
         </table>
+        <% cache("calendar_#{@date.year.to_s}_#{@date.month.to_s}") do  %>
         <div id="calendar">
           <% calendar_for Array(@matches), :year => @date.year, :month => @date.month do |calendar| %>
             <%= calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
@@ -263,6 +239,7 @@
             <% end %>
           <% end %>
         </div>
+        <% end %>
       </div>
 
 
@@ -283,7 +260,6 @@
           </div>
         </div>
       </div>
-
       <div id="footer">
 
         <div id="footer-menu">
