@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
   before_filter :meta_tags
   before_filter :advertisements
   before_filter :current_voting
-  before_filter :set_date_object
+  before_filter :set_date_object_and_find_matches
 
   #before_filter :require_http_auth
   
@@ -99,8 +99,9 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_date_object
+  def set_date_object_and_find_matches
     @date = params[:month] ? Date.new(params[:year].to_i,params[:month].to_i, 1) : Date.today
+	@layout_matches = Match.where(:scheduled_at => (@date.beginning_of_month - 1)..(@date.end_of_month + 1)).includes([:team0, :team1])
   end
 
 

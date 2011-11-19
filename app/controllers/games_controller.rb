@@ -69,10 +69,15 @@ class GamesController < ApplicationController
 
   def replay
     if current_user
-      @game = Game.find(params[:id])
-      @game.downloads += 1
-      @game.save
-      send_file @game.replay.path, :disposition => 'attachment'
+	  if @game.replay
+	    @game = Game.find(params[:id])
+        @game.downloads += 1
+        @game.save
+        send_file @game.replay.path, :disposition => 'attachment'
+	  else
+	    flash[:notice] = "This replay is not yet available for download. Please try again later."
+        redirect_to :action => :show, :id => params[:id]
+	  end
     else
       flash[:notice] = "You must be registered in order to download replays."
       redirect_to :action => :show, :id => params[:id]

@@ -220,8 +220,8 @@
         </table>
         <% cache("calendar_#{@date.year.to_s}_#{@date.month.to_s}") do  %>
         <div id="calendar">
-          <% calendar_for Array(@matches), :year => @date.year, :month => @date.month do |calendar| %>
-            <%= calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
+          <% calendar_for Array(@layout_matches), :year => @date.year, :month => @date.month do |calendar| %>
+            <%= calendar.head('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun') %>
             <% calendar.day(:day_method => :scheduled_at) do |date, matches| %>
               <% if date.month == @date.month %>
                 <% if matches.size == 0 %>

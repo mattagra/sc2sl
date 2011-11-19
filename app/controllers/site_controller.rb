@@ -6,7 +6,6 @@ class SiteController < ApplicationController
     @article = Article.latest.featured.published.first
     @games = Game.where("games.result is not null").order("updated_at desc").limit(10).includes({:player0 => :team, :player1 => :team})
     
-    @matches = Match.where(:scheduled_at => (@date.beginning_of_month - 1)..(@date.end_of_month + 1)).includes([:team0, :team1])
     @season = Season.where(:published => true).limit(1)
   end
 
@@ -42,13 +41,7 @@ class SiteController < ApplicationController
     
   end
 
-  def live
-    @article = Article.latest.featured.published.first
-    @games = Game.where("games.result is not null").order(:updated_at).limit(10)
-    @matches = Match.all
-    @date = params[:month] ? Date.new(params[:year].to_i,params[:month].to_i, 1) : Date.today
-    @season = Season.where(:published => true).limit(1).first
-  end
+
 
   def sitemap
     @static_pages = ["live", "terms", "faq", "", "about", "contact", "privacy"]
