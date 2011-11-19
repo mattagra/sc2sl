@@ -26,7 +26,7 @@ xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
 
   @teams.each do |team|
     xml.url do
-      xml.loc team_url(team)
+      xml.loc team_url(team.slug)
       xml.lastmod team.updated_at.to_date
       xml.priority 0.9
     end
@@ -34,7 +34,7 @@ xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
 
   @players.each do |player|
     xml.url do
-      xml.loc player_url(player)
+      xml.loc profile_url(player.user.login)
       xml.lastmod player.updated_at.to_date
       xml.priority 0.9
     end

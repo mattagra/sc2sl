@@ -49,7 +49,7 @@ module ApplicationHelper
   end
 
   def view_article_path(article, page = 0)
-    if page > 0
+    if page.to_i > 0
       named_article_path(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url, :page => page)
     else
       named_article_path(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url)
@@ -57,7 +57,7 @@ module ApplicationHelper
   end
 
   def view_article_url(article, page = 0)
-    if page > 0
+    if page.to_i > 0
       named_article_url(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url)
     else
       named_article_url(:year => article.created_at.year, :month => article.created_at.strftime("%m"), :day => article.created_at.strftime("%d"), :url => article.url, :page => page)
