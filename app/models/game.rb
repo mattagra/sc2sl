@@ -12,6 +12,11 @@ class Game < ActiveRecord::Base
 
   #Rating
   ajaxful_rateable :stars => 5
+  
+  scope :race0, lambda{ |x| joins(:player0) & Player.race(x)}
+  scope :race1, lambda{ |x| joins(:player1) & Player.race(x)}
+  
+  scope :matchup, lambda{ |x,y| race0(x).race1(y)}
 
   #Validations
   #None necesary for games. We want to be able to schedule games.
@@ -19,6 +24,7 @@ class Game < ActiveRecord::Base
   def self.paginated(page=1,offset=20)
     order('id desc').limit(offset).offset((page - 1) * offset)
   end
+  
 
   def customname
     ("SC2SL " + self.player0.team.short_name + "." + self.player0.user.login + " vs " + self.player1.team.short_name + "."  + self.player1.user.login + " on " + self.map.name).gsub(/\s/,"_")

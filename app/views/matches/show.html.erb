@@ -1,6 +1,7 @@
 
 <div id="newsmain">
   <% if can? :update, @match %><%= link_to 'Edit Match', edit_match_path(@match) %><% end %>
+  <% if @match.team0 and @match.team1 %>
   <table width="800" border="0" align="center" cellpadding="0" cellspacing="0">
     <tbody><tr>
         <td width="356" rowspan="2">
@@ -99,6 +100,9 @@
     </tbody></table>
   <div align="center"><br />
     &nbsp;    </div>
+	<% else %>
+	  The details of this match are not yet determined.
+	<% end %>	
 </div>
 
 

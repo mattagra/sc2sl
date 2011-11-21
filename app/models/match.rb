@@ -24,7 +24,6 @@ class Match < ActiveRecord::Base
   validates :best_of, :presence => true, :numericality => true
   validates :team0, :presence => true, :if => Proc.new { |match| match.playoff_id.nil?}
   validates :team1, :presence => true, :if => Proc.new { |match| match.playoff_id.nil?}
-  validates :scheduled_at, :presence => true
 
   #triggers
   before_save :determine_status
@@ -76,7 +75,11 @@ class Match < ActiveRecord::Base
   end
   
   def title
+    if team0 and team1
     self.team0.name + " VS " + self.team1.name
+	else
+	"TBD"
+	end
   end
 
   def casters

@@ -27,8 +27,8 @@
 
 
         <div id="rankings">
-          <div style="border:none; width:524px;float: left;">
-            <div id="ranking-content" style="border:1px solid gray; float: left;">
+          <div style="border:none; width:524px;margin: 0px auto;">
+            <div id="ranking-content" style="border:1px solid gray;float: left; ">
 
               <div id="ranking-ligne-titre">
 
@@ -77,12 +77,12 @@
             <table width="500" border="0" cellspacing="0" cellpadding="0">
               <% week[1].each do |match| %>
                 <tr>
-                  <td width="100"><%= link_to(image_tag(match.team0.photo.url(:normal)), team_path(match.team0.slug)  ) %></td>
+                  <td width="100"><%= link_to(image_tag(match.team0.photo.url(:normal)), team_path(match.team0.slug)  ) %><br /><%= link_to match.team0.name, team_path(match.team0.slug) %></td>
                   <td width="300" align="center">
                     <font class="scoreseason">[<%= match.team0_wins %> - <%= match.team1_wins %>]</font><br />
                     <%= link_to "<font class='sresultm'>MATCH SHEET</font>".html_safe, match_path(match) %>
                   </td>
-                  <td width="100"><%= link_to(image_tag(match.team1.photo.url(:normal)), team_path(match.team1.slug)  ) %></td>
+                  <td width="100"><%= link_to(image_tag(match.team1.photo.url(:normal)), team_path(match.team1.slug)  ) %><br /><%= link_to match.team1.name, team_path(match.team1.slug) %></td>
                 </tr>
               <% end %>
             </table>
@@ -93,7 +93,7 @@
           <%  if @season.playoff_matches.size > 0 %>
             <div style="float:left;">
 
-              <% rounds = ((Math.log([@season.playoff_matches.size + 1.0,2.0].max.to_f))/(Math.log(2.0))).ceil %>
+              <% rounds = ((Math.log([@season.playoff_matches.size,2.0].max.to_f))/(Math.log(2.0))).ceil %>
               <% current_round = 0 %>
               <% while current_round < rounds %>
                 <div style="width:90px;float:left;">

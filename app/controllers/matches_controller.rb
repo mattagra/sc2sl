@@ -35,8 +35,11 @@ cache_sweeper :match_sweeper
     @layout_page = "Matches"
     @layout_subpage = @match.title
     @description = "Get the details about this match"
+	if @match.team0 and @match.team1
     @keywords += ["matches", @match.team0, @match.team1] + @match.team0.players + @match.team1.players
-
+    else
+	  @keywords += ["matches", "tbd"]
+	end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @match }

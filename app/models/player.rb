@@ -10,6 +10,8 @@ class Player < ActiveRecord::Base
   validates :team, :presence => true
   validates :user, :presence => true
   validates :date_joined, :presence => true
+  
+  scope :race, lambda{|x| joins(:user) & User.race(x)}
 
   def active?
     self.date_quit == nil

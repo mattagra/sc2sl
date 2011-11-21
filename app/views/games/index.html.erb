@@ -2,9 +2,9 @@
   <tbody><tr background="css/images/ranking/titre/fond.jpg"><td height="13">	<span class="replaytitre"> SC2SL REPLAYS </span></td></tr>
   </tbody></table>
 <table width="879" cellpadding="5" cellspacing="0" style="border-bottom:solid thin #333333;" bgcolor="#e8e8e8">
-  <tbody><tr class="replayfilter"><td width="3">&nbsp;</td><td width="40"><img src="/css/images/content-bar/sponsors/fleche.gif">PvT<br>
-        <img src="/css/images/content-bar/sponsors/fleche.gif">PvZ<br> <img src="/css/images/content-bar/sponsors/fleche.gif">PvP</td>
-      <td><img src="/css/images/content-bar/sponsors/fleche.gif">ZvT<br> <img src="/css/images/content-bar/sponsors/fleche.gif">ZvZ<br><img src="/css/images/content-bar/sponsors/fleche.gif">TvT</td>
+  <tbody><tr class="replayfilter"><td width="3">&nbsp;</td><td width="40"><img src="/css/images/content-bar/sponsors/fleche.gif"><%= link_to "PvT", replays_path(:matchup => "pt") %><br>
+        <img src="/css/images/content-bar/sponsors/fleche.gif"><%= link_to "PvZ", replays_path(:matchup => "pz") %><br> <img src="/css/images/content-bar/sponsors/fleche.gif"><%= link_to "PvP", replays_path(:matchup => "pp") %></td>
+      <td><img src="/css/images/content-bar/sponsors/fleche.gif"><%= link_to "ZvT", replays_path(:matchup => "zt") %><br> <img src="/css/images/content-bar/sponsors/fleche.gif"><%= link_to "ZvZ", replays_path(:matchup => "zz") %><br><img src="/css/images/content-bar/sponsors/fleche.gif"><%= link_to "TvT", replays_path(:matchup => "tt") %></td>
       <td></td>
     </tr>
   </tbody></table>

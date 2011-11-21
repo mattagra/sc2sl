@@ -143,7 +143,7 @@
 
         <div class="menu-live-left">NEXT LIVE ON SC2SL</div>
 
-        <div class="menu-live-right"><img src="/css/images/menu/clock.png" alt="NEXT LIVE" valign="absmiddle" /><span style="float : left ;height : 18px; margin-left : 8px; margin-top : 7px;"><%= @live_match.scheduled_at.strftime("%d %b %H:%M").upcase if @live_match  %> </span></div>
+        <div class="menu-live-right"><span style="float : left ;height : 18px; margin-left : 8px; margin-top : 7px;"><%= @live_match.scheduled_at.strftime("%d %b %H:%M").upcase if @live_match  %> </span></div>
 
       </div>
 
@@ -220,7 +220,7 @@
         </table>
         <% cache("calendar_#{@date.year.to_s}_#{@date.month.to_s}") do  %>
         <div id="calendar">
-          <% calendar_for Array(@layout_matches), :year => @date.year, :month => @date.month do |calendar| %>
+          <% calendar_for Array(@layout_matches), :year => @date.year, :month => @date.month, :today => Time.now do |calendar| %>
             <%= calendar.head('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun') %>
             <% calendar.day(:day_method => :scheduled_at) do |date, matches| %>
               <% if date.month == @date.month %>

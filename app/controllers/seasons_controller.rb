@@ -123,8 +123,8 @@ class SeasonsController < ApplicationController
     season.playoff_matches.each {|m| m.destroy}
     maps = season.maps
     num_teams = num_teams.to_i
-    if num_teams and num_teams > 0
-    (num_teams - 1).times do |i|
+    if num_teams > 0
+    (num_teams).times do |i|
       Match.new(:season_id => season.id, :best_of => 7, :maps => maps, :playoff_id => i).save
     end
     end

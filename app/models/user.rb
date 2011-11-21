@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   scope :new_photos, with_photos.where(:photo_approved => nil)
   scope :approved_photos, with_photos.where(:photo_approved => true)
   
+  
+  scope :race, lambda{|x| where(:race => x) }
 
 
   #Attachments

@@ -22,6 +22,8 @@ class GamesController < ApplicationController
       @games = @player.games.paginated(@current_page, @per_page)
       @games_count = @player.games.count
       @keywords += [@player.login]
+	elsif params[:matchup]
+	  
     else
       @games = Game.where("games.result is not null").paginated(@current_page, @per_page)
       @games_count = Game.where("games.result is not null").count
