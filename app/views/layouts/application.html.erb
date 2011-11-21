@@ -194,9 +194,13 @@
 
         <div id="live-ligne">
           <div id="live-ligne-left" align="left">
-            <div align="left"><img src="/css/images/flags/fr.png" alt="" width="16" height="11" /> <a href="#">Millenium </a>
-              <img src="/css/images/flags/gb.png" alt="" width="16" height="11" /> <a href="#">GLHF.TV </a>
-              <img src="/css/images/flags/ru.png" alt="" width="16" height="11" /> <a href="#">CyberArena </a> </div>
+            <div align="left">
+			  <% if @live_match %>
+			    <% @live_match.casters[0..2].each do |caster| %>
+			      <%= image_tag caster.country.flag, :width => 16, :height => 11 %>&nbsp;<%= link_to caster.login, caster.website, :target => "_blank" %>
+			    <% end %>
+			  <% end %>
+		    </div>
           </div>
 
         </div>
