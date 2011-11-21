@@ -15,7 +15,12 @@
 
 
 <td width="140" valign="top"><strong>Login * </strong></td>
-<td width="260" valign="top"><%= form.text_field :login, :size => 30 %></td>
+<% if (form.object.new_record? or (current_user and current_user.is_admin?)) %>
+  <td width="260" valign="top"><%= form.text_field :login, :size => 30 %></td>
+<% else %>
+  <td width="260" valign="top"><%=  form.object.login %></td>
+<% end  %>
+
 </tr>
 <tr>
   <td width="140" valign="top"><p><strong>Password </strong>*</p>
