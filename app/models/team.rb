@@ -22,7 +22,7 @@ class Team < ActiveRecord::Base
     Match.where("team0_id = ? or team1_id = ?", self.id, self.id)
   end
 
-  def games
+  def games  
     self.matches.collect{|m| m.completed_games}.flatten.uniq
   end
 

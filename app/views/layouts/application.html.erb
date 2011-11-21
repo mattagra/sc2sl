@@ -209,21 +209,21 @@
               <td height="20" colspan="2" bgcolor="#FFFFFF" style="text-align: right;">
                 <span class="ntitle2">
                   <%= link_to image_tag("/css/images/content-bar/sponsors/flecheg.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"),
-                    :month => (@date.beginning_of_month-1).strftime("%m"),  :year => (@date.beginning_of_month-1).strftime("%Y") %>
-                  <%= @date.strftime("%B %Y")  %>
+                    :month => (@calendar_date.beginning_of_month-1).strftime("%m"),  :year => (@calendar_date.beginning_of_month-1).strftime("%Y") %>
+                  <%= @calendar_date.strftime("%B %Y")  %>
                   <%= link_to image_tag("/css/images/content-bar/sponsors/fleche.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"),
-                    :month => (@date.end_of_month+1).strftime("%m"),  :year => (@date.end_of_month+1).strftime("%Y") %>
+                    :month => (@calendar_date.end_of_month+1).strftime("%m"),  :year => (@calendar_date.end_of_month+1).strftime("%Y") %>
                 </span>
               </td>
             </tr>
           </thead>
         </table>
-        <% cache("calendar_#{@date.year.to_s}_#{@date.month.to_s}") do  %>
+        <% cache("calendar_#{@calendar_date.year.to_s}_#{@calendar_date.month.to_s}") do  %>
         <div id="calendar">
-          <% calendar_for Array(@layout_matches), :year => @date.year, :month => @date.month, :today => Time.now do |calendar| %>
+          <% calendar_for Array(@layout_matches), :year => @calendar_date.year, :month => @calendar_date.month, :today => Time.now do |calendar| %>
             <%= calendar.head('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun') %>
             <% calendar.day(:day_method => :scheduled_at) do |date, matches| %>
-              <% if date.month == @date.month %>
+              <% if date.month == @calendar_date.month %>
                 <% if matches.size == 0 %>
                   <%= date.day %>
                 <% else %>

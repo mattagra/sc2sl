@@ -13,10 +13,7 @@ class Game < ActiveRecord::Base
   #Rating
   ajaxful_rateable :stars => 5
   
-  scope :race0, lambda{ |x| joins(:player0) & Player.race(x)}
-  scope :race1, lambda{ |x| joins(:player1) & Player.race(x)}
-  
-  scope :matchup, lambda{ |x,y| race0(x).race1(y)}
+
 
   #Validations
   #None necesary for games. We want to be able to schedule games.
