@@ -1435,7 +1435,7 @@ table#user{
 	float : left;
 	width : 120px;
 	font-size : 12px;
-	margin-top:5px;
+	margin:5px 0px;
 	color : #FFFFFF;
 	text-shadow : #000000 1px 1px;
 	line-height : 12px;
