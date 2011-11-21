@@ -1442,6 +1442,10 @@ table#user{
 	text-align : right;
 }
 
+#middle-titre-texte-right a{
+  color: white;
+}
+
 .middle-titre-texte-right a{
 	color : #FFFFFF;
 }
