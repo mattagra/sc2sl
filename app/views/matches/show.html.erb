@@ -87,10 +87,14 @@
         <td valign="top">
           <%  @match.vote_events.each do |vote_event| %>
           <p align="left" class="matchlist"><%= link_to vote_event.team.name, team_path(vote_event.team.slug) %> revive (<%= pluralize(vote_event.votes.count, "vote") %>)</p>
-          <blockquote>
-            <% vote_event.players.each do |player| %>
+          <blockquote style="margin: 20px 40px;">
+            <% vote_event.players.sort_by{|p| -vote_event.votes.where(:player_id => p.id).count}.each_with_index do |player, i| %>
             <p align="left" class="matchlist">
-              <%= link_to((image_tag(race_icon_url(player.user.race))+ player.login).html_safe,profile_path(player.login)) %> <%= "(#{pluralize(vote_event.votes.where(:player_id => player.id).count, 'vote')})" %>
+			<% if i == 0 %>
+			<strong><%= link_to((image_tag(race_icon_url(player.user.race))+ player.login).html_safe,profile_path(player.login)) %> <%= "(#{vote_event.votes.where(:player_id => player.id).count})" %></strong>
+			<% else %>
+			   <%= link_to((image_tag(race_icon_url(player.user.race))+ player.login).html_safe,profile_path(player.login)) %> <%= "(#{vote_event.votes.where(:player_id => player.id).count})" %>
+			<% end %>              
             </p>
             <% end %>
               </blockquote>

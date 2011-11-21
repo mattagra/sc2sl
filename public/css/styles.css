@@ -12,6 +12,8 @@ font-size: 11px;
   background-position: top center;
   background-color :#000000;
 }
+
+
  img {
  border: 0;
  }
@@ -2259,3 +2261,13 @@ text-decoration: none;
 font-size: 16px;
 }
 
+
+.matchtitre {
+font-size: 20px;
+text-decoration: bold;
+}
+
+.matchpre {
+font-size: 16px;
+text-decoration: none;
+}
