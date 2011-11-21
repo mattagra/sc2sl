@@ -114,7 +114,7 @@ function addUBB(code)
       </div><br/>
     <% end %>
   </div>
-  <% elsif current_user.banned? %>
+  <% elsif current_user and current_user.banned? %>
   <div align="center"><br/>You are currently banned and may not post.<br/> <br/></div>
 <% else %>
   <div align="center"><br/>You must <%= link_to "register", register_path %> or <%= link_to "login", login_path %> to comment.<br/> <br/></div>
