@@ -13,6 +13,8 @@ class Game < ActiveRecord::Base
   #Rating
   ajaxful_rateable :stars => 5
   
+  scope :matchup, lambda{|x,y| joins({:player0 => :user}, {:player1 => :user}).where({:player0 => {:user => {:race => x}}, :player1 => {:user => {:race => y}}  } | {:player1 => {:user => {:race => x}}, :player0 => {:user => {:race => y}}  })}
+  
 
 
   #Validations

@@ -23,7 +23,9 @@ class GamesController < ApplicationController
       @games_count = @player.games.count
       @keywords += [@player.login]
 	elsif params[:matchup]
-	  
+	  @games = Game.matchup(params[:matchup][:race0], params[:matchup][:race1]).paginated(@current_page, @per_page)
+	  @games_count = Game.matchup(params[:matchup][:race0], params[:matchup][:race1]).count
+	  @keywords += [params[:matchup][:race0],params[:matchup][:race1] ]
     else
       @games = Game.where("games.result is not null").paginated(@current_page, @per_page)
       @games_count = Game.where("games.result is not null").count

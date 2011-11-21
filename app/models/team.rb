@@ -22,9 +22,14 @@ class Team < ActiveRecord::Base
     Match.where("team0_id = ? or team1_id = ?", self.id, self.id)
   end
 
-  def games  
-    self.matches.collect{|m| m.completed_games}.flatten.uniq
+  
+  def games
+    Game.joins(:match => [:team0, :team1]).where({:match => {:team0 => {:id => self.id}}| {:team1 => {:id => self.id}}}, {:result.not_eq => nil})
   end
+  
+  #def games  
+  #  self.matches.collect{|m| m.completed_games}.flatten.uniq
+  #end
 
 
   has_attached_file :photo,
