@@ -156,6 +156,14 @@ margin-top : 3px;
 margin-right: 5px;
 border: none;
 }
+.login-content-middle {
+margin-top: 1px;
+float: left;
+width: 310px;
+height: 25px;
+margin-left: 5px;
+}
+
 .login-content-right img{
 
 }
