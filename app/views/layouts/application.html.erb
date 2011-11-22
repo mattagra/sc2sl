@@ -222,7 +222,7 @@
             </tr>
           </thead>
         </table>
-        <% cache("calendar_#{@calendar_date.year.to_s}_#{@calendar_date.month.to_s}") do  %>
+        <% cache("calendar_#{@calendar_date.year.to_s}_#{@calendar_date.month.to_s}_#{Time.now.day.to_s}") do  %>
         <div id="calendar">
           <% calendar_for Array(@layout_matches), :year => @calendar_date.year, :month => @calendar_date.month, :today => Time.now, :first_day_of_week => 1  do |calendar| %>
             <%= calendar.head('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun') %>
