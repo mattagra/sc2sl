@@ -2186,7 +2186,7 @@ font-weight: bold;
 .ddpanel .ddpaneltab a{ /*"toggle" tab related CSS*/
                         float: right;
                         color: white;
-                        background: #333333 url(/css/images/toggleleft.gif) no-repeat left bottom; /*background of toggle tab*/
+                        background: #333333; /*background of toggle tab*/
                         text-decoration: none;
                         letter-spacing: 1px;
 }
@@ -2194,7 +2194,7 @@ font-weight: bold;
 .ddpanel .ddpaneltab a span{ /*"toggle" tab related CSS*/
                              float: left;
                              display: block;
-                             background: transparent url(/css/images/toggleright.gif) no-repeat right bottom;
+                             background: transparent;
                              padding: 1px 12px 4px 13px;
                              cursor: pointer;
 }

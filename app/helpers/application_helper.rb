@@ -114,7 +114,7 @@ module ApplicationHelper
       end
       c = page
     end
-    boxes << " | " + link_to(image_tag("/css/images/paginationr.gif"),url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")))
+    boxes << "  " + link_to(image_tag("/css/images/paginationr.gif"),url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")))
     return sanitize(boxes.join("")) # + "per_page: #{per_page}, current: #{current}, total: #{total}"
   end
 
