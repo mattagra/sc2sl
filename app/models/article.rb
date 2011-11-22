@@ -12,6 +12,8 @@ class Article < ActiveRecord::Base
   validates_attachment_size :photo, :less_than=>1.megabyte
   validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif', 'image/pjpeg', 'image/x-png']
 
+  validates :user, :presence => true
+  
 
   #attached
   has_attached_file :photo, {:styles => { :normal => "643x253!" }, :url => "/shared/articles/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
