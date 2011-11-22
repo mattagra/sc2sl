@@ -56,19 +56,19 @@ module Sc2sl
         :panda],
       'Link' => [
         /\[url=(.*?)\](.*?)\[\/url\]/mi,
-        '<a href="\1" rel="nofollow">\2</a>',
+        '<a href="\1" rel="nofollow" target="_blank">\2</a>',
         'Hyperlink to somewhere else',
         'Maybe try looking on [url=http://google.com]Google[/url]?',
         :link],
       'Link (Implied)' => [
         /\[url\](.*?)\[\/url\]/mi,
-        '<a href="\1" rel="nofollow">\1</a>',
+        '<a href="\1" rel="nofollow" target="_blank">\1</a>',
         'Hyperlink (implied)',
         "Maybe try looking on [url]http://google.com[/url]",
         :link],
       'Link (Automatic)' => [
         /(\A|\s)((https?:\/\/|www\.)[^\s<]+)/,
-        ' <a href="\2" rel="nofollow">\2</a>',
+        ' <a href="\2" rel="nofollow" target="_blank">\2</a>',
         'Hyperlink (automatic)',
         'Maybe try looking on http://www.google.com',
         :link]
