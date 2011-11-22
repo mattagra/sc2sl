@@ -61,6 +61,7 @@
         <th><%= f.object.team0.short_name %> Player</th>
         <th><%= f.object.team1.short_name %> Player</th>
         <th>Map</th>
+		<th>Revived Used?</th>
         <th>Winning Team</th>
         <th>Replay</th>
       </tr>
@@ -70,6 +71,7 @@
           <td><%= game_form.select :player0_id, f.object.team0.players.collect {|p| [p.user.login, p.id] }, :prompt => true %></td>
           <td><%= game_form.select :player1_id, f.object.team1.players.collect {|p| [p.user.login, p.id] }, :prompt => true %></td>
           <td><%= game_form.select :map_id, Map.all.collect{|m| [m.name, m.id]}, :prompt => true %></td>
+		  <td><%= game_form.check_box :revived%></td>
           <td><%= game_form.select :result, [[f.object.team0.short_name, 0], [f.object.team1.short_name, 1]], :prompt => true %></td>
           <td>Replay <%= game_form.file_field :replay %></td>
         </tr>

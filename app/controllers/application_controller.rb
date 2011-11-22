@@ -83,7 +83,6 @@ class ApplicationController < ActionController::Base
   before_filter :articles
   before_filter :live_match
   before_filter :meta_tags
-  before_filter :advertisements
   before_filter :current_voting
   before_filter :set_date_object_and_find_matches
 
@@ -124,11 +123,6 @@ class ApplicationController < ActionController::Base
     @current_vote_event = VoteEvent.last
   end
 
-  def advertisements
-    advertisements = Advertisement.all
-    @advertisements_show = advertisements.randomize(:weight)[0..2].randomize
-
-  end
 
   def tag_cloud
     @tags = Article.tag_counts_on(:tags)

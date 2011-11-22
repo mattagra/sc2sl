@@ -17,6 +17,12 @@ font-size: 11px;
  img {
  border: 0;
  }
+ 
+ .bold {
+   font-weight: bold;
+ }
+ 
+ 
 A:link {text-decoration: none; color: #0D4986}
 A:visited {text-decoration: none; color: #0D4986}
 A:active {text-decoration: none; color: #0D4986}
@@ -133,10 +139,16 @@ margin-left : 0px;
 }
 .login-content-texte {
 float : left;
-margin-top : 8px;
+ /*margin-top : 8px; */
 margin-left : 10px;
 margin-right : 8px;
+width: 410px;
 }
+
+.login-content-text span {
+  margin-top: 8px;
+}
+
 .login-content-texte a{
 color: white;
 }
@@ -891,6 +903,7 @@ margin-right : 4px;
     float : left;
     width : 525px;
     margin-left : 0px;
+	margin-right: 2px;
 }
 #fullpage{
     padding-top: 0px;
@@ -1369,6 +1382,7 @@ margin-left: 1px;
 .ntitle
 {
     font-size:13px;
+	color: black;
 }
 .ntitle2
 {

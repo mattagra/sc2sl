@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111121232141) do
+ActiveRecord::Schema.define(:version => 20111122063523) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -243,6 +243,7 @@ ActiveRecord::Schema.define(:version => 20111121232141) do
     t.string   "replay_content_type"
     t.integer  "replay_file_size"
     t.decimal  "rating_average",      :precision => 6, :scale => 2, :default => 0.0
+    t.boolean  "revived",                                           :default => false, :null => false
   end
 
   create_table "languages", :force => true do |t|

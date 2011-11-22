@@ -124,8 +124,7 @@ class Match < ActiveRecord::Base
       nil
     end
   end
-
-  
+    
 
 end
 
