@@ -9,7 +9,7 @@ class Advertisement < ActiveRecord::Base
   
   
   
-  scope :random_ad, lambda { order("RAND() * weight")  }
+  scope :random_ad, lambda { order("RANDOM() * weight")  }
   
   
   
@@ -17,13 +17,10 @@ class Advertisement < ActiveRecord::Base
   
   
 
-  has_attached_file :photo,    {
-    :styles => {
-      :horizontal => "570x92!",
-      :vertical => "120x600!",
-    }, 
-    :url => "/shared/advertisements/:attachment/:id/:style.:extension",
-    :path => ":rails_root/public:url",
+  has_attached_file :photo, {
+    :styles => {:horizontal => "570x92!", :vertical => "120x600!"},
+    :url => "/shared/internal_ad/:attachment/:id/:style.:extension",
+    :path => ":rails_root/public:url"  
   }
 
 end
