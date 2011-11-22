@@ -131,7 +131,7 @@
     <table width="1000" height="92" border="0" align="center" cellpadding="0" cellspacing="0">
       <tr>
         <td width="380" align="center" valign="middle"><%= cms_snippet_content('main_logo') %></td>
-        <td width="620" align="center" valign="middle"><div id="pubhaut"><%= cms_snippet_content('ad_top_right') %></div></td>
+        <td width="620" align="center" valign="middle"><div id="pubhaut"><%= random_ad("horizontal") %></div></td>
       </tr>
     </table>
 
@@ -263,7 +263,9 @@
             <div id="right-titre">
               <div id="right-titre-texte">ADVERTISEMENT</div>
             </div>
-            <div id="advertissement-image"><a href="#"><img src="/css/images/header/pub/logi2.gif" alt="logitech offer for starcraft fans!" width="120" height="600" /></a></div>
+            <div id="advertissement-image">
+			<%= random_ad("vertical") %>
+			</div>
           </div>
         </div>
       </div>

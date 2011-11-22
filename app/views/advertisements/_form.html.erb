@@ -24,11 +24,15 @@
     <%= f.text_field :weight %>
   </div>
   <div class="field">
-    <%= f.label :photo %>209x64*
+    <%= f.label :ad_type %><br />
+	<%= f.select :ad_type, Advertisement::AD_TYPES.keys, {:prompt => 'Select Ad Type'} %>
+  </div>  
+  <div class="field">
+    <%= f.label :photo %>570x92 or 120x600
     <%= f.file_field :photo %>
     <br />
     <% if @advertisement.photo.exists? then %>
-      <%= image_tag @advertisement.photo.url(:normal) %>
+      <%= image_tag @advertisement.photo.url(@advertisement.ad_type) %>
     <% end %>
   </div>
   <div class="actions">
