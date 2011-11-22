@@ -37,17 +37,26 @@
                   <p class="matchpre"><%= link_to_if !@match.url.blank?, "View VODS", @match.url  %></p>
                   <p class="matchpre">&nbsp;</p></td>
               </tr>
+
               <% @match.games.each do |game| %>
               <% if game.player0 and game.player1 %>
                 <tr>
-                  <td width="101">
+                  <td width="101" bgcolor="<%= if game.revived then "#CCC" else "" end %>"  >
                     <%= link_to(image_tag(game.map.photo.url(:thumb), :height => "75"), replay_path(game)) %>
                   </td>
-                  <td width="378" valign="top">
+                  <td width="378" valign="top" bgcolor="<%= if game.revived then "#CCC" else "" end %>">
                     <p align="left" class="matchlist"><span class="playoffteam playoffteam">
-                        <%= link_to((image_tag(race_icon_url(game.player0.user.race))+" " +game.player0.login).html_safe,profile_path(game.player0.login)) %>
-                        <% if game.winning_player == game.player0 %>&nbsp;&gt;&nbsp;<% elsif game.winning_player == game.player1 %>&nbsp;&lt;&nbsp;<% else %>&nbsp;vs&nbsp;<% end %>
-                        <%= link_to((image_tag(race_icon_url(game.player1.user.race))+" " +game.player1.login).html_safe,profile_path(game.player1.login)) %>
+					    <% if game.winning_player == game.player0 %>
+						  
+						  <strong><%= link_to((image_tag(race_icon_url(game.player0.user.race))+" " +game.player0.login).html_safe,profile_path(game.player0.login)) %></strong>						 
+						  &nbsp;&gt;&nbsp;
+						  <%= link_to((image_tag(race_icon_url(game.player1.user.race))+" " +game.player1.login).html_safe,profile_path(game.player1.login)) %>
+						<% else %>
+						  <%= link_to((image_tag(race_icon_url(game.player0.user.race))+" " +game.player0.login).html_safe,profile_path(game.player0.login)) %>						 
+						  &nbsp;&lt;&nbsp;
+						  <strong><%= link_to((image_tag(race_icon_url(game.player1.user.race))+" " +game.player1.login).html_safe,profile_path(game.player1.login)) %></strong>
+                        <% end %>
+						<%= if game.revived then  " * REVIVED *" else "" end %>
                       </span>
                     </p>
                     <p align="left" class="matchlist">&nbsp;</p>
@@ -74,9 +83,9 @@
           </table>
           <p>&nbsp;</p>
           <p align="center" class="matchlist">
-             <%= link_to @match.team0.name, team_path(@match.team0.slug) %>
+             <%= link_to @match.team0.name, team_path(@match.team0.slug), {:class => "#{(@match.team0_wins == 4 ? "bold" : "")}"} %>
              <%= "#{@match.team0_wins} - #{@match.team1_wins}" %>
-             <%= link_to @match.team1.name, team_path(@match.team1.slug) %>
+             <%= link_to @match.team1.name, team_path(@match.team1.slug), {:class => "#{(@match.team0_wins == -4 ? "bold" : "")}"}  %>
           </p>
         </td>
         <td height="72" valign="top"><p align="left" class="matchlist">&nbsp;</p>

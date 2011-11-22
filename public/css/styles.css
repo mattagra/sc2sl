@@ -17,6 +17,12 @@ font-size: 11px;
  img {
  border: 0;
  }
+ 
+ .bold {
+   font-weight: bold;
+ }
+ 
+ 
 A:link {text-decoration: none; color: #0D4986}
 A:visited {text-decoration: none; color: #0D4986}
 A:active {text-decoration: none; color: #0D4986}
