@@ -17,7 +17,7 @@
 
 <p>
   <b>Photo </b>
-  <%= image_tag @advertisement.photo.url(:normal) %>
+  <%= image_tag @advertisement.photo.url(@advertisement.ad_type) %>
 </p>
 
 

@@ -29,6 +29,7 @@ gem "cancan"
 gem 'yaml_db'
 gem "memcache-client"
 gem 'delayed_job'
+gem "meta_where"
 
 gem 'comfortable_mexican_sofa'
 
