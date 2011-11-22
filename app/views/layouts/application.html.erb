@@ -85,13 +85,14 @@
             <img src="/css/images/login/icones/login.png" alt="Formulaire de connexion" align="left" />
               
                 <% unless current_user %>
-                  <div class="login-content-texte"><%= link_to "REGISTER", register_path %> or LOGIN</div>
+                  <div class="login-content-texte"><span style="float:left;margin-top: 8px;"><%= link_to "REGISTER", register_path %> or LOGIN</span>
                   <%= form_for UserSession.new, :url => user_session_path do |f| %>
                     <%= f.text_field :login, :placeholder => "Login", :class => "input-login" %>
                     <%= f.password_field :password, :placeholder => "Password", :class => "input-login" %>
                     <%= f.hidden_field :remember_me, :value => true %>
                     <%= f.submit "OK", :class => "submit-login" %>
                   <% end %>
+				  </div>
                 <% else %>
                 <div class="login-content-texte">
                 Welcome <b><%= current_user.login %></b> |

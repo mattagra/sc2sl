@@ -139,11 +139,16 @@ margin-left : 0px;
 }
 .login-content-texte {
 float : left;
-margin-top : 8px;
+ /*margin-top : 8px; */
 margin-left : 10px;
 margin-right : 8px;
 width: 410px;
 }
+
+.login-content-text span {
+  margin-top: 8px;
+}
+
 .login-content-texte a{
 color: white;
 }
