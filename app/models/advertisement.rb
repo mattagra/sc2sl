@@ -22,7 +22,7 @@ class Advertisement < ActiveRecord::Base
       :horizontal => "570x92!",
       :vertical => "120x600!",
     }, 
-    :url => "/shared/advertisements/:attachment/:id/:style_:basename.:extension",
+    :url => "/shared/advertisements/:attachment/:id/:style.:extension",
     :path => ":rails_root/public:url",
   }
 
