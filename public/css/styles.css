@@ -891,6 +891,7 @@ margin-right : 4px;
     float : left;
     width : 525px;
     margin-left : 0px;
+	margin-right: 2px;
 }
 #fullpage{
     padding-top: 0px;
@@ -1369,6 +1370,7 @@ margin-left: 1px;
 .ntitle
 {
     font-size:13px;
+	color: black;
 }
 .ntitle2
 {
