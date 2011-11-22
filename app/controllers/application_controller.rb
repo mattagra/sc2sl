@@ -101,7 +101,7 @@ class ApplicationController < ActionController::Base
 
   def set_date_object_and_find_matches
     @today = Date.today
-	@calendar_date = params[:month] ? Date.new(params[:year].to_i,params[:month].to_i, 1) : Date.today
+	@calendar_date = (params[:calendar_month] and params[:calendar_year]) ? Date.new(params[:calendar_year].to_i,params[:calendar_month].to_i, 1) : Date.today
 	@layout_matches = Match.where(:scheduled_at => (@calendar_date.beginning_of_month - 1)..(@calendar_date.end_of_month + 1)).includes([:team0, :team1])
   end
 
