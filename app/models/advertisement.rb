@@ -8,16 +8,8 @@ class Advertisement < ActiveRecord::Base
   validates :ad_type, :presence => true, :inclusion =>  Advertisement::AD_TYPES.keys
   
   
-  def self.sql_rand_function
-    if ActiveRecord::Base.connection.class == ActiveRecord::ConnectionAdapters::SQLite3Adapter
-	  'RANDOM()'
-	else
-	  'RAND()'
-	end
-  end
   
-  
-  scope :random_ad, lambda { order("#{self.sql_rand_function} * weight")  }
+  scope :random_ad, lambda { order("RAND() * weight")  }
   
   
   
