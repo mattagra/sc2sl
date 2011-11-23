@@ -19,7 +19,7 @@
         <% if @user.country  %>
           <%= image_tag @user.country.flag %>
         <% end %>   <%= @user.full_name %></br>
-        <%= @user.age %>  years old  <% if @user == current_user or current_admin %>
+        <%= @user.age %>  years old  <% if current_admin %>
           | Email: <%=h @user.email %> | <% end %>
         <% if @user == current_user %>
 

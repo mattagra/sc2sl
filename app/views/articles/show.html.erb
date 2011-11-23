@@ -20,7 +20,7 @@
     <br />
 	<br />
       <%- r = /([^a-z0-9_]|^)@([a-z0-9_]+)/i %>
-      <%= raw  auto_link(@article.description).gsub(r) {|m| "#{$1}<a href='http://twitter.com/#{$2}'>@#{$2}</a>#{$3}" }  %>
+      <%= raw  auto_link(@article.description, :html => {:target => '_blank'}).gsub(r) {|m| "#{$1}<a href='http://twitter.com/#{$2}' target='_blank'>@#{$2}</a>#{$3}" }  %>
 	  <br />&nbsp;
   </div>
   <div id="footernews" align="right">
