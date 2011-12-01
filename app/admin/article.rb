@@ -23,7 +23,7 @@ ActiveAdmin.register Article do
   end
   
   controller do
-    
+    cache_sweeper :article_sweeper
     def create
       @article = Article.new(params[:article])
 	  @article.user = current_user

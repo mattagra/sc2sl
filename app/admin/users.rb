@@ -59,7 +59,7 @@ ActiveAdmin.register User do
   
   
   controller do
-    
+    cache_sweeper :user_sweeper
     def update
       @user = User.find(params[:id])
       if @user.update_attributes(params[:user], !current_user.is_super_admin?)

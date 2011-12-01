@@ -13,6 +13,10 @@ ActiveAdmin.register Player do
     default_actions
   end
   
+  controller do
+    cache_sweeper :player_sweeper
+  end
+  
  
   
   

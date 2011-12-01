@@ -18,7 +18,7 @@ class ArticleSweeper < ActionController::Caching::Sweeper
   private
   def expire_cache_for(article)
     # Expire a fragment
-    expire_fragment('recent_news')
+    expire_fragment("recent_news")
     expire_fragment("articles_banner")
     expire_fragment("featured_article")
   end
