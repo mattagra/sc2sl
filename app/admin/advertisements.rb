@@ -21,7 +21,7 @@ ActiveAdmin.register Advertisement do
       f.input :title
 	  f.input :url
 	  f.input :ad_type, :as => :select, :collection => Advertisement::AD_TYPES.keys
-      f.input :photo
+      f.input :photo, :label => "Photo (horizontal => 570x92, vertical => 120x600)"
 	  f.input :weight
     end
     f.buttons
