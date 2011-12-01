@@ -16,7 +16,7 @@ ActiveAdmin.register Advertisement do
     default_actions
   end
 
-  form do |f|
+  form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs "Details" do
       f.input :title
 	  f.input :url
