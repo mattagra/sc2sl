@@ -30,8 +30,8 @@
                 <div class="ranking-ligne-ml"><%= @season.game_losses(team) %></div>
               </div>
             <% end %>
-          <% end %>
-        </div>
+          </div>  
+        <% end %>
       <% end %>
     </div>
 
@@ -48,9 +48,9 @@
             </p>
           </div>
           <div class="article-texte"><%- r = /([^a-z0-9_]|^)@([a-z0-9_]+)/i %><%=raw auto_link(truncate_words(@article.description, 200, "(..)", 1327)).gsub(r) {|m| "#{$1}<a href='http://twitter.com/#{$2}'>@#{$2}</a>#{$3}" } %>
-            <br/> &nbsp;
+            <br /> &nbsp;
             <div align="right">
-              <br/><%= link_to "Read More", view_article_path(@article), :style => "font-weight: bolder;font-size: 13px;" %>
+              <br /><%= link_to "Read More", view_article_path(@article), :style => "font-weight: bolder;font-size: 13px;" %>
             </div>
           </div>
         <% end %>
@@ -71,7 +71,7 @@
               <%= link_to content_tag(:font, article.created_at.strftime(" %m/%d") + " - ", :class => "ntitle2") + 
               content_tag(:font, article.title + " ", :class => "ntitle"), view_article_path(article) %>&nbsp;
               <%= link_to content_tag(:font, article.comments.count.to_s + " ", :class => "ntitle") +
-              content_tag(:img, "", :src => "/css/images/comment/com.gif"), view_article_path(article)+ "#comments" %><br/>
+              content_tag(:img, "", :src => "/css/images/comment/com.gif"), view_article_path(article)+ "#comments" %><br />
             <% end %>
           </div>
       <% end %>
