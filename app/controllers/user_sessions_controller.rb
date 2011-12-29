@@ -12,7 +12,7 @@ class UserSessionsController < ApplicationController
       redirect_back_or_default root_url
     else
       flash[:notice] = "Login not succesful, please try again."
-      render :action => :new
+      redirect_to login_url
     end
   end
 

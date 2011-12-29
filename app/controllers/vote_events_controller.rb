@@ -1,6 +1,7 @@
 class VoteEventsController < ApplicationController
 
     authorize_resource
+    cache_sweeper :vote_sweeper
 
   def index
     @vote_events = VoteEvent.all

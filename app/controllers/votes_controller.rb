@@ -1,6 +1,7 @@
 class VotesController < ApplicationController
 
     authorize_resource
+    cache_sweeper :vote_sweeper
 
   require 'ipaddr'
   def new
@@ -14,7 +15,7 @@ class VotesController < ApplicationController
     @vote.user = current_user
     @vote.ip_address = IPAddr.new(request.remote_ip).to_i
     unless @vote.save
-      flash[:notice] = "We could not save your vote"
+      flash[:notice] = "You have already voted on this computer"
     end
     redirect_to vote_path
   end

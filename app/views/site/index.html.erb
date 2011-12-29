@@ -48,7 +48,7 @@
           </p>
         </div>
         <div class="article-texte"><%- r = /([^a-z0-9_]|^)@([a-z0-9_]+)/i %><%=raw auto_link(truncate_words(@article.description, 200, "(..)", 1327)).gsub(r) {|m| "#{$1}<a href='http://twitter.com/#{$2}'>@#{$2}</a>#{$3}" } %>
-          <br />
+          <br /> 
           <div>
             <br /><%= link_to "Read More", view_article_path(@article), :style => "font-weight: bolder;font-size: 13px;" %>
           </div>

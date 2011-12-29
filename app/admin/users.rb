@@ -30,6 +30,8 @@ ActiveAdmin.register User do
       f.input :login
       f.input :first_name
       f.input :last_name
+      f.input :password
+      f.input :password_confirmation
       f.input :country
       f.input :birthdate
       f.input :race, :as => :select, :collection => ["protoss", "zerg", "terran", "random"]
