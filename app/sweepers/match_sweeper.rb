@@ -21,7 +21,7 @@ class MatchSweeper < ActionController::Caching::Sweeper
     expire_fragment('season_rankings')
     if match.scheduled_at and match.scheduled_at.year
       expire_fragment("calendar_#{match.scheduled_at.year}_#{match.scheduled_at.month}")
-      if match.scheduled_at_changed?
+      if match.scheduled_at_changed? and match.scheduled_at_was and match.scheduled_at_was.year
         expire_fragment("calendar_#{match.scheduled_at_was.year}_#{match.scheduled_at_was.month}")
       end
     end

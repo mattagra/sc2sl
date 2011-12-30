@@ -21,6 +21,23 @@
     <link href="/css/smoothness/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
     <link href="/css/images/logo.ico" rel="shortcut icon" />
     
+    <!-- Widget styles -->
+    <link rel="stylesheet" type="text/css" href="/css/sliderkit-core.css" media="screen, projection" />
+    <link rel="stylesheet" type="text/css" href="/css/sliderkit-demos.css" media="screen, projection" />
+
+    <!-- Compatibility fix -->
+    <!--[if IE 6]>
+      <link rel="stylesheet" type="text/css" href="/css/sliderkit-demos-ie6.css" />
+    <![endif]-->
+
+    <!--[if IE 7]>
+      <link rel="stylesheet" type="text/css" href="/css/sliderkit-demos-ie7.css" />
+    <![endif]-->
+
+    <!--[if IE 8]>
+      <link rel="stylesheet" type="text/css" href="/css/sliderkit-demos-ie8.css" />
+    <![endif]-->
+    
 
     <!-- JAVASCRIPT  -->
 
@@ -34,10 +51,63 @@
     <script type="text/javascript" src="/js/slider-news.js"></script>
     <script type="text/javascript" src="/js/jquery.placeheld.min.js"></script>
     <script type="text/javascript" src="/javascripts/jquery.popupwindow.js"></script>
+    <!-- jQuery library -->
+    <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
         $("input[placeholder]").placeHeld();
       });
+    </script>
+    
+    <!-- Slider Kit execution -->
+    <script type="text/javascript">
+      <script type="text/javascript">
+			$(window).load(function(){ //$(window).load() must be used instead of $(document).ready() because of Webkit compatibility				
+				
+				// Photo slider > Minimal
+				$(".photoslider-mini").sliderkit({
+					autospeed:3000,
+					panelbtnshover:true,
+					circular:true
+				});
+				
+				// Photo slider > Bullets nav
+				$(".photoslider-bullets").sliderkit({
+					auto:false,
+					circular:true,
+					mousewheel:true,
+					shownavitems:5,
+					panelfx:"sliding",
+					panelfxspeed:2000,
+					panelfxeasing:"easeOutExpo" // "easeOutExpo", "easeInOutExpo", etc.
+				});
+				
+				// Photo slider > 1 click
+				$(".photoslider-1click").sliderkit({
+					auto:false,
+					circular:true,
+					shownavitems:8,
+					panelclick:true,
+					panelfx:"sliding",
+					panelfxspeed:1000,
+					panelfxeasing:"easeInOutExpo" //"easeOutExpo", "easeOutCirc", etc.
+				});
+				
+				// Photo slider > Vertical
+				$("#photoslider-vertical").sliderkit({
+					auto:false,
+					circular:true,
+					shownavitems:1,
+					navfx:"none",
+					panelfx:"sliding",
+					panelfxspeed:1200,
+					panelfxeasing:"easeOutCirc",
+					mousewheel:true,
+					verticalnav:true,
+					verticalslide:true
+				});
+			});	
+		</script>
     </script>
 
     <script type="text/JavaScript">
@@ -154,10 +224,15 @@
       <% if @live_match and @live_match.live %>
         <%= render :partial => "matches/live", :locals => {:live_match => @live_match} %>
       <% else %>
-        <div id="slider" class="nivoSlider">
-          <%- @frontpage_articles.each_with_index do |article, i| %>
-            <%= render :partial => "articles/article_banner", :locals => {:article => article, :i => i} %>
-          <% end %>
+        <div class="sliderkit photoslider-mini">
+	      <div class="sliderkit-panels">
+            <div class="sliderkit-btn sliderkit-go-btn sliderkit-go-prev" ><a href="#" title="Previous"><span>Previous</span></a></div>
+            <div class="sliderkit-btn sliderkit-go-btn sliderkit-go-next" ><a href="#" title="Next"><span>Next</span></a></div>
+
+            <%- @frontpage_articles.each do |article| %>
+              <%= render :partial => "articles/article_banner", :locals => {:article => article} %>
+            <% end %>
+          </div>
         </div>
       <% end %>
 

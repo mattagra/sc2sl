@@ -82,11 +82,9 @@
 
   //###################################
   //nothing beyond this point
-  function GetCount(ddate,iid){
+  function GetCount(ddate,iid, sdate){
 
-    dateNow = new Date();	//grab current date
-    amount = ddate.getTime() - dateNow.getTime();	//calc milliseconds between dates
-    delete dateNow;
+    amount = ddate- sdate;	//calc milliseconds between dates
 
     // if time is already past
     if(amount < 0){
@@ -116,15 +114,18 @@
       out = out.substr(0,out.length-2);
       document.getElementById(iid).innerHTML=out;
 
-      setTimeout(function(){GetCount(ddate,iid)}, 1000);
+      setTimeout(function(){GetCount(ddate,iid, sdate + 1000)}, 1000);
     }
   }
 <% v = VoteEvent.last %>
 <% if v %>
-    dateFuture1 = new Date(<%= v.ended_at.year  %>,<%= v.ended_at.month - 1  %>,<%= v.ended_at.day   %>,<%= v.ended_at.hour   %>,<%= v.ended_at.min   %>,<%= v.ended_at.sec   %>);
+    <% end_date = v.ended_at.in_time_zone  %>
+    <% date_now = Time.now.in_time_zone %>
+    dateNow1 = new Date(<%= date_now.year  %>,<%= date_now.month - 1  %>,<%= date_now.day   %>,<%= date_now.hour   %>,<%= date_now.min   %>,<%= date_now.sec   %>);
+    dateFuture1 = new Date(<%= end_date.year  %>,<%= end_date.month - 1  %>,<%= end_date.day   %>,<%= end_date.hour   %>,<%= end_date.min   %>,<%= end_date.sec   %>);
 
     window.onload=function(){
-      GetCount(dateFuture1, 'countbox1');
+      GetCount(dateFuture1.getTime(), 'countbox1', dateNow1.getTime());
       //you can add additional countdowns here (just make sure you create dateFuture2 and countbox2 etc for each)
     };
 <% end  %>
