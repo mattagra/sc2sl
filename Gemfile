@@ -28,7 +28,7 @@ gem 'ajaxful_rating', :git => 'git://github.com/edgarjs/ajaxful-rating.git', :br
 gem "cancan"
 gem 'yaml_db'
 gem "memcache-client"
-gem 'delayed_job'
+gem 'delayed_job', '2.1.4'
 gem "meta_where"
 
 gem 'comfortable_mexican_sofa', '1.5.3'
