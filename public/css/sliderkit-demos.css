@@ -18,7 +18,7 @@
 /*---------------------------------
  *  Photos slider > Minimal
  *---------------------------------*/
-.photoslider-mini{width:643px;height:257px;float: left;	position:relative; top: -10px; display: block;}
+.photoslider-mini{width:643px;height:257px;float: left;	position:relative; top: 0px; display: block;}
 
 /* Panels buttons */
 .photoslider-mini .sliderkit-go-btn{position:absolute;top:0;z-index:10;width:50px;height:335px;}
