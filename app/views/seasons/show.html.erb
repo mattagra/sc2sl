@@ -27,7 +27,7 @@
 
 
         <div id="rankings">
-          <div style="border:none; width:524px;margin: 0px auto;">
+          <div style="border:none; width:605px;margin: 0px auto;">
             <div id="ranking-content" style="border:1px solid gray;float: left; ">
 
               <div id="ranking-ligne-titre">
@@ -74,9 +74,9 @@
         <%  @season.regular_matches.group_by(&:weeks_id).each do |week| %>
           <div id="week<%= week[0] -%>">
 
-            <table width="500" border="0" cellspacing="0" cellpadding="0">
+            <table width="500" border="0" cellspacing="0" cellpadding="0" style="margin: 0 auto;">
               <% week[1].each do |match| %>
-                <tr>
+                <tr style="height: 150px;">
                   <td width="100"><%= link_to(image_tag(match.team0.photo.url(:normal)), team_path(match.team0.slug)  ) %><br /><%= link_to match.team0.name, team_path(match.team0.slug) %></td>
                   <td width="300" align="center">
                     <font class="scoreseason">[<%= match.team0_wins %> - <%= match.team1_wins %>]</font><br />
@@ -118,6 +118,20 @@
                 <div style="height:<%= 30 * (2 ** current_round - 1) / 2.0 %>px;width:100%;float:left;">&nbsp;</div>
                 <div style="border-bottom: thin solid black;float:left;width:100%;height:30px;position:relative;"><div style="position: absolute; bottom: 0; left: 0;padding-left:5px;"></div></div>
               </div>
+            </div>
+            <br />
+            <div style="float: left;">
+              <% match = @season.playoff_matches.where(:playoff_id => (2 ** (rounds)) - 1).first %>
+              <% if match %>
+                <div style="float:left;width:90px;">
+                  <a href="<%= match_path(match) %>">
+                    <div style="border-bottom: thin solid black;float:left;width:100%;height:30px;position:relative;"><div style="position: absolute; bottom: 0; left: 0;padding-left:5px;"><span class="<%= (match.results.to_i > 0 ? "bold" : "normal")  %> "> <%= match.team0 || "TBD" %></span> </div></div>
+                    <div style="height:<%= 30 * (2 ** 0 - 1) %>px;width:100%;float:left;border-right:solid thin black;"></div>
+                    <div style="border-bottom: thin solid black;border-right: thin solid black;float:left;width:100%;height:30px;position:relative;"><div style="position: absolute; bottom: 0; left: 0;padding-left:5px;"><span class="<%= (match.results.to_i < 0 ? "bold" : "normal")   %> "><%= match.team1 || "TBD" %></span></div></div>
+                    <div style="height:<%= 30 * (2 ** 0 - 1) %>px;width:100%;float:left;"></div>
+                  </a>
+                </div>
+              <% end %>
             </div>
           <% else %>
             Playoffs Not yet Determined

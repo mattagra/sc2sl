@@ -4,7 +4,7 @@ class SiteController < ApplicationController
   
   def index
     @article = Article.latest.featured.published.first
-    @games = Game.where("games.result is not null").order("updated_at desc").limit(10).includes({:player0 => :team, :player1 => :team})
+    @games = Game.where("games.result is not null").paginated(1, 10).includes({:player0 => :team, :player1 => :team})
     
     @season = Season.where(:published => true).limit(1)
   end

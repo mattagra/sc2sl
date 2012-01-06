@@ -80,7 +80,7 @@ class Season < ActiveRecord::Base
 
 
   def rank_for(team)
-    self.teams.sort_by{|x| self.points(x)}.index(team).to_i + 1
+    self.teams.sort_by{|x| -self.points(x)}.index(team).to_i + 1
   end
 
 end

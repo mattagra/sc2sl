@@ -214,9 +214,9 @@
 
         <div class="menu-separation"></div>
 
-        <div class="menu-live-left">NEXT LIVE ON SC2SL</div>
+        <div class="menu-live-left">&nbsp;</div>
 
-        <div class="menu-live-right"><span style="float : right ;height : 18px; margin-left : 8px; margin-top : 7px;"><%= @live_match.scheduled_at.strftime("%d %b %H:%M").upcase if @live_match  %> </span></div>
+        <div class="menu-live-right"><span style="float : right ;height : 18px; margin-left : 8px; margin-top : 7px;">NEXT LIVE ON SC2SL <%= @live_match.scheduled_at.strftime("%d %b %H:%M").upcase if @live_match  %> </span></div>
 
       </div>
 

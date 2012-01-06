@@ -8,6 +8,7 @@ set :scm, "git"
 set :scm_verbose, true
 set :user, "root"
 set :password, "MAzrdNzV"
+set :bundle_without, [:development, :test]
 
 set :default_environment, {
   'PATH' => "/var/lib/gems/1.8/bin:$PATH"
@@ -56,6 +57,15 @@ namespace :deploy do
       put page, "#{shared_path}/system/maintenance.html", :mode => 0644
     end
   end
+  
+  namespace :cache do
+    desc 'Clear memcache'
+    task :clear => :environment do
+      Rails.cache.clear
+    end
+  end
+  
+  
    task :start do ; end
    task :stop do ; end
    task :restart, :roles => :app, :except => { :no_release => true } do
@@ -84,4 +94,5 @@ end
 before 'deploy:restart', 'deploy:web:disable'
 after 'deploy:update_code', 'deploy:symlink_shared'
 after "deploy:restart", "delayed_job:restart"
-after "delayed_job:restart", 'deploy:web:enable'
+after "delayed_job:restart", 'deploy:cache:clear'
+after 'deploy:cache:clear', 'deploy:web:enable'
