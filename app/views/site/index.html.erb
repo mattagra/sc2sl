@@ -13,10 +13,10 @@
             <div class="ranking-ligne-titre-id">#</div>
             <div class="ranking-ligne-titre-name">Team</div>
             <div class="ranking-ligne-titre-points">Points</div>
-            <div class="ranking-ligne-titre-win">Wins</div>
-            <div class="ranking-ligne-titre-loose">Losses</div>
             <div class="ranking-ligne-titre-mw">GW</div>
             <div class="ranking-ligne-titre-ml">GL</div>
+            <div class="ranking-ligne-titre-win">Wins</div>
+            <div class="ranking-ligne-titre-loose">Losses</div>
           </div>
 
           <% @season.teams.sort_by{|t| -1 * @season.points(t)}.each_with_index do |team, i| %>
@@ -24,10 +24,10 @@
               <div class="ranking-ligne-id"><%= i + 1 %>.</div>
               <div class="ranking-ligne-name"><%= image_tag team.country.flag%> <%= link_to team.name, team_path(team.slug) %></div>
               <div class="ranking-ligne-points"><%= @season.points(team) %> pts</div>
-              <div class="ranking-ligne-win"><%= @season.wins(team) %></div>
-              <div class="ranking-ligne-loose"><%= @season.losses(team) %></div>
               <div class="ranking-ligne-mw"><%= @season.game_wins(team) %></div>
               <div class="ranking-ligne-ml"><%= @season.game_losses(team) %></div>
+              <div class="ranking-ligne-win"><%= @season.wins(team) %></div>
+              <div class="ranking-ligne-loose"><%= @season.losses(team) %></div>
             </div>
           <% end %>
         </div>

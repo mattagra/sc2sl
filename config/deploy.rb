@@ -8,7 +8,6 @@ set :scm, "git"
 set :scm_verbose, true
 set :user, "root"
 set :password, "MAzrdNzV"
-set :bundle_without, [:development, :test]
 
 set :default_environment, {
   'PATH' => "/var/lib/gems/1.8/bin:$PATH"
@@ -58,12 +57,7 @@ namespace :deploy do
     end
   end
   
-  namespace :cache do
-    desc 'Clear memcache'
-    task :clear => :environment do
-      Rails.cache.clear
-    end
-  end
+  
   
   
    task :start do ; end
@@ -90,9 +84,28 @@ namespace :delayed_job do
     end
 end
 
+namespace :memcached do 
+    desc "Start memcached"
+    task :start, :roles => :app  do
+      sudo "/etc/init.d/memcached start"
+    end
+    desc "Stop memcached"
+    task :stop, :roles => :app  do
+      sudo "/etc/init.d/memcached stop"
+    end
+    desc "Restart memcached"
+    task :restart, :roles => :app  do
+      sudo "/etc/init.d/memcached restart"
+    end        
+    desc "Flush memcached - this assumes memcached is on port 11211"
+    task :flush, :roles => :app  do
+      sudo "echo 'flush_all' | nc localhost 11211"
+    end        
+  end
+
 
 before 'deploy:restart', 'deploy:web:disable'
 after 'deploy:update_code', 'deploy:symlink_shared'
-after "deploy:restart", "delayed_job:restart"
-after "delayed_job:restart", 'deploy:cache:clear'
-after 'deploy:cache:clear', 'deploy:web:enable'
+after 'deploy:restart', 'delayed_job:restart'
+after 'delayed_job:restart', 'memcached:restart'
+after 'memcached:restart', 'deploy:web:enable'
