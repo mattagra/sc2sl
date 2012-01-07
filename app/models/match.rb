@@ -81,6 +81,14 @@ class Match < ActiveRecord::Base
 	"TBD"
 	end
   end
+  
+  def short_title
+    if team0 and team1
+      self.team0.short_name + " vs " + self.team1.short_name
+	else
+	"TBD"
+	end
+  end
 
   def casters
     unless self.caster_ids.nil?

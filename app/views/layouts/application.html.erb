@@ -247,7 +247,7 @@
 
             <% if @live_match and @live_match.live %>
               <div id="live-haut-status-image"><img src="/css/images/content-bar/live/live.jpg" alt="Live" /></div>
-              <div id="live-haut-status-texte">LIVE IS ONLINE</div>
+              <div id="live-haut-status-texte"><img src = '/css/images/live.gif' /></div>
             <% else %>
               <div id="live-haut-status-image"><img src="/css/images/content-bar/live/offline.jpg" alt="Offline" /></div>
               <div id="live-haut-status-texte">LIVE IS OFFLINE</div>
@@ -261,7 +261,7 @@
 
             <div id="live-haut-infos-competition">Playday <%= @live_match.weeks_id if @live_match %></div>
 
-            <div id="live-haut-infos-team"><%= @live_match.title if @live_match  %></div>
+            <div id="live-haut-infos-team"><%= link_to_if @live_match, @live_match.short_title, match_path(@live_match.id) %></div>
 
           </div>
 
