@@ -32,9 +32,10 @@ ActiveAdmin.register Article do
         redirect_to :action => :show, :id => @article.id
       else
 	    flash[:warning] = "There was a problem when trying to create an article"
-        render :action => :edit
+        render :action => :new
       end
     end
+    
     
   end
   
