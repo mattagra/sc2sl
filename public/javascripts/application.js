@@ -1,6 +1,9 @@
 $('a[data-popup]').live('click', function(e) {
   console.log("opening popup");
-  window.open($(this)[0].href, $(this).html(), $(this).attr("data-popup") );
+  var left = screen.width/2
+  var top = screen.height/2
+  
+  window.open($(this)[0].href, $(this).html(), $(this).attr("data-popup")+ ',top=' + top + ',left=' + left );
   //window.open($(this)[0].href );
   e.preventDefault();
 });

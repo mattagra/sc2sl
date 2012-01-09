@@ -37,7 +37,7 @@
     <p class="closeup">
       <% @live_match.games.order('id asc').each do |game| %>
         <% if game.player0 and game.player1 %>
-          <strong><%= link_to(image_tag(race_icon_url(game.player0.user.race)).to_s + game.player0.user.login, profile_path(game.player0.login) ) %><% if game.winning_player == game.player0 %>&nbsp;&gt;&nbsp;<% elsif game.winning_player == game.player1 %>&nbsp;&lt;&nbsp;<% else %>&nbspvs&nbsp;<% end %><%= link_to(image_tag(race_icon_url(game.player1.user.race)).to_s + game.player1.user.login,  profile_path(game.player1.login) ) %></strong><br />
+          <strong><%= link_to(image_tag(race_icon_url(game.player0.user.race)).to_s + " " + game.player0.user.login, profile_path(game.player0.login) ) %><% if game.winning_player == game.player0 %>&nbsp;&gt;&nbsp;<% elsif game.winning_player == game.player1 %>&nbsp;&lt;&nbsp;<% else %>&nbspvs&nbsp;<% end %><%= link_to(image_tag(race_icon_url(game.player1.user.race)).to_s + " " +  game.player1.user.login,  profile_path(game.player1.login) ) %></strong><br />
         <% end %>
       <% end %>
       <br />
@@ -58,8 +58,12 @@
     <br />
   </div>
   <div id="livefaq">
-    <span class="votenowtimeleft"><strong><a href="#">WATCH THE LIVE STREAM  </a></strong></span><br>
-    <span class="votenowfaq"><a href="#">How can i vote ?</a> - <a href="#">How does a match proceeds ?</a> - <a href="#">FAQ </a></span>
+    <span class="votenowtimeleft"><strong><a href="http://twitch.tv/SC2SL/">WATCH THE LIVE STREAM  </a></strong></span><br>
+    <span class="votenowfaq">
+      <% @live_match.casters[0..2].each do |caster| %>
+	    <%= image_tag caster.country.flag, :width => 16, :height => 11 %>&nbsp;<%= link_to caster.login, caster.website, :target => "_blank" %>
+      <% end %>
+    </span><br />&nsbp;
   </div>
 
 </div>
