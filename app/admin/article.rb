@@ -27,13 +27,7 @@ ActiveAdmin.register Article do
     def create
       @article = Article.new(params[:article])
 	  @article.user = current_user
-      if @article.save
-        flash[:notice] = "Article Created!"
-        redirect_to :action => :show, :id => @article.id
-      else
-	    flash[:warning] = "There was a problem when trying to create an article"
-        render :action => :new
-      end
+      create!
     end
     
     
