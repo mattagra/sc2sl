@@ -52,7 +52,7 @@
       <div id="votenow">
         <div align="center" class="live-vote">
           <% if current_user %>
-            <a href="/vote" class="popupwindow" rel="resizable:1,width:200,height:300"><span class="votenowtxt">VOTE NOW</span> - <span id="countbox1" class="votenowtimeleft"></span> <span class="votenowtimeleft">left</span></a>
+            <a href="/vote" class="popupwindow" rel="resizable:1,width:200,height:300, center:1"><span class="votenowtxt">VOTE NOW</span> - <span id="countbox1" class="votenowtimeleft"></span> <span class="votenowtimeleft">left</span></a>
           <% else %>
             <%= link_to "REGISTER TO VOTE", register_path, :class => "votenowtxt" %>
           <% end %>
