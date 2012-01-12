@@ -14,8 +14,15 @@ var profiles =
   {
     height:500,
     width:400,
-    center:1
-  }
+    centerBrowser:1
+  },
+  
+  windowCenter:
+	{
+		height:170,
+		width:180,
+		center:1
+	}
 
         
 
