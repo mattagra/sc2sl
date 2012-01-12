@@ -17,7 +17,12 @@
     </div>
   </div>
   <div id="LiveMScore">
-    <div id="scoretext"><%= link_to(@live_match.team0_wins.to_s + " - " + @live_match.team1_wins.to_s, match_path(@live_match)) %></div>
+    <div id="scoretext">
+    <%= link_to(@live_match.team0_wins.to_s + " - " + @live_match.team1_wins.to_s, match_path(@live_match)) %>
+    <% if can? :edit, @live_match %>
+    <br /><%= link_to "Edit", edit_match_path(@live_match.id) %>
+    <% end %>
+    </div>
   </div>
   <div id="LiveMTeam2logo">
     <%= link_to(image_tag(@live_match.team1.photo.url(:normal)), team_path(@live_match.team1.slug)) %>
@@ -63,7 +68,7 @@
       <% @live_match.casters[0..2].each do |caster| %>
 	    <%= image_tag caster.country.flag, :width => 16, :height => 11 %>&nbsp;<%= link_to caster.login, caster.website, :target => "_blank" %>
       <% end %>
-    </span><br />&nsbp;
+    </span><br />
   </div>
 
 </div>

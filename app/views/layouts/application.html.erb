@@ -68,7 +68,7 @@
 				
 				// Photo slider > Minimal
 				$(".photoslider-mini").sliderkit({
-					autospeed:3000,
+					autospeed:9000,
 					panelbtnshover:true,
 					circular:true
 				});
@@ -261,7 +261,7 @@
 
             <div id="live-haut-infos-competition">Playday <%= @live_match.weeks_id if @live_match %></div>
 
-            <div id="live-haut-infos-team"><%= link_to_if @live_match, @live_match.short_title, match_path(@live_match.id) %></div>
+            <div id="live-haut-infos-team"><%= link_to(@live_match.short_title, match_path(@live_match.id)) if !@live_match.nil? %></div>
 
           </div>
 
