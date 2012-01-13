@@ -172,6 +172,18 @@ module ApplicationHelper
 	  ""
 	end
   end
+  
+  
+  def describe_round(round, max_rounds)
+  round += 1
+    if round == max_rounds
+      "Grand Final"
+    elsif round + 1 == max_rounds
+      "Semi Finals"
+    else
+      "Round of "  + (2**(max_rounds - round + 1)).to_s
+    end
+  end
 
   
 
