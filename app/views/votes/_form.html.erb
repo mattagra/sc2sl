@@ -1,14 +1,20 @@
 <%  if @vote.new_record? %>
-  VOTE
-  <% form_for @vote, :url => match_vote_event_votes_path(:match_id => @vote.vote_event.match.id, :vote_event_id => @vote.vote_event.id) do |f| %>
-    <% @vote.vote_event.players.uniq.each do |p| %>
-      <%= f.radio_button :player_id, p.id %>
-      <%= f.label :player_id, p.login %>
-  <br />
-    <% end %><br />
-    <%= f.submit "Vote" %>
-  <% end %>
-
+  <table width="180px" height="170px" cellpading="0" cellspacing="0" border="0">
+    <tbody><tr>
+	  <td bgcolor="#043958" align="center"><span style="color:#ffffff;font-face:Arial;font-size:12px;">CHOOSE YOUR CHAMPION</span></td></tr><tr>
+	  <td>
+        <% form_for @vote, :url => match_vote_event_votes_path(:match_id => @vote.vote_event.match.id, :vote_event_id => @vote.vote_event.id) do |f| %>
+          <div style="margin:0;padding:0;display:inline"></div> 
+          <% @vote.vote_event.players.uniq.each do |p| %>
+          <%= f.radio_button :player_id, p.id %><%= f.label :player_id, p.login %><br />
+          
+          <% end %>
+          <br /><br />
+          <center><%= f.submit "Vote" %></center>
+        <% end %>
+      </td>
+    </tr></tbody>
+  </table>
 <% else %>
   Thank you for voting!
 <% end %>
