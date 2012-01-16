@@ -55,7 +55,7 @@ class Match < ActiveRecord::Base
       self.results  = self.games.select{|g| g.result == 0}.size -  self.games.select{|g| g.result == 1}.size
       #If playoff Match, set team to next round.
       unless self.playoff_id.nil? or self.playoff_id == 0
-        m = Match.find_by_season_id_and_playoff_id(self.season_id, (self.playoff_id / 2 - 1).ceil)
+        m = Match.find_by_season_id_and_playoff_id(self.season_id, ((self.playoff_id + 1) / 2 - 1).ceil)
         if self.playoff_id % 2 == 0
           m.team0 = self.team1
         else
