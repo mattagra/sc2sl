@@ -51,10 +51,14 @@
 						  <strong><%= link_to((image_tag(race_icon_url(game.player0.user.race))+" " +game.player0.login).html_safe,profile_path(game.player0.login)) %></strong>						 
 						  &nbsp;&gt;&nbsp;
 						  <%= link_to((image_tag(race_icon_url(game.player1.user.race))+" " +game.player1.login).html_safe,profile_path(game.player1.login)) %>
-						<% else %>
+						<% elsif game.winning_player == game.player1 %>
 						  <%= link_to((image_tag(race_icon_url(game.player0.user.race))+" " +game.player0.login).html_safe,profile_path(game.player0.login)) %>						 
 						  &nbsp;&lt;&nbsp;
 						  <strong><%= link_to((image_tag(race_icon_url(game.player1.user.race))+" " +game.player1.login).html_safe,profile_path(game.player1.login)) %></strong>
+						<% else %>
+  						  <%= link_to((image_tag(race_icon_url(game.player0.user.race))+" " +game.player0.login).html_safe,profile_path(game.player0.login)) %>						 
+						  vs
+						  <%= link_to((image_tag(race_icon_url(game.player1.user.race))+" " +game.player1.login).html_safe,profile_path(game.player1.login)) %>
                         <% end %>
 						<%= if game.revived then  " * REVIVED *" else "" end %>
                       </span>
