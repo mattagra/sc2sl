@@ -72,6 +72,7 @@ class GamesController < ApplicationController
   end
 
   def replay
+    @game = Game.find(params[:id])
     if current_user
 	  if @game.replay
 	    @game = Game.find(params[:id])

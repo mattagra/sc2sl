@@ -73,7 +73,7 @@
           <td><%= game_form.select :map_id, Map.all.collect{|m| [m.name, m.id]}, :prompt => true %></td>
 		  <td><%= game_form.check_box :revived%></td>
           <td><%= game_form.select :result, [[f.object.team0.short_name, 0], [f.object.team1.short_name, 1]], :prompt => true %></td>
-          <td>Replay <%= game_form.file_field :replay %></td>
+          <td><%= link_to_if game_form.object.replay_file_size , "Replay", replay_match_game_path(game_form.object.match_id, game_form.object.id) %> <%= game_form.file_field :replay %></td>
         </tr>
       <% end %>
     <% end %>
