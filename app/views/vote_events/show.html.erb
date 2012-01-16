@@ -6,8 +6,10 @@
 </table>
 
 Current Votes
+<% total_votes = [@vote_Event.votes.count,1].max %>
 <% @vote_event.players.each do |player| %>
-<%= player.login %>: <%= @vote_event.votes.where(:player_id => player.id).count %>
+<% player_votes = @vote_event.votes.where(:player_id => player.id).count %>
+<%= player.login %>: <% if current_user.is_admin? %><%= player_votes %><% end %> <%= sprintf('%.2f', player_votes.to_f / total_votes.to_f) %>%
 <% end %>
 <br />
 <% end %>
