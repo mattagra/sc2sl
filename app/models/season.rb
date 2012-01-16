@@ -59,8 +59,35 @@ class Season < ActiveRecord::Base
   end
 
   def current_week
-    self.matches.where("matches.results <> 0").maximum("weeks_id") || 1
+    self.matches.where("matches.results <> 0 and playoff_id is null").maximum("weeks_id") || 1
+	
   end
+  
+  def describe_status
+    if self.matches.where("matches.results <> 0 and playoff_id is null").maximum("weeks_id")
+	  "Round " + self.matches.where("matches.results <> 0 and playoff_id is null").maximum("weeks_id").to_s
+	elsif self.matches.where("matches.results <> 0 and playoff_id is not null").maximum("playoff_id")
+      self.describe_round(self.matches.where("matches.results <> 0 and playoff_id is not null").maximum("playoff_id"))
+	else
+	  "unknown"
+	end
+  end
+  
+  
+  def self.describe_round(playoff_id)
+    max_rounds = (playoff_id + 1) / 2
+	round = 0
+    if round == max_rounds
+      "Grand Final"
+    elsif round + 1 == max_rounds
+      "Semi Finals"
+    else
+      "Round of "  + (2**(max_rounds - round + 1)).to_s
+    end
+  end
+  
+  
+
 
 
   def status

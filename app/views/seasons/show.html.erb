@@ -5,7 +5,7 @@
     <br />
     <%=  grayscale_banner_link(@season.banner, season_path(@season)) %>
     <br />
-								Current status : <span class="style1">Week <%= @season.current_week %> </span><br />
+								Current status : <span class="style1"><%= @season.describe_status %></span><br />
     <br />
 
     <div class="season_tabs">
