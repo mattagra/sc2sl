@@ -259,7 +259,7 @@
 
           <div id="live-haut-infos">
 
-            <div id="live-haut-infos-competition">Playday <%= @live_match.weeks_id if @live_match %></div>
+            <div id="live-haut-infos-competition"><% if @live_match %><% if @live_match.weeks_id %>Playday <%= elsif @live_match.playoff_id %> <%= describe_round(0, (@live_match.playoff_id + 1) / 2) %><% end %></div>
 
             <div id="live-haut-infos-team"><%= link_to(@live_match.short_title, match_path(@live_match.id)) if !@live_match.nil? %></div>
 
