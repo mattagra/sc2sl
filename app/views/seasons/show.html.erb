@@ -121,6 +121,7 @@
                 <div style="border-bottom: thin solid black;float:left;width:100%;height:30px;position:relative;"><div style="position: absolute; bottom: 0; left: 0;padding-left:5px;"><span class="bold"> <%=  @season.playoff_matches.where(:playoff_id => 0).first.winner if @season.playoff_matches.where(:playoff_id => 0).first  %></span> </div></div>
               </div>
             </div>
+			<div style="float: left;width: 100%; height: 5px;">&nbsp;</div>
             <div style="float: left;">
               <% match = @season.playoff_matches.where(:playoff_id => (2 ** (rounds)) - 1).first %>
               <% if match %>
