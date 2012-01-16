@@ -133,6 +133,7 @@
                     <div style="height:<%= 30 * (2 ** 0 - 1) %>px;width:100%;float:left;"></div>
                   </a>
                 </div>
+				<div style="width:250px; height: 40px;float: left;"><span class="potitle"><strong>Consolation Winner</strong></span><br><span class="postitle"> </span></div><br />
 				<div style="width:250px;float:left;">
                   <div style="height:30px;width:100%;float:left;">&nbsp;</div>
                   <div style="border-bottom: thin solid black;float:left;width:100%;height:30px;position:relative;"><div style="position: absolute; bottom: 0; left: 0;padding-left:5px;"><span class="bold"> <%=  @season.playoff_matches.where(:playoff_id => 0).first.winner if @season.playoff_matches.where(:playoff_id => (@season.playoff_matches.count - 1)).first  %></span> </div></div>
