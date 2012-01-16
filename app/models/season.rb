@@ -34,28 +34,28 @@ class Season < ActiveRecord::Base
  
 
   def points(team)
-    self.matches.where(:team0_id => team.id).inject(0){ |total, m| total + m.team0_points}.to_i +
-      self.matches.where(:team1_id => team.id).inject(0){ |total, m| total + m.team1_points}.to_i
+    self.matches.where(:team0_id => team.id).where(:playoff_id => nil).inject(0){ |total, m| total + m.team0_points}.to_i +
+      self.matches.where(:team1_id => team.id).where(:playoff_id => nil).inject(0){ |total, m| total + m.team1_points}.to_i
   end
 
   def wins(team)
-    self.matches.where(:team0_id => team.id).where("matches.results > 0").count +
-      self.matches.where(:team1_id => team.id).where("matches.results < 0").count
+    self.matches.where(:team0_id => team.id).where(:playoff_id => nil).where("matches.results > 0").count +
+      self.matches.where(:team1_id => team.id).where(:playoff_id => nil).where("matches.results < 0").count
   end
 
   def losses(team)
-    self.matches.where(:team0_id => team.id).where("matches.results < 0").count +
-      self.matches.where(:team1_id => team.id).where("matches.results > 0").count
+    self.matches.where(:team0_id => team.id).where(:playoff_id => nil).where("matches.results < 0").count +
+      self.matches.where(:team1_id => team.id).where(:playoff_id => nil).where("matches.results > 0").count
   end
 
   def game_wins(team)
-    self.games.where("(matches.team0_id = #{team.id} and games.result = 0)").count +
-      self.games.where("(matches.team1_id = #{team.id} and games.result = 1)").count
+    self.games.where("(matches.team0_id = #{team.id} and games.result = 0 and matches.playoff_id is null)").count +
+      self.games.where("(matches.team1_id = #{team.id} and games.result = 1 and matches.playoff_id is null)").count
   end
 
   def game_losses(team)
-    self.games.where("(matches.team0_id = #{team.id} and games.result = 1)").count +
-      self.games.where("(matches.team1_id = #{team.id} and games.result = 0)").count
+    self.games.where("(matches.team0_id = #{team.id} and games.result = 1 and matches.playoff_id is null)").count +
+      self.games.where("(matches.team1_id = #{team.id} and games.result = 0 and matches.playoff_id is null)").count
   end
 
   def current_week
