@@ -25,7 +25,7 @@
       <td height="26" width="34" valign="middle">&nbsp;&nbsp;<%= image_tag rating_star_image(game.rating_average) %></td>
       <td width="150" valign="absmiddle"><%=  image_tag(race_icon_url(game.player0.user.race), :align => :top) %>&nbsp;<%= game.player0.team.name %> <b><%= game.player0.login %></b></td>
       <td width="150" valign="middle"><%=  image_tag(race_icon_url(game.player1.user.race), :align => :top) %>&nbsp;<%= game.player1.team.name %> <b><%= game.player1.login %></b></td>
-      <td width="27" valign="middle" vspace="2"><%= link_to(image_tag("/css/images/last-replays/dl2.gif", :alt => "Download Replay"),  replay_replay_path(game)) %>
+      <td width="27" valign="middle" vspace="2"><%= link_to_if(game.replay.exists?,  image_tag("/css/images/last-replays/dl2.gif", :alt => "Download Replay"),  replay_replay_path(game)) %>
         <%= link_to(image_tag("/css/images/last-replays/loupe.png", :alt => "Game Details"),replay_path(game)) %>
       </td>
     </tr>
