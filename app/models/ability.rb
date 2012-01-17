@@ -15,6 +15,7 @@ class Ability
         can :update, User do |user|
           user.try(:id) == user.id
         end
+        can :rate, Game
         can :create, Comment
         can :update, Comment do |comment|
           comment.try(:user) == user || user.role?(:moderator)
