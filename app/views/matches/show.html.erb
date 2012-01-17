@@ -107,7 +107,7 @@
           <%  @match.vote_events.each do |vote_event| %>
           <p align="left" class="matchlist"><%= link_to vote_event.team.name, team_path(vote_event.team.slug) %> revive (<%= pluralize(vote_event.votes.count, "vote") %>)</p>
           <blockquote style="margin: 20px 40px;">
-            <% total_votes = = [vote_event.votes.count,1].max
+            <% total_votes = [vote_event.votes.count,1].max %>
             <% vote_event.players.sort_by{|p| -vote_event.votes.where(:player_id => p.id).count}.each_with_index do |player, i| %>
                <% player_votes = vote_event.votes.where(:player_id => player.id).count %>
                 <p align="left" class="matchlist">
