@@ -24,7 +24,7 @@ gem "bb-ruby", '0.9.5', :path => "vendor/bundle/ruby/1.8/gems/bb-ruby-0.9.5"
 gem "recaptcha", :require => "recaptcha/rails"
 gem "haml", "~> 3.1.3"
 gem "rrschedule"
-gem 'ajaxful_rating', :git => 'git://github.com/edgarjs/ajaxful-rating.git', :branch => "rails3"
+gem 'ajaxful_rating', :git => 'git://github.com/edgarjs/ajaxful-rating.git' , :branch => "rails3"
 gem "cancan"
 gem 'yaml_db'
 gem "memcache-client"

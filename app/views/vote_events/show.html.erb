@@ -1,20 +1,22 @@
 <% unless @vote.new_record? %>
-<% cache('vote_events_show') do %>
-<table>
-  <tr><td>Match</td><td><%=  @vote_event.match.title %></td></tr>
-  <tr><td>Team</td><td><%=  @vote_event.team.name %></td></tr>
-</table>
+    <% cache('vote_events_show') do %>
+        <table>
+          <tr><td>Match</td><td><%=  @vote_event.match.title %></td></tr>
+          <tr><td>Team</td><td><%=  @vote_event.team.name %></td></tr>
+        </table>
 
-Current Votes
-<% total_votes = [@vote_Event.votes.count,1].max %>
-<% @vote_event.players.each do |player| %>
-<% player_votes = @vote_event.votes.where(:player_id => player.id).count %>
-<%= player.login %>: <% if current_user.is_admin? %><%= player_votes %><% end %> <%= sprintf('%.2f', player_votes.to_f / total_votes.to_f) %>%
-<% end %>
-<br />
-<% end %>
+        Current Votes
+        <% total_votes = [@vote_event.votes.count,1].max %>
+        <% @vote_event.players.each do |player| %>
+            <% player_votes = @vote_event.votes.where(:player_id => player.id).count %>
+            <%= player.login %>: <% if current_user.is_admin? %><%= player_votes %><% end %> <%= sprintf('%.2f', player_votes.to_f / total_votes.to_f) %>%
+        <% end %>
+        <br />
+    <% end %>
 <% end %>
 
 <% if Time.now > @vote_event.started_at and Time.now < @vote_event.ended_at %>
-<%= render :partial => 'votes/form' %>
+    <%= render :partial => 'votes/form' %>
+<% else %>
+  Voting has ended. 
 <% end %>

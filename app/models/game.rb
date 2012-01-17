@@ -11,7 +11,7 @@ class Game < ActiveRecord::Base
   has_attached_file :replay, {:url => "/shared/:class/:attachment/:id/:customname.:extension", :path => ":rails_root/public:url"}
 
   #Rating
-  ajaxful_rateable :stars => 5
+  ajaxful_rateable :stars => 5, :allow_update => true
   
   scope :matchup, lambda{|x,y| joins({:player0 => :user}, {:player1 => :user}).where({:player0 => {:user => {:race => x}}, :player1 => {:user => {:race => y}}  } | {:player1 => {:user => {:race => x}}, :player0 => {:user => {:race => y}}  })}
   
