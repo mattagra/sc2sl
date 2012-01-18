@@ -8,7 +8,7 @@ class GamesController < ApplicationController
     @layout_page = "Replay List"
     @description = "List of all recent replays."
     @keywords += ["games", "replays"]
-    @current_page = (params[:page]|| 1).to_i
+    @current_page = [(params[:page]|| 1).to_i, 1].max
     @per_page = 20
 
 
@@ -43,7 +43,7 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @comment = Comment.new_of_type(@game)
-    @current_page = (params[:page] || 1).to_i
+    @current_page = [(params[:page]|| 1).to_i, 1].max
     @comments_count = @game.comments.count
     @comments= @game.comments.paginated(@current_page, 10)
     @layout_page = "Game"

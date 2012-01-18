@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @current_page = (params[:page] || 1).to_i
+    @current_page = [(params[:page]|| 1).to_i, 1].max
     @per_page = 50
     unless params[:search].blank?
       @users = User.where("login LIKE ?", params[:search]).paginated(@current_page, @per_page)
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
       return
     end
     if @user
-    @current_page = (params[:page] || 1).to_i
+    @current_page = [(params[:page]|| 1).to_i, 1].max
     @comments_count = @user.comments.count
     @comments= @user.comments.paginated(@current_page, 10)
     else

@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   before_filter :deny_banned, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
-    @current_page = (params[:page] || 1).to_i
+    @current_page = [(params[:page]|| 1).to_i, 1].max
     @per_page = 10
     @comments= Comment.newest.paginated(@current_page, @per_page)
     @comments_count = Comment.count

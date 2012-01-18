@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   cache_sweeper :article_sweeper
 
   def index
-    @current_page = (params[:page]|| 1).to_i
+    @current_page = [(params[:page]|| 1).to_i, 1].max
     @per_page = 20
     if current_admin
       if params[:tag]
@@ -58,7 +58,7 @@ class ArticlesController < ApplicationController
     @comments = []
     unless  @article.nil?
       @comment = Comment.new_of_type(@article)
-      @current_page = (params[:page] || 1).to_i
+      @current_page = [(params[:page]|| 1).to_i, 1].max
       @comments_count = @article.comments.count
       @comments= @article.comments.paginated(@current_page, 10)
 
