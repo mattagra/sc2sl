@@ -19,7 +19,7 @@
         <br />	 <%= @game.map.name %> - <%= link_to "Match Sheet", match_path(@game.match) %>
         <br />
         <img src='/css/images/Replay/disk.jpg' align='top' /> <strong><%= link_to_if (current_user and @game.replay.exists?) , "Download", replay_match_game_path(@game.match_id, @game) %></strong>  (<%= @game.downloads %>) <br  /> <%= link_to("You must register to download replays",register_path) if current_user.nil? %><br />
-        Admin Rating: <%= rating_star_image(@game.admin_rating) %>
+        Admin Rating: <%= image_tag rating_star_image(@game.admin_rating) %>
         <%= ratings_for @game, :remote_options => {:url => rate_replay_path(@game)} %><br/>
         <%=raw @game.formatted_spoiler %><br/>
       </p>
