@@ -20,12 +20,20 @@
   </tbody></table>
 
 <table width="879" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <th style="text-align: center;height:26px; ">Admin Rating</th>
+    <th style="text-align: center;">User Rating</th>
+    <th>Player 1</th>
+    <th>Player 2</th>
+    <th>Replay Deatils</th>
+  </tr>
   <% @games.each do |game| %>
-  <tr bgcolor="<%= cycle("#ffffff","#e8e8e8") %>">
-      <td height="26" width="34" valign="middle">&nbsp;&nbsp;<%= image_tag rating_star_image(game.rating_average) %></td>
-      <td width="150" valign="absmiddle"><%=  image_tag(race_icon_url(game.player0.user.race), :align => :top) %>&nbsp;<%= game.player0.team.name %> <b><%= game.player0.login %></b></td>
-      <td width="150" valign="middle"><%=  image_tag(race_icon_url(game.player1.user.race), :align => :top) %>&nbsp;<%= game.player1.team.name %> <b><%= game.player1.login %></b></td>
-      <td width="27" valign="middle" vspace="2"><%= link_to_if(game.replay.exists?,  image_tag("/css/images/last-replays/dl2.gif", :alt => "Download Replay"),  replay_replay_path(game)) %>
+  <tr bgcolor="<%= cycle("#e8e8e8", "#ffffff") %>">
+      <td valign="middle" style="text-align: center;width:100px;">&nbsp;&nbsp;<%= image_tag rating_star_image(game.admin_rating) %></td>
+      <td height="26" valign="middle" style="text-align: center;width:100px;">&nbsp;&nbsp;<%= image_tag rating_star_image(game.rating_average) %></td>
+      <td valign="absmiddle"><%=  image_tag(race_icon_url(game.player0.user.race), :align => :top) %>&nbsp;<%= game.player0.team.name %> <b><%= game.player0.login %></b></td>
+      <td valign="middle"><%=  image_tag(race_icon_url(game.player1.user.race), :align => :top) %>&nbsp;<%= game.player1.team.name %> <b><%= game.player1.login %></b></td>
+      <td valign="middle" vspace="2" style="text-align: right;width:100px;"><%= link_to_if(game.replay.exists?,  image_tag("/css/images/last-replays/dl2.gif", :alt => "Download Replay"),  replay_replay_path(game)) %>
         <%= link_to(image_tag("/css/images/last-replays/loupe.png", :alt => "Game Details"),replay_path(game)) %>
       </td>
     </tr>

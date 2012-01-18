@@ -105,16 +105,16 @@
 
         <td valign="top">
           <%  @match.vote_events.each do |vote_event| %>
-          <p align="left" class="matchlist"><%= link_to vote_event.team.name, team_path(vote_event.team.slug) %> revive (<%= pluralize(vote_event.votes.count, "vote") %>)</p>
+          <p align="left" class="matchlist"><%= link_to vote_event.team.name, team_path(vote_event.team.slug) %> revive. <% if current_admin %>(<%= pluralize(vote_event.votes.count, "vote") %>)<%end %></p>
           <blockquote style="margin: 20px 40px;">
             <% total_votes = [vote_event.votes.count,1].max %>
             <% vote_event.players.sort_by{|p| -vote_event.votes.where(:player_id => p.id).count}.each_with_index do |player, i| %>
                <% player_votes = vote_event.votes.where(:player_id => player.id).count %>
                 <p align="left" class="matchlist">
                 <% if i == 0 %>
-                    <strong><%= link_to((image_tag(race_icon_url(player.user.race))+ player.login).html_safe,profile_path(player.login)) %> <% if current_admin %><%= player_votes %><% end %> <%= sprintf('%.2f', player_votes.to_f / total_votes.to_f) %>%</strong>
+                    <strong><%= link_to((image_tag(race_icon_url(player.user.race))+ player.login).html_safe,profile_path(player.login)) %> <% if current_admin %><%= player_votes %><% end %> <%= sprintf('%.1f', 100.0 * player_votes.to_f / total_votes.to_f) %>%</strong>
                 <% else %>
-                   <%= link_to((image_tag(race_icon_url(player.user.race))+ player.login).html_safe,profile_path(player.login)) %> <% if current_admin %><%= player_votes %><% end %> <%= sprintf('%.2f', player_votes.to_f / total_votes.to_f) %>%
+                   <%= link_to((image_tag(race_icon_url(player.user.race))+ player.login).html_safe,profile_path(player.login)) %> <% if current_admin %><%= player_votes %><% end %> <%= sprintf('%.1f', 100.0 * player_votes.to_f / total_votes.to_f) %>%
                 <% end %>              
                 </p>
             <% end %>
