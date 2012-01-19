@@ -1,7 +1,8 @@
-<table width="879" cellpadding="0" cellspacing="0" border="0">
+<div id="newsmain">
+<table width="800" cellpadding="0" cellspacing="0" border="0">
   <tbody><tr background="css/images/ranking/titre/fond.jpg"><td height="13">	<span class="replaytitre"> SC2SL REPLAYS </span></td></tr>
   </tbody></table>
-<table width="879" cellpadding="5" cellspacing="0" style="border-bottom:solid thin #333333;" bgcolor="#e8e8e8">
+<table width="800" cellpadding="5" cellspacing="0" style="border-bottom:solid thin #333333;" >
   <tbody>
     <tr class="replayfilter">
 	<td width="3">&nbsp;</td>
@@ -19,27 +20,29 @@
     </tr>
   </tbody></table>
 
-<table width="879" cellpadding="0" cellspacing="0" border="0">
+<table width="800" cellpadding="0" cellspacing="0" border="0">
   <tr>
-    <th style="text-align: center;height:26px; ">Admin Rating</th>
-    <th style="text-align: center;">User Rating</th>
-    <th>Player 1</th>
-    <th>Player 2</th>
-    <th>Replay Details</th>
+    <th style="text-align: center;height:26px; border-bottom: thin solid black;">Admin Rating</th>
+    <th style="text-align: center; border-bottom: thin solid black;">User Rating</th>
+    <th style="border-bottom: thin solid black;">Player 1</th>
+    <th style="border-bottom: thin solid black;">Player 2</th>
+    <th style="text-align: center; border-bottom: thin solid black;">Replay Details</th>
   </tr>
   <% @games.each do |game| %>
-  <tr bgcolor="<%= cycle("#e8e8e8", "#ffffff") %>">
+  <tr>
       <td valign="middle" style="text-align: center;width:100px;">&nbsp;&nbsp;<%= image_tag rating_star_image(game.admin_rating) %></td>
       <td height="26" valign="middle" style="text-align: center;width:100px;">&nbsp;&nbsp;<%= image_tag rating_star_image(game.rating_average) %></td>
-      <td valign="absmiddle"><%=  image_tag(race_icon_url(game.player0.user.race), :align => :top) %>&nbsp;<%= game.player0.team.name %> <b><%= game.player0.login %></b></td>
-      <td valign="middle"><%=  image_tag(race_icon_url(game.player1.user.race), :align => :top) %>&nbsp;<%= game.player1.team.name %> <b><%= game.player1.login %></b></td>
-      <td valign="middle" vspace="2" style="text-align: right;width:100px;"><%= link_to_if(game.replay.exists?,  image_tag("/css/images/last-replays/dl2.gif", :alt => "Download Replay"),  replay_replay_path(game)) %>
+      <td valign="absmiddle" style="width:240px;" ><%=  image_tag(race_icon_url(game.player0.user.race), :align => :top) %>&nbsp;<%= link_to((game.player0.team.name + '<b> ' + game.player0.login + '</b>').html_safe, replay_path(game)) %>  </td>
+      <td valign="middle" style="width:240px;"><%=  image_tag(race_icon_url(game.player1.user.race), :align => :top) %>&nbsp;<%= link_to((game.player1.team.name + '<b> ' + game.player1.login + '</b>').html_safe, replay_path(game)) %> </td>
+      <td valign="middle" vspace="2" style="text-align: center;width:100px;"><%= link_to_if(game.replay.exists?,  image_tag("/css/images/last-replays/dl2.gif", :alt => "Download Replay"),  replay_replay_path(game)) %>
         <%= link_to(image_tag("/css/images/last-replays/loupe.png", :alt => "Game Details"),replay_path(game)) %>
       </td>
     </tr>
   <% end %>
 </table>
 
-<table width="879" cellpadding="0" cellspacing="0" bgcolor="#e8e8e8" style="border-top:solid thin #333333;">
+<table width="800" cellpadding="0" cellspacing="0">
   <tbody><tr height="30"><td align="right"><%=  paginate_links(@per_page, @current_page, @games_count, request.path, params) %></td><td width="3">&nbsp;</td></tr><tr>
     </tr></tbody></table>
+
+ </div>
