@@ -19,8 +19,8 @@ var profiles =
   
   windowCenter:
 	{
-		height:170,
-		width:180,
+		height:200,
+		width:250,
 		center:1
 	}
 

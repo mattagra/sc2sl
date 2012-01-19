@@ -9,7 +9,8 @@
         <% total_votes = [@vote_event.votes.count,1].max %>
         <% @vote_event.players.each do |player| %>
             <% player_votes = @vote_event.votes.where(:player_id => player.id).count %>
-            <%= player.login %>: <% if current_admin %><%= player_votes %><% end %> <%= sprintf('%.2f', 100.0 * player_votes.to_f / total_votes.to_f) %>%
+            <%= player.login %>: <% if current_admin %><%= player_votes %><% end %> <%= sprintf('%.2f', 100.0 * player_votes.to_f / total_votes.to_f) %>%<br />
+            <div style="background-color: blue; height: 5px;width: <%= ( 180.0 * player_votes.to_f / total_votes.to_f).to_i %>px">&nbsp;</div>
         <% end %>
         <br />
     <% end %>

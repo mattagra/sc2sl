@@ -6,7 +6,7 @@ class VotesController < ApplicationController
   require 'ipaddr'
   def new
     vote_event_id = params[:vote_event_id] || VoteEvent.last.id
-    @vote = Vote.find_by_vote_event_id_and_user_id(vote_event_id, current_user.id) || Vote.new(:vote_event_id => vote_event_id)
+    @vote = Vote.find_by_match_id_and_user_id(VoteEvent.find(vote_event_id).match_id, current_user.id) || Vote.new(:vote_event_id => vote_event_id)
   end
 
   def create
