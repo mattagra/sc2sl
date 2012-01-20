@@ -26,5 +26,6 @@ class MatchSweeper < ActionController::Caching::Sweeper
       end
     end
     expire_fragment("live_section")
+    expire_fragment("matches/live")
   end
 end

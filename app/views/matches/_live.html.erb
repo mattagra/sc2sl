@@ -1,3 +1,4 @@
+<% cache("matches/live") do %>
 <div id="LiveM">
   <div id="LiveMTeam1logo">
     <%= link_to(image_tag(@live_match.team0.photo.url(:normal)), team_path(@live_match.team0.slug)) %>
@@ -44,6 +45,7 @@
       <% end %>
       <br />
     </p>
+<% end %>
     <% if @current_vote_event and Time.now >= @current_vote_event.started_at and Time.now <= @current_vote_event.ended_at %>
     <div class="votenowcad" id="vcad">
       <div id="votenow">

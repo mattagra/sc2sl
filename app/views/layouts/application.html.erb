@@ -314,25 +314,27 @@
 	<% end %>
 	
 	
-    <% cache("live_section", {:expires_in => 30.seconds}) do %>
+    
     <div id="content-bar">
 	  
 	  <% if @live_match and @live_match.live %>
 		<%= render :partial => "matches/live", :locals => {:live_match => @live_match} %>
 	  <% else %>
-		<div class="sliderkit photoslider-mini">
-		  <div class="sliderkit-panels">
-			<div class="sliderkit-btn sliderkit-go-btn sliderkit-go-prev" ><a href="#" title="Previous"><span>Previous</span></a></div>
-			<div class="sliderkit-btn sliderkit-go-btn sliderkit-go-next" ><a href="#" title="Next"><span>Next</span></a></div>
-
-			<%- @frontpage_articles.each do |article| %>
-			  <%= render :partial => "articles/article_banner", :locals => {:article => article} %>
-			<% end %>
-		  </div>
-		</div>
+        <% cache("frontpage_articles") do %>
+            <div class="sliderkit photoslider-mini">
+              <div class="sliderkit-panels">
+                <div class="sliderkit-btn sliderkit-go-btn sliderkit-go-prev" ><a href="#" title="Previous"><span>Previous</span></a></div>
+                <div class="sliderkit-btn sliderkit-go-btn sliderkit-go-next" ><a href="#" title="Next"><span>Next</span></a></div>
+                
+                <%- @frontpage_articles.each do |article| %>
+                  <%= render :partial => "articles/article_banner", :locals => {:article => article} %>
+                <% end %>
+              </div>
+            </div>
+        <% end %>
 	  <% end %>
 
-
+      <% cache("live_section", {:expires_in => 1.minute}) do %>
       <div id="live">
 
         <div id="live-haut">
@@ -373,9 +375,9 @@
           </div>
 
         </div>
-
+        <% end %>
       </div>
-	  <% end %>
+	  
 
       <% cache("calendar_#{@calendar_date.year.to_s}_#{@calendar_date.month.to_s}_#{Time.now.day.to_s}") do  %>
       <div id="head-sponsors" align="center">
