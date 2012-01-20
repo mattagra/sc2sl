@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.xml
   def show
-    @team = Team.find_by_name(Team.deslug(params[:name]))
+    @team = Team.includes({:players => :user}, :comments).find_by_name(Team.deslug(params[:name]))
     @comment = Comment.new_of_type(@team)
     @current_page = [(params[:page]|| 1).to_i, 1].max
     @comments_count = @team.comments.count
