@@ -314,7 +314,7 @@
 	<% end %>
 	
 	
-    <% cache("live_section") do %>
+    <% cache("live_section", {:expires_in => 30.seconds}) do %>
     <div id="content-bar">
 	  
 	  <% if @live_match and @live_match.live %>
