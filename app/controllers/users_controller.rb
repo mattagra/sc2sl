@@ -33,15 +33,13 @@ class UsersController < ApplicationController
 
   def show
     if current_user and params[:login].nil?
-      @user = @current_user
+      @user = current_user
       @comment = Comment.new_of_type(@user)
     elsif params[:login]
-      @user = User.find_by_login(params[:login])
+      @user = User.find_by_login!(params[:login])
       @comment = Comment.new_of_type(@user)
     else
-      flash[:params] = "Cannot Find a User with that name"
-      redirect_to root_url
-      return
+      raise ActionController::RoutingError.new('Not Found')
     end
     if @user
     @current_page = [(params[:page]|| 1).to_i, 1].max
