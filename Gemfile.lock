@@ -72,9 +72,9 @@ GEM
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
     cocaine (0.2.1)
-    comfortable_mexican_sofa (1.5.3)
+    comfortable_mexican_sofa (1.6.8)
       active_link_to (~> 1.0.0)
-      paperclip (~> 2.4.1)
+      paperclip (>= 2.3.0)
       rails (>= 3.0.0)
     daemons (1.1.5)
     delayed_job (2.1.4)
@@ -192,7 +192,7 @@ DEPENDENCIES
   bb-ruby (= 0.9.5)!
   cancan
   capistrano
-  comfortable_mexican_sofa (= 1.5.3)
+  comfortable_mexican_sofa (= 1.6.8)
   daemons
   delayed_job (= 2.1.4)
   haml (~> 3.1.3)

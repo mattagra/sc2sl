@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120116225351) do
+ActiveRecord::Schema.define(:version => 20120120043037) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -81,20 +81,22 @@ ActiveRecord::Schema.define(:version => 20120116225351) do
 
   create_table "cms_blocks", :force => true do |t|
     t.integer  "page_id"
-    t.string   "label"
+    t.string   "identifier"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "cms_blocks", ["page_id", "label"], :name => "index_cms_blocks_on_page_id_and_label"
+  add_index "cms_blocks", ["page_id", "identifier"], :name => "index_cms_blocks_on_page_id_and_label"
 
   create_table "cms_categories", :force => true do |t|
-    t.string "label"
-    t.string "categorized_type"
+    t.string  "label"
+    t.string  "categorized_type"
+    t.integer "site_id"
   end
 
   add_index "cms_categories", ["categorized_type", "label"], :name => "index_cms_categories_on_categorized_type_and_label", :unique => true
+  add_index "cms_categories", ["site_id", "categorized_type", "label"], :name => "index_cms_categories_on_site_id_and_categorized_type_and_label", :unique => true
 
   create_table "cms_categorizations", :force => true do |t|
     t.integer "category_id"
@@ -127,7 +129,7 @@ ActiveRecord::Schema.define(:version => 20120116225351) do
     t.integer  "parent_id"
     t.string   "app_layout"
     t.string   "label"
-    t.string   "slug"
+    t.string   "identifier"
     t.text     "content"
     t.text     "css"
     t.text     "js"
@@ -138,7 +140,7 @@ ActiveRecord::Schema.define(:version => 20120116225351) do
   end
 
   add_index "cms_layouts", ["parent_id", "position"], :name => "index_cms_layouts_on_parent_id_and_position"
-  add_index "cms_layouts", ["site_id", "slug"], :name => "index_cms_layouts_on_site_id_and_slug", :unique => true
+  add_index "cms_layouts", ["site_id", "identifier"], :name => "index_cms_layouts_on_site_id_and_slug", :unique => true
 
   create_table "cms_pages", :force => true do |t|
     t.integer  "site_id"
@@ -175,15 +177,17 @@ ActiveRecord::Schema.define(:version => 20120116225351) do
     t.string  "path"
     t.string  "locale",      :default => "en",  :null => false
     t.boolean "is_mirrored", :default => false, :null => false
+    t.string  "identifier"
   end
 
   add_index "cms_sites", ["hostname"], :name => "index_cms_sites_on_hostname"
+  add_index "cms_sites", ["identifier"], :name => "index_cms_sites_on_identifier"
   add_index "cms_sites", ["is_mirrored"], :name => "index_cms_sites_on_is_mirrored"
 
   create_table "cms_snippets", :force => true do |t|
     t.integer  "site_id"
     t.string   "label"
-    t.string   "slug"
+    t.string   "identifier"
     t.text     "content"
     t.integer  "position",   :default => 0,     :null => false
     t.boolean  "is_shared",  :default => false, :null => false
@@ -191,8 +195,8 @@ ActiveRecord::Schema.define(:version => 20120116225351) do
     t.datetime "updated_at"
   end
 
+  add_index "cms_snippets", ["site_id", "identifier"], :name => "index_cms_snippets_on_site_id_and_slug", :unique => true
   add_index "cms_snippets", ["site_id", "position"], :name => "index_cms_snippets_on_site_id_and_position"
-  add_index "cms_snippets", ["site_id", "slug"], :name => "index_cms_snippets_on_site_id_and_slug", :unique => true
 
   create_table "comments", :force => true do |t|
     t.string   "external_type"
@@ -239,9 +243,9 @@ ActiveRecord::Schema.define(:version => 20120116225351) do
     t.string   "replay_file_name"
     t.string   "replay_content_type"
     t.integer  "replay_file_size"
-    t.decimal  "rating_average",      :default => 0.0
-    t.boolean  "revived",             :default => false, :null => false
-    t.integer  "admin_rating",        :default => 0
+    t.decimal  "rating_average",      :precision => 6, :scale => 2, :default => 0.0
+    t.boolean  "revived",                                           :default => false, :null => false
+    t.integer  "admin_rating",                                      :default => 0
   end
 
   create_table "languages", :force => true do |t|

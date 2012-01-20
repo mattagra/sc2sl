@@ -2,6 +2,10 @@ class SiteController < ApplicationController
 
   before_filter :current_user
   
+  caches_action :index, :layout => false, :expires_in => 10.minutes
+  caches_action :terms, :layout => false
+  caches_action :sitemap, :expires_in => 24.hours
+  
   def index
     @article = Article.latest.featured.published.first
     @games = Game.where("games.result is not null").paginated(1, 10).includes({:player0 => :team, :player1 => :team})

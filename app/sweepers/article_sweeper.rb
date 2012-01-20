@@ -21,5 +21,6 @@ class ArticleSweeper < ActionController::Caching::Sweeper
     expire_fragment("recent_news")
     expire_fragment("articles_banner")
     expire_fragment("featured_article")
+	expire_fragment("live_section")
   end
 end

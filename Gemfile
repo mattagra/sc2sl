@@ -31,7 +31,7 @@ gem "memcache-client"
 gem 'delayed_job', '2.1.4'
 gem "meta_where"
 
-gem 'comfortable_mexican_sofa', '1.5.3'
+gem 'comfortable_mexican_sofa', '1.6.8'
 
 #gem 'sprockets', :git => "git://github.com/sstephenson/sprockets"
 

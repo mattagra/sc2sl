@@ -19,9 +19,6 @@
   <div id="LiveMScore">
     <div id="scoretext">
     <%= link_to(@live_match.team0_wins.to_s + " - " + @live_match.team1_wins.to_s, match_path(@live_match)) %>
-    <% if can? :edit, @live_match %>
-    <br /><%= link_to "Edit", edit_match_path(@live_match.id) %>
-    <% end %>
     </div>
   </div>
   <div id="LiveMTeam2logo">

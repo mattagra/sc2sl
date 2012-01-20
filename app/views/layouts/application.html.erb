@@ -139,7 +139,7 @@
         //-->
     </script>    
     
-    <% end %>
+    
 	<style type="text/css">
             /*
         * Style by Rogie http://www.komodomedia.com/blog/2007/01/css-star-rating-redux/
@@ -226,6 +226,7 @@
             height: 10px;
         }
     </style>
+	<% end %>
     <%= ajaxful_rating_style %>
 
     <title><%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League</title>
@@ -234,7 +235,6 @@
     <meta name="keywords" content="<%= @keywords.join(", ") %>" lang="en" xml:lang="en" />
 
   </head>
-
   <body onload="MM_preloadImages('/css/images/login/icones/facebook.png','/css/images/login/icones/twitter.gif','/css/images/login/icones/rss.gif','/css/images/login/icones/mirc2.gif')">
 
     <div id="structure-login2">
@@ -269,17 +269,19 @@
               </div>
                 <% end %>
           </div>
-		  <div class="login-content-middle">					
-            <%= cms_snippet_content('coverage') %>
-		  </div>
-          <div class="login-content-right">
-            <img src="/css/images/menu/join.png" alt="youtube" border="0" align="top"/>
-            <a target="_blank" href="http://www.youtube.com/sc2slvods/" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('youtube','','/css/images/login/icones/youtube.gif',1)"><img src="/css/images/login/icones/youtube.png" alt="youtube" width="21" height="20" border="0" align="top" id="youtube" /></a>
-            <a target="_blank" href="http://www.facebook.com/pages/SC2SL/258966677449790" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image62','','/css/images/login/icones/facebook.gif',1)"><img src="/css/images/login/icones/facebook.png" alt="fb" width="21" height="20" border="0" id="Image62" /></a>
-            <a target="_blank" href="http://twitter.com/#!/SC2SL" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image63','','/css/images/login/icones/twitter.gif',1)"><img src="/css/images/login/icones/twitter.png" alt="twitter" width="21" height="20" border="0" id="Image63" /></a>
-            <a target="_blank" href="/articles.rss" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image64','','/css/images/login/icones/rss.gif',1)"><img src="/css/images/login/icones/rss.png" border="0" id="Image64" /></a>
-            <a target="_blank" href="irc://irc.quakenet.org/sc2sl" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image65','','/css/images/login/icones/mirc2.gif',1)"><img src="/css/images/login/icones/mirc2.png" alt="mirc" width="21" height="20" border="0" id="Image65" /></a>
-          </div>
+		  <% cache("layout_static_1") do %>
+			  <div class="login-content-middle">					
+				<%= cms_snippet_content('coverage') %>
+			  </div>
+			  <div class="login-content-right">
+				<img src="/css/images/menu/join.png" alt="youtube" border="0" align="top"/>
+				<a target="_blank" href="http://www.youtube.com/sc2slvods/" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('youtube','','/css/images/login/icones/youtube.gif',1)"><img src="/css/images/login/icones/youtube.png" alt="youtube" width="21" height="20" border="0" align="top" id="youtube" /></a>
+				<a target="_blank" href="http://www.facebook.com/pages/SC2SL/258966677449790" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image62','','/css/images/login/icones/facebook.gif',1)"><img src="/css/images/login/icones/facebook.png" alt="fb" width="21" height="20" border="0" id="Image62" /></a>
+				<a target="_blank" href="http://twitter.com/#!/SC2SL" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image63','','/css/images/login/icones/twitter.gif',1)"><img src="/css/images/login/icones/twitter.png" alt="twitter" width="21" height="20" border="0" id="Image63" /></a>
+				<a target="_blank" href="/articles.rss" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image64','','/css/images/login/icones/rss.gif',1)"><img src="/css/images/login/icones/rss.png" border="0" id="Image64" /></a>
+				<a target="_blank" href="irc://irc.quakenet.org/sc2sl" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image65','','/css/images/login/icones/mirc2.gif',1)"><img src="/css/images/login/icones/mirc2.png" alt="mirc" width="21" height="20" border="0" id="Image65" /></a>
+			  </div>
+		  <% end %>
         </div>
       </div>
 
@@ -287,11 +289,12 @@
     <table width="1000" height="92" border="0" align="center" cellpadding="0" cellspacing="0">
       <tr>
         <td width="380" align="center" valign="middle"><%= cms_snippet_content('main_logo') %></td>
+		
         <td width="620" align="center" valign="middle"><div id="pubhaut"><%= random_ad("horizontal") %></div></td>
       </tr>
     </table>
 
-
+    <% cache("layout_menu") do %>
     <div id="menu">
 
       <%= cms_snippet_content('main_menu') %>
@@ -307,22 +310,27 @@
       </div>
 
     </div>
-
+	
+	<% end %>
+	
+	
+    <% cache("live_section") do %>
     <div id="content-bar">
-      <% if @live_match and @live_match.live %>
-        <%= render :partial => "matches/live", :locals => {:live_match => @live_match} %>
-      <% else %>
-        <div class="sliderkit photoslider-mini">
-	      <div class="sliderkit-panels">
-            <div class="sliderkit-btn sliderkit-go-btn sliderkit-go-prev" ><a href="#" title="Previous"><span>Previous</span></a></div>
-            <div class="sliderkit-btn sliderkit-go-btn sliderkit-go-next" ><a href="#" title="Next"><span>Next</span></a></div>
+	  
+	  <% if @live_match and @live_match.live %>
+		<%= render :partial => "matches/live", :locals => {:live_match => @live_match} %>
+	  <% else %>
+		<div class="sliderkit photoslider-mini">
+		  <div class="sliderkit-panels">
+			<div class="sliderkit-btn sliderkit-go-btn sliderkit-go-prev" ><a href="#" title="Previous"><span>Previous</span></a></div>
+			<div class="sliderkit-btn sliderkit-go-btn sliderkit-go-next" ><a href="#" title="Next"><span>Next</span></a></div>
 
-            <%- @frontpage_articles.each do |article| %>
-              <%= render :partial => "articles/article_banner", :locals => {:article => article} %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+			<%- @frontpage_articles.each do |article| %>
+			  <%= render :partial => "articles/article_banner", :locals => {:article => article} %>
+			<% end %>
+		  </div>
+		</div>
+	  <% end %>
 
 
       <div id="live">
@@ -367,8 +375,9 @@
         </div>
 
       </div>
+	  <% end %>
 
-
+      <% cache("calendar_#{@calendar_date.year.to_s}_#{@calendar_date.month.to_s}_#{Time.now.day.to_s}") do  %>
       <div id="head-sponsors" align="center">
         <table width="353" height="12" border="0" cellpadding="0" cellspacing="2" bordercolor="#000000">
           <thead>
@@ -386,7 +395,7 @@
             </tr>
           </thead>
         </table>
-        <% cache("calendar_#{@calendar_date.year.to_s}_#{@calendar_date.month.to_s}_#{Time.now.day.to_s}") do  %>
+        
         <div id="calendar">
           <% calendar_for Array(@layout_matches), :year => @calendar_date.year, :month => @calendar_date.month, :today => Time.now, :first_day_of_week => 1  do |calendar| %>
             <%= calendar.head('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun') %>
@@ -407,9 +416,9 @@
             <% end %>
           <% end %>
         </div>
-        <% end %>
+        
       </div>
-
+      <% end %>
 
       <div id="structure">
         <div id="fullpage3">
@@ -430,6 +439,8 @@
           </div>
         </div>
       </div>
+	  
+	  <% cache("html_footer") do %>
       <div id="footer">
 
         <div id="footer-menu">
@@ -454,3 +465,5 @@
   </body>
 
 </html>
+
+<% end %>
