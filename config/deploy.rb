@@ -25,6 +25,9 @@ set :bundle_flags, "--quiet"
 
 require 'bundler/capistrano'
 
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
+
 # If you are using Passenger mod_rails uncomment this:
 namespace :deploy do
   namespace :web do

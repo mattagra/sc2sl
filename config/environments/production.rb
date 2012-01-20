@@ -25,6 +25,8 @@ Sc2sl::Application.configure do
 
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new
+  
+  config.logger = Logger.new(config.paths.log.first, 1, 5242880)
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
@@ -58,4 +60,12 @@ Sc2sl::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  config.middleware.use ExceptionNotifier,
+  :email_prefix => "[Exception] ",
+  :sender_address => %{"Exception Notifier" <support@sc2sl.com>},
+  :exception_recipients => %w{webmaster@sc2sl.com}
+  
+  
+  
 end
