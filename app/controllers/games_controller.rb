@@ -3,6 +3,8 @@ class GamesController < ApplicationController
   # GET /games.xml
   authorize_resource
   cache_sweeper :game_sweeper
+  
+  
   def index
     
     @layout_page = "Replay List"
