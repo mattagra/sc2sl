@@ -40,7 +40,7 @@ ComfortableMexicanSofa.configure do |config|
   # the upload method and appropriate settings based on Paperclip.  For S3 see:
   # http://rdoc.info/gems/paperclip/2.3.8/Paperclip/Storage/S3, and for 
   # filesystem see: http://rdoc.info/gems/paperclip/2.3.8/Paperclip/Storage/S3
-  #   config.upload_file_options = {:storage => :filesystem}
+   config.upload_file_options = {:url => "/shared/cms_files/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url"}
   
   # Sofa allows you to setup entire site from files. Database is updated with each
   # request (if nessesary). Please note that database entries are destroyed if there's
