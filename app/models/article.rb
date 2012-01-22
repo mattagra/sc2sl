@@ -8,7 +8,7 @@ class Article < ActiveRecord::Base
   validates :url, :uniqueness => true
   validates :summary, :length => {:minimum => 5, :maximum => 128}
   validates :description, :length => {:minimum => 5}
-  validates_attachment_presence :photo                    
+  #validates_attachment_presence :photo                    
   validates_attachment_size :photo, :less_than=>1.megabyte
   validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif', 'image/pjpeg', 'image/x-png']
 
