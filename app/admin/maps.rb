@@ -11,7 +11,7 @@ ActiveAdmin.register Map do
     default_actions
   end
 
-  form do |f|
+  form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs "Details" do
       f.input :name
       f.input :photo
