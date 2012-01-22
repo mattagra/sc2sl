@@ -3,6 +3,18 @@ ActiveAdmin.register Article do
   scope :published
   scope :unpublished
   scope :featured
+  
+  
+  index do
+    column "Title" do |article|
+      link_to article.title, admin_article_path(article)
+    end
+    column :published
+    column :featured
+    column :tag_list
+    column :summary
+    default_actions
+  end
 
   
   form :html => { :enctype => "multipart/form-data" } do |f|
