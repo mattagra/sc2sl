@@ -28,6 +28,7 @@ ActiveAdmin.register User do
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs "Details" do
       f.input :login
+	  f.input :email
       f.input :first_name
       f.input :last_name
       f.input :password
@@ -52,6 +53,7 @@ ActiveAdmin.register User do
     f.inputs "Options" do
       f.input :subscription
       f.input :time_zone
+	  f.input :active
       f.input :roles, :as => :select, :collection => User::ROLES, :multiple => true
     end
     
@@ -75,6 +77,17 @@ ActiveAdmin.register User do
         render :action => :edit
       end
     end
+	
+	
+	def create
+	  @user = User.new
+	  if @user.update_attributes(params[:user], !current_user.is_super_admin?)
+        flash[:notice] = "Account created!"
+        redirect_to :action => :show, :id => @user.id
+      else
+        render :action => :new
+      end
+	end
     
   end
   
