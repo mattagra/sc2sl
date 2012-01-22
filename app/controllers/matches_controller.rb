@@ -2,6 +2,7 @@ class MatchesController < ApplicationController
 
     authorize_resource
     cache_sweeper :match_sweeper
+	cache_sweeper :game_sweeper
 
 
   # GET /matches
