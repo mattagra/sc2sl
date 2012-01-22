@@ -107,8 +107,8 @@ namespace :memcached do
   end
 
 
-before 'deploy:restart', 'deploy:web:disable'
+
 after 'deploy:update_code', 'deploy:symlink_shared'
-after 'deploy:restart', 'delayed_job:restart'
-after 'delayed_job:restart', 'memcached:restart'
-after 'memcached:restart', 'deploy:web:enable'
+#after 'deploy:restart', 'delayed_job:restart'
+#after 'delayed_job:restart', 'memcached:restart'
+#after 'memcached:restart', 'deploy:web:enable'
