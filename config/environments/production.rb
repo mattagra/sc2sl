@@ -26,7 +26,7 @@ Sc2sl::Application.configure do
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new
   
-  #config.logger = Logger.new(config.paths.log.first, 1, 5242880)
+  config.logger = Logger.new
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
