@@ -48,7 +48,7 @@ class SiteController < ApplicationController
 
 
   def sitemap
-    @static_pages = ["live", "terms", "faq", "", "about", "contact", "privacy"]
+    @static_pages = ["live", "terms", "faq", "", "about", "contact", "privacy", "partner"]
     @articles = Article.all
     @matches = Match.all
     @teams = Team.all
