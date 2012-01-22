@@ -74,7 +74,7 @@ ActiveAdmin.register User do
         flash[:notice] = "Account updated!"
         redirect_to :action => :show, :id => @user.id
       else
-        render :action => :edit
+        render active_admin_template('edit.html.arb'), :layout => false
       end
     end
 	
@@ -85,7 +85,7 @@ ActiveAdmin.register User do
         flash[:notice] = "Account created!"
         redirect_to :action => :show, :id => @user.id
       else
-        render :action => :new
+        render active_admin_template('new.html.arb'), :layout => false
       end
 	end
     
