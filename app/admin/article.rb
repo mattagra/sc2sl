@@ -16,6 +16,7 @@ ActiveAdmin.register Article do
     f.inputs "Text" do
       f.input :summary, :input_html => {:rows => 3, :cols => 20}
       f.input :description, :input_html => { :class => "ckeditor" }
+	  f.input :featured_description, :input_html => { :class => "ckeditor" }
     end  
     
     f.buttons

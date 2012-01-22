@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120120043037) do
+ActiveRecord::Schema.define(:version => 20120122194256) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -69,7 +69,8 @@ ActiveRecord::Schema.define(:version => 20120120043037) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.boolean  "featured"
-    t.boolean  "published",          :default => false, :null => false
+    t.boolean  "published",            :default => false, :null => false
+    t.text     "featured_description"
   end
 
   create_table "assignments", :force => true do |t|
@@ -243,9 +244,9 @@ ActiveRecord::Schema.define(:version => 20120120043037) do
     t.string   "replay_file_name"
     t.string   "replay_content_type"
     t.integer  "replay_file_size"
-    t.decimal  "rating_average",      :default => 0.0
-    t.boolean  "revived",             :default => false, :null => false
-    t.integer  "admin_rating",        :default => 0
+    t.decimal  "rating_average",      :precision => 6, :scale => 2, :default => 0.0
+    t.boolean  "revived",                                           :default => false, :null => false
+    t.integer  "admin_rating",                                      :default => 0
   end
 
   create_table "languages", :force => true do |t|
