@@ -12,7 +12,7 @@ group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
 end
 
-gem 'rmagick'
+#gem 'rmagick'
 gem 'authlogic'
 gem 'daemons'
 gem 'activeadmin', :git => 'git://github.com/turlockmike/active_admin.git'
