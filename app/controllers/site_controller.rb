@@ -22,23 +22,23 @@ class SiteController < ApplicationController
   end
 
   #For the future!!!!
-  def panda
-    require "RMagick"
-    include Magick
-    
-    caption =  params[:caption].to_s[0..24]
-
-      img = ImageList.new("public/images/caption/panda.png")
-      txt = Draw.new
-      txt.gravity = Magick::SouthGravity
-      txt.pointsize = 25
-      txt.stroke = '#000000'
-      txt.fill = '#ffffff'
-      txt.font_weight = Magick::BoldWeight
-      
-      txt.annotate(img, 0,0,0,0, caption)
-      img.format = 'png'
-      send_data img.to_blob, :stream => 'false', :filename => "panda.png", :type => 'image/png', :disposition => 'inline'
+  #def panda
+  #  require "RMagick"
+  #  include Magick
+  #  
+  #  caption =  params[:caption].to_s[0..24]
+  #
+  #    img = ImageList.new("public/images/caption/panda.png")
+  #    txt = Draw.new
+  #    txt.gravity = Magick::SouthGravity
+  #    txt.pointsize = 25
+  #    txt.stroke = '#000000'
+  #    txt.fill = '#ffffff'
+  #    txt.font_weight = Magick::BoldWeight
+  #    
+  #    txt.annotate(img, 0,0,0,0, caption)
+  #    img.format = 'png'
+  #    send_data img.to_blob, :stream => 'false', :filename => "panda.png", :type => 'image/png', :disposition => 'inline'
   end
 
   def terms
