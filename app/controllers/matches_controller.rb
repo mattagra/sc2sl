@@ -2,7 +2,6 @@ class MatchesController < ApplicationController
 
     authorize_resource
     cache_sweeper :match_sweeper
-	cache_sweeper :game_sweeper
 
 
   # GET /matches
@@ -90,16 +89,6 @@ class MatchesController < ApplicationController
 
     respond_to do |format|
       if @match.update_attributes(params[:match])
-	    expire_fragment("season_rankings")
-        if @match.scheduled_at and @match.scheduled_at.year
-		  expire_fragment("calendar_#{@match.scheduled_at.year}_#{@match.scheduled_at.month}")
-	      if @match.scheduled_at_changed? and @match.scheduled_at_was and @match.scheduled_at_was.year
-			expire_fragment("calendar_#{@match.scheduled_at_was.year}_#{@match.scheduled_at_was.month}")
-		  end
-		end
-		expire_fragment("live_section")
-		expire_fragment("matches/live")
-		expire_fragment("recent_games")
         format.html { render(:action => "edit" , :notice => 'Match was successfully updated.') }
         format.xml  { head :ok }
       else

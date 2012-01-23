@@ -2,9 +2,9 @@ class SiteController < ApplicationController
 
   before_filter :current_user
   
-  caches_action :index, :layout => false, :expires_in => 10.minutes
+  caches_action :index, :layout => false, :expires_in => 15.seconds
   caches_action :terms, :layout => false
-  caches_action :sitemap, :expires_in => 24.hours
+  caches_action :sitemap, :expires_in => 30.minutes
   
   def index
     @article = Article.latest.featured.published.first
