@@ -39,7 +39,7 @@ class SiteController < ApplicationController
   #    txt.annotate(img, 0,0,0,0, caption)
   #    img.format = 'png'
   #    send_data img.to_blob, :stream => 'false', :filename => "panda.png", :type => 'image/png', :disposition => 'inline'
-  end
+  #end
 
   def terms
     render :layout => false
