@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   authorize_resource
   
   before_filter :deny_banned, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :authenticate_super_admin!, :only => [:index]
 
   def index
     @current_page = [(params[:page]|| 1).to_i, 1].max

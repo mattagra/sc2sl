@@ -61,7 +61,7 @@ module ApplicationHelper
   def view_article_url(article, page = 0)
     zone = ActiveSupport::TimeZone.new("Paris")
     time = article.created_at.in_time_zone(zone)
-    if page.to_i > 0
+    unless page.to_i > 0
       named_article_url(:year => time.year, :month => time.strftime("%m"), :day => time.strftime("%d"), :url => article.url)
     else
       named_article_url(:year => time.year, :month => time.strftime("%m"), :day => time.strftime("%d"), :url => article.url, :page => page)

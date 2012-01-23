@@ -1,6 +1,7 @@
 class ModerationsController < ApplicationController
 
     authorize_resource
+    before_filter :authenticate_super_admin!
 
   # GET /moderations
   # GET /moderations.xml

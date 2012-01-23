@@ -22,23 +22,24 @@ class SiteController < ApplicationController
   end
 
   #For the future!!!!
-  #def panda
-  #  require "RMagick"
-  #  include Magick
-  #  def lolcat
-  #    img = ImageList.new("public/images/caption/panda.png")
-  #    txt = Draw.new
-  #    img.annotate(txt, 0,0,0,0, "In ur Railz, annotatin ur picz."){
-  #      txt.gravity = Magick::SouthGravity
-  #      txt.pointsize = 25
-  #      txt.stroke = '#000000'
-  #      txt.fill = '#ffffff'
-  #      txt.font_weight = Magick::BoldWeight
-  #    }
-  #    img.format = 'png'
-  #    send_data img.to_blob, :stream => 'false', :filename => 'test.png', :type => 'image/png', :disposition => 'inline'
-  #  end
-  #end
+  def panda
+    require "RMagick"
+    include Magick
+    
+    caption =  params[:caption].to_s[0..24]
+
+      img = ImageList.new("public/images/caption/panda.png")
+      txt = Draw.new
+      txt.gravity = Magick::SouthGravity
+      txt.pointsize = 25
+      txt.stroke = '#000000'
+      txt.fill = '#ffffff'
+      txt.font_weight = Magick::BoldWeight
+      
+      txt.annotate(img, 0,0,0,0, caption)
+      img.format = 'png'
+      send_data img.to_blob, :stream => 'false', :filename => "panda.png", :type => 'image/png', :disposition => 'inline'
+  end
 
   def terms
     render :layout => false

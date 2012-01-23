@@ -1,30 +1,18 @@
-
-<% if can? :create, Player %><%= link_to 'New Player', new_player_path %><% end %><br />
 <h1>Listing players</h1>
 
 <table>
   <tr>
     <th>Team</th>
-    <th>User</th>
-    <th>Date joined</th>
-    <th>Date quit</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Player</th>
   </tr>
 
 <% @players.each do |player| %>
   <tr>
-    <td><%= player.team %></td>
-    <td><%= player.user %></td>
-    <td><%= player.date_joined %></td>
-    <td><%= player.date_quit %></td>
-    <td><%= link_to 'Show', player %></td>
-    <td><% if can? :edit, player %><%= link_to 'Edit', edit_player_path(player) %><% end %></td>
-    <td><% if can? :destroy, player %><%= link_to 'Destroy', player, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
+    <td><%= link_to player.team, team_path(player.team.slug) %>
+    <td><%= link_to player.user.to_s, profile_path(player.user.login) %></td>
+
   </tr>
 <% end %>
 </table>
 
-<br />
 

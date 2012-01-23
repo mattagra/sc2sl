@@ -2,6 +2,7 @@ class NewslettersController < ApplicationController
   # GET /newsletters
   # GET /newsletters.xml
       authorize_resource
+      before_filter :authenticate_super_admin!
 
   def index
     @newsletters = Newsletter.all
