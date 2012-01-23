@@ -41,14 +41,9 @@ class UsersController < ApplicationController
     else
       raise ActionController::RoutingError.new('Not Found')
     end
-    if @user
     @current_page = [(params[:page]|| 1).to_i, 1].max
     @comments_count = @user.comments.count
     @comments= @user.comments.paginated(@current_page, 10)
-    else
-      flash[:params] = "Cannot Find a User with that name"
-      redirect_to root_url
-    end
   end
 
   def edit

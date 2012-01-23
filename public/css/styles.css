@@ -1163,7 +1163,7 @@ margin-right : 4px;
 }
 #ranking-content {
 	float : left;
-	width : 519px;
+	width : 521px;
 }
 
 #ranking-ligne-titre {
@@ -1179,7 +1179,7 @@ margin-right : 4px;
 }
 .ranking-ligne-titre-id {
 	float : left;
-	width : 50px;
+	width : 45px;
 	height : 14px;
 	border-right: 1px solid #B7B7B7;
 	text-align : center;
@@ -1226,7 +1226,7 @@ margin-right : 4px;
 }
 .ranking-ligne-titre-ml {
 	float : left;
-	width : 35px;
+	width : 40px;
 	height : 14px;
 	text-align : center;
 	padding-left : 3px;
@@ -1244,7 +1244,7 @@ margin-left: 1px;
 }
 .ranking-ligne-id {
 	float : left;
-	width : 50px;
+	width : 45px;
 	border-right: 1px solid #B7B7B7;
 	text-align : center;
 }
@@ -1283,7 +1283,7 @@ margin-left: 1px;
 }
 .ranking-ligne-ml {
 	float : left;
-	width : 38px;
+	width : 43px;
 	text-align : center;
 }
 
