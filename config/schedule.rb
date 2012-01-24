@@ -23,3 +23,9 @@ every 6.hours do
   rake "cleanup:clean_ar_sessions"
 end
 
+job_type :envcommand, 'cd :path && RAILS_ENV=:environment :task'
+
+every :reboot do
+  envcommand 'script/delayed_job restart'
+end
+
