@@ -20,9 +20,9 @@ class MatchSweeper < ActionController::Caching::Sweeper
     # Expire a fragment
     expire_fragment("season_rankings")
     if match.scheduled_at and match.scheduled_at.year
-      expire_fragment("calendar_#{match.scheduled_at.year}_#{match.scheduled_at.month}")
+      expire_fragment("calendar_#{match.scheduled_at.year.to_s}_#{match.scheduled_at.month.to_s}")
       if match.scheduled_at_changed? and match.scheduled_at_was and match.scheduled_at_was.year
-        expire_fragment("calendar_#{match.scheduled_at_was.year}_#{match.scheduled_at_was.month}")
+        expire_fragment("calendar_#{match.scheduled_at_was.year.to_s}_#{match.scheduled_at_was.month.to_s}")
       end
     end
     expire_fragment("live_section")

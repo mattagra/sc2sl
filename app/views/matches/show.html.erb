@@ -23,13 +23,7 @@
       <tr>
         <td><div align="center">
             <p class="playoffteam"><strong>VS</strong></p>
-            <p class="playoffteam"><span class="matchpre">
-            <% if @match.weeks_id %>
-              <%= link_to "#{@match.season.name} Round #{@match.weeks_id}", season_path(@match.season) + "#week#{@match.weeks_id}" %>
-            <% else %>
-              <%= link_to "#{@match.season.name} Playoffs", season_path(@match.season) + "#playoff" %>
-            <% end %>
-            </span></p>
+            
             <p class="playoffteam">&nbsp;</p>
             <p class="playoffteam">&nbsp;</p>
           </div></td>
@@ -39,6 +33,13 @@
             <tbody>
               <tr>
                 <td colspan="2"><p class="matchpre">&nbsp;</p>
+				  <p class="matchpre">
+					<% if @match.weeks_id %>
+					  <%= link_to "#{@match.season.name} Round #{@match.weeks_id}", season_path(@match.season) + "#week#{@match.weeks_id}" %>
+					<% else %>
+					  <%= link_to "#{@match.season.name} Playoffs", season_path(@match.season) + "#playoff" %>
+					<% end %>
+                  </p>
                   <p class="matchpre">Date: <%= american_time(@match.scheduled_at) %> </p>
                   <p class="matchpre"><%= link_to_if !@match.url.blank?, "View VODS", @match.url  %></p>
                   <p class="matchpre">&nbsp;</p></td>
