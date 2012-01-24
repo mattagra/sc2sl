@@ -309,7 +309,7 @@
       </tr>
     </table>
 
-    <% cache("layout_menu") do %>
+    <% cache("layout_menu_#{Time.zone}") do %>
     <div id="menu">
 
       <%= cms_snippet_content('main_menu') %>
