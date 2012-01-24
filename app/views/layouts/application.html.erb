@@ -1,4 +1,4 @@
-<% cache("html_header") do %>
+<% cache("html_header", {:expires_in => 1.hour}) do %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
@@ -284,7 +284,7 @@
               </div>
                 <% end %>
           </div>
-		  <% cache("layout_static_1") do %>
+		  <% cache("layout_static_1", {:expires_in => 1.hour}) do %>
 			  <div class="login-content-middle">					
 				<%= cms_snippet_content('coverage') %>
 			  </div>
@@ -309,7 +309,7 @@
       </tr>
     </table>
 
-    <% cache("layout_menu_#{Time.zone}") do %>
+    <% cache("layout_menu_#{Time.zone}", {:expires_in => 1.minute}) do %>
     <div id="menu">
 
       <%= cms_snippet_content('main_menu') %>
@@ -335,7 +335,7 @@
 	  <% if @live_match and @live_match.live %>
 		<%= render :partial => "matches/live", :locals => {:live_match => @live_match} %>
 	  <% else %>
-        <% cache("frontpage_articles") do %>
+        <% cache("frontpage_articles", {:expires_in => 5.minutes}) do %>
             <div class="sliderkit photoslider-mini">
               <div class="sliderkit-panels">
                 <div class="sliderkit-btn sliderkit-go-btn sliderkit-go-prev" ><a href="#" title="Previous"><span>Previous</span></a></div>
@@ -394,7 +394,7 @@
       </div>
 	  
 
-      <% cache("calendar_#{@calendar_date.year.to_s}_#{@calendar_date.month.to_s}") do  %>
+      <% cache("calendar_#{@calendar_date.year.to_s}_#{@calendar_date.month.to_s}", {:expires_in => 1.hour}) do  %>
       <div id="head-sponsors" align="center">
         <table width="353" height="12" border="0" cellpadding="0" cellspacing="2" bordercolor="#000000">
           <thead>
@@ -457,7 +457,7 @@
         </div>
       </div>
 	  
-	  <% cache("html_footer") do %>
+	  <% cache("html_footer", {:expires_in => 1.hour}) do %>
       <div id="footer">
 
         <div id="footer-menu">
