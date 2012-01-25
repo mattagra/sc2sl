@@ -15,7 +15,7 @@
         </td>
         <td width="320" rowspan="2">
           <div align="right">
-            <span class="playoffteam"><%= link_to @match.team1.name, team_path(@match.team1.slug) %><strong> </strong></span>
+            <span class="playoffteam"><strong><%= link_to @match.team1.name, team_path(@match.team1.slug) %> </strong></span>
             <%= image_tag(@match.team1.photo.url(:normal), :hspace => 10, :align => "middle") if @match.team1 and @match.team1.photo.exists?  %>
           </div>
         </td>
