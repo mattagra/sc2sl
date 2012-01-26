@@ -165,7 +165,9 @@ module ApplicationHelper
   
   
   def random_ad(style)
-    ads = Rails.cache.fetch("advertisments_#{style}") || Advertisement.of_type(style)
+    ads = Rails.cache.fetch("advertisments_#{style}") do
+      Advertisement.of_type(style)
+    end
     ad = ads.random(:weight)
 	if ad
 	  link_to(image_tag(ad.photo.url(style), :alt => ad.title, :width => Advertisement::AD_TYPES[style][:width], :height => Advertisement::AD_TYPES[style][:height] ) ,ad.url, :target => "_blank")
