@@ -39,6 +39,11 @@ ActiveAdmin.register Advertisement do
     end
     active_admin_comments
   end
+  
+  controller do
+    cache_sweeper :advertisement_sweeper
+    
+  end
 
 
   

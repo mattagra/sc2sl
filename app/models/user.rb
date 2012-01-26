@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
 
   #Validations
   validates :email, :presence => true, :uniqueness => true, :email_format => true
-  validates :login, :presence => true, :uniqueness => true, :length => {:within => 3..20}, :format => { :with => /[A-Za-z0-9]+/ }
+  validates :login, :presence => true, :uniqueness => true, :length => {:within => 3..20}, :format => { :with => /\A[A-Za-z0-9\-\_]+\Z/ }
   validates_acceptance_of :terms, :on => :create
   after_validation :set_defaults, :on => :create
   validates :signature, :length => {:within => 0..255}

@@ -46,7 +46,7 @@
   <td valign="top"><p><strong>Timezone</strong></p>
     <p class="ntitle2">Time Zone</p></td>
   <td colspan="3" valign="top">
-    <%=  form.select :time_zone  , ActiveSupport::TimeZone.all.collect{|t| [t.to_s, t.name]},  { :prompt => true, :include_blank => true }, :class => "form-dd" %>
+    <%=  form.select :time_zone  , ActiveSupport::TimeZone.all.collect{|t| [t.to_s, t.name]},  { :prompt => true}, :class => "form-dd" %>
   </td>
 </tr>
 <% unless form.object.new_record? %>

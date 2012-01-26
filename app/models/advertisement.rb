@@ -9,7 +9,7 @@ class Advertisement < ActiveRecord::Base
   
   
   
-  scope :random_ad, lambda { order("RANDOM() * weight")  }
+  #scope :random_ad, lambda { order("-LOG(1.0 - RANDOM()) / weight asc")  }
   
   
   

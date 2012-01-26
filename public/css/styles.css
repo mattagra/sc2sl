@@ -1792,11 +1792,13 @@ background-color : #26282B;
 #calendar td a {
     text-decoration: none;
     color: #0D4986;
+    font-weight: bold;
 }
 
 #calendar td a:hover {
     text-decoration: underline;
     color: #1D86F1;
+    font-weight: bold;
 }
 
 
