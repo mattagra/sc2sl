@@ -168,11 +168,18 @@ module ApplicationHelper
     ads = Rails.cache.fetch("advertisments_#{style}") do
       Advertisement.of_type(style).to_a
     end
+    #ads = Advertisement.of_type(style).to_a
     ad = ads.random(:weight)
 	if ad
-	  link_to(image_tag(ad.photo.url(style), :alt => ad.title, :width => Advertisement::AD_TYPES[style][:width], :height => Advertisement::AD_TYPES[style][:height] ) ,ad.url, :target => "_blank")
+      if ad.photo.exists?
+	    link_to(image_tag(ad.photo.url(style), :alt => ad.title, :width => Advertisement::AD_TYPES[style][:width], :height => Advertisement::AD_TYPES[style][:height] ) ,ad.url, :target => "_blank")
+      elsif ad.is_html_ad?
+        ad.html_text.html_safe
+      else
+        "ADVERTISEMENT ERROR"
+      end      
 	else
-	  ""
+	  "ADVERTISEMENT NOT FOUND"
 	end
   end
   

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125220438) do
+ActiveRecord::Schema.define(:version => 20120126213153) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120125220438) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ad_type"
+    t.text     "html_text",          :limit => 512
   end
 
   create_table "articles", :force => true do |t|

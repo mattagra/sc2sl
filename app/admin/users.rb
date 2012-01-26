@@ -2,6 +2,7 @@ ActiveAdmin.register User do
 
   scope :all, :default => true
   scope :recent
+  scope :inactive
   
 
   filter :login

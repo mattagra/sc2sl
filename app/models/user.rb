@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
   scope :newest, order('id asc')
   scope :alphabetical, order('LOWER(login) asc')
   scope :recent, order('updated_at desc')
+  scope :inactive, where(:active => false)
   
 
   before_save :capitalize_names #, :reset_tokens
