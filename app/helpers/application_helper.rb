@@ -165,7 +165,8 @@ module ApplicationHelper
   
   
   def random_ad(style)
-    ads = Rails.cache.fetch("advertisments_#{style}") do
+    cache = ActiveSupport::Cache::MemCacheStore.new(:expires_in => 2.minutes)
+    ads = cache.fetch("advertisments_#{style}") do
       Advertisement.of_type(style).to_a
     end
     #ads = Advertisement.of_type(style).to_a
