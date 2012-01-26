@@ -18,9 +18,10 @@ class AdvertisementSweeper < ActionController::Caching::Sweeper
   private
   def expire_cache_for(advertisement)
     # Expire a fragment
-    expire_fragment("advertisments_+#{advertisement.ad_type.to_s}")
+    cache = ActiveSupport::Cache::MemCacheStore.new
+    cache.delete("advertisments_#{advertisement.ad_type.to_s}")
     if advertisement.ad_type_changed? and advertisement.ad_type_was
-      expire_fragment("advertisements_#{(advertisement.ad_type_was.to_s)}")
+      cache.delete("advertisements_#{advertisement.ad_type_was.to_s}")
     end
   end
 end
