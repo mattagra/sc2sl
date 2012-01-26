@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
   scope :recent, order('updated_at desc')
   
 
-  before_save :capitalize_names, :reset_tokens
+  before_save :capitalize_names #, :reset_tokens
   before_save :check_for_new_photo
 
   def self.paginated(page=1,offset=50)

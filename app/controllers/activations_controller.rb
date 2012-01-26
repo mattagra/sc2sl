@@ -3,11 +3,11 @@ class ActivationsController < ApplicationController
 
 
     def new
-    @user = User.find_using_perishable_token(params[:activation_code], 1.month) || (raise Exception)
+    @user = User.find_using_perishable_token(params[:activation_code])
 
     #raise Exception if @user.active?
 
-    if @user.activate!
+    if @user and @user.activate!
       flash[:notice] = "Your account has been activated. Thank you for joining"
       UserMailer.delay.welcome(@user)
       UserSession.create(@user, false)
