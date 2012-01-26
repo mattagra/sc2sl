@@ -166,7 +166,7 @@ module ApplicationHelper
   
   def random_ad(style)
     ads = Rails.cache.fetch("advertisments_#{style}") do
-      Advertisement.of_type(style)
+      Advertisement.of_type(style).to_a
     end
     ad = ads.random(:weight)
 	if ad
