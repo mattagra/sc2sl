@@ -143,6 +143,8 @@ class ApplicationController < ActionController::Base
   def set_timezone
     Time.zone = (current_user.time_zone if current_user) || Sc2sl::Application.config.time_zone
   end
+  
+
 
 
 end

@@ -5,9 +5,6 @@
 	    <td bgcolor="#043958" align="center"><span style="color:#ffffff;font-face:Arial;font-size:12px;">CHOOSE YOUR CHAMPION</span></td>
       </tr>
       <tr>
-	    <td bgcolor="red" align="center"><span style="color:#ffffff;font-face:Arial;font-size:12px;">You may only vote once per match.</span></td>
-      </tr>
-      <tr>
           <td>
             <% form_for @vote, :url => match_vote_event_votes_path(:match_id => @vote.vote_event.match.id, :vote_event_id => @vote.vote_event.id) do |f| %>
               <div style="margin:0;padding:0;display:inline"></div> 

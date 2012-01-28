@@ -23,6 +23,9 @@ ActiveAdmin.register User do
     column :last_name
     column :country
     column :race
+	column "Activation" do |user|
+	  link_to "Resend", activation_admin_user_path(user)
+    end
     default_actions
   end
   
@@ -59,7 +62,7 @@ ActiveAdmin.register User do
     end
     
     f.buttons
-
+    
   end
   
   
@@ -89,8 +92,22 @@ ActiveAdmin.register User do
         render active_admin_template('new.html.arb'), :layout => false
       end
 	end
+	
+	
+	
     
   end
+  
+  member_action :activation, :method => :get do
+	  @user = User.find(params[:id])
+	  if @user
+	    UserMailer.activation(@user)
+		flash[:notice] = "Activation Email Sent"
+	    redirect_to :action => :index
+      else
+	    redirect_to :action => :index
+	  end
+	end
   
   
 

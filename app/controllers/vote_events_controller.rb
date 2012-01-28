@@ -16,7 +16,11 @@ class VoteEventsController < ApplicationController
   def show_current
     @vote_event = VoteEvent.last
     @vote = Vote.find_by_vote_event_id_and_user_id(@vote_event.id, current_user.id) || Vote.new(:vote_event_id => @vote_event.id)
+	if @vote.new_record?
+	  @auto_refresh = 10
+	end
     render :layout => false, :action => :show
+	
   end
 
   def new

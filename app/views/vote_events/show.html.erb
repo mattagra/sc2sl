@@ -1,3 +1,11 @@
+<html>
+<head>
+<% unless @vote.new_record? %>
+<meta http-equiv="refresh" content="30" >
+<% end %>
+
+</head>
+<body>
 <% unless @vote.new_record? %>
     <% cache('vote_events_show') do %>
         <table>
@@ -5,7 +13,7 @@
           <tr><td>Team</td><td><%=  @vote_event.team.name %></td></tr>
         </table>
 
-        Current Votes
+        <strong>Current Votes</strong><br />
         <% total_votes = [@vote_event.votes.count,1].max %>
         <% @vote_event.players.each do |player| %>
             <% player_votes = @vote_event.votes.where(:player_id => player.id).count %>
@@ -21,3 +29,8 @@
 <% else %>
   Voting has ended. 
 <% end %>
+<br />
+<small>Page refreshes every 30 seconds automatically.</small>
+</body>
+
+</html>
