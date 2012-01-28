@@ -2,7 +2,7 @@
 <div id="left">
 
   <div id="ranking">
-    <% cache('season_rankings') do %>
+    <% cache('season_rankings', {:expires_in => 10.minutes}) do %>
       <% @season = Season.published.last %>
       <% if @season %>
         <div id="ranking-titre">
@@ -36,7 +36,7 @@
   </div>
 
   <div class="article">
-    <% cache("featured_article") do  %>
+    <% cache("featured_article", {:expires_in => 10.minutes}) do  %>
       <% if @article %>
         <div class="article-titre2">
           <p><%= link_to @article.title, view_article_path(@article) %></p>
@@ -59,7 +59,7 @@
 </div>
 
 <div id="center">
-  <% cache("recent_news") do %>
+  <% cache("recent_news", {:expires_in => 10.minutes}) do %>
     <div id="middlenews">
       <div id="middle-titre">
         <div id="middle-titre-texte">LAST NEWS</div>
@@ -90,7 +90,7 @@
     </div>
   <% end %>
 
-  <% cache("recent_games") do %>
+  <% cache("recent_games", {:expires_in => 10.minutes}) do %>
     <div id="middle">
       <div id="middle-titre">
         <div id="middle-titre-texte">LAST REPLAYS</div>
