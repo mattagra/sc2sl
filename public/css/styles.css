@@ -529,9 +529,6 @@ a.nivo-prevNav {
     z-index:1;
     left: 10px;
     top: 205px;
-    border : 2px;
-    border-color:#333333;
-    border-style:dashed;
     text-align:center;
     padding:5px;
 }
