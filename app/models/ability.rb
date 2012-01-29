@@ -17,6 +17,7 @@ class Ability
         end
         can :rate, Game
         can :create, Comment
+		can :replay, Game
         can :update, Comment do |comment|
           comment.try(:user) == user || user.role?(:moderator)
         end
