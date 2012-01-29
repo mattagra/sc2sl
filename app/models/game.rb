@@ -21,7 +21,7 @@ class Game < ActiveRecord::Base
   #None necesary for games. We want to be able to schedule games.
 
   def self.paginated(page=1,offset=20)
-    order('id desc').limit(offset).offset((page - 1) * offset)
+    order('games.id asc').limit(offset).offset((page - 1) * offset)
   end
   
 
