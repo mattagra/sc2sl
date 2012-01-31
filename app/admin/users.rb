@@ -6,6 +6,7 @@ ActiveAdmin.register User do
   
 
   filter :login
+  filter :email
   filter :current_login_ip
   filter :first_name
   filter :last_name
