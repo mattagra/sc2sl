@@ -13,7 +13,6 @@ class UserMailer < ActionMailer::Base
 
   def username_change(user, old_login)
     @user = user
-    @reason = reason
     @old_login = old_login
     mail(:to => "#{@user.login} <#{@user.email}>", :subject => "SC2SL: New Username")
   end
