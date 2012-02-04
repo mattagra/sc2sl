@@ -37,7 +37,7 @@ class UsersController < ApplicationController
       @user = current_user
       @comment = Comment.new_of_type(@user)
     elsif params[:login]
-      @user = User.find_by_login!(params[:login]).includes(:players => [:team, :games])
+      @user = User.find_by_login!(params[:login])
       @comment = Comment.new_of_type(@user)
     else
       raise ActionController::RoutingError.new('Not Found')
