@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   #Authentication
   acts_as_authentic do |c|
+    c.disable_perishable_token_maintenance true
     #c.my_config_option = my_value # for available options see documentation in: Authlogic::ActsAsAuthentic
   end # block optional
 

@@ -17,6 +17,27 @@ class ApplicationController < ActionController::Base
 
   #before_filter :require_http_auth
   
+  unless Rails.application.config.consider_all_requests_local
+  rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
+  rescue_from ActionController::RoutingError, :with => :render_not_found
+  rescue_from ActionController::UnknownController, :with => :render_not_found
+  rescue_from ActionController::UnknownAction, :with => :render_not_found
+  end
+  
+  
+  def render_not_found
+    respond_to do |type| 
+      type.html { render :template => "errors/error_404", :status => 404, :layout => 'application' } 
+      type.all  { render :nothing => true, :status => 404 } 
+    end
+    true
+  end
+
+
+  
+  
+  
+  
   protected
   def require_http_auth
     authenticate_or_request_with_http_basic do |username, password|

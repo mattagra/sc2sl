@@ -16,11 +16,10 @@
 
     <!-- STYLES  -->
 
-    <link href="/favicon.gif" rel="shortcut icon" />
      <link href="/css/styles.css" rel="stylesheet" type="text/css"/>
 	<!-- <% stylesheet_link_tag cms_css_path(1, "default") %> -->
     <link href="/css/smoothness/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
-    <link href="favicon.ico" rel="shortcut icon" />
+    <link href="/favicon.ico" rel="shortcut icon" />
     
     <!-- Widget styles -->
     <link rel="stylesheet" type="text/css" href="/css/sliderkit-core.css" media="screen, projection" />
@@ -341,7 +340,7 @@
                 <div class="sliderkit-btn sliderkit-go-btn sliderkit-go-prev" ><a href="#" title="Previous"><span>Previous</span></a></div>
                 <div class="sliderkit-btn sliderkit-go-btn sliderkit-go-next" ><a href="#" title="Next"><span>Next</span></a></div>
                 
-                <%- @frontpage_articles.find_all{|a| a.photo.exists?}.each do |article| %>
+                <%- @frontpage_articles.find_all{|a| a.photo.exists?}[0..2].each do |article| %>
                   <%= render :partial => "articles/article_banner", :locals => {:article => article} %>
                 <% end %>
               </div>
