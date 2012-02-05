@@ -23,7 +23,7 @@ Sc2sl::Application.routes.draw do
     end
   end
   
-  match '/matches/:calendar_year/:calendar_month/' => 'matches#index', :constraints => { :calendar_year => /\d{4}/, :calendar_month => /\d{2}/},  :as => :matches
+  match '/matches/:calendar_year/:calendar_month/' => 'matches#index', :constraints => { :calendar_year => /\d{4}/, :calendar_month => /\d.+/},  :as => :events
 
 
   resources :matches do
