@@ -10,7 +10,7 @@
 	<table width="780" border="0" cellpadding="2" cellspacing="0" padding="2"><tbody>
 	  <% @matches.each do |match| %>
 		  <tr bgcolor="#999999" id="match_<%= match.id.to_s %>"><td align="center" bgcolor="#CCCCCC">&nbsp;</td>
-			<td colspan="2" align="left" bgcolor="#CCCCCC"><strong>Monday 6th  <%= american_date(match.scheduled_at) %></strong></td>
+			<td colspan="2" align="left" bgcolor="#CCCCCC"><strong><%= american_date(match.scheduled_at) %></strong></td>
 			</tr>
 		  <tr>
 			<td valign="top">&nbsp;</td>
