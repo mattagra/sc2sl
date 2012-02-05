@@ -118,7 +118,7 @@ class User < ActiveRecord::Base
   end
 
   def safe_name
-    self.first_name.to_s + " " + (if self.last_name.length > 0 then self.last_name.to_s[0..0] + "." else "" end) 
+    self.first_name.to_s + " " + (if (self.last_name and self.last_name.length > 0) then self.last_name.to_s[0..0] + "." else "" end) 
   end
   
   def age
