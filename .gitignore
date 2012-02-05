@@ -15,8 +15,8 @@ public/images/seasons/*
 public/images/teams/*
 public/images/users/*
 db/development.sqlite3
-vendor/*
-vendor/*/*
+vendor/bundle/*
+vender/cache/*
 RAILS_ENV=development
 RAILS_ENV=development/*
 development
