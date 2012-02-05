@@ -12,6 +12,8 @@ group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
 end
 
+
+gem 'facebooker2'
 gem 'ruby-hmac'
 gem 'mogli'
 gem 'authlogic'
