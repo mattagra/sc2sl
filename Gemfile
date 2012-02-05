@@ -14,6 +14,7 @@ end
 
 
 gem 'facebooker2'
+#gem 'authlogic_facebook_connect', :git => 'git://github.com/turlockmike/authlogic_facebook_connect.git'
 gem 'ruby-hmac'
 gem 'mogli'
 gem 'authlogic'
