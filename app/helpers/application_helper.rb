@@ -22,6 +22,14 @@ module ApplicationHelper
       time.strftime("%b %d")
     end
   end
+  
+  def american_time_only(time, zone = nil)
+    if zone
+	  time.in_time_zone(zone).strftime("%a %H:%M %Z")
+	else
+      time.strftime("%a %H:%M %Z")
+	end
+  end
 
 
 

@@ -22,6 +22,9 @@ Sc2sl::Application.routes.draw do
       post 'rate'
     end
   end
+  
+  match '/matches/:calendar_year/:calendar_month/' => 'matches#index', :constraints => { :calendar_year => /\d{4}/, :calendar_month => /\d{2}/},  :as => :matches
+
 
   resources :matches do
     resources :vote_events do

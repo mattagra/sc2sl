@@ -427,11 +427,13 @@
                 <% else %>
                   <% str = "" %>
                   <% id = 0 %>
+				  <% scheduled_at = nil %>
                   <% for match in matches %>
                     <% str += match.title + "\n" %>
                     <% id = match.id %>
+					<% scheduled_at = match.scheduled_at %>
                   <% end %>
-                  <%= link_to date.day, match_path(id), :title => str %>
+                  <%= link_to(date.day, (matches_path(:calendar_month => scheduled_at.month, :calendar_year => scheduled_at.year) + "#match_#{id}"), :title => str) %>
                 <% end %>
               <% end %>
             <% end %>
