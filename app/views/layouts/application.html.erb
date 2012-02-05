@@ -266,6 +266,10 @@
                     <%= f.hidden_field :remember_me, :value => true %>
                     <%= f.submit "OK", :class => "submit-login" %>
                   <% end %>
+				  <div style="margin-top: 4px; margin-left: 10px;float: right;">
+				  <%= authlogic_facebook_login_button("Log in with facebook", :controller => :user_session, :scope => "email").html_safe %>
+	              <%= fb_connect_async_js %>
+				  </div>
 				  </div>
                 <% else %>
                 <div class="login-content-texte">

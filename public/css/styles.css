@@ -142,7 +142,7 @@ float : left;
  /*margin-top : 8px; */
 margin-left : 10px;
 margin-right : 8px;
-width: 420px;
+width: 620px;
 }
 
 .login-content-text span {
@@ -157,7 +157,7 @@ color: white;
 }
 .login-content-left {
 float : left;
-width:465px;
+width:665px;
 height:25px;
 margin-top : 0px;
 margin-left: 5px;
@@ -173,7 +173,7 @@ border: none;
 .login-content-middle {
 margin-top: 1px;
 float: left;
-width: 310px;
+width: 10px;
 height: 25px;
 margin-left: 5px;
 }

@@ -19,13 +19,6 @@ GIT
       rails (>= 3.0.0)
       sass (>= 3.1.0)
 
-GIT
-  remote: git://github.com/turlockmike/authlogic_facebook_connect.git
-  revision: 3efe12d7e997d387529b278d8719037e27e4b4d5
-  specs:
-    authlogic_facebook_connect (0.0.1)
-      facebooker2
-
 PATH
   remote: vendor/bundle/ruby/1.8/gems/bb-ruby-0.9.5
   specs:
@@ -221,7 +214,6 @@ DEPENDENCIES
   acts-as-taggable-on
   ajaxful_rating!
   authlogic
-  authlogic_facebook_connect!
   bb-ruby (= 0.9.5)!
   cancan
   capistrano
