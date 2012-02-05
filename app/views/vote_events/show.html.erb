@@ -7,7 +7,7 @@
 </head>
 <body>
 <% unless @vote.new_record? %>
-    <% cache('vote_events_show') do %>
+    <% cache('vote_events_show_#{current_admin.nil?.to_s}') do %>
         <table>
           <tr><td>Match</td><td><%=  @vote_event.match.title %></td></tr>
           <tr><td>Team</td><td><%=  @vote_event.team.name %></td></tr>

@@ -61,6 +61,10 @@ ActiveAdmin.register User do
 	  f.input :active
       f.input :roles, :as => :select, :collection => User::ROLES, :multiple => true
     end
+	f.inputs "Facebook Details" do
+	  f.input :facebook_session_key
+      f.input :facebook_uid
+	end
     
     f.buttons
     

@@ -45,6 +45,12 @@ class UsersController < ApplicationController
     @current_page = [(params[:page]|| 1).to_i, 1].max
     @comments_count = @user.comments.count
     @comments= @user.comments.paginated(@current_page, 10)
+	
+	@layout_page = "Profile"
+    @layout_subpage = @user.login
+    @description = "Profile for #{@user.login}"
+    @keywords += ["profile", @user.login]
+	
   end
 
   def edit
