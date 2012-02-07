@@ -1,44 +1,45 @@
-
-<h1>Listing matches</h1>
-
-<table>
-  <tr>
-    <th>Team0</th>
-    <th>Team1</th>
-    <th>Date</th>
-    <th>Stream Url</th>
-    <th>Casters</th>
-    <th>Live</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-  <% week = 1 %>
-  <tr>
-    <td colspan="6"><b>Week 0</b></td>
-  </tr>
-<% @matches.each do |match| %>
-  <% if week != match.weeks_id %>
-  <tr>
-    <td colspan="6"><b>Week <%= match.weeks_id %></b></td>
-  </tr>
-  <% week = match.weeks_id.to_i %>
-  <% end %>
-  <tr>
-    <td><%= match.team0 || "TBD" %></td>
-    <td><%= match.team1 || "TBD" %></td>
-    <td><%= match.scheduled_at %></td>
-        <td><%= link_to match.url, match.url %> </td>
-    <td><%= match.casters.collect{|c| c.login}.join(" ") %></td>
-    <td><%= match.live %></td>
-    <td><%= link_to 'Show', match %></td>
-    <td><% if can? :edit, match %><%= link_to 'Edit', edit_match_path(match) %><% end %></td>
-    <td><% if can? :destroy, match %><%= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<% if can? :create, Match %><%= link_to 'New Match', new_match_path %><% end %>
+<div id="newsmain">
+					<div id="standmid" align="left">
+ <div id="titrenews" align="left">
+        Calendar: <%= @matches_date.strftime("%B %Y") %><br>
+        <div id="undertitle"><%= link_to "Previous", matches_path(:calendar_month => (@matches_date.beginning_of_month-1).strftime("%m"),  :calendar_year => (@matches_date.beginning_of_month-1).strftime("%Y")) %> - <%= link_to "Next", matches_path(:calendar_month => (@calendar_date.end_of_month+1).strftime("%m"),  :calendar_year => (@calendar_date.end_of_month+1).strftime("%Y")) %><br/> Filter: <select name="gameselect">
+          <option selected="selected">Starcraft 2</option>
+      </select></div>
+      </div>
+                                        
+	<table width="780" border="0" cellpadding="2" cellspacing="0" padding="2"><tbody>
+	  <% @matches.each do |match| %>
+		  <tr bgcolor="#999999" id="match_<%= match.id.to_s %>"><td align="center" bgcolor="#CCCCCC">&nbsp;</td>
+			<td colspan="2" align="left" bgcolor="#CCCCCC"><strong><%= american_date(match.scheduled_at) %></strong></td>
+			</tr>
+		  <tr>
+			<td valign="top">&nbsp;</td>
+			<td height="1" valign="top">&nbsp;</td>
+			<td height="1" align="right">&nbsp;</td>
+		  </tr>
+		  <tr>
+			<td width="1" valign="top"><br/></td>
+			
+			<td width="552" valign="top">
+			  <strong><%= link_to((image_tag(match.team0.country.flag).to_s + " " + match.team0.name + " vs. " + image_tag(match.team1.country.flag).to_s + " " + match.team1.name).html_safe, match_path(match))%></strong><br />
+			  <% if match.weeks_id %>
+		        <%= link_to "#{match.season.name} Round #{match.weeks_id}", season_path(match.season) + "#week#{match.weeks_id}" %>
+			  <% else %>
+				<%= link_to "#{match.season.name} Playoffs", season_path(match.season) + "#playoff" %>
+			  <% end %>
+			</td>
+			<td width="215" align="right"><strong>Event Time: <%= american_time_only(match.scheduled_at, "Paris") %></strong><br/>
+			<%= american_time_only(match.scheduled_at, "America/Los_Angeles") %><br/>
+			<%= american_time_only(match.scheduled_at, "America/New_York") %></td>
+		  </tr>
+		  <tr bgcolor="#999999">
+			<td height="1" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+			<td height="1" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
+			<td height="1" align="right" bgcolor="#FFFFFF">&nbsp;</td>
+		  </tr>
+	  <% end %>
+	
+	
+	  
+        
+   </tbody></table></div></div>

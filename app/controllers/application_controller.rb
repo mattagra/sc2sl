@@ -1,5 +1,6 @@
 
 class ApplicationController < ActionController::Base
+  include Facebooker2::Rails::Controller
   include UrlHelper
   protect_from_forgery
   helper :all

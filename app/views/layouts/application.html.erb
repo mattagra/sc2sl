@@ -228,6 +228,7 @@
     </style>
 	<% end %>
     <%= ajaxful_rating_style %>
+	
 
     <title><%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League</title>
     <meta name="title" content="<%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League" />
@@ -265,6 +266,10 @@
                     <%= f.hidden_field :remember_me, :value => true %>
                     <%= f.submit "OK", :class => "submit-login" %>
                   <% end %>
+				  <div style="margin-top: 4px; margin-left: 10px;float: right;">
+				  <%= authlogic_facebook_login_button("Log in with facebook", :controller => :user_session, :scope => "email").html_safe %>
+	              <%= fb_connect_async_js %>
+				  </div>
 				  </div>
                 <% else %>
                 <div class="login-content-texte">
@@ -402,10 +407,10 @@
               <td height="20" colspan="2" bgcolor="#FFFFFF" style="text-align: right;">
                 <span class="ntitle2">
                   <%= link_to image_tag("/css/images/content-bar/sponsors/flecheg.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"),
-                    :calendar_month => (@calendar_date.beginning_of_month-1).strftime("%m"),  :calendar_year => (@calendar_date.beginning_of_month-1).strftime("%Y") %>
-                  <%= @calendar_date.strftime("%B %Y")  %>
+                    matches_path(:calendar_month => (@calendar_date.beginning_of_month-1).strftime("%m"),  :calendar_year => (@calendar_date.beginning_of_month-1).strftime("%Y")) %>
+                  <%= link_to @calendar_date.strftime("%B %Y"), matches_path(:calendar_month =>  @calendar_date.strftime("%m"), :calendar_year => @calendar_date.strftime("%Y") )  %>
                   <%= link_to image_tag("/css/images/content-bar/sponsors/fleche.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"),
-                    :calendar_month => (@calendar_date.end_of_month+1).strftime("%m"),  :calendar_year => (@calendar_date.end_of_month+1).strftime("%Y") %>
+                    matches_path(:calendar_month => (@calendar_date.end_of_month+1).strftime("%m"),  :calendar_year => (@calendar_date.end_of_month+1).strftime("%Y")) %>
                 </span>
               </td>
             </tr>
@@ -422,11 +427,13 @@
                 <% else %>
                   <% str = "" %>
                   <% id = 0 %>
+				  <% scheduled_at = nil %>
                   <% for match in matches %>
                     <% str += match.title + "\n" %>
                     <% id = match.id %>
+					<% scheduled_at = match.scheduled_at %>
                   <% end %>
-                  <%= link_to date.day, match_path(id), :title => str %>
+                  <%= link_to(date.day, matches_path(:calendar_month => scheduled_at.strftime("%m"), :calendar_year => scheduled_at.strftime("%Y")) + "#match_#{id}", :title => str) %>
                 <% end %>
               <% end %>
             <% end %>
@@ -477,7 +484,7 @@
 
     </div>
     <div>&nbsp;</div>
-
+    
   </body>
 
 </html>

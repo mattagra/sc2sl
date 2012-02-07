@@ -8,7 +8,7 @@
     <div align="left">
       <p>
         <strong><%= link_to @live_match.team0.name, team_path(@live_match.team0.slug) %></strong><br>
-        <span class="soustitre"><img src="/css/images/content-bar/live/star2.gif" alt="teamcaptain" width="12" height="12" hspace="0" vspace="0" align="texttop"> <%= @live_match.team0.user.to_s %>  - <%= @live_match.season.rank_for(@live_match.team0).ordinalize %> </span><br>
+        <span class="soustitre"><img src="/css/images/content-bar/live/star2.gif" alt="teamcaptain" width="12" height="12" hspace="0" vspace="0" align="texttop"> <%= @live_match.team0.user.login %>  - <%= @live_match.season.rank_for(@live_match.team0).ordinalize %> </span><br>
         <br> <span class="lineup">
           <% @live_match.team0.players.each do |player|  %>
             <%= link_to player.login, profile_path(player.login) %>&nbsp;
@@ -27,7 +27,7 @@
   </div>
   <div id="LiveMTeam2">
     <div align="right" class="soustitre"><strong><%= link_to @live_match.team1.name, team_path(@live_match.team1.slug) %></strong><br>
-      <div vertical-align="middle"><img src="/css/images/content-bar/live/star2.gif" alt="teamcaptain" width="12" height="12" hspace="0" vspace="0" align="texttop"> <%= @live_match.team1.user.to_s %>  - <%= @live_match.season.rank_for(@live_match.team1).ordinalize %> </div>
+      <div vertical-align="middle"><img src="/css/images/content-bar/live/star2.gif" alt="teamcaptain" width="12" height="12" hspace="0" vspace="0" align="texttop"> <%= @live_match.team1.user.login %>  - <%= @live_match.season.rank_for(@live_match.team1).ordinalize %> </div>
       <br>
       <span class="lineup">
         <% @live_match.team1.players.each do |player|  %>

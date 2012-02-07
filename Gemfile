@@ -13,6 +13,10 @@ group :development do
 end
 
 
+gem 'facebooker2'
+#gem 'authlogic_facebook_connect', :git => 'git://github.com/turlockmike/authlogic_facebook_connect.git'
+gem 'ruby-hmac'
+gem 'mogli'
 gem 'authlogic'
 gem 'daemons'
 gem 'activeadmin', :git => 'git://github.com/turlockmike/active_admin.git'
@@ -55,7 +59,7 @@ gem 'comfortable_mexican_sofa', '1.6.8'
 gem 'capistrano'
 
 # To use debugger
-# gem 'ruby-debug'
+#gem 'ruby-debug'
 
 # Bundle the extra gems:
 # gem 'bj'gem list

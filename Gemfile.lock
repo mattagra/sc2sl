@@ -89,12 +89,22 @@ GEM
       abstract (>= 1.0.0)
     exception_notification (2.5.2)
       actionmailer (>= 3.0.4)
+    facebooker2 (0.0.16)
+      mogli (>= 0.0.33)
+      ruby-hmac
     fastercsv (1.5.4)
     formtastic (2.0.2)
       rails (~> 3.0)
     haml (3.1.4)
     has_scope (0.5.1)
+    hashie (1.1.0)
     highline (1.6.9)
+    httmultiparty (0.3.6)
+      httparty (>= 0.7.3)
+      multipart-post
+    httparty (0.8.1)
+      multi_json
+      multi_xml
     i18n (0.5.0)
     inherited_resources (1.2.2)
       has_scope (~> 0.5.0)
@@ -123,6 +133,14 @@ GEM
       activesupport (~> 3.0.0)
       arel (~> 2.0.7)
     mime-types (1.17.2)
+    mogli (0.0.37)
+      hashie (~> 1.1.0)
+      httmultiparty (>= 0.3.6)
+      httparty (>= 0.4.3)
+      multi_json (~> 1.0.3)
+    multi_json (1.0.4)
+    multi_xml (0.4.1)
+    multipart-post (1.1.4)
     mysql2 (0.2.18)
     mysql2 (0.2.18-x86-mingw32)
     net-scp (1.0.4)
@@ -166,6 +184,7 @@ GEM
     recaptcha (0.3.4)
     responders (0.6.4)
     rrschedule (0.3.1)
+    ruby-hmac (0.4.0)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
     sass (3.1.12)
@@ -202,16 +221,19 @@ DEPENDENCIES
   daemons
   delayed_job (= 2.1.4)
   exception_notification (= 2.5.2)
+  facebooker2
   haml (~> 3.1.3)
   jquery-rails (>= 1.0.3)
   memcache-client
   meta_where
+  mogli
   mysql2 (< 0.3)
   nokogiri
   paperclip
   rails (= 3.0.9)
   recaptcha
   rrschedule
+  ruby-hmac
   sanitize
   sqlite3-ruby
   stringex

@@ -7,16 +7,15 @@ class MatchesController < ApplicationController
   # GET /matches
   # GET /matches.xml
   def index
-    if params[:match_id]
-    @matches = Match.order("weeks_id asc").where(:match_id => params[:match_id])
-    else
-    @matches = Match.order("id desc")
-    end
+    @today = Date.today
+	@matches_date = (params[:calendar_month] and params[:calendar_year]) ? Date.new(params[:calendar_year].to_i,params[:calendar_month].to_i, 1) : Date.today
+	@matches = Match.where(:scheduled_at => (@calendar_date.beginning_of_month - 1)..(@calendar_date.end_of_month + 1)).includes([:team0, :team1]).order("scheduled_at ASC")
+ 
 
-    @layout_page = "Matches"
+    @layout_page = "Calendar"
     @description = "See the latest matches"
 
-    @keywords += ["matches"]
+    @keywords += ["matches", @matches_date.strftime("%B"), @matches_date.year.to_s]
 
     respond_to do |format|
       format.html # index.html.erb

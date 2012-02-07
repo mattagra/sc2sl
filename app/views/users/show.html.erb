@@ -3,7 +3,12 @@
   <table id="user" width="880">
     <tr width="95">
       <td rowspan="3">
-        <%= image_tag @user.photo.url(:normal), :align => "left" %></td><td class="votenowtxt"> <%= image_tag race_icon_url(@user.race), :alt => "race"%> <%= @user.login %></span> 							 					<strong>
+	    <% if @user.connected_with_facebook? and !@user.photo.exists? %>
+		  <%= image_tag "http://graph.facebook.com/#{@user.facebook_uid}/picture", :width => 96, :height => 96 %>
+		<% else %>
+		  <%= image_tag @user.photo.url(:normal), :align => "left" %>
+		<% end %>
+		</td><td class="votenowtxt"> <%= image_tag race_icon_url(@user.race), :alt => "race"%> <%= @user.login %></span> 							 					<strong>
         <% if @user.banned? %>
             Ban Type: <%= @user.current_ban.mod_type %> -  <%= @user.current_ban.length %> days - Ends: <%= @user.current_ban.ends_at %>
           <% end %> </strong>
@@ -18,7 +23,7 @@
         <br/>
         <% if @user.country  %>
           <%= image_tag @user.country.flag %>
-        <% end %>   <%= @user.full_name %></br>
+        <% end %>   <%= @user.safe_name %></br>
         <%= @user.age %>  years old  <% if current_admin %>
           | Email: <%=h @user.email %> | <% end %>
         <% if @user == current_user %>
@@ -29,7 +34,11 @@
         <% end %>
 
         <br/>
-        <%= @user.website %>
+        <%= link_to @user.website, @user.website %>
+		<br />
+		<% if @user == current_user and !current_user.connected_with_facebook?  %>
+		  <%= link_to "Link my facebook account", new_user_session_path %>
+		<% end %>
       </td></tr>
   </table>
   <br/>

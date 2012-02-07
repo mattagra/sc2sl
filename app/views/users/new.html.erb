@@ -1,17 +1,22 @@
 
 
-<% form_for @user, :url => account_path, :html => {:multipart => true} do |f| %>
-  <% if @user.errors.any? %>
-    <div id="errorExplanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div><div style="width:100%" />
-  <% end %>
   <div id="newsmain">
+    <br />
+	<center>
+	<%= authlogic_facebook_login_button("Register with facebook", :controller => :user_session, :scope => "email").html_safe %>
+	<%= fb_connect_async_js %>
+	</center>
+	<% form_for @user, :url => account_path, :html => {:multipart => true} do |f| %>
+	  <% if @user.errors.any? %>
+		<div id="errorExplanation">
+		  <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+		  <ul>
+			<% @user.errors.full_messages.each do |msg| %>
+			  <li><%= msg %></li>
+			<% end %>
+		  </ul>
+		</div><div style="width:100%" />
+	  <% end %>
     <div align="center">
       <table width="800" border="0" cellpadding="2" cellspacing="2" bordercolor="#FFFFFF">
         <tbody><tr>
@@ -36,5 +41,6 @@
         </tbody>
       </table>
     </div>
-  </div>
-<% end %>
+
+  <% end %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120126213153) do
+ActiveRecord::Schema.define(:version => 20120204235406) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -394,21 +394,21 @@ ActiveRecord::Schema.define(:version => 20120126213153) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                  :null => false
-    t.string   "crypted_password",                       :null => false
-    t.string   "password_salt",                          :null => false
-    t.string   "persistence_token",                      :null => false
-    t.string   "single_access_token",                    :null => false
-    t.string   "perishable_token",                       :null => false
-    t.string   "login",                                  :null => false
-    t.integer  "login_count",         :default => 0,     :null => false
-    t.integer  "failed_login_count",  :default => 0,     :null => false
+    t.string   "email",                                   :null => false
+    t.string   "crypted_password",                        :null => false
+    t.string   "password_salt",                           :null => false
+    t.string   "persistence_token",                       :null => false
+    t.string   "single_access_token",                     :null => false
+    t.string   "perishable_token",                        :null => false
+    t.string   "login",                                   :null => false
+    t.integer  "login_count",          :default => 0,     :null => false
+    t.integer  "failed_login_count",   :default => 0,     :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
-    t.boolean  "active",              :default => false, :null => false
+    t.boolean  "active",               :default => false, :null => false
     t.datetime "last_updated"
     t.string   "first_name"
     t.string   "last_name"
@@ -432,6 +432,8 @@ ActiveRecord::Schema.define(:version => 20120126213153) do
     t.boolean  "subscription"
     t.string   "bnet_server"
     t.string   "time_zone"
+    t.string   "facebook_session_key"
+    t.integer  "facebook_uid"
   end
 
   create_table "vote_events", :force => true do |t|

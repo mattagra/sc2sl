@@ -37,7 +37,7 @@ class UsersController < ApplicationController
       @user = current_user
       @comment = Comment.new_of_type(@user)
     elsif params[:login]
-      @user = User.where(:login => params[:login]).includes(:players => [:team, :user]).first
+      @user = User.find_by_login!(params[:login])
       @comment = Comment.new_of_type(@user)
     else
       raise ActionController::RoutingError.new('Not Found')
@@ -45,6 +45,12 @@ class UsersController < ApplicationController
     @current_page = [(params[:page]|| 1).to_i, 1].max
     @comments_count = @user.comments.count
     @comments= @user.comments.paginated(@current_page, 10)
+	
+	@layout_page = "Profile"
+    @layout_subpage = @user.login
+    @description = "Profile for #{@user.login}"
+    @keywords += ["profile", @user.login]
+	
   end
 
   def edit

@@ -60,6 +60,18 @@ class User < ActiveRecord::Base
 
   before_save :capitalize_names #, :reset_tokens
   before_save :check_for_new_photo
+  
+  def to_s
+    if self.first_name
+	  self.safe_name
+	else
+	  self.login.to_s
+	end
+  end
+  
+  def facebook_photo
+    "http://graph.facebook.com/#{self.facebook_uid}/picture"
+  end
 
   def self.paginated(page=1,offset=50)
     self.alphabetical.limit(offset).offset((page.to_i - 1) * offset.to_i)
@@ -69,6 +81,22 @@ class User < ActiveRecord::Base
   def self.find_by_login_or_email(login)
     find_by_login(login) || find_by_email(login)
   end
+  
+  def connected_with_facebook?
+    !self.facebook_uid.nil?
+  end
+  
+  def before_connect(facebook_session)
+	  self.first_name = facebook_session.first_name
+	  self.last_name = facebook_session.last_name
+	  self.email = facebook_session.email
+	  self.login = "#{facebook_session.first_name.to_s.downcase}_#{Time.now.to_i.to_s}"[0..19]
+	  self.password = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{self.login}--")[0,6]
+	  self.password_confirmation = self.password
+	  self.active = true
+	  self.subscription = true
+	  self.reset_tokens
+	end
 
 
   def capitalize_names
@@ -89,6 +117,10 @@ class User < ActiveRecord::Base
     self.first_name.to_s + " " + self.last_name.to_s
   end
 
+  def safe_name
+    self.first_name.to_s + " " + (if (self.last_name and self.last_name.length > 0) then self.last_name.to_s[0..0] + "." else "" end) 
+  end
+  
   def age
     now = Time.now.utc.to_date
     if self.birthdate
@@ -100,8 +132,8 @@ class User < ActiveRecord::Base
   
 
   def set_defaults
-    self.active = false
-    self.subscription = true
+    self.active = false if self.active.nil?
+    self.subscription = true if self.subscription.nil?
   end
 
   def reset_tokens
@@ -122,9 +154,6 @@ class User < ActiveRecord::Base
     save!
   end
 
-  def to_s
-    self.login
-  end
 
   def is_moderator?
     role?(:moderator) or role?(:admin) or role?(:superadmin)
@@ -150,9 +179,37 @@ class User < ActiveRecord::Base
   def role?(role)
     roles.include? role.to_s
   end
-
-
-
   
+  
+  def save_with_validation(options=nil)
+	  perform_validation = case options
+		when Hash
+		  options[:validate] != false
+		when NilClass
+		  true
+		else
+		  ActiveSupport::Deprecation.warn "save(#{options}) is deprecated, please give save(:validate => #{options}) instead", caller
+		  options
+	  end
+
+	  # clear the remote validations so they don't interfere with the local
+	  # ones. Otherwise we get an endless loop and can never change the
+	  # fields so as to make the resource valid
+	  @remote_errors = nil
+	  if perform_validation && valid? || !perform_validation
+		save_without_validation
+		true
+	  else
+		false
+	  end
+	rescue ResourceInvalid => error
+	  # cache the remote errors because every call to <tt>valid?</tt> clears
+	  # all errors. We must keep a copy to add these back after local
+	  # validations
+	  @remote_errors = error
+	  load_remote_errors(@remote_errors, true)
+	  false
+	end
+    
 
 end
