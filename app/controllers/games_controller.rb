@@ -80,7 +80,7 @@ class GamesController < ApplicationController
 	    @game = Game.find(params[:id])
         @game.downloads += 1
         @game.save
-        send_file @game.replay.path, :disposition => 'attachment'
+        redirect_to @game.replay.url
 	  else
 	    flash[:notice] = "This replay is not yet available for download. Please try again later."
         redirect_to :action => :show, :id => params[:id]
