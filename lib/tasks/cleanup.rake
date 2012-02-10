@@ -7,4 +7,16 @@ namespace 'cleanup' do
     RAILS_DEFAULT_LOGGER.info "#{rows} session row(s) deleted."
   end
   
+  desc "delete old users and send reactivation emails to users at certain timeframes."
+  task :clean_users => :environment do
+    User.where(:active => false, :created_at.lt => 7.days.ago ).delete_all 
+    User.where(:active => false, :created_at.gt => 24.hours.ago, :created_at.lt => 23.hours.ago).each do |user|
+      UserMailer.delay.activation(user)
+    end
+    User.where(:active => false, :created_at.gt => 72.hours.ago, :created_at.lt => 71.hours.ago).each do |user|
+      UserMailer.delay.activation(user)
+    end
+  end
+  
+  
 end

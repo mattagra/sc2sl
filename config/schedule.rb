@@ -23,6 +23,11 @@ every 6.hours do
   rake "cleanup:clean_ar_sessions"
 end
 
+every 1.hour do
+  rake "cleanup:clean_users"
+end
+
+
 job_type :envcommand, 'cd :path && RAILS_ENV=:environment :task'
 
 every :reboot do

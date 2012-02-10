@@ -106,7 +106,7 @@ ActiveAdmin.register User do
   member_action :activation, :method => :get do
 	  @user = User.find(params[:id])
 	  if @user
-	    UserMailer.activation(@user)
+	    UserMailer.delay.activation(@user)
 		flash[:notice] = "Activation Email Sent"
 	    redirect_to :action => :index
       else
