@@ -49,6 +49,8 @@ class User < ActiveRecord::Base
   has_many :players, :dependent => :destroy
   has_many :retired_players, :class_name => "Player", :conditions => ["date_quit is not null"], :dependent => :destroy
   #has_many :games, :through => :players
+  has_many :topics
+  has_many :posts
 
   #Ratings
   ajaxful_rater
@@ -62,7 +64,7 @@ class User < ActiveRecord::Base
   before_save :check_for_new_photo
   
   def to_s
-    if self.first_name
+    if self.first_name.to_s.length > 0
 	  self.safe_name
 	else
 	  self.login.to_s

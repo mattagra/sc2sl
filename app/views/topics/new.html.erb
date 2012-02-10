@@ -1,0 +1,5 @@
+<%= render :partial => 'forums/head', :locals => { :forum => @topic.forum } %>
+<%= render "shared/form_errors", :object => @topic %>
+<h2>New Topic</h2>
+
+<%= render "form" %>

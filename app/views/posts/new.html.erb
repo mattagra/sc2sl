@@ -1,0 +1,8 @@
+<%= render :partial => 'forums/head', :locals => { :forum => @topic.forum } %>
+
+<h2>New Post</h2>
+
+<%= semantic_form_for [@topic.forum, @topic, @post] do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+  <%= f.submit "Submit" %>
+<% end %>

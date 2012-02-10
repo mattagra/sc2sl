@@ -38,7 +38,13 @@ Sc2sl::Application.routes.draw do
     end
   end
 
-
+  resources :forums do
+    resources :topics do
+      resources :posts
+    end
+  end
+  
+  
   resources :maps
 
   resources :seasons

@@ -414,7 +414,7 @@ ActiveRecord::Schema.define(:version => 20120210183252) do
   create_table "topics", :force => true do |t|
     t.integer  "forum_id"
     t.integer  "user_id"
-    t.string   "subject"
+    t.string   "title"
     t.boolean  "hidden",     :default => false
     t.boolean  "pinned",     :default => false
     t.boolean  "locked",     :default => false

@@ -12,7 +12,7 @@ group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
 end
 
-
+gem 'formtastic'
 gem 'facebooker2'
 #gem 'authlogic_facebook_connect', :git => 'git://github.com/turlockmike/authlogic_facebook_connect.git'
 gem 'ruby-hmac'

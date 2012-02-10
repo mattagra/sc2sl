@@ -3,7 +3,7 @@ class CreateTopics < ActiveRecord::Migration
     create_table :topics do |t|
       t.references :forum
       t.references :user
-      t.string :subject
+      t.string :title
       t.boolean :hidden, :default => false
       t.boolean :pinned, :default => false
       t.boolean :locked, :default => false

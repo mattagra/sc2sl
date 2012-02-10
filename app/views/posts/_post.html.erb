@@ -1,0 +1,20 @@
+<a name='post-<%= post.id %>'></a>
+<div id='post_<%= post.id %>' class='post <%= cycle('odd', 'even') -%>'>
+
+  <div class='user'>
+    <div class='username'>
+      <%= link_to post.user.to_s, profile_path(post.user.login) %>
+    </div>
+    <div class='icon'>Avatar here</div>
+  </div>
+
+  <div class='contents'>
+    <a href='#post-<%= post.id %>'>
+      <time datetime="<%= post.created_at.to_s(:db) -%>"><%= "#{time_ago_in_words(post.created_at)} ago" %></time>
+    </a>
+    <br />
+    <%= post.formatted_text %>
+
+    
+  </div>
+</div>

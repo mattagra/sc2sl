@@ -1,0 +1,14 @@
+<div id='forum'>
+  <h2><%= link_to "Forums", forums_path %> &raquo; <%= link_to forum.title, forum %></h2>
+  <small><%= forum.description %></small>
+  <menu id='forum_topic_links'>
+    <% unless @topic.try(:new_record?) %>
+      <% if can? :create_topic, @forum %>
+        <%= link_to "New Topic", new_forum_topic_path(forum) %>
+      <% end %>
+    <% end %>
+    <% if @topic %>
+      <%= link_to "back", forum_path(forum) %>
+    <% end %>
+  </menu>
+</div>

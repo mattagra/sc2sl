@@ -1,0 +1,12 @@
+<div id='topic' class='<%= 'un' unless @topic.locked? %>locked'>
+  <%= render :partial => 'topics/head', :locals => { :topic => @topic } %>
+
+  <menu>
+    <%= link_to "quote", new_forum_topic_post_path(@topic.forum, @topic) %>
+  </menu>
+
+  Paginate Posts
+  <div id='posts'>
+    <%= render :partial => "posts/post", :collection => @posts %>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<%= render :partial => 'head', :locals => { :forum => @forum } %>
+
+<% if @topics.num_pages > 1 %>
+  <div class='pages'>
+    Page: Paginate here
+  </div>
+<% end %>
+<table class='topics subdued' cellspacing='0'>
+  <thead>
+    <tr>
+      <th class="icon"></th>
+      <th class="byline">Topic</th>
+      <th class="latest-post">Latest</th>
+      <th class="posts-count">Posts</th>
+      <th class="views-count">Views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @topics.empty? %>
+      <tr><td colspan='5' align='center'>none</td></tr>
+    <% end %>
+    <%= render @topics %>
+  </tbody>
+</table>

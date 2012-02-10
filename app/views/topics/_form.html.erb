@@ -1,0 +1,9 @@
+<%= semantic_form_for [@forum, @topic] do |f| %>
+  <%= f.input :title %>
+
+  <%= f.semantic_fields_for :posts do |post| %>
+    <%= render :partial => "posts/form", :locals => { :f => post }%>
+  <% end %>
+  
+  <%= f.submit %>
+<% end %>
