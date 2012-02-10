@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120204235406) do
+ActiveRecord::Schema.define(:version => 20120210183252) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -232,6 +232,13 @@ ActiveRecord::Schema.define(:version => 20120204235406) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "forums", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "games", :force => true do |t|
     t.integer  "player0_id"
     t.integer  "player1_id"
@@ -245,9 +252,9 @@ ActiveRecord::Schema.define(:version => 20120204235406) do
     t.string   "replay_file_name"
     t.string   "replay_content_type"
     t.integer  "replay_file_size"
-    t.decimal  "rating_average",      :precision => 6, :scale => 2, :default => 0.0
-    t.boolean  "revived",                                           :default => false, :null => false
-    t.integer  "admin_rating",                                      :default => 0
+    t.decimal  "rating_average",      :default => 0.0
+    t.boolean  "revived",             :default => false, :null => false
+    t.integer  "admin_rating",        :default => 0
   end
 
   create_table "languages", :force => true do |t|
@@ -311,6 +318,17 @@ ActiveRecord::Schema.define(:version => 20120204235406) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "posts", :force => true do |t|
+    t.integer  "topic_id"
+    t.integer  "user_id"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "rates", :force => true do |t|
     t.integer  "rater_id"
@@ -392,6 +410,21 @@ ActiveRecord::Schema.define(:version => 20120204235406) do
     t.text     "description"
     t.string   "short_name"
   end
+
+  create_table "topics", :force => true do |t|
+    t.integer  "forum_id"
+    t.integer  "user_id"
+    t.string   "subject"
+    t.boolean  "hidden",     :default => false
+    t.boolean  "pinned",     :default => false
+    t.boolean  "locked",     :default => false
+    t.integer  "views",      :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "topics", ["forum_id"], :name => "index_topics_on_forum_id"
+  add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                   :null => false
