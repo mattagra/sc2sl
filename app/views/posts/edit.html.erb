@@ -1,3 +1,4 @@
+<div id="newsmain">
 <%= render :partial => 'forums/head', :locals => { :forum => @topic.forum } %>
 
 <h2>Edit post</h2>
@@ -6,3 +7,4 @@
   <%= render :partial => "form", :locals => { :f => f } %>
   <%= f.submit "Edit" %>
 <% end %>
+</div>

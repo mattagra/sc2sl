@@ -9,7 +9,8 @@ class Moderation < ActiveRecord::Base
   belongs_to :moderator, :class_name => "User"
 
   #Validations
-  validates :comment_id, :presence => true, :uniqueness => true
+  validates :comment_id, :uniqueness => true
+  
   validates :moderator_id, :presence => true
   validates :mod_type, :presence => true, :inclusion => {:in => TYPES}
   validates :reason, :presence => true, :length => {:minimum => 3, :maximum => 256}

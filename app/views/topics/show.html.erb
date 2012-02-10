@@ -1,12 +1,25 @@
+<div id="newsmain">
 <div id='topic' class='<%= 'un' unless @topic.locked? %>locked'>
   <%= render :partial => 'topics/head', :locals => { :topic => @topic } %>
 
   <menu>
-    <%= link_to "quote", new_forum_topic_post_path(@topic.forum, @topic) %>
+    <%= link_to "New Reply", new_forum_topic_post_path(@topic.forum, @topic) %>
   </menu>
 
   Paginate Posts
-  <div id='posts'>
+  <div id='comments'>
     <%= render :partial => "posts/post", :collection => @posts %>
+    <% if @topic.posts.size > 0 %>
+      <%= render :partial => "posts/posts_footer" %>
+    <% end %>
+    
   </div>
+  <p>
+    <%= form_for [@topic.forum, @topic, Post.new] do |f| %>
+      <%= render :partial => "posts/form", :locals => { :f => f } %>
+      <%= f.submit "Submit" %>
+    <% end %>
+  </p>
+  
+</div>
 </div>

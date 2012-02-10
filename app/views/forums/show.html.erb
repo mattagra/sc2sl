@@ -1,3 +1,4 @@
+<div id="newsmain">
 <%= render :partial => 'head', :locals => { :forum => @forum } %>
 
 <% if @topics.num_pages > 1 %>
@@ -22,3 +23,4 @@
     <%= render @topics %>
   </tbody>
 </table>
+</div>
