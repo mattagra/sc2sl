@@ -64,10 +64,10 @@ class User < ActiveRecord::Base
   before_save :check_for_new_photo
   
   def to_s
-    if self.first_name.to_s.length > 0
-	  self.safe_name
+    if connected_with_facebook? and first_name.to_s.length > 0 and last_name.to_s.length > 0
+	  safe_name
 	else
-	  self.login.to_s
+	  login.to_s
 	end
   end
   
