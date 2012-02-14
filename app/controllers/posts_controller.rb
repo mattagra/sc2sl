@@ -32,6 +32,10 @@ class PostsController < ApplicationController
   
   def update
     @post = Post.find(params[:id])
+    if (@topic.locked? or @topic.hidden?) and !current_admin
+      flash[:notice] = "That topic has been deleted or locked."
+      redirect_to @topic.forum and return
+    end
     if @post.update_attributes(params[:post])
       flash[:notice] = "Post was updated"
       redirect_to [@topic.forum, @topic]

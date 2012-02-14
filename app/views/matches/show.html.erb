@@ -41,6 +41,7 @@
 					<% end %>
                   </p>
                   <p class="matchpre">Date: <%= american_time(@match.scheduled_at) %> </p>
+                  <p class="matchpre">Maps: <%= @match.games.collect{|g| g.map.to_s}.join(", ") %></p>
                   <p class="matchpre"><%= link_to_if !@match.url.blank?, "View VODS", @match.url  %></p>
                   <p class="matchpre">&nbsp;</p></td>
               </tr>

@@ -2,7 +2,7 @@ class SiteController < ApplicationController
 
   before_filter :current_user
   
-  #caches_action :index, :layout => false, :expires_in => 15.seconds
+  caches_action :index, :layout => false, :expires_in => 30.seconds
   caches_action :terms, :layout => false
   caches_action :sitemap, :expires_in => 30.minutes
   
