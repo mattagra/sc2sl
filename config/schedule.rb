@@ -19,6 +19,9 @@
 
 # Learn more: http://github.com/javan/whenever
 
+
+set :output, "/apps/sc2sl/current/log/cron_log.log"
+
 every 6.hours do
   rake "cleanup:clean_ar_sessions"
 end
@@ -28,7 +31,7 @@ every 1.hour do
 end
 
 
-job_type :envcommand, 'cd :path && RAILS_ENV=:environment :task'
+job_type :envcommand, 'cd :path && :task RAILS_ENV=:environment'
 
 every :reboot do
   envcommand 'script/delayed_job restart'
