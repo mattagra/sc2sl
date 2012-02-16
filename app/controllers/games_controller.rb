@@ -43,7 +43,7 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.xml
   def show
-    @game = Game.find(params[:id])
+    @game = Game.find_by_id!(params[:id], :conditions => ["player0_id is NOT NULL and player1_id is NOT NULL",])
     @comment = Comment.new_of_type(@game)
     @current_page = [(params[:page]|| 1).to_i, 1].max
     @comments_count = @game.comments.count

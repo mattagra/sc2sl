@@ -90,6 +90,7 @@ ActiveAdmin.register User do
 	
 	def create
 	  @user = User.new
+      @user.reset_tokens
 	  if @user.update_attributes(params[:user], !current_user.is_super_admin?)
         flash[:notice] = "Account created!"
         redirect_to :action => :show, :id => @user.id
