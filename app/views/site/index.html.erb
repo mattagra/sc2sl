@@ -65,7 +65,7 @@
         <div id="middle-titre-texte">LAST NEWS</div>
         <div id="middle-titre-texte-right"><%= link_to "+see all", articles_path %></div>
       </div>
-      <div style="margin-left:2px; margin-top:2px;padding-left: 5px;">
+      <div style="margin-left:2px; margin-top:2px;padding-left: 5px;height: 150px;">
         <% @frontpage_articles.each do |article| %>
           <%= link_to content_tag(:font, article.created_at.strftime(" %m/%d") + " - ", :class => "ntitle2") +
             content_tag(:font, article.title + " ", :class => "ntitle"), view_article_path(article) %>&nbsp;
