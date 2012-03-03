@@ -62,7 +62,7 @@
     <br />
   </div>
   <div id="livefaq">
-    <span class="votenowtimeleft"><strong><a href="http://www.twitch.tv/mousesports_sc2">WATCH THE LIVE STREAM  </a></strong></span><br>
+    <span class="votenowtimeleft"><strong><%= link_to "WATCH THE LIVE STREAM", @live_match.url %></strong></span><br>
     <span class="votenowfaq">
       <% @live_match.casters.each do |caster| %>
 	    <%= image_tag caster.country.flag, :width => 16, :height => 11 %>&nbsp;<%= link_to caster.login, caster.website, :target => "_blank" %>

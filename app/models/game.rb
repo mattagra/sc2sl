@@ -6,6 +6,9 @@ class Game < ActiveRecord::Base
   belongs_to :player0, :class_name => "Player"
   belongs_to :player1, :class_name => "Player"
   has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Game.to_s}'", :dependent => :destroy
+  
+  validates :player0, :presence => true, :if => :has_result?
+  validates :player1, :presence => true, :if => :has_result?
 
   #Attachments
   has_attached_file :replay, {:url => "/shared/:class/:attachment/:id/:customname.:extension", :path => ":rails_root/public:url"}
@@ -53,6 +56,10 @@ class Game < ActiveRecord::Base
 
   def players
     [player0, player1]
+  end
+  
+  def has_result?
+    !result.nil?
   end
 
   def result_s
