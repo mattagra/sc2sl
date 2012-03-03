@@ -7,14 +7,14 @@
 <table width="800">
   <% current_month = nil %>
   <% @articles.each do |article| %>
-    <% unless current_month == article.created_at.month %>
+    <% unless current_month == article.published_at.month %>
       <tr>
-        <td><span class="newsmonth"><br/><%= article.created_at.strftime("%B - %Y") %></span><br/>&nbsp;</td>
+        <td><span class="newsmonth"><br/><%= article.published_at.strftime("%B - %Y") %></span><br/>&nbsp;</td>
       </tr>
-      <% current_month = article.created_at.month %>
+      <% current_month = article.published_at.month %>
     <% end %>
     <tr>
-      <td><span class="newslist"><strong><%= article.created_at.strftime("%b %d") %> - <%= link_to article.title, view_article_path(article) %> <%= ("[ " + (link_to "Edit", edit_admin_article_path(article)) + " | " +  (link_to "Delete", admin_article_path(article), :method => :delete, :confirm => "Do you want to delete this article?") + "]" ).html_safe if current_admin %></strong></span></td>
+      <td><span class="newslist"><strong><%= article.published_at.strftime("%b %d") %> - <%= link_to article.title, view_article_path(article) %> <%= ("[ " + (link_to "Edit", edit_admin_article_path(article)) + " | " +  (link_to "Delete", admin_article_path(article), :method => :delete, :confirm => "Do you want to delete this article?") + "]" ).html_safe if current_admin %></strong></span></td>
     </tr>
     <tr>
       <td valign="top" height="28"><span class="newslist">Written by : <%= article.user.login %> | <%= pluralize(article.comments.count, 'comment') %></td>

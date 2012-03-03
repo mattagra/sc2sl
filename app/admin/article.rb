@@ -21,6 +21,7 @@ ActiveAdmin.register Article do
     f.inputs "Details" do
       f.input :title
       f.input :published
+	  f.input :published_at
       f.input :featured
       f.input :tag_list
       f.input :photo

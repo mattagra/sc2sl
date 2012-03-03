@@ -41,7 +41,7 @@
         <div class="article-titre2">
           <p><%= link_to @article.title, view_article_path(@article) %></p>
           <p><span class="style6">
-              <%= @article.created_at.strftime("%b #{@article.created_at.day.ordinalize}") %>,
+              <%= @article.created_at.strftime("%b #{@article.published_at.day.ordinalize}") %>,
               <%= @article.comments.count %>
             </span>
             <img src="/css/images/comment/com.gif" alt="" />
@@ -67,7 +67,7 @@
       </div>
       <div style="margin-left:2px; margin-top:2px;padding-left: 5px;height: 150px;">
         <% @frontpage_articles.each do |article| %>
-          <%= link_to content_tag(:font, article.created_at.strftime(" %m/%d") + " - ", :class => "ntitle2") +
+          <%= link_to content_tag(:font, article.published_at.strftime(" %m/%d") + " - ", :class => "ntitle2") +
             content_tag(:font, article.title + " ", :class => "ntitle"), view_article_path(article) %>&nbsp;
           <%= link_to content_tag(:font, article.comments.count.to_s + " ", :class => "ntitle") +
             content_tag(:img, "", :src => "/css/images/comment/com.gif"), view_article_path(article)+ "#comments" %><br />

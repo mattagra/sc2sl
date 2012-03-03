@@ -13,6 +13,7 @@ class Article < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif', 'image/pjpeg', 'image/x-png']
 
   validates :user, :presence => true
+  validates :published_at, :presence => true
   
 
   #attached
@@ -24,7 +25,7 @@ class Article < ActiveRecord::Base
   has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Article.to_s}'", :dependent => :destroy
 
   #Scopes
-  scope :published, where(:published => true)
+  scope :published, where(:published => true).where(:published_at.lt => Time.now)
   scope :unpublished, where(:published => false)
   scope :featured, where(:featured => true)
   scope :recent, order("articles.id desc").limit(20)
@@ -44,8 +45,8 @@ class Article < ActiveRecord::Base
   end
 
   def formatted_time
-    if self.created_at
-      self.created_at.strftime("%B %d %Y %H:%M")
+    if self.published_at
+      self.published_at.strftime("%B %d %Y %H:%M")
     else
       Time.now.strftime("%B %d %Y %H:%M")
     end
