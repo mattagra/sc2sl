@@ -110,23 +110,23 @@ module ApplicationHelper
       end
     end
     boxes = []
-    left =  link_to(image_tag("/css/images/paginationl.gif"), url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url, :page).merge(:page => "#{[current, 1].max}").collect{|k,v| "#{k}=#{v}"}.join("&")))) + " "
+    left =  link_to(image_tag("/css/images/paginationl.gif"), url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url, :page).merge(:page => "#{[current - 1, 1].max}").collect{|k,v| "#{k}=#{v}"}.join("&")))) + " "
     
     c = 0
     final_pages.each do |page|
       if (c - page).abs > 1
         boxes << "..."
-        boxes <<  link_to_unless_current(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&"))).to_s
+        boxes <<  link_to(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url, :page).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&"))).to_s
       else
-	    if page == 1
-		  boxes << link_to_unless_current(page.to_s, request.url).to_s
-		else
-          boxes << link_to_unless_current(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&"))).to_s
-		end
+	    #if page == 1
+		#  boxes << link_to(page.to_s, request.url).to_s
+		#else
+          boxes << link_to(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url, :page).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&"))).to_s
+		#end
       end
       c = page
     end
-    right =  "  " + link_to(image_tag("/css/images/paginationr.gif"),url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")))
+    right =  "  " + link_to(image_tag("/css/images/paginationr.gif"),url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url, :page).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")))
     return (left.html_safe + boxes.join(" | ").html_safe + right.html_safe).html_safe # + "per_page: #{per_page}, current: #{current}, total: #{total}"
   end
 
