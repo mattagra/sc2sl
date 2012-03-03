@@ -251,6 +251,14 @@
 	
   </head>
   <body>
+    <div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=162853603828753";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 
     <div id="structure-login2">
       <div id="login">
@@ -267,7 +275,7 @@
                     <%= f.submit "OK", :class => "submit-login" %>
                   <% end %>
 				  <div style="margin-top: 4px; margin-right: 40px;float: right;">
-				  <%= authlogic_facebook_login_button("Log in with facebook", :controller => :user_session, :scope => "email").html_safe %>
+				  <%= authlogic_facebook_login_button("Log In With Facebook", :controller => :user_session, :scope => "email").html_safe %>
 	              <%= fb_connect_async_js %>
 				  </div>
 				  </div>
@@ -296,7 +304,7 @@
 			    
 				<a href="https://twitter.com/sc2sl" class="twitter-follow-button" data-show-count="false">Follow @sc2sl</a>
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-				<div class="fb-like" data-href="http://sc2sl.com" data-send="false" data-width="50" data-show-faces="false" data-font="tahoma" data-colorscheme="dark"></div>
+				<div class="fb-like" data-href="http://www.sc2sl.com" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false" data-font="tahoma"></div>
 			  </div>
 		  <% end %>
         </div>
