@@ -10,12 +10,7 @@ class User < ActiveRecord::Base
 
   SERVERS = %w[Americas Europe Korea SEA China]
 
-  #Scopes
-  scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0"} }
-  scope :subscription, where(:subscription => true)
-  scope :with_photos, where("photo_file_size > 0")
-  scope :new_photos, with_photos.where(:photo_approved => nil)
-  scope :approved_photos, with_photos.where(:photo_approved => true)
+  
   
   
   scope :race, lambda{|x| where(:race => x) }
@@ -54,10 +49,19 @@ class User < ActiveRecord::Base
 
   #Ratings
   ajaxful_rater
+  
+  #Scopes
+  scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0"} }
+  scope :subscription, where(:subscription => true)
+  scope :with_photos, where("photo_file_size > 0")
+  scope :new_photos, with_photos.where(:photo_approved => nil)
+  scope :approved_photos, with_photos.where(:photo_approved => true)
   scope :newest, order('id asc')
   scope :alphabetical, order('LOWER(login) asc')
   scope :recent, order('updated_at desc')
   scope :inactive, where(:active => false)
+  scope :not_a_player, includes(:player).where("players.id is null")
+  scope :is_a_player, includes(:player).where("players.id is not null")
   
 
   before_save :capitalize_names #, :reset_tokens

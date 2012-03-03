@@ -65,7 +65,7 @@
   </div>
   <br /><br />
   <h3>Comments:</h3>
-  <span class="pagination" style="float: right"><%=  paginate_links(1, @current_page, @comments_count, request.path) %></span><br />
+  <span class="pagination" style="float: right"><%=  paginate_links(10, @current_page, @comments_count, request.path) %></span><br />
   <%= render  @team.comments %>
   <% if @team.comments.size > 0 %>
     <%= render :partial => "comments/comment_footer" %>

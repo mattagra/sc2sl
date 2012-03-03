@@ -141,7 +141,7 @@ margin-left : 0px;
 float : left;
  /*margin-top : 8px; */
 margin-left : 10px;
-margin-right : 8px;
+margin-right : 0px;
 width: 620px;
 }
 
@@ -157,7 +157,7 @@ color: white;
 }
 .login-content-left {
 float : left;
-width:665px;
+width:655px;
 height:25px;
 margin-top : 0px;
 margin-left: 5px;
@@ -165,7 +165,7 @@ margin-left: 5px;
 .login-content-right {
 float : right;
 text-align:right;
-width:205px;
+width:335px;
 margin-top : 3px;
 margin-right: 5px;
 border: none;
@@ -173,9 +173,9 @@ border: none;
 .login-content-middle {
 margin-top: 1px;
 float: left;
-width: 10px;
+width: 00px;
 height: 25px;
-margin-left: 5px;
+margin-left: 0px;
 }
 
 .login-content-right img{

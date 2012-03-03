@@ -250,7 +250,7 @@
 	
 	
   </head>
-  <body onload="MM_preloadImages('/css/images/login/icones/facebook.png','/css/images/login/icones/twitter.gif','/css/images/login/icones/rss.gif','/css/images/login/icones/mirc2.gif')">
+  <body>
 
     <div id="structure-login2">
       <div id="login">
@@ -266,7 +266,7 @@
                     <%= f.hidden_field :remember_me, :value => true %>
                     <%= f.submit "OK", :class => "submit-login" %>
                   <% end %>
-				  <div style="margin-top: 4px; margin-left: 10px;float: right;">
+				  <div style="margin-top: 4px; margin-right: 40px;float: right;">
 				  <%= authlogic_facebook_login_button("Log in with facebook", :controller => :user_session, :scope => "email").html_safe %>
 	              <%= fb_connect_async_js %>
 				  </div>
@@ -293,12 +293,10 @@
 				<%= cms_snippet_content('coverage') %>
 			  </div>
 			  <div class="login-content-right">
-				<img src="/css/images/menu/join.png" alt="youtube" border="0" align="top"/>
-				<a target="_blank" href="http://www.youtube.com/sc2slvods/" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('youtube','','/css/images/login/icones/youtube.gif',1)"><img src="/css/images/login/icones/youtube.png" alt="youtube" width="21" height="20" border="0" align="top" id="youtube" /></a>
-				<a target="_blank" href="http://www.facebook.com/pages/SC2SL/258966677449790" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image62','','/css/images/login/icones/facebook.gif',1)"><img src="/css/images/login/icones/facebook.png" alt="fb" width="21" height="20" border="0" id="Image62" /></a>
-				<a target="_blank" href="http://twitter.com/#!/SC2SL" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image63','','/css/images/login/icones/twitter.gif',1)"><img src="/css/images/login/icones/twitter.png" alt="twitter" width="21" height="20" border="0" id="Image63" /></a>
-				<a target="_blank" href="/articles.rss" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image64','','/css/images/login/icones/rss.gif',1)"><img src="/css/images/login/icones/rss.png" border="0" id="Image64" /></a>
-				<a target="_blank" href="irc://irc.quakenet.org/sc2sl" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image65','','/css/images/login/icones/mirc2.gif',1)"><img src="/css/images/login/icones/mirc2.png" alt="mirc" width="21" height="20" border="0" id="Image65" /></a>
+			    
+				<a href="https://twitter.com/sc2sl" class="twitter-follow-button" data-show-count="false">Follow @sc2sl</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				<div class="fb-like" data-href="http://sc2sl.com" data-send="false" data-width="50" data-show-faces="true" data-font="tahoma" data-colorscheme="dark"></div>
 			  </div>
 		  <% end %>
         </div>

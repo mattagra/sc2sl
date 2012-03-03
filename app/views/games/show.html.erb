@@ -28,7 +28,7 @@
   </div>
 
   <h3>Comments: </h3>
-  <span class="pagination" style="float: right"><%=  paginate_links(1, @current_page, @comments_count, request.path) %></span><br />
+  <span class="pagination" style="float: right"><%=  paginate_links(10, @current_page, @comments_count, request.path) %></span><br />
   <div id="comments">
     <%= render @game.comments.order('id asc') %>
     <% if @game.comments.size > 0 %>
