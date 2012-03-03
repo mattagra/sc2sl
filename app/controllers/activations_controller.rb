@@ -3,9 +3,9 @@ class ActivationsController < ApplicationController
 
 
     def new
-    @user = User.find_using_perishable_token(params[:activation_code])
+    @user = User.where(:perishable_token => params[:activation_code])
 
-    #raise Exception if @user.active?
+    raise Exception if @user.active?
 
     if @user and @user.activate!
       flash[:notice] = "Your account has been activated. Thank you for joining"
