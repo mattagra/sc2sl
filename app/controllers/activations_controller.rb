@@ -3,7 +3,7 @@ class ActivationsController < ApplicationController
 
 
     def new
-    @user = User.where(:perishable_token => params[:activation_code])
+    @user = User.where(:perishable_token => params[:activation_code]).first
 
     raise Exception if @user.active?
 
