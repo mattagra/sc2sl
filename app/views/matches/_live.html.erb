@@ -46,7 +46,7 @@
       <br />
     </p>
 <% end %>
-    <% if @current_vote_event and Time.now >= @current_vote_event.started_at and Time.now <= @current_vote_event.ended_at %>
+    <% if @current_vote_event and Time.now >= @current_vote_event.started_at and Time.now <= (@current_vote_event.ended_at + 5.minutes) %>
     <div class="votenowcad" id="vcad">
       <div id="votenow">
         <div align="center" class="live-vote">

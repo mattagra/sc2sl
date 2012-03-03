@@ -1,39 +1,10 @@
-<html>
-<head>
-<meta http-equiv="refresh" content="15" >
-
-</head>
-<body>
-<table>
-  <tr><td>Match</td><td><%=  @vote_event.match.title %></td></tr>
-  <tr><td>Team</td><td><%=  @vote_event.team.name %></td></tr>
-</table>
-
-<strong>Current Votes</strong><br />
-<% total_votes = [@vote_event.votes.count,1].max %>
-<% @vote_event.players.each do |player| %>
-	<% player_votes = @vote_event.votes.where(:player_id => player.id).count %>
-	<%= player.login %>:  <%= sprintf('%.2f', 100.0 * player_votes.to_f / total_votes.to_f) %>%<br />
-	<div style="background-color: blue; height: 5px;width: <%= ( 180.0 * player_votes.to_f / total_votes.to_f).to_i %>px">&nbsp;</div>
-<% end %>
-<br />
-
-<% if Time.now > @vote_event.started_at and Time.now < @vote_event.ended_at %>
-    Keep voting!
-<% else %>
-  Voting has ended. 
-<% end %>
-</body>
-
-</html>
-
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<% if (Time.now >= @vote_event.started_at and Time.now <= @vote_event.ended_at) %>
 <meta http-equiv="refresh" content="15" >
+<% end %>
 <title>SC2SL Live Voting</title>
 <style type="text/css">
 body {
@@ -81,29 +52,108 @@ body {
 <body>
 <table width="565" border="0" align="center">
   <tr>
-    <td><p><img src="banner.png" width="565" height="221" /></p></td>
+    <td><p><img src="/images/live_vote/banner.png" width="565" height="221" /></p></td>
   </tr>
   <tr>
-    <td width="565" height="485" BACKGROUND="votelive.png"><table width="565" border="0">
+    <td width="565" height="485" BACKGROUND="/images/live_vote/votelive.png"><table width="565" border="0">
       <tr align="center" valign="middle">
         <td height="116" colspan="2" align="center" valign="middle">
-		<img src="normal_esc.png" width="100" height="100" /><span class="score">3 - 0 </span><img src="normal_AI.png" width="100" height="100" />
-		<%= image_tag(@vote_event.match.team0.photo.url(:normal), :hspace => 10, :align => "middle") if @vote_event.match.team0 and @vote_event.match.team0.photo.exists?  %>
+		<%= image_tag(@vote_event.match.team0.photo.url(:normal), :width => 100, :height => 100) if @vote_event.match.team0 and @vote_event.match.team0.photo.exists?  %>
 		<span class="score"><%= @vote_event.match.team0_wins.to_s + " - " + @vote_event.match.team1_wins.to_s %> </span>
+		<%= image_tag(@vote_event.match.team1.photo.url(:normal), :width => 100, :height => 100) if @vote_event.match.team1 and @vote_event.match.team1.photo.exists?  %>
 		</td>
       </tr>
       <tr>
         <td width="36" height="120" valign="top"><p>&nbsp;</p></td>
-        <td width="519" valign="top"><p><img alt="De" src="http://sc2sl.com/css/images/flags/de.png?1329417829" /> <img alt="Rouge" height="11" src="http://sc2sl.com/css/images/races/rouge.jpg?1329417829" width="16" /> <strong class="player">GoOdy  </strong><br/><img src="votebar.png" alt="" width="140" height="27" align="absmiddle" /> <span class="pour">70%</span></p>
-<p> <img alt="Se" src="http://sc2sl.com/css/images/flags/se.png?1329417829" /> <img alt="Jaune" height="11" src="http://sc2sl.com/css/images/races/jaune.jpg?1329417829" width="16" /> <span class="player"><strong>Vipro</strong> <br/></span><img src="votebar.png" alt="" width="40" height="27" align="absmiddle" /> <span class="pour">20%</span></p>
-          <p class="player"> <img alt="De" src="http://sc2sl.com/css/images/flags/de.png?1329417829" /> <img alt="Jaune" height="11" src="http://sc2sl.com/css/images/races/jaune.jpg?1329417829" width="16" /> Jaxx <br/><img src="votebar.png" alt="" width="20" height="27" align="absmiddle" /> <span class="pour">10%</span></p></td>
+        <td width="519" valign="top">
+			<% total_votes = [@vote_event.votes.count,1].max %>
+			<% @vote_event.players.each do |player| %>
+			  <% player_votes = @vote_event.votes.where(:player_id => player.id).count %>
+			  <p>
+				<%= image_tag player.user.country.flag %>
+				<%= image_tag(race_icon_url(player.user.race)) %>
+				<strong class="player"><%= player.login %></strong>
+				<br />
+				<img src="/images/live_vote/votebar.png" alt="" width ="<%=( 200.0 * player_votes.to_f / total_votes.to_f).to_i %>" height="27" align="absmiddle" /> <span class="pour"><%= sprintf('%.1f', 100.0 * player_votes.to_f / total_votes.to_f) %>%</span>
+			  </p>
+			<% end %>
+		
+        </td>
       </tr>
       <tr>
-        <td height="86" colspan="2" align="center" valign="middle" class="timer">1 : 30 <span class="timer2">LEFT</span></td>
+		<td height="86" colspan="2" align="center" valign="middle" class="timer"><span id="countbox1" class="votenowtimeleft timer"></span><span class="timer2"> LEFT</span></td>
       </tr>
     </table></td>
   </tr>
 </table>
+
+<script type="text/javascript">
+  //######################################################################################
+  // Author: ricocheting.com
+  // Version: v2.0
+  // Date: 2011-03-31
+  // Description: displays the amount of time until the "dateFuture" entered below.
+
+  // NOTE: the month entered must be one less than current month. ie; 0=January, 11=December
+  // NOTE: the hour is in 24 hour format. 0=12am, 15=3pm etc
+  // format: dateFuture1 = new Date(year,month-1,day,hour,min,sec)
+  // example: dateFuture1 = new Date(2003,03,26,14,15,00) = April 26, 2003 - 2:15:00 pm
+
+  // TESTING: comment out the line below to print out the "dateFuture" for testing purposes
+  //document.write(dateFuture +"<br />");
+
+
+  //###################################
+  //nothing beyond this point
+  function GetCount(ddate,iid, sdate){
+
+    amount = ddate- sdate;	//calc milliseconds between dates
+
+    // if time is already past
+    if(amount < 0){
+      document.getElementById(iid).parentNode.innerHTML="Voting is Over!";
+    }
+    // else date is still good
+    else{
+      days=0;hours=0;mins=0;secs=0;out="";
+
+      amount = Math.floor(amount/1000);//kill the "milliseconds" so just secs
+
+      days=Math.floor(amount/86400);//days
+      amount=amount%86400;
+
+      hours=Math.floor(amount/3600);//hours
+      amount=amount%3600;
+
+      mins=Math.floor(amount/60);//minutes
+      amount=amount%60;
+
+      secs=Math.floor(amount);//seconds
+
+      if(days != 0){out += days +" "+((days==1)?"day":"days")+" ";}
+      if(hours != 0){out += hours +" "+((hours==1)?"hour":"hours")+" ";}
+      out += mins+((mins==1)?" : ":" : ");
+      out += secs +" "+((secs==1)?"":"")+" ";
+      out = out.substr(0,out.length-2);
+      document.getElementById(iid).innerHTML=out;
+
+      setTimeout(function(){GetCount(ddate,iid, sdate + 1000)}, 1000);
+    }
+  }
+<% v = @vote_event %>
+    <% end_date = v.ended_at.in_time_zone  %>
+    <% date_now = Time.now.in_time_zone %>
+    dateNow1 = new Date(<%= date_now.year  %>,<%= date_now.month - 1  %>,<%= date_now.day   %>,<%= date_now.hour   %>,<%= date_now.min   %>,<%= date_now.sec   %>);
+    dateFuture1 = new Date(<%= end_date.year  %>,<%= end_date.month - 1  %>,<%= end_date.day   %>,<%= end_date.hour   %>,<%= end_date.min   %>,<%= end_date.sec   %>);
+
+    window.onload=function(){
+      GetCount(dateFuture1.getTime(), 'countbox1', dateNow1.getTime());
+      //you can add additional countdowns here (just make sure you create dateFuture2 and countbox2 etc for each)
+    };
+</script>
+
+
+
 </body>
 </html>
 

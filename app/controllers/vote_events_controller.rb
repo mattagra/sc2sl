@@ -19,8 +19,11 @@ class VoteEventsController < ApplicationController
 	if @vote.new_record?
 	  @auto_refresh = 10
 	end
-    render :layout => false, :action => :show
-	
+	if !params[:caster].blank?
+	  render :layout => false, :action => :caster
+	else
+      render :layout => false, :action => :show
+	end
   end
 
   def new
