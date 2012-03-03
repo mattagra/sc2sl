@@ -1735,7 +1735,9 @@ background-color : #26282B;
     padding:10px;
 }
 
-
+#comments {
+  margin-top: 2px;
+}
 
 #comments img {
     max-width: 400px;
@@ -2310,4 +2312,21 @@ text-decoration: none;
 	text-shadow : #202020 1px 1px;
 	line-height : 12px;
 
+}
+
+
+.pagination a.link
+{
+  text-decoration: underline;
+}
+
+.pagination a:hover.link
+{
+  text-decoration: none;
+}
+
+.pagination a.current_link
+{
+  text-decoration: none;
+  font-weight: bold;
 }
