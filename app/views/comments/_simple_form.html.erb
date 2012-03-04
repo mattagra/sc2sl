@@ -1,5 +1,4 @@
-<% if current_user and !current_user.banned? and @comment and @comment.commentable? %>
-  <script type="text/javascript">
+<script type="text/javascript">
 var UBB_prompt = new Array();
 UBB_prompt["b"] = "Enter the text to appear in bold:";
 UBB_prompt["u"] = "Enter the text to appear underlined:";
@@ -82,15 +81,7 @@ function addUBB(code)
 
 </script>
   <div id="newcomment">
-    <%= form_for(@comment) do |f| %>
-      <% if @comment.errors.any? %>
-        <div class="flash flash_error">
-          <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-            <% @comment.errors.full_messages.each do |msg| %>
-              <br /><%= msg %>
-            <% end %>
-        </div>
-      <% end %>
+
       <%= f.hidden_field :external_type %>
       <%= f.hidden_field :external_id %>
       <%= hidden_field_tag :back_url, params[:back_url] || request.fullpath  %>
@@ -108,16 +99,4 @@ function addUBB(code)
   <tr>
     <td><%= f.text_area :description, :cols => 75, :rows => 10, :id => :bbcode %></td>
   </tr>
-</table></div>
-      <div class="actions" align="center">
-        <%= f.submit %>
-      </div><br/>
-    <% end %>
-  </div>
-  <% elsif current_user and current_user.banned? %>
-  <div align="center"><br/>You are currently banned and may not post.<br/> <br/></div>
-  <% elsif @comment and @comment.commentable? == false %>
-  <div align="center"><br />This is no longer available to be commented on<br /><br /></div>
-<% else %>
-  <div align="center"><br/>You must <%= link_to "register", register_path %> or <%= link_to "login", login_path %> to comment.<br/> <br/></div>
-<% end %>
+</table>

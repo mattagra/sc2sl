@@ -40,7 +40,7 @@ Sc2sl::Application.routes.draw do
 
   resources :forums do
     resources :topics do
-      resources :posts
+      resources :comments
     end
   end
   

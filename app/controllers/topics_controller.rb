@@ -7,12 +7,15 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.where(:id => params[:id], :forum_id => params[:forum_id]).visible.first
     @topic.increment!(:views)
-    @posts = @topic.posts.page(params[:page]).per(20)
+    @comments = @topic.comments.page(params[:page]).per(10)
+	@comment = Comment.new_of_type(@topic)
+	@current_page = [(params[:page]|| 1).to_i, 1].max
+    @comments_count = @topic.comments.count
   end
   
   def new
     @topic = @forum.topics.build
-    @topic.posts.build  
+	@comment = @topic.comments.build
   end
   
   def create

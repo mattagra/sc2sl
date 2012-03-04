@@ -186,6 +186,10 @@ class User < ActiveRecord::Base
     roles.include? role.to_s
   end
   
+  def commentable(user)
+    true
+  end
+  
   
   def save_with_validation(options=nil)
 	  perform_validation = case options
@@ -216,6 +220,9 @@ class User < ActiveRecord::Base
 	  load_remote_errors(@remote_errors, true)
 	  false
 	end
+	
+	
+	
     
 
 end

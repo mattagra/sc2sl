@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120303222808) do
+ActiveRecord::Schema.define(:version => 20120303232936) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -74,6 +74,10 @@ ActiveRecord::Schema.define(:version => 20120303222808) do
     t.text     "featured_description"
     t.datetime "published_at"
   end
+
+  add_index "articles", ["published"], :name => "index_articles_on_published"
+  add_index "articles", ["published_at"], :name => "index_articles_on_published_at"
+  add_index "articles", ["title"], :name => "index_articles_on_title"
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -211,6 +215,10 @@ ActiveRecord::Schema.define(:version => 20120303222808) do
     t.boolean  "locked",        :default => false
   end
 
+  add_index "comments", ["external_id"], :name => "index_comments_on_external_id"
+  add_index "comments", ["external_type"], :name => "index_comments_on_external_type"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
   create_table "countries", :force => true do |t|
     t.string   "name"
     t.string   "short"
@@ -258,6 +266,10 @@ ActiveRecord::Schema.define(:version => 20120303222808) do
     t.integer  "admin_rating",                                      :default => 0
   end
 
+  add_index "games", ["match_id"], :name => "index_games_on_match_id"
+  add_index "games", ["player0_id"], :name => "index_games_on_player0_id"
+  add_index "games", ["player1_id"], :name => "index_games_on_player1_id"
+
   create_table "languages", :force => true do |t|
     t.string   "name"
     t.string   "code"
@@ -291,6 +303,11 @@ ActiveRecord::Schema.define(:version => 20120303222808) do
     t.boolean  "live"
   end
 
+  add_index "matches", ["season_id"], :name => "index_matches_on_season_id"
+  add_index "matches", ["team0_id"], :name => "index_matches_on_team0_id"
+  add_index "matches", ["team1_id"], :name => "index_matches_on_team1_id"
+  add_index "matches", ["weeks_id"], :name => "index_matches_on_weeks_id"
+
   create_table "moderations", :force => true do |t|
     t.integer  "user_id"
     t.string   "mod_type"
@@ -302,6 +319,9 @@ ActiveRecord::Schema.define(:version => 20120303222808) do
     t.integer  "comment_id"
     t.datetime "ends_at"
   end
+
+  add_index "moderations", ["comment_id"], :name => "index_moderations_on_comment_id"
+  add_index "moderations", ["user_id"], :name => "index_moderations_on_user_id"
 
   create_table "newsletters", :force => true do |t|
     t.string   "subject_line"
@@ -320,16 +340,8 @@ ActiveRecord::Schema.define(:version => 20120303222808) do
     t.datetime "updated_at"
   end
 
-  create_table "posts", :force => true do |t|
-    t.integer  "topic_id"
-    t.integer  "user_id"
-    t.text     "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
-  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+  add_index "players", ["team_id"], :name => "index_players_on_team_id"
+  add_index "players", ["user_id"], :name => "index_players_on_user_id"
 
   create_table "rates", :force => true do |t|
     t.integer  "rater_id"
@@ -470,6 +482,12 @@ ActiveRecord::Schema.define(:version => 20120303222808) do
     t.integer  "facebook_uid"
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["facebook_uid", "facebook_session_key"], :name => "index_users_on_facebook_uid_and_facebook_session_key"
+  add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"
+  add_index "users", ["login"], :name => "index_users_on_login"
+  add_index "users", ["race"], :name => "index_users_on_race"
+
   create_table "vote_events", :force => true do |t|
     t.integer  "match_id"
     t.datetime "started_at"
@@ -479,6 +497,8 @@ ActiveRecord::Schema.define(:version => 20120303222808) do
     t.datetime "updated_at"
   end
 
+  add_index "vote_events", ["match_id"], :name => "index_vote_events_on_match_id"
+
   create_table "votes", :force => true do |t|
     t.integer  "vote_event_id"
     t.integer  "player_id"
@@ -487,5 +507,9 @@ ActiveRecord::Schema.define(:version => 20120303222808) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "votes", ["player_id"], :name => "index_votes_on_player_id"
+  add_index "votes", ["vote_event_id", "ip_address"], :name => "index_votes_on_vote_event_id_and_ip_address"
+  add_index "votes", ["vote_event_id", "user_id"], :name => "index_votes_on_vote_event_id_and_user_id"
 
 end

@@ -74,6 +74,10 @@ class Player < ActiveRecord::Base
     self.games.reject{ |game| (game.players - [self]).first.user.race != "terran" }.count
   end
   
+  def commentable(user)
+    true
+  end
+  
   
 
 end

@@ -132,6 +132,10 @@ class Match < ActiveRecord::Base
       nil
     end
   end
+  
+  def commentable(user)
+    true
+  end
     
 
 end

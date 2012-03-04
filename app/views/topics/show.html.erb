@@ -3,22 +3,17 @@
   <%= render :partial => 'topics/head', :locals => { :topic => @topic } %>
 
   <menu>
-    <%= link_to "New Reply", new_forum_topic_post_path(@topic.forum, @topic) %>
+    <%= link_to "New Reply", new_forum_topic_comment_path(@topic.forum, @topic) %>
   </menu>
 
-  Paginate Posts
-  <div id='comments'>
-    <%= render :partial => "posts/post", :collection => @posts %>
-    <% if @topic.posts.size > 0 %>
-      <%= render :partial => "posts/posts_footer" %>
+  <span class="pagination" style="float: right"><%=  paginate_links(10, @current_page, @comments_count, request.path) %></span><br />
+    <%= render  @topic.comments %>
+    <% if @topic.comments.size > 0 %>
+      <%= render :partial => "comments/comment_footer" %>
     <% end %>
     
-  </div>
   <p>
-    <%= form_for [@topic.forum, @topic, Post.new] do |f| %>
-      <%= render :partial => "posts/form", :locals => { :f => f } %>
-      <%= f.submit "Submit" %>
-    <% end %>
+    <%= render :partial => "comments/form" %>
   </p>
   
 </div>

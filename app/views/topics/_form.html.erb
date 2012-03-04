@@ -6,8 +6,8 @@
       <%= f.text_field :title %>
       <br />
       <div align="center">
-      <%= f.fields_for :posts do |post| %>
-        <%= render :partial => "posts/form", :locals => { :f => post }%>
+      <%= f.fields_for :comments do |comment| %>
+        <%= render :partial => "comments/simple_form", :locals => { :f => comment }%>
       <% end %>
       </div>
       <div class="actions" align="center">
@@ -16,7 +16,7 @@
     <% end %>
   </div>
   <% elsif current_user and current_user.banned? %>
-    <div align="center"><br/>You are currently banned and may not post.<br/> <br/></div>
+    <div align="center"><br/>You are currently banned and may not comment.<br/> <br/></div>
 <% else %>
   <div align="center"><br/>You must <%= link_to "register", register_path %> or <%= link_to "login", login_path %> to comment.<br/> <br/></div>
 <% end %>

@@ -1588,6 +1588,7 @@ table.dashboard {
   margin-bottom: 10px;
   font-size: 1.0em; }
   .scopes .scope {
+    display: inline-block;
     padding: 4px 8px 3px 8px;
     margin-right: 4px; }
     .scopes .scope a {
