@@ -33,7 +33,11 @@ class Game < ActiveRecord::Base
   end
 
   def title
+    if self.player0 and self.player1
      ("SC2SL " + self.player0.team.short_name + "." + self.player0.user.login + " vs " + self.player1.team.short_name + "."  + self.player1.user.login + " on " + self.map.name)
+    else
+	  "SC2SL Match TBD"
+	end
   end
 
   def scheduled_at

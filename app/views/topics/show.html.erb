@@ -2,9 +2,6 @@
 <div id='topic' class='<%= 'un' unless @topic.locked? %>locked'>
   <%= render :partial => 'topics/head', :locals => { :topic => @topic } %>
 
-  <menu>
-    <%= link_to "New Reply", new_forum_topic_comment_path(@topic.forum, @topic) %>
-  </menu>
 
   <span class="pagination" style="float: right"><%=  paginate_links(10, @current_page, @comments_count, request.path) %></span><br />
     <%= render  @topic.comments %>
