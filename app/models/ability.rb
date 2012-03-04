@@ -21,11 +21,7 @@ class Ability
         can :update, Comment do |comment|
           comment.try(:user) == user || user.role?(:moderator)
         end
-        can :create, Post
-        can :create, Topic
-        can :update, Post do |post|
-          post.try(:user) == user || user.role?(:moderator)
-        end        
+        can :create, Topic    
         if user.role?(:admin)
           can :create, Article
           can :update, Article do |article|
