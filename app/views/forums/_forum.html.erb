@@ -5,7 +5,7 @@
       Last Comment
       <span class='last_comment'>
           <% if last_comment = forum.last_visible_comment -%>
-            <%= link_to(lastcomment.topic, forum_topic_path(forum, last_comment.topic)) -%> <%= t('by') %> <%= last_comment.user %> <%= t('time_ago_in_words', :time => time_ago_in_words(last_comment.created_at)) -%>
+            <%= link_to(last_comment.topic, forum_topic_path(forum, last_comment.topic)) -%> <%= t('by') %> <%= last_comment.user %> <%= t('time_ago_in_words', :time => time_ago_in_words(last_comment.created_at)) -%>
           <% else %>
             none
           <% end %>
