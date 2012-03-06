@@ -2,6 +2,7 @@ class Comment < ActiveRecord::Base
 
   #Associations
   belongs_to :user
+  belongs_to :topic, :foreign_key => :external_id
 
   #Types
   EXTERNAL_TYPES = ["Article", "Team", "Game", "Match",  "Player", "User", "Topic"]
