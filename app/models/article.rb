@@ -28,9 +28,9 @@ class Article < ActiveRecord::Base
   scope :published, where(:published => true).where(:published_at.lt => DateTime.now)
   scope :unpublished, where(:published => false)
   scope :featured, where(:featured => true)
-  scope :recent, order("articles.id desc").limit(20)
-  scope :latest, order("articles.id desc").limit(1)
-  scope :newest, order("articles.id desc")
+  scope :recent, order("published_at desc").limit(20)
+  scope :latest, order("published_at desc").limit(1)
+  scope :newest, order("published_at desc")
 
   def self.paginated(page=1,offset=20)
     newest.limit(offset).offset((page - 1) * offset)
