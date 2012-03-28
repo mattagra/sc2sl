@@ -41,14 +41,14 @@ Sc2sl::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.smtp_settings = {
-    :address => "localhost",
-    :port => 25,
-    :domain => "sc2sl.com",
-    :openssl_verify_mode => 'none'
-    
-    
-  }
+  #config.action_mailer.smtp_settings = {
+  #  :address => "localhost",
+  #  :port => 25,
+  #  :domain => "sc2sl.com",
+  #  :openssl_verify_mode => 'none'
+  #
+  #
+  #}
 
   # Enable threaded mode
   # config.threadsafe!
