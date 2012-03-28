@@ -1,6 +1,6 @@
 class AddHtmlTextToAdvertisement < ActiveRecord::Migration
   def self.up
-    add_column :advertisements, :html_text, :text, :limit => 512
+    add_column :advertisements, :html_text, :text
   end
 
   def self.down
