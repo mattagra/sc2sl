@@ -25,7 +25,7 @@ gem 'paperclip'
 gem 'acts-as-taggable-on'
 gem 'jquery-rails', '>= 1.0.3'
 gem "sanitize"
-gem "bb-ruby", '0.9.5', :path => "vendor/bundle/ruby/1.8/gems/bb-ruby-0.9.5"
+gem "bb-ruby", '0.9.5', :git => "git@github.com:turlockmike/bb-ruby.git"
 gem "recaptcha", :require => "recaptcha/rails"
 gem "haml", "~> 3.1.3"
 gem "rrschedule"
@@ -35,6 +35,7 @@ gem 'yaml_db'
 gem "memcache-client"
 gem 'delayed_job', '2.1.4'
 gem "meta_where"
+gem "bcrypt-ruby-3.0.1"
 
 
 gem 'exception_notification', '2.5.2'

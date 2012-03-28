@@ -3,7 +3,7 @@
 .sqlite3
 log/*
 .log
-
+vendor/*
 tmp/**/*
 config/database.yml
 .rvmrc
