@@ -23,4 +23,5 @@ developmet/*
 public/shared/*
 .redcar
 .redcar/*
+.DS_Store
 

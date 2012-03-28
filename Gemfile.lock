@@ -5,8 +5,9 @@ GIT
   specs:
     ajaxful_rating (3.0.0.beta8)
 
-PATH
-  remote: vendor/bundle/ruby/1.8/gems/bb-ruby-0.9.5
+GIT
+  remote: git@github.com:turlockmike/bb-ruby.git
+  revision: c8cf6ff7e00e2fd3eef6aad08e0d42e1c89415c4
   specs:
     bb-ruby (0.9.5)
 
@@ -140,8 +141,6 @@ GEM
     multi_json (1.0.4)
     multi_xml (0.4.1)
     multipart-post (1.1.5)
-    mysql2 (0.2.18)
-    mysql2 (0.2.18-x86-mingw32)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -227,7 +226,6 @@ DEPENDENCIES
   memcache-client
   meta_where
   mogli
-  mysql2 (< 0.3)
   nokogiri
   paperclip
   rails (= 3.0.9)

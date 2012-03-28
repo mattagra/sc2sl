@@ -5,7 +5,7 @@ gem 'rails', '= 3.0.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :production do
- gem "mysql2", '< 0.3'
+ #gem "mysql2", '< 0.3'
 end
 
 group :development do
@@ -35,7 +35,6 @@ gem 'yaml_db'
 gem "memcache-client"
 gem 'delayed_job', '2.1.4'
 gem "meta_where"
-gem "bcrypt-ruby-3.0.1"
 
 
 gem 'exception_notification', '2.5.2'
