@@ -6,7 +6,7 @@ GIT
     ajaxful_rating (3.0.0.beta8)
 
 GIT
-  remote: git@github.com:turlockmike/bb-ruby.git
+  remote: git://github.com/turlockmike/bb-ruby.git
   revision: c8cf6ff7e00e2fd3eef6aad08e0d42e1c89415c4
   specs:
     bb-ruby (0.9.5)
