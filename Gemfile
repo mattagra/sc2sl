@@ -41,10 +41,10 @@ gem "rails_autolink", "~> 1.0.6"
 
 gem 'sass-rails', "~> 3.1.0"
 gem 'coffee-rails', "~> 3.1.0"
-gem 'uglifier'
+gem 'execjs'
 
 group :assets do
-
+  gem 'uglifier'
 end
 
 

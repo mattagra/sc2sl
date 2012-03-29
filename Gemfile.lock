@@ -265,6 +265,7 @@ DEPENDENCIES
   daemons
   delayed_job (= 2.1.4)
   exception_notification (= 2.5.2)
+  execjs
   facebooker2
   formtastic
   haml (~> 3.1.3)
