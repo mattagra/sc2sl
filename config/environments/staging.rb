@@ -60,7 +60,7 @@ Sc2sl::Application.configure do
   
   config.assets.compress = true
   
-  config.assets.compile = false
+  config.assets.compile = true
   
   
   
