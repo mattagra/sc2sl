@@ -8,8 +8,9 @@ end
 
 group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'heroku'
 end
-
+ 
 gem 'formtastic'
 gem 'facebooker2'
 gem 'ruby-hmac'

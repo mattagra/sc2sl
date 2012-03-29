@@ -16,6 +16,7 @@ public/images/users/*
 db/development.sqlite3
 vendor/bundle/*
 vender/cache/*
+.gem
 RAILS_ENV=development
 RAILS_ENV=development/*
 development
