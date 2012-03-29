@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '= 3.1.4'
 
 group :production do
- #gem "mysql2", '< 0.3'
+ gem "mysql2", '< 0.3'
 end
 
 group :development do
@@ -23,11 +23,7 @@ gem 'paperclip'
 gem 'acts-as-taggable-on'
 gem 'jquery-rails'
 gem "sanitize"
-<<<<<<< HEAD
-gem "bb-ruby"
-=======
 gem "bb-ruby", '0.9.5', :git => "git://github.com/turlockmike/bb-ruby.git"
->>>>>>> 03ff8f4da78f4409d5298fd1ec66dc0ef5d02982
 gem "recaptcha", :require => "recaptcha/rails"
 gem "haml", "~> 3.1.3"
 gem "rrschedule"
