@@ -58,6 +58,14 @@ Sc2sl::Application.configure do
   :sender_address => %{"Exception Notifier" <support@sc2sl.com>},
   :exception_recipients => %w{webmaster@sc2sl.com}
   
+  config.assets.compress = true
+  
+  config.assets.compile = false
+  
+  
+  
+  config.assets.digest = true
+  
   
   
 end

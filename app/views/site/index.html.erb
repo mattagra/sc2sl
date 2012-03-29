@@ -44,7 +44,7 @@
               <%= @article.created_at.strftime("%b #{@article.published_at.day.ordinalize}") %>,
               <%= @article.comments.count %>
             </span>
-            <%= image_path "/css/images/comment/com.gif" %>
+            <%= image_tag "comment/com.gif" %>
           </p>
         </div>
         <div class="article-texte"><%- r = /([^a-z0-9_]|^)@([a-z0-9_]+)/i %><%=raw auto_link(@article.featured_description).gsub(r) {|m| "#{$1}<a href='http://twitter.com/#{$2}'>@#{$2}</a>#{$3}" } %>
