@@ -10,6 +10,10 @@ group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'heroku'
 end
+
+group :staging do
+  gem 'pg'
+end
  
 gem 'formtastic'
 gem 'facebooker2'
