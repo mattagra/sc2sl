@@ -1,9 +1,8 @@
-
+.idea/
 .bundle
 .sqlite3
 log/*
 .log
-
 tmp/**/*
 config/database.yml
 .rvmrc
@@ -24,4 +23,9 @@ developmet/*
 public/shared/*
 .redcar
 .redcar/*
+<<<<<<< HEAD
 .sass-cache/
+=======
+.DS_Store
+
+>>>>>>> 03ff8f4da78f4409d5298fd1ec66dc0ef5d02982

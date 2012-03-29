@@ -1,4 +1,4 @@
-def truncate_words(text, length = 200, end_string = '(…)', chars = 0)
+def truncate_words(text, length = 200, end_string = "(...)", chars = 0)
   if chars != 0 
     text = text[0,chars]
   end
