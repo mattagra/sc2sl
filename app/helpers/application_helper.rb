@@ -46,13 +46,13 @@ module ApplicationHelper
   def race_icon_url(race)
     case race
     when "protoss"
-      "/css/images/races/jaune.jpg"
+      image_path "races/jaune.jpg"
     when "zerg"
-      "/css/images/races/mauve.jpg"
+      image_path "races/mauve.jpg"
     when "terran"
-      "/css/images/races/rouge.jpg"
+      image_path "races/rouge.jpg"
     else
-      "/css/images/races/random.jpg"
+      image_path "races/random.jpg"
     end
   end
 
@@ -128,21 +128,19 @@ module ApplicationHelper
 
   def grayscale_banner_link(banner, path)
     link_to(image_tag(banner.url(:normal_gray), :border => "0", :onmouseover => "this.src='#{banner.url(:normal)}'", :onmouseout => "this.src='#{banner.url(:normal_gray)}'"), path)
-    #("<div style='height: 129px;'>" +
-    #    link_to(image_tag(banner.url(:normal), :class => "img_colorscale"), path) +
-    #    link_to(image_tag(banner.url(:normal_gray), :class => "img_grayscale"), path) + "</div>").html_safe
+
   end
 
 
   def rating_star_image(rating)
     if rating > 4.5
-      "/css/images/last-replays/goldstar.png"
+      image_path "last-replays/goldstar.png"
     elsif rating > 3.5
-      "/css/images/last-replays/silverstar.png"
+      image_path "last-replays/silverstar.png"
     elsif rating > 0
-      "/css/images/last-replays/bronzestar.png"
+      image_path "last-replays/bronzestar.png"
     else
-      "/css/images/last-replays/emptystar.png"
+      image_path "last-replays/emptystar.png"
     end
   end
 
@@ -151,9 +149,9 @@ module ApplicationHelper
     ret = ""
     case event[1]
     when 'join'
-      ret = "<img src='/css/images/user/small_green_arrow.png' alt='' width='10' height='9' /> Joined #{link_to(event[2].team.to_s, team_path(event[2].team.slug))}"
+      ret = image_tag("user/small_green_arrow.png", :height => 9, :width => 10).to_s + "Joined #{link_to(event[2].team.to_s, team_path(event[2].team.slug))}"
     when 'quit'
-      ret = "<img src='/css/images/user/small_red_arrow.png' alt='' width='10' height='9' /> Left #{link_to(event[2].team.to_s, team_path(event[2].team.slug))}"
+      ret = image_tag("user/small_red_arrow.png", :height => 9, :width => 10).to_s + "Left #{link_to(event[2].team.to_s, team_path(event[2].team.slug))}"
     when "game"
       other = (event[2].players - [event[3]]).first
       if event[2].winning_player == event[3]

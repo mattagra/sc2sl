@@ -1,3 +1,7 @@
-<div class="sliderkit-panel">
-    <%= link_to(image_tag(article.photo.url(:normal), :alt => "", :height => 257, :width => 643), view_article_path(article)) %>
+<div class="item <%= active %>">
+    <%= content_tag(:a,
+	  (
+	  image_tag(article.photo.url(:normal), :alt => "", :height => 257, :width => 643) + (content_tag(:div, (content_tag(:h4, article.title) + content_tag(:p, article.summary)), :class => "carousel-caption"))
+	  ),:href => view_article_path(article)
+    ) %>
 </div>

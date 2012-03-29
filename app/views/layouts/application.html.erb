@@ -15,220 +15,25 @@
    
 
     <!-- STYLES  -->
-
-     <link href="/css/styles.css" rel="stylesheet" type="text/css"/>
-	<!-- <% stylesheet_link_tag cms_css_path(1, "default") %> -->
-    <link href="/css/smoothness/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
+    <%= stylesheet_link_tag "application" %>
+	<%= javascript_include_tag "application" %>
     <link href="/favicon.ico" rel="shortcut icon" />
     
-    <!-- Widget styles -->
-    <link rel="stylesheet" type="text/css" href="/css/sliderkit-core.css" media="screen, projection" />
-    <link rel="stylesheet" type="text/css" href="/css/sliderkit-site.css" media="screen, projection" />
-    <link rel="stylesheet" type="text/css" href="/css/sliderkit-demos.css" media="screen, projection" />
-
-    <!-- Compatibility fix -->
-    <!--[if IE 6]>
-      <link rel="stylesheet" type="text/css" href="/css/sliderkit-demos-ie6.css" />
-    <![endif]-->
-
-    <!--[if IE 7]>
-      <link rel="stylesheet" type="text/css" href="/css/sliderkit-demos-ie7.css" />
-    <![endif]-->
-
-    <!--[if IE 8]>
-      <link rel="stylesheet" type="text/css" href="/css/sliderkit-demos-ie8.css" />
-    <![endif]-->
     
 
     <!-- JAVASCRIPT  -->
 
     <%= auto_discovery_link_tag(:rss, {:controller => :articles, :action => :index, :host => "sc2sl.com", :format => :rss}, {:title => "Latest SC2SL News"}) %>
-    <%= javascript_include_tag :defaults %>
-    <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>
-    <script type="text/javascript" src="/js/dddropdownpanel.js"></script>
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-    <script type="text/javascript" src="/js/slider.js"></script>
-    <script type="text/javascript" src="/js/slider-news.js"></script>
-    <script type="text/javascript" src="/js/jquery.placeheld.min.js"></script>
-    <script type="text/javascript" src="/javascripts/jquery.popupwindow.js"></script>
-    <script type="text/javascript" src="/js/sliderkit/jquery.sliderkit.1.8.min.js"></script>
-    <!-- jQuery library -->
-    <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $("input[placeholder]").placeHeld();
-      });
-    </script>
+
+
     
-    <!-- Slider Kit execution -->
-
-      <script type="text/javascript">
-			$(window).load(function(){ //$(window).load() must be used instead of $(document).ready() because of Webkit compatibility				
-				
-				// Photo slider > Minimal
-				$(".photoslider-mini").sliderkit({
-					autospeed:9000,
-					panelbtnshover:true,
-					circular:true
-				});
-				
-				// Photo slider > Bullets nav
-				$(".photoslider-bullets").sliderkit({
-					auto:false,
-					circular:true,
-					mousewheel:true,
-					shownavitems:5,
-					panelfx:"sliding",
-					panelfxspeed:2000,
-					panelfxeasing:"easeOutExpo" // "easeOutExpo", "easeInOutExpo", etc.
-				});
-				
-				// Photo slider > 1 click
-				$(".photoslider-1click").sliderkit({
-					auto:false,
-					circular:true,
-					shownavitems:8,
-					panelclick:true,
-					panelfx:"sliding",
-					panelfxspeed:1000,
-					panelfxeasing:"easeInOutExpo" //"easeOutExpo", "easeOutCirc", etc.
-				});
-				
-				// Photo slider > Vertical
-				$("#photoslider-vertical").sliderkit({
-					auto:false,
-					circular:true,
-					shownavitems:1,
-					navfx:"none",
-					panelfx:"sliding",
-					panelfxspeed:1200,
-					panelfxeasing:"easeOutCirc",
-					mousewheel:true,
-					verticalnav:true,
-					verticalslide:true
-				});
-			});	
-		</script>
 
 
-    <script type="text/JavaScript">
-      <!--
-      function MM_swapImgRestore() { //v3.0
-        var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
-      }
-
-      function MM_preloadImages() { //v3.0
-        var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
-          var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
-            if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
-        }
-
-        function MM_findObj(n, d) { //v4.01
-          var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
-            d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
-          if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
-          for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
-          if(!x && d.getElementById) x=d.getElementById(n); return x;
-        }
-
-        function MM_swapImage() { //v3.0
-          var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
-            if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
-        }
-        //-->
-    </script>    
     
     
-	<style type="text/css">
-            /*
-        * Style by Rogie http://www.komodomedia.com/blog/2007/01/css-star-rating-redux/
-        */
-
-        .ajaxful-rating,
-        .ajaxful-rating a:hover,
-        .ajaxful-rating a:active,
-        .ajaxful-rating a:focus,
-        .ajaxful-rating .show-value{
-            background: url("/images/star.png") left -1000px repeat-x;
-        }
-        .ajaxful-rating{
-            position: relative;
-            width: 125px; 
-            height: 25px;
-            overflow: hidden;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            background-position: left top;
-        }
-        .ajaxful-rating li{ display: inline; }
-        .ajaxful-rating a,
-        .ajaxful-rating span,
-        .ajaxful-rating .show-value{
-            position: absolute;
-            top: 0;
-            left: 0;
-            text-indent: -1000em;
-            height: 25px;
-            line-height: 25px;
-            outline: none;
-            overflow: hidden;
-            border: none;
-        }
-        .ajaxful-rating a:hover,
-        .ajaxful-rating a:active,
-        .ajaxful-rating a:focus{
-            background-position: left bottom;
-        }
-
-        /* This section is generated dynamically.
-        Just add a call to the helper method 'ajaxful_rating_style' within
-        the head tags in your main layout 
-        .ajaxful-rating li a.stars-1{
-        width: 20%;
-        z-index: 6;
-        }
-        .ajaxful-rating li a.stars-2{
-        width: 40%;
-        z-index: 5;
-        }
-        .ajaxful-rating li a.stars-3{
-        width: 60%;
-        z-index: 4;
-        }
-        .ajaxful-rating li a.stars-4{
-        width: 80%;
-        z-index: 3;
-        }
-        .ajaxful-rating li a.stars-5{
-        width: 100%;
-        z-index: 2;
-        }
-        */
-        .ajaxful-rating .show-value{
-            z-index: 1;
-            background-position: left center;
-        }
-
-        /* smaller star */
-        .ajaxful-rating.small{
-            width: 50px; /* this is setted dynamically */
-            height: 10px;
-        }
-        .ajaxful-rating.small,
-        .ajaxful-rating.small a:hover,
-        .ajaxful-rating.small a:active,
-        .ajaxful-rating.small a:focus,
-        .ajaxful-rating.small .show-value{
-            background-image: url("/images/star_small.png");
-            line-height: 10px;
-            height: 10px;
-        }
-    </style>
-	<% end %>
-    <%= ajaxful_rating_style %>
 	
+	<% end %>	
 
     <title><%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League</title>
     <meta name="title" content="<%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League" />
@@ -257,7 +62,7 @@
       <div id="login">
         <div id="login-content">
           <div class="login-content-left">
-            <img src="/css/images/login/icones/login.png" alt="Formulaire de connexion" align="left" />
+			<%= image_tag "login/icones/login.png", :alt => "Login", :align => "left" %>
               
                 <% unless current_user %>
                   <div class="login-content-texte"><span style="float:left;margin-top: 8px;"><%= link_to "REGISTER", register_path %> or LOGIN</span>
@@ -339,15 +144,17 @@
 		<%= render :partial => "matches/live", :locals => {:live_match => @live_match} %>
 	  <% else %>
         <% cache("frontpage_articles", {:expires_in => 5.minutes}) do %>
-            <div class="sliderkit photoslider-mini">
-              <div class="sliderkit-panels">
-                <div class="sliderkit-btn sliderkit-go-btn sliderkit-go-prev" ><a href="#" title="Previous"><span>Previous</span></a></div>
-                <div class="sliderkit-btn sliderkit-go-btn sliderkit-go-next" ><a href="#" title="Next"><span>Next</span></a></div>
+            <div id="myCarousel" class="carousel">
+              <div class="carousel-inner">
                 
-                <%- @frontpage_articles.find_all{|a| a.photo.exists?}[0..2].each do |article| %>
-                  <%= render :partial => "articles/article_banner", :locals => {:article => article} %>
+                <%- @frontpage_articles.find_all{|a| a.photo.exists?}[0..2].each_with_index do |article, i| %>
+                  <%= render :partial => "articles/article_banner", :locals => {:article => article, :active => (i == 0 ? "active" : "") } %>
                 <% end %>
+				
+                
               </div>
+			  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
             </div>
         <% end %>
 	  <% end %>
@@ -360,10 +167,10 @@
           <div id="live-haut-status">
 
             <% if @live_match and @live_match.live %>
-              <div id="live-haut-status-image"><img src="/css/images/content-bar/live/live.jpg" alt="Live" /></div>
-              <div id="live-haut-status-texte"><img src = '/css/images/live.gif' /></div>
+              <div id="live-haut-status-image"><%= image_tag "content-bar/live/live.jpg", :alt=>"Live" %></div>
+              <div id="live-haut-status-texte"><%= image_tag 'live.gif' %></div>
             <% else %>
-              <div id="live-haut-status-image"><img src="/css/images/content-bar/live/offline.jpg" alt="Offline" /></div>
+              <div id="live-haut-status-image"><%= image_tag "content-bar/live/offline.jpg", :alt=>"Offline" %></div>
               <div id="live-haut-status-texte">LIVE IS OFFLINE</div>
             <% end %>
 
@@ -405,10 +212,10 @@
               <td height="20" colspan="5" bgcolor="#FFFFFF"><div align="left" class="ntitle2" style="margin-left:2px"></div></td>
               <td height="20" colspan="2" bgcolor="#FFFFFF" style="text-align: right;">
                 <span class="ntitle2">
-                  <%= link_to image_tag("/css/images/content-bar/sponsors/flecheg.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"),
+                  <%= link_to image_tag("content-bar/sponsors/flecheg.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"),
                     matches_path(:calendar_month => (@calendar_date.beginning_of_month-1).strftime("%m"),  :calendar_year => (@calendar_date.beginning_of_month-1).strftime("%Y")) %>
                   <%= link_to @calendar_date.strftime("%B %Y"), matches_path(:calendar_month =>  @calendar_date.strftime("%m"), :calendar_year => @calendar_date.strftime("%Y") )  %>
-                  <%= link_to image_tag("/css/images/content-bar/sponsors/fleche.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"),
+                  <%= link_to image_tag("content-bar/sponsors/fleche.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"),
                     matches_path(:calendar_month => (@calendar_date.end_of_month+1).strftime("%m"),  :calendar_year => (@calendar_date.end_of_month+1).strftime("%Y")) %>
                 </span>
               </td>
@@ -417,7 +224,7 @@
         </table>
         
         <div id="calendar">
-          <% calendar_for Array(@layout_matches), :year => @calendar_date.year, :month => @calendar_date.month, :today => Time.now, :first_day_of_week => 1  do |calendar| %>
+          <%= calendar_for @layout_matches.to_a, :year => @calendar_date.year, :month => @calendar_date.month, :today => Time.now, :first_day_of_week => 1  do |calendar| %>
             <%= calendar.head('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun') %>
             <% calendar.day(:day_method => :scheduled_at) do |date, matches| %>
               <% if date.month == @calendar_date.month %>

@@ -66,5 +66,13 @@ Sc2sl::Application.configure do
   :exception_recipients => %w{webmaster@sc2sl.com}
   
   
+  config.assets.compress = true
+  
+  config.assets.compile = false
+  
+  
+  
+  config.assets.digest = true
+  
   
 end

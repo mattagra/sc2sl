@@ -10,23 +10,23 @@
 
     <div class="season_tabs">
       <div id="tabs" style="float:left;">
-        <ul>
-          <li><a href="#rankings">Rankings</a></li>
-          <li><a href="#week1" >Round 1</a></li>
-          <li><a href="#week2" >Round 2</a></li>
-          <li><a href="#week3" >Round 3</a></li>
-          <li><a href="#week4" >Round 4</a></li>
-          <li><a href="#week5" >Round 5</a></li>
-          <li><a href="#week6" >Round 6</a></li>
-          <li><a href="#week7" >Round 7</a></li>
-          <li><a href="#playoff" >Playoffs</a></li>
+        <ul class="nav nav-tabs">
+          <li><a href="#rankings" data-toggle="tab">Rankings</a></li>
+          <li><a href="#week1" data-toggle="tab">Round 1</a></li>
+          <li><a href="#week2" data-toggle="tab">Round 2</a></li>
+          <li><a href="#week3" data-toggle="tab">Round 3</a></li>
+          <li><a href="#week4" data-toggle="tab">Round 4</a></li>
+          <li><a href="#week5" data-toggle="tab">Round 5</a></li>
+          <li><a href="#week6" data-toggle="tab">Round 6</a></li>
+          <li><a href="#week7" data-toggle="tab">Round 7</a></li>
+          <li><a href="#playoffs" data-toggle="tab">Playoffs</a></li>
         </ul>
 
 
 
 
-
-        <div id="rankings">
+       <div class="tab-content">
+        <div id="rankings" class="tab-pane active">
           <div style="border:none; width:521px;margin: 0px auto;">
             <div id="ranking-content" style="border:1px solid gray;float: left; ">
 
@@ -72,7 +72,7 @@
         </div>
 
         <%  @season.regular_matches.group_by(&:weeks_id).each do |week| %>
-          <div id="week<%= week[0] -%>">
+          <div id="week<%= week[0] -%>" class="tab-pane">
 
             <table width="500" border="0" cellspacing="0" cellpadding="0" style="margin: 0 auto;">
               <% week[1].each do |match| %>
@@ -89,7 +89,7 @@
           </div>
         <% end %>
 
-        <div id="playoff">
+        <div id="playoffs" class="tab-pane">
           <%  if @season.playoff_matches.size > 0 %>
             <div style="float:left;width: 100%;">
 
@@ -146,16 +146,14 @@
             Playoffs Not yet Determined
           <% end %>
         </div>
+		</div>
       </div>
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
-  $(function() {
-    $("#tabs").tabs();
-    $("#tabs > div").addClass('clearfix');
-  });
+
 </script>
 
 

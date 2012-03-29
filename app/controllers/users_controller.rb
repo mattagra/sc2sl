@@ -20,17 +20,7 @@ class UsersController < ApplicationController
     end
   end
 
-  #def index
-  #  @current_page = [(params[:page]|| 1).to_i, 1].max
-  #  @per_page = 50
-  #  unless params[:search].blank?
-  #    @users = User.where("login LIKE ?", params[:search]).paginated(@current_page, @per_page)
-  #    @users_count = User.where("login LIKE ?", params[:search]).count
-  #  else
-  #    @users = User.paginated(@current_page, @per_page)
-  #    @users_count = User.count
-  #  end
-  #end
+
 
   def show
     if current_user and params[:login].nil?

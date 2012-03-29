@@ -4,20 +4,21 @@ require 'rails/all'
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env) if defined?(Bundler)
+if defined?(Bundler)
+  Bundler.require *Rails.groups(:assets => %w(development test))
+
+end
 
 module Sc2sl
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    Dir.glob("./lib/*.{rb}").each { |file| require file }
+
     config.filter_parameters << :password << :password_confirmation
-    config.action_view.javascript_expansions[:defaults] = %w(jquery.min jquery_ujs application)
     config.action_mailer.default_url_options = {:host => "sc2sl.com"}
     config.time_zone = "Paris"
-
-
+    Dir.glob("./lib/*.{rb}").each { |file| require file }
     IMGUR_API_KEY = "edb81443e23154af166573652a25544a"
     CUSTOM_BBCODE = {
       'Spoiler' => [
@@ -95,7 +96,8 @@ module Sc2sl
 
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
-
+    config.assets.enabled = true
+	config.assets.version = '1.0'
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

@@ -24,8 +24,7 @@
         <% if @user.country  %>
           <%= image_tag @user.country.flag %>
         <% end %>   <%= @user.safe_name %></br>
-        <%= @user.age %>  years old  <% if current_admin %>
-          | Email: <%=h @user.email %> | <% end %>
+        <%= @user.age %>  years old 
         <% if @user == current_user %>
 
           <%= link_to 'Update Information', edit_account_path %>

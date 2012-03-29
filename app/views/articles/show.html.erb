@@ -13,7 +13,7 @@
       </div>
       <div id="titrecom">
         <div id="textcom"><a href="#comments"><%= @article.comments.count %></a></div>
-        <a href="#newcomment"><img src="/css/images/comment/add.png" style="margin-left:3px;" alt="add a comment" /></a>
+        <a href="#newcomment"><%= image_tag("comment/add.png", :style => "margin-left: 3px;")%></a>
       </div>
     </div>
     <br />
