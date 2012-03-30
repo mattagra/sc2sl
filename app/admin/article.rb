@@ -43,6 +43,13 @@ ActiveAdmin.register Article do
 	  @article.user = current_user
       create!
     end
+
+    def new
+      @article = Article.new
+      @article.published_at = Time.now
+      new!
+
+    end
     
     
   end

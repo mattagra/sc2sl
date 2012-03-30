@@ -9,7 +9,7 @@ class Match < ActiveRecord::Base
   belongs_to :season
   has_many :vote_events, :dependent => :destroy
   has_many :votes, :through => :vote_events, :dependent => :destroy
-
+  belongs_to :forfeit_team, :class_name => "Team"
 
   #Accessors
   attr_accessor :maps
@@ -39,7 +39,9 @@ class Match < ActiveRecord::Base
   end
 
   def determine_status
-    if self.games.select{|g| g.result == 0}.size == (self.best_of + 1) / 2
+    if self.forfeit_team
+      self.results = (self.forfeit_team == self.team0) ? 4 : -4
+    elsif self.games.select{|g| g.result == 0}.size == (self.best_of + 1) / 2
       self.results  = self.games.select{|g| g.result == 0}.size -  self.games.select{|g| g.result == 1}.size
       #If playoff Match, set team to next round.
       #unless self.playoff_id.nil? or self.playoff_id == 0
@@ -67,11 +69,19 @@ class Match < ActiveRecord::Base
   end
 
   def team0_wins
+    if forfeit_team == team1
+      4
+    else
     self.games.select{|g| g.result == 0}.size
+      end
   end
 
   def team1_wins
-    self.games.select{|g| g.result == 1}.size
+    if forfeit_team == team0
+      4
+    else
+      self.games.select{|g| g.result == 1}.size
+    end
   end
   
   def title
@@ -117,12 +127,12 @@ class Match < ActiveRecord::Base
 
   def team0_points
     i = 4 - self.results.to_i
-    Match::POINTS[i]
+    Match::POINTS[i] + self.bonus_points0.to_i
   end
 
   def team1_points
     i = 4 + self.results.to_i
-    Match::POINTS[i]
+    Match::POINTS[i] + self.bonus_points1.to_i
   end
 
   def winner

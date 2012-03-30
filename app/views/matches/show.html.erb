@@ -43,6 +43,7 @@
                   <p class="matchpre">Date: <%= american_time(@match.scheduled_at) %> </p>
                   
                   <p class="matchpre"><%= link_to_if !@match.url.blank?, "View VODS", @match.url  %></p>
+                  <p class="matchpre"><%= @match.match_notes %></p></td>
                   <p class="matchpre">&nbsp;</p></td>
               </tr>
 

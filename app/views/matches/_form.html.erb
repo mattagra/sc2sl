@@ -1,92 +1,129 @@
 <%= form_for(@match, :html => {:multipart => true}) do |f| %>
-  <% if @match.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
+    <% if @match.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
 
-      <ul>
-        <% @match.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <% unless f.object.new_record? %>
-    <%= f.object.season.name %><br /><br />
-  <% end %>
-
-
-  <div class="field">
-    <b><%= f.label :team0_id %></b><br />
-    <% if f.object.new_record? || f.object.team0.nil? %>
-      <%= f.select :team0_id, Team.all.collect{|t| [t.short_name, t.id]} %>
-    <% else %>
-      <%= f.object.team0.name %>
+          <ul>
+            <% @match.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
     <% end %>
-  </div>
-  <br />
-  <div class="field">
-    <b><%= f.label :team1_id %></b><br />
-    <% if f.object.new_record? || f.object.team1.nil? %>
-      <%= f.select :team1_id, Team.all.collect{|t| [t.short_name, t.id]} %>
-    <% else %>
-      <%= f.object.team1.name %>
-    <% end %>
-  </div>
-  <br />
-  <div class="field">
-    <%= f.label :scheduled_at %><br />
-    <%= f.datetime_select :scheduled_at %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :weeks_id, "Round" %><br />
-    <%= f.text_field :weeks_id %>
-  </div>
-  <br />
 
-  <div class="field">
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
-  </div>
-  <br />
-  <div class="field">
-    <%= f.label :caster_ids %><br />
-    <%= f.select :caster_ids, User.where(:caster => true).collect{|u| [u.login, u.id]},{},  {:multiple => true, :size => 6} %>
-  </div>
-  <br />
-  <div class="field">
-    <%= f.label :live %><br />
-    <%= f.check_box :live %>
-  </div>
-  <br /><br />
-  <% unless f.object.team0.nil? or f.object.team1.nil? %>
-    <table>
-      <tr>
-        <th>Game #</th>
-        <th><%= f.object.team0.short_name %> Player</th>
-        <th><%= f.object.team1.short_name %> Player</th>
-        <th>Map</th>
-		<th>Revived Used?</th>
-        <th>Admin Rating</th>
-        <th>Winning Team</th>
-        <th>Replay</th>
-      </tr>
-      <% f.fields_for :games do |game_form| %>
-        <tr>
-          <td><%= game_form.hidden_field  :match_order %><%= game_form.object.match_order %> </td>
-          <td><%= game_form.select :player0_id, f.object.team0.players.collect {|p| [p.user.login, p.id] }, :prompt => true %></td>
-          <td><%= game_form.select :player1_id, f.object.team1.players.collect {|p| [p.user.login, p.id] }, :prompt => true %></td>
-          <td><%= game_form.select :map_id, Map.all.collect{|m| [m.name, m.id]}, :prompt => true %></td>
-		  <td><%= game_form.check_box :revived%></td>
-          <td><%= game_form.select :admin_rating, [1,2,3,4,5], :prompt => true %></td>
-          <td><%= game_form.select :result, [[f.object.team0.short_name, 0], [f.object.team1.short_name, 1]], :prompt => true %></td>
-          <td><%= link_to_if game_form.object.replay_file_size , "Replay", replay_match_game_path(game_form.object.match_id, game_form.object.id) %> <%= game_form.file_field :replay %></td>
-        </tr>
+    <% unless f.object.new_record? %>
+        <%= f.object.season.name %><br /><br/>
+    <% end %>
+
+
+    <div class="field">
+      <b><%= f.label :team0_id %></b><br/>
+      <% if f.object.new_record? || f.object.team0.nil? %>
+          <%= f.select :team0_id, Team.all.collect { |t| [t.short_name, t.id] } %>
+      <% else %>
+          <%= f.object.team0.name %>
       <% end %>
+    </div>
+    <br/>
+    <div class="field">
+      <b><%= f.label :team1_id %></b><br/>
+      <% if f.object.new_record? || f.object.team1.nil? %>
+          <%= f.select :team1_id, Team.all.collect { |t| [t.short_name, t.id] } %>
+      <% else %>
+          <%= f.object.team1.name %>
+      <% end %>
+    </div>
+    <br/>
+    <div class="field">
+      <%= f.label :scheduled_at %>
+      <br/>
+      <%= f.datetime_select :scheduled_at %>
+    </div>
+
+    <div class="field">
+      <%= f.label :weeks_id, "Round" %>
+      <br/>
+      <%= f.text_field :weeks_id %>
+    </div>
+    <br/>
+
+    <div class="field">
+      <%= f.label :url %>
+      <br/>
+      <%= f.text_field :url %>
+    </div>
+    <br/>
+    <div class="field">
+      <%= f.label :caster_ids %>
+      <br/>
+      <%= f.select :caster_ids, User.where(:caster => true).collect { |u| [u.login, u.id] }, {}, {:multiple => true, :size => 6} %>
+    </div>
+    <br/>
+    <div class="field">
+      <%= f.label :live %>
+      <br/>
+      <%= f.check_box :live %>
+    </div>
+
+    <% if @match.team0 and @match.team1 %>
+        <div class="field">
+          <%= f.label :forfeit_team_id %>
+          <br/>
+          <%= f.select :forfeit_team_id, [[@match.team0.short_name, @match.team0.id], [@match.team1.short_name, @match.team1.id]], {:include_blank => true} %>
+        </div>
     <% end %>
-  </table>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <% if @match.team0 %>
+        <div class="field">
+          <%= f.label :bonus_points0, "Bonus points for #{@match.team0}" %>
+          <br/>
+          <%= f.text_field :bonus_points0 %>
+        </div>
+    <% end %>
+    <% if @match.team1 %>
+        <div class="field">
+          <%= f.label :bonus_points1, "Bonus points for #{@match.team1}" %>
+          <br/>
+          <%= f.text_field :bonus_points1 %>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :match_notes %>
+      <br/>
+      <%= f.text_field :match_notes %>
+    </div>
+
+
+
+
+    <br/><br/>
+    <% unless f.object.team0.nil? or f.object.team1.nil? %>
+        <table>
+          <tr>
+            <th>Game #</th>
+            <th><%= f.object.team0.short_name %> Player</th>
+            <th><%= f.object.team1.short_name %> Player</th>
+            <th>Map</th>
+            <th>Revived Used?</th>
+            <th>Admin Rating</th>
+            <th>Winning Team</th>
+            <th>Replay</th>
+          </tr>
+          <% f.fields_for :games do |game_form| %>
+              <tr>
+                <td><%= game_form.hidden_field :match_order %><%= game_form.object.match_order %> </td>
+                <td><%= game_form.select :player0_id, f.object.team0.players.collect { |p| [p.user.login, p.id] }, :prompt => true %></td>
+                <td><%= game_form.select :player1_id, f.object.team1.players.collect { |p| [p.user.login, p.id] }, :prompt => true %></td>
+                <td><%= game_form.select :map_id, Map.all.collect { |m| [m.name, m.id] }, :prompt => true %></td>
+                <td><%= game_form.check_box :revived %></td>
+                <td><%= game_form.select :admin_rating, [1, 2, 3, 4, 5], :prompt => true %></td>
+                <td><%= game_form.select :result, [[f.object.team0.short_name, 0], [f.object.team1.short_name, 1]], :prompt => true %></td>
+                <td><%= link_to_if game_form.object.replay_file_size, "Replay", replay_match_game_path(game_form.object.match_id, game_form.object.id) %> <%= game_form.file_field :replay %></td>
+              </tr>
+          <% end %>
+    <% end %>
+    </table>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

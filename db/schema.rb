@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120303232936) do
+ActiveRecord::Schema.define(:version => 20120330162556) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(:version => 20120303232936) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ad_type"
-    t.text     "html_text",          :limit => 512
+    t.text     "html_text"
   end
 
   create_table "articles", :force => true do |t|
@@ -301,6 +301,10 @@ ActiveRecord::Schema.define(:version => 20120303232936) do
     t.string   "url"
     t.string   "caster_ids"
     t.boolean  "live"
+    t.integer  "forfeit_team_id"
+    t.integer  "bonus_points0"
+    t.integer  "bonus_points1"
+    t.text     "match_notes"
   end
 
   add_index "matches", ["season_id"], :name => "index_matches_on_season_id"
