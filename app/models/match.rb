@@ -40,7 +40,7 @@ class Match < ActiveRecord::Base
 
   def determine_status
     if self.forfeit_team
-      self.results = (self.forfeit_team == self.team0) ? 4 : -4
+      self.results = (self.forfeit_team == self.team0) ? -4 : 4
     elsif self.games.select{|g| g.result == 0}.size == (self.best_of + 1) / 2
       self.results  = self.games.select{|g| g.result == 0}.size -  self.games.select{|g| g.result == 1}.size
       #If playoff Match, set team to next round.
@@ -69,15 +69,15 @@ class Match < ActiveRecord::Base
   end
 
   def team0_wins
-    if forfeit_team == team1
+    if self.forfeit_team == team1
       4
     else
-    self.games.select{|g| g.result == 0}.size
-      end
+      self.games.select{|g| g.result == 0}.size
+    end
   end
 
   def team1_wins
-    if forfeit_team == team0
+    if self.forfeit_team == team0
       4
     else
       self.games.select{|g| g.result == 1}.size
