@@ -65,6 +65,8 @@ class Match < ActiveRecord::Base
       #  end
       #  m.save
       #end
+    else
+      self.results = 0
     end
   end
 
