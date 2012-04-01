@@ -111,7 +111,7 @@ namespace :memcached do
   end
 
 
-
+before 'deploy:assets:precompile', 'bundle:install'
 after 'deploy:update_code', 'deploy:symlink_shared'
 after 'deploy:update_code', 'deploy:migrate'
 after 'deploy:update"', 'deploy:cleanup' 
