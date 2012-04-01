@@ -8,7 +8,7 @@
 		<% else %>
 		  <%= image_tag @user.photo.url(:normal), :align => "left" %>
 		<% end %>
-		</td><td class="votenowtxt"> <%= image_tag race_icon_url(@user.race), :alt => "race"%> <%= @user.login %></span> 							 					<strong>
+		</td><td class="votenowtxt"> <%= image_tag race_icon_url(@user.race), :alt => "race"%> <%= @user.login %> 							 					<strong>
         <% if @user.banned? %>
             Ban Type: <%= @user.current_ban.mod_type %> -  <%= @user.current_ban.length %> days - Ends: <%= @user.current_ban.ends_at %>
           <% end %> </strong>
@@ -22,8 +22,8 @@
     <tr> <td class="playertab">
         <br/>
         <% if @user.country  %>
-          <%= image_tag @user.country.flag %>
-        <% end %>   <%= @user.safe_name %></br>
+          <%= flag_icon @user.country.flag %>
+        <% end %>   <%= @user.safe_name %><br />
         <%= @user.age %>  years old 
         <% if @user == current_user %>
 

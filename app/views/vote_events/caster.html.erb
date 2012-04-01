@@ -70,7 +70,7 @@ body {
 			<% @vote_event.players.each do |player| %>
 			  <% player_votes = @vote_event.votes.where(:player_id => player.id).count %>
 			  <p>
-				<%= image_tag player.user.country.flag %>
+				<%= flag_icon player.user.country.flag %>
 				<%= image_tag(race_icon_url(player.user.race)) %>
 				<strong class="player"><%= player.login %></strong>
 				<br />

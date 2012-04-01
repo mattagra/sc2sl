@@ -21,7 +21,7 @@
 			<td width="1" valign="top"><br/></td>
 			
 			<td width="552" valign="top">
-			  <strong><%= link_to((image_tag(match.team0.country.flag).to_s + " " + match.team0.name + " vs. " + image_tag(match.team1.country.flag).to_s + " " + match.team1.name).html_safe, match_path(match))%></strong><br />
+			  <strong><%= link_to((flag_icon(match.team0.country.flag).to_s + " " + match.team0.name + " vs. " + flag_icon(match.team1.country.flag).to_s + " " + match.team1.name).html_safe, match_path(match))%></strong><br />
 			  <% if match.weeks_id %>
 		        <%= link_to "#{match.season.name} Round #{match.weeks_id}", season_path(match.season) + "#week#{match.weeks_id}" %>
 			  <% else %>

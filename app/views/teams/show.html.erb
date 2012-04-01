@@ -6,13 +6,13 @@
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td width="240" valign="top">  <%= image_tag(@team.photo.url(:normal)) if @team.photo.exists?  %></td>
-      <td valign="top"><span class="votenowtxt style1"><span class="votenowtxt  style3"><%= image_tag @team.country.flag %>  <%= @team.name %> </span></span> <br/>
+      <td valign="top"><span class="votenowtxt style1"><span class="votenowtxt  style3"><%= flag_icon @team.country.flag %>  <%= @team.name %> </span></span> <br/>
         <% if @team.user %><img src="/css/images/content-bar/live/star2.gif" alt="" width="12" height="12" /><em> Coached by <%= link_to @team.user.login, profile_path(@team.user.login) %></em><br/><% end %>
         <p>Official website: <%= link_to @team.website, @team.website, {:target => "_blank"} %><br/>
           <br/>
           <%= link_to "Browse #{@team.short_name} replays.", replays_path(:team_id => @team.id) %></p>
         <% @team.players.each do |player| %>
-          <%= image_tag player.user.country.flag if player.user.country %>
+          <%= flag_icon player.user.country.flag if player.user.country %>
           <%= image_tag race_icon_url(player.user.race),  :width => 16, :height => 11 %>
           <%= link_to player, profile_path(player.login) %>
           <br />
