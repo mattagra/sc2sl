@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
     {:styles => {
       :normal => "96x96",
       :thumb => "32x32"
-    }, :url => "/shared/users/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url", :default_url => "/css/images/comment/avatar.jpg"}
+    }, :url => "/shared/users/:attachment/:id/:style_:basename.:extension", :path => ":rails_root/public:url", :default_url => "comment/avatar.jpg"}
 
 
   #Attributes

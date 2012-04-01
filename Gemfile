@@ -44,6 +44,9 @@ gem 'sass-rails', "~> 3.1.0"
 gem 'coffee-rails', "~> 3.1.0"
 gem 'execjs'
 
+gem 'mime-types'
+gem 'ckeditor', "3.7.0.rc3"
+
 group :assets do
   gem 'uglifier'
 end
