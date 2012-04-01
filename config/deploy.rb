@@ -8,7 +8,7 @@ set :scm, "git"
 set :scm_verbose, true
 set :user, "root"
 set :password, "MAzrdNzV"
-
+set :keep_releases, 10
 set :default_environment, {
   'PATH' => "/var/lib/gems/1.8/bin:$PATH"
 }
@@ -89,13 +89,7 @@ namespace :delayed_job do
         run "cd #{current_path};chmod 755 script/delayed_job;RAILS_ENV=#{rails_env} script/delayed_job restart"
     end
 end
-namespace :assets do
-	desc "precompile the assets"
-  task :precompile_assets, :roles => :web, :except => { :no_release => true } do
-    run "cd #{current_path}; rm -rf public/assets/*"
-    run "#{try_sudo} cd #{current_path}; #{try_sudo} RAILS_ENV=production bundle exec rake assets:precompile"
-  end
-  end
+
 
 namespace :memcached do 
     desc "Start memcached"
@@ -119,7 +113,7 @@ namespace :memcached do
 
 
 after 'deploy:update_code', 'deploy:symlink_shared'
-after 'deploy:symlink_shared', 'assets:precompile_assets'
-#after 'deploy:restart', 'delayed_job:restart'
-#after 'delayed_job:restart', 'memcached:restart'
-#after 'memcached:restart', 'deploy:web:enable'
+after 'deploy:update_code', 'deploy:migrate'
+after 'deploy:update"', 'deploy:cleanup' 
+after 'deploy:update', 'delayed_job:restart'
+after 'deploy:update', 'memcached:restart'
