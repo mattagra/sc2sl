@@ -35,19 +35,19 @@
           <% if comment.user.is_moderator? %>
             <br />
             <span class="lineup">
-              <img src="/css/images/comment/staff.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" /><span><%= comment.user.roles.last.to_s.capitalize %></span>
+              <%= image_tag "comment/staff.jpg", :alt=>"", :width=>"21", :height=>"13", :hspace=>"4", :vspace=>"3", :align=>"top" %><span><%= comment.user.roles.last.to_s.capitalize %></span>
             </span>
           <% end %>
           <% if comment.user.player %>
             <br />
             <span class="lineup">
-              <img src="/css/images/comment/player.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" /><span style="overflow: visible"><%= link_to comment.user.player.team.short_name, named_team_path(comment.user.player.team.slug) %></span>
+              <%= image_tag "comment/player.jpg", :alt=>"", :width=>"21", :height=>"13", :hspace=>"4", :vspace=>"3", :align=>"top" %><span style="overflow: visible"><%= link_to comment.user.player.team.short_name, named_team_path(comment.user.player.team.slug) %></span>
             </span>
           <% end %>
           <% if comment.user.caster %>
             <br />
             <span class="lineup">
-              <img src="/css/images/comment/caster.jpg" alt="" width="21" height="13" hspace="4" vspace="3" align="top" /><%= link_to "Caster", comment.user.website, :rel => "nofollow" %>
+              <%= image_tag "comment/caster.jpg", :alt=>"", :width=>"21", :height=>"13", :hspace=>"4", :vspace=>"3", :align=>"top" %><%= link_to "Caster", comment.user.website, :rel => "nofollow" %>
             </span>
           <% end %>
 
