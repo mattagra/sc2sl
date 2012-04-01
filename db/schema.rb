@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(:version => 20120330162556) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ad_type"
-    t.text     "html_text"
+    t.text     "html_text",          :limit => 512
   end
 
   create_table "articles", :force => true do |t|
