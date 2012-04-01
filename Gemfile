@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '= 3.1.4'
 
 group :production do
- gem "mysql2", '< 0.3'
+ gem "mysql2"
 end
 
 group :development do
@@ -56,9 +56,7 @@ gem 'comfortable_mexican_sofa', '1.6.16'
 
 #gem 'sprockets', :git => "git://github.com/sstephenson/sprockets"
 
-group :production do
-gem "mysql2", '< 0.3'
-end
+
 
 #group :development do
 #  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
