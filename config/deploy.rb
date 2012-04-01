@@ -3,7 +3,8 @@ set :application, "sc2sl"
 set :domain,      "vps13407.ovh.net"
 set :repository,  "git@github.com:turlockmike/sc2sl.git"
 set :deploy_to,   "/apps/#{application}"
-set :branch, "master"
+set :branch, fetch(:branch, "master")
+set :env, fetch(:env, "production")
 set :scm, "git"
 set :scm_verbose, true
 set :user, "root"
