@@ -58,6 +58,12 @@ namespace :deploy do
 
       put page, "#{shared_path}/system/maintenance.html", :mode => 0644
     end
+	desc "precompile the assets"
+  task :precompile_assets, :roles => :web, :except => { :no_release => true } do
+    run "cd #{current_path}; rm -rf public/assets/*"
+    run "cd #{current_path}; RAILS_ENV=production bundle exec rake assets:precompile"
+  end
+	
   end
   
   
@@ -109,6 +115,7 @@ namespace :memcached do
 
 
 after 'deploy:update_code', 'deploy:symlink_shared'
+after 'deploy:symlink_shared', 'deploy:precompile_assets'
 #after 'deploy:restart', 'delayed_job:restart'
 #after 'delayed_job:restart', 'memcached:restart'
 #after 'memcached:restart', 'deploy:web:enable'
