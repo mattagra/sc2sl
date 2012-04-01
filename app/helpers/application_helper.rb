@@ -198,6 +198,10 @@ module ApplicationHelper
     end
   end
 
+
+  def flag_icon(country)
+    "<i class='flag flags-#{country}'></i>".html_safe
+  end
   
 
   

@@ -49,6 +49,7 @@ gem 'ckeditor', "3.7.0.rc3"
 
 group :assets do
   gem 'uglifier'
+  gem 'compass-rails'
 end
 
 

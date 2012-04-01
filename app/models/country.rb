@@ -6,7 +6,7 @@ class Country < ActiveRecord::Base
 
 
   def flag
-    "flags/#{self.short.downcase}.png"
+    self.short.downcase
   end
 
   def to_s

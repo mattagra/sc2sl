@@ -16,7 +16,7 @@
               <% end %>
             </div>
           </div>
-          <% if comment.user.country %><%=  image_tag comment.user.country.flag, :alt => comment.user.country.name %> <% end %>  <%= link_to comment.user.to_s, profile_path(comment.user.login) %> <span class="commentuptime"><%= comment.formatted_time %> </span></div></td>
+          <% if comment.user.country %><a class="<%= comment.user.country.flag %>" href="#"></a> <% end %>  <%= link_to comment.user.to_s, profile_path(comment.user.login) %> <span class="commentuptime"><%= comment.formatted_time %> </span></div></td>
     </tr>
     <tr>
       <td width="104" valign="top">
