@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
   end
   
   def live_match
-      @live_match = Match.where(:live => true).order("matches.scheduled_at desc").limit(1)[0] || Match.where("matches.scheduled_at > ?", Time.now).order("matches.scheduled_at asc").limit(1)[0]
+      @live_match = Match.where(:live => true).order("matches.scheduled_at desc").first() || Match.where("matches.scheduled_at > ?", Time.now).order("matches.scheduled_at asc").first()
       @upcoming_matches =  Match.where("matches.scheduled_at > ?", Time.now).order("matches.scheduled_at asc").limit(4)
   end
 
