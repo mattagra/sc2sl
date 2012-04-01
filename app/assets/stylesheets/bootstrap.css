@@ -340,7 +340,7 @@
 }
 .carousel {
   position: relative;
-  margin-bottom: 18px;
+  margin-bottom: 0px;
   line-height: 1;
 }
 .carousel-inner {
