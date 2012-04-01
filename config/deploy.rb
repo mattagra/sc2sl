@@ -64,6 +64,7 @@ namespace :deploy do
     run "cd #{current_path}; RAILS_ENV=production bundle exec rake assets:precompile"
   end
 	
+	
   end
   
   
