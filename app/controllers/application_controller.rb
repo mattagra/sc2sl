@@ -164,8 +164,6 @@ class ApplicationController < ActionController::Base
   def set_timezone
     Time.zone =  "Hawaii" #(current_user.time_zone if current_user and !current_user.time_zone.blank?) || Sc2sl::Application.config.time_zone
   end
-  
-
 
 
 end

@@ -5,9 +5,9 @@ module TeamsHelper
     ret = ""
     case event[1]
     when 'join'
-      ret = "<img src='/css/images/user/small_green_arrow.png' alt='' width='10' height='9' /> New player : #{link_to(event[2].to_s, profile_path(event[2].user.login))}"
+      ret = image_tag("user/small_green_arrow.png", :width => 10, :height => 9).to_s +  "New player : " + link_to(event[2].to_s, profile_path(event[2].user.login)).to_s
     when 'quit'
-      ret = "<img src='/css/images/user/small_red_arrow.png' alt='' width='10' height='9' /> Player left : #{link_to(event[2].to_s, profile_path(event[2].user.login))}"
+      ret = image_tag("user/small_red_arrow.png", :width => 10, :height => 9).to_s +  "Player left : " + link_to(event[2].to_s, profile_path(event[2].user.login)).to_s
     when "match"
       other = (event[2].teams - [event[3]]).first
       if event[2].winner == event[3]

@@ -7,7 +7,7 @@
     <tr>
       <td width="240" valign="top">  <%= image_tag(@team.photo.url(:normal)) if @team.photo.exists?  %></td>
       <td valign="top"><span class="votenowtxt style1"><span class="votenowtxt  style3"><%= flag_icon @team.country.flag %>  <%= @team.name %> </span></span> <br/>
-        <% if @team.user %><img src="/css/images/content-bar/live/star2.gif" alt="" width="12" height="12" /><em> Coached by <%= link_to @team.user.login, profile_path(@team.user.login) %></em><br/><% end %>
+        <% if @team.user %><%= image_tag "content-bar/live/star2.gif", :height => 12, :width => 12 %><em> Coached by <%= link_to @team.user.login, profile_path(@team.user.login) %></em><br/><% end %>
         <p>Official website: <%= link_to @team.website, @team.website, {:target => "_blank"} %><br/>
           <br/>
           <%= link_to "Browse #{@team.short_name} replays.", replays_path(:team_id => @team.id) %></p>
@@ -57,7 +57,7 @@
         ids: ["historic", "historiccontent", "historictab"], // id of main panel DIV, content DIV, and tab DIV
         stateconfig: {initial: "5px", persiststate: true}, // initial: initial reveal amount in pixels (ie: 5px)
         animate: {enabled: true, steps: 5}, //steps: number of animation steps. Int between 1-20. Smaller=faster.
-        pointerimage: {enabled: true, src: ["/css/images/arrow-down.gif", "/css/images/arrow-up.gif"]},
+        pointerimage: {enabled: true, src: ["<%= image_path "arrow-down.gif" %>", "<%= image_path "arrow-up.gif" %>"]},
         closepanelonclick: {enabled: true} // close panel when links or elements with CSS class="closepanel" within container is clicked on?
       })
 

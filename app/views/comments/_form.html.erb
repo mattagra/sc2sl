@@ -119,5 +119,5 @@ function addUBB(code)
   <% elsif @comment and @comment.commentable? == false %>
   <div align="center"><br />This is no longer available to be commented on<br /><br /></div>
 <% else %>
-  <div align="center"><br/>You must <%= link_to "register", register_path %> or <%= link_to "login", login_path %> to comment.<br/> <br/></div>
+  <div align="center"><br/>You must <%= link_to "register", new_user_registration_path %> or <%= link_to "login", new_user_session_path %> to comment.<br/> <br/></div>
 <% end %>

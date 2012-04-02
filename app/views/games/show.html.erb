@@ -3,7 +3,7 @@
 
     <div id="titrenews">
       <div id="titrecom">
-        <a href="#newcomment"><img src="/css/images/comment/add.png" alt="add a comment"/></a>
+        <a href="#newcomment"><%= image_tag "comment/add.png" %></a>
       </div>
       <div id=textcom align=right>
         <a href="#comments"><%= @game.comments.count %></a>
@@ -18,7 +18,7 @@
       <p><%= image_tag @game.map.photo.url(:normal), :border => "1" %>
         <br />	 <%= @game.map.name %> - <%= link_to "Match Sheet", match_path(@game.match) %>
         <br />
-        <img src='/css/images/Replay/disk.jpg' align='top' /> <strong><%= link_to_if (current_user and @game.replay.exists?) , "Download", replay_match_game_path(@game.match_id, @game) %></strong>  (<%= @game.downloads %>) <br  /> <%= link_to("You must register to download replays",register_path) if current_user.nil? %><br />
+        <%= image_tag "Replay/disk.jpg", :align => :top %> <strong><%= link_to_if (current_user and @game.replay.exists?) , "Download", replay_match_game_path(@game.match_id, @game) %></strong>  (<%= @game.downloads %>) <br  /> <%= link_to("You must register to download replays",register_path) if current_user.nil? %><br />
         Admin Rating: <%= image_tag rating_star_image(@game.admin_rating) %>
         <%= ratings_for @game, :remote_options => {:url => rate_replay_path(@game)} %><br/>
         <%=raw @game.formatted_spoiler %><br/>

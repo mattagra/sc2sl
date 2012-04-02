@@ -52,10 +52,10 @@ body {
 <body>
 <table width="565" border="0" align="center">
   <tr>
-    <td><p><img src="/images/live_vote/banner.png" width="565" height="221" /></p></td>
+    <td><p><%= image_tag "live_vote/banner.png", :width => 565, :height => 221 %></p></td>
   </tr>
   <tr>
-    <td width="565" height="485" BACKGROUND="/images/live_vote/votelive.png"><table width="565" border="0">
+    <td width="565" height="485" background="<%= image_path "live_vote/votelive.png" %>"><table width="565" border="0">
       <tr align="center" valign="middle">
         <td height="116" colspan="2" align="center" valign="middle">
 		<%= image_tag(@vote_event.match.team0.photo.url(:normal), :width => 100, :height => 100) if @vote_event.match.team0 and @vote_event.match.team0.photo.exists?  %>
@@ -74,7 +74,8 @@ body {
 				<%= image_tag(race_icon_url(player.user.race)) %>
 				<strong class="player"><%= player.login %></strong>
 				<br />
-				<img src="/images/live_vote/votebar.png" alt="" width ="<%=( 200.0 * player_votes.to_f / total_votes.to_f).to_i %>" height="27" align="absmiddle" /> <span class="pour"><%= sprintf('%.1f', 100.0 * player_votes.to_f / total_votes.to_f) %>%</span>
+                <%= image_tag("live_vote/votebar.png", :width => (200.0 * player_votes.to_f / total_votes.to_f).to_i, :height => 27, :align => "absmiddle") %>
+				<span class="pour"><%= sprintf('%.1f', 100.0 * player_votes.to_f / total_votes.to_f) %>%</span>
 			  </p>
 			<% end %>
 		
