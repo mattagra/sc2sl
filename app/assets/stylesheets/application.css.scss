@@ -43,10 +43,10 @@ color : #000000;
  }
 
 
-A:link {text-decoration: none; color: #0D4986}
-A:visited {text-decoration: none; color: #0D4986}
-A:active {text-decoration: none; color: #0D4986}
-A:hover {text-decoration: none; color: #1d86f1}
+a:link {text-decoration: none; color: #0D4986}
+a:visited {text-decoration: none; color: #0D4986}
+a:active {text-decoration: none; color: #0D4986}
+a:hover {text-decoration: underline; color: #1d86f1}
 
 /* Playoff season */
 

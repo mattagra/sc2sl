@@ -85,7 +85,8 @@
             FB.login(function(response) {
                 if (response.authResponse) {
                     $.getJSON('<%= user_omniauth_callback_path(:facebook) %>', function(json) {
-                        window.location.reload(true);
+                        console.log("Response", json);
+                        /*window.location.reload(true); */
                     });
 
                 }
