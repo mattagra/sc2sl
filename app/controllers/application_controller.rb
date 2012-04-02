@@ -130,11 +130,11 @@ class ApplicationController < ActionController::Base
   #  end
   #end
   #
-  #def authenticate_super_admin!
-  #  unless current_super_admin
-  #    raise ActionController::RoutingError.new('Not Found')
-  #  end
-  #end
+  def authenticate_super_admin!
+    unless current_super_admin
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
 
 
 
