@@ -41,7 +41,7 @@ section "New Users" do
     end
     column :email
     column :country
-    column :current_login_ip
+    column :current_sign_in_ip
   end
   strong { link_to "View All Users", admin_users_path }
 end

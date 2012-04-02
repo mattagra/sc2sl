@@ -7,7 +7,7 @@ ActiveAdmin.register User do
 
   filter :login
   filter :email
-  filter :current_login_ip
+  filter :current_sign_in_ip
   filter :first_name
   filter :last_name
   filter :country
@@ -19,7 +19,7 @@ ActiveAdmin.register User do
     end
     column :email
     column "Registered", :created_at
-    column :current_login_ip
+    column :current_sign_in_ip
     column :first_name
     column :last_name
     column :country
@@ -90,7 +90,6 @@ ActiveAdmin.register User do
 	
 	def create
 	  @user = User.new
-      @user.reset_tokens
 	  if @user.update_attributes(params[:user], !current_user.is_super_admin?)
         flash[:notice] = "Account created!"
         redirect_to :action => :show, :id => @user.id
