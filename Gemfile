@@ -17,10 +17,12 @@ group :staging do
 end
  
 gem 'formtastic'
-gem 'facebooker2'
 gem 'ruby-hmac'
-gem 'mogli'
-gem 'authlogic'
+gem 'devise'
+gem 'hashie', '1.2.0'
+gem "omniauth"
+gem "omniauth-facebook"
+gem "tilt", '1.3.3'
 gem 'daemons'
 gem 'activeadmin', '0.4.3'
 gem "meta_search"
@@ -39,6 +41,7 @@ gem 'yaml_db'
 gem "memcache-client"
 gem 'delayed_job', '2.1.4'
 gem "rails_autolink", "~> 1.0.6"
+gem "watu_table_builder", :require => "table_builder"
 
 gem 'sass-rails', "~> 3.2.3"
 gem 'coffee-rails', "~> 3.2.1"

@@ -1,0 +1,103 @@
+<% unless form.object.new_record? %>
+<tr>
+  <td width="140" valign="top"><p><strong>First Name *</strong></p>                          </td>
+  <td width="260" valign="top"><%= form.text_field :first_name, :size => 30 %></td>
+  <td width="140" valign="top"><p><strong>Last Name  *</strong></p>
+    <p>&nbsp;</p></td>
+  <td width="260" valign="top"><%= form.text_field :last_name, :size => 30 %></td>
+</tr>
+<% end %>
+<tr>
+
+    <td width="140" valign="top"><strong>Login * </strong></td>
+    <% if (form.object.new_record? or (current_user and current_user.is_admin?)) %>
+      <td width="260" valign="top"><%= form.text_field :login, :size => 30 %></td>
+    <% else %>
+      <td width="260" valign="top"><%=  form.object.login %></td>
+    <% end  %>
+
+
+  <td width="140" valign="top"><p><strong>Email *</strong></p><p class="ntitle2">Add a valid address </p></td>
+  <% if (form.object.new_record? or (current_user and current_user.is_admin?)) %>
+      <td width="260" valign="top"><%=  form.email_field :email, :size => 30 %></td>
+  <% else %>
+      <td width="260" valign="top"><%=  form.object.email %></td>
+  <% end  %>
+
+
+
+
+</tr>
+
+<tr>
+  <td width="140" valign="top"><p><strong>Current Password </strong>*</p></td>
+  <td width="260" valign="top"><%= form.password_field :current_password, :size => 30 %></td>
+  <td width="140" valign="top"> </td>
+  <td width="260" valign="top"></td>
+</tr>
+<tr>
+  <td width="140" valign="top"><p><strong>Password </strong>*</p>
+    <p class="ntitle2">Min. size 6 chars. </p></td>
+  <td width="260" valign="top"><%= form.password_field :password, :size => 30 %></td>
+  <td width="140" valign="top"> <strong>Password confirmation * </strong></td>
+  <td width="260" valign="top"><%= form.password_field :password_confirmation, :size => 30 %></td>
+</tr>
+<tr>
+  <td valign="top"><p><strong>Country</strong></p>
+    <p class="ntitle2">Country of Birth</p></td>
+  <td colspan="3" valign="top">
+    <%=  form.select :country_id,Country.all.collect {|c| [c.name, c.id]},  { :prompt => true }, :class => "form-dd"%>
+  </td>
+</tr>
+<tr>
+  <td valign="top"><p><strong>Timezone</strong></p>
+    <p class="ntitle2">Time Zone</p></td>
+  <td colspan="3" valign="top">
+    <%=  form.select :time_zone  , ActiveSupport::TimeZone.all.collect{|t| [t.to_s, t.name]},  { :prompt => true}, :class => "form-dd" %>
+  </td>
+</tr>
+<% unless form.object.new_record? %>
+<tr>
+  <td valign="top"><strong><label for="user_birthdate"> Birthdate <span class="small">Year / Month / day</span></label></strong></td>
+  <td colspan="3" valign="top"><%=  form.date_select :birthdate, :start_year => Time.now.year - 100, :end_year => Time.now.year %></td>
+</tr>
+<% end %>
+<tr>
+  <td colspan="4" valign="top"><p>&nbsp;</p>
+    <hr align="left" width="755" />
+    <p>&nbsp;</p></td>
+</tr>
+<% unless form.object.new_record? %>
+<tr>
+  <td width="140" valign="top"><strong>Bnet Name</strong></td>
+  <td width="260" valign="top"><%=  form.text_field :bnet_name, :size => 30 %></td>
+  <td width="140" valign="top"><p><strong>.Code</strong></p>
+    <p class="ntitle2">Ex: 805 </p></td>
+  <td width="260" valign="top"><%= form.text_field :bent_code, :size => 30 %></td>
+</tr>
+<tr>
+  <td valign="top"><strong>Bnet Server </strong></td>
+  <td valign="top"><%=  form.select :bnet_server, User::SERVERS, {:prompt => true}, :class => "formd-dd2" %></td>
+  <td valign="top"><p><strong>Main Race</strong></p>
+    <p>&nbsp; </p></td>
+  <td valign="top"><%=  form.select :race, ["protoss", "zerg", "terran", "random"], {}, {:class => "rform-dd2"} %></td>
+</tr>
+
+<tr>
+  <td valign="top"><strong>Photo</strong></td>
+  <td colspan="3" valign="top"><%= form.file_field :photo %></td>
+</tr>
+<tr>
+  <td valign="top"><strong>Signature</strong></td>
+  <td colspan="3" valign="top"><%=  form.text_field :signature, :class => "form-dd", :size => 30  %></td>
+</tr>
+<tr>
+  <td valign="top"><strong>Profile Text </strong></td>
+  <td colspan="3" valign="top"><%=  form.text_area :profile_text, :rows => 8, :cols => 50 %></td>
+</tr>
+  <tr>
+    <td valign="top"><b><%= form.label :subscription %></b></td>
+    <td colspan="3" valign="top"><%=  form.check_box :subscription, :class => "form-dd" %></td>
+  <% end  %>
+</tr>
+

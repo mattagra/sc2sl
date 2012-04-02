@@ -1,17 +1,17 @@
 
-<table width="780" border="0" cellpadding="0" cellspacing="0" id="comtab">
+<table width="780" border="0" cellpadding="0" cellspacing="0" class="comtab">
   <tbody><tr>
       <td colspan="2">
         <div class="commentup" id="comment_<%= comment.id %>">
           <div id="thumbs">
             <div align="right">
-              <% if can? :create, Comment %><%= link_to "Quote", new_comment_path(:comment_id => comment.id, :back_url => request.fullpath) %> -<% end %>
-              <% if can? :edit, comment %><%= link_to "Edit", edit_comment_path(comment, :back_url => request.fullpath) %> -<% end %>
+              <% if can? :create, Comment %><%= link_to "Quote", new_comment_path(:comment_id => comment.id, :back_url => request.fullpath) %><% end %>
+              <% if can? :edit, comment %> - <%= link_to "Edit", edit_comment_path(comment, :back_url => request.fullpath) %><% end %>
               <% if can? :edit, Moderation %>
                 <%- if comment.moderation %>
-                  <%= link_to "Warn", edit_moderation_path(comment.moderation) %>
+                   - <%= link_to "Warn", edit_moderation_path(comment.moderation) %>
                 <% else %>
-                  <%= link_to "Warn", new_moderation_path(:user_id => comment.user.id, :comment_id => comment.id) %>
+                   - <%= link_to "Warn", new_moderation_path(:user_id => comment.user.id, :comment_id => comment.id) %>
                 <% end %>
               <% end %>
             </div>

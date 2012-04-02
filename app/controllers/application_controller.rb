@@ -1,6 +1,5 @@
 
 class ApplicationController < ActionController::Base
-  include Facebooker2::Rails::Controller
   include UrlHelper
   protect_from_forgery
   helper :all
@@ -79,16 +78,16 @@ class ApplicationController < ActionController::Base
   end
 
 
-  def current_user_session
-    return @current_user_session if defined?(@current_user_session)
-    @current_user_session = UserSession.find
-  end
-
-  def current_user
-    return @current_user if defined?(@current_user)
-    @current_user = current_user_session && current_user_session.record
-  end
-
+  #def current_user_session
+  #  return @current_user_session if defined?(@current_user_session)
+  #  @current_user_session = UserSession.find
+  #end
+  #
+  #def current_user
+  #  return @current_user if defined?(@current_user)
+  #  @current_user = current_user_session && current_user_session.record
+  #end
+  #
   def current_moderator
     if current_user and current_user.is_moderator?
       return current_user
@@ -112,30 +111,30 @@ class ApplicationController < ActionController::Base
       return nil
     end
   end
-
-  def require_user
-    unless current_user
-      store_location
-      flash[:notice] = "You must be logged in to access this page"
-      redirect_to new_user_session_url
-      return false
-    end
-  end
-
-  def require_no_user
-    if current_user
-      store_location
-      flash[:notice] = "You must be logged out to access this page"
-      redirect_to account_url
-      return false
-    end
-  end
-
-  def authenticate_super_admin!
-    unless current_super_admin
-      raise ActionController::RoutingError.new('Not Found')
-    end
-  end
+  #
+  #def require_user
+  #  unless current_user
+  #    store_location
+  #    flash[:notice] = "You must be logged in to access this page"
+  #    redirect_to new_user_session_url
+  #    return false
+  #  end
+  #end
+  #
+  #def require_no_user
+  #  if current_user
+  #    store_location
+  #    flash[:notice] = "You must be logged out to access this page"
+  #    redirect_to account_url
+  #    return false
+  #  end
+  #end
+  #
+  #def authenticate_super_admin!
+  #  unless current_super_admin
+  #    raise ActionController::RoutingError.new('Not Found')
+  #  end
+  #end
 
 
 

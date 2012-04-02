@@ -425,7 +425,6 @@ u.password = "michael"
 u.password_confirmation = "michael"
 u.terms = "1"
 u.roles = ["moderator", "admin", "superadmin"]
-u.reset_tokens
 u.save
 u.activate!
 

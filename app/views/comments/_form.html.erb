@@ -94,7 +94,7 @@ function addUBB(code)
       <%= f.hidden_field :external_type %>
       <%= f.hidden_field :external_id %>
       <%= hidden_field_tag :back_url, params[:back_url] || request.fullpath  %>
-    <% if current_moderator and !f.object.new_record? %>
+    <% if current_user and current_user.is_moderator? and !f.object.new_record? %>
       <div class="field">
         <%= f.label :locked %><br />
         <%= f.check_box :locked %>

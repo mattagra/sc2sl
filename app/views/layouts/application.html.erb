@@ -1,123 +1,138 @@
 <% cache("html_header", {:expires_in => 1.hour}) do %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
 
-    <META NAME="ROBOTS" CONTENT="NOODP" />
-    <meta http-equiv="Content-Language" content="EN-US" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="Description" content="The Starcraft 2 Survivor League is a Starcraft 2 team league event in survivor mode. Vote for your favorite player during a match and bring him back  to life!" />
-    <meta name="author" content="p6e" />
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
-    <meta name="language" content="english" />
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />  
-   
-
-    <!-- STYLES  -->
-    <%= stylesheet_link_tag "application" %>
-	<%= javascript_include_tag "application" %>
-    <link href="/favicon.ico" rel="shortcut icon" />
-    
-    
-
-    <!-- JAVASCRIPT  -->
-
-    <%= auto_discovery_link_tag(:rss, {:controller => :articles, :action => :index, :host => "sc2sl.com", :format => :rss}, {:title => "Latest SC2SL News"}) %>
-    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+      <META NAME="ROBOTS" CONTENT="NOODP"/>
+      <meta http-equiv="Content-Language" content="EN-US"/>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <meta name="Description" content="The Starcraft 2 Survivor League is a Starcraft 2 team league event in survivor mode. Vote for your favorite player during a match and bring him back  to life!"/>
+      <meta name="author" content="p6e"/>
+      <meta name="robots" content="index, follow"/>
+      <meta name="googlebot" content="index, follow"/>
+      <meta name="language" content="english"/>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 
 
-    
+      <!-- STYLES  -->
+      <%= stylesheet_link_tag "application" %>
+      <%= javascript_include_tag "application" %>
+      <link href="/favicon.ico" rel="shortcut icon"/>
 
 
-    
-    
-	
-	<% end %>	
+      <!-- JAVASCRIPT  -->
 
-    <title><%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League</title>
-    <meta name="title" content="<%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League" />
-    <meta name="description" content="<%= (@description + " | ") %> <%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League" />
-    <meta name="keywords" content="<%= @keywords.join(", ") %>" lang="en" xml:lang="en" />
-	<script type="text/javascript">
-
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-28567064-1']);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-
-	</script>
-	
-	
-  </head>
-  <body>
+      <%= auto_discovery_link_tag(:rss, {:controller => :articles, :action => :index, :host => "sc2sl.com", :format => :rss}, {:title => "Latest SC2SL News"}) %>
+      <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
 
-    <div id="structure-login2">
-      <div id="login">
-        <div id="login-content">
-          <div class="login-content-left">
-			<%= image_tag "login/icones/login.png", :alt => "Login", :align => "left" %>
-              
-                <% unless current_user %>
-                  <div class="login-content-texte"><span style="float:left;margin-top: 8px;"><%= link_to "REGISTER", register_path %> or LOGIN</span>
-                  <%= form_for UserSession.new, :url => user_session_path do |f| %>
-                    <%= f.text_field :login, :placeholder => "Login", :class => "input-login" %>
-                    <%= f.password_field :password, :placeholder => "Password", :class => "input-login" %>
-                    <%= f.hidden_field :remember_me, :value => true %>
-                    <%= f.submit "OK", :class => "submit-login" %>
-                  <% end %>
-				  <div style="margin-top: 4px; margin-right: 40px;float: right;">
-				  <%= authlogic_facebook_login_button("Log In With Facebook", :controller => :user_session, :scope => "email").html_safe %>
-	              <%= fb_connect_async_js %>
-				  </div>
-				  </div>
-                <% else %>
-                <div class="login-content-texte">
-                Welcome <b><%= current_user.login %></b> |
-              <%= link_to "My Account", account_path %> |
-              <% if current_user.is_moderator? %>
+
+
+
+
+
+
+<% end %>
+
+<title><%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>
+  Starcraft 2 Survivor League</title>
+<meta name="title" content="<%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League"/>
+<meta name="description" content="<%= (@description + " | ") %> <%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League"/>
+<meta name="keywords" content="<%= @keywords.join(", ") %>" lang="en" xml:lang="en"/>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28567064-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+
+
+</head>
+<body>
+
+
+<div id="structure-login2">
+<div id="login">
+  <div id="login-content">
+    <div class="login-content-left">
+      <%= image_tag "login/icones/login.png", :alt => "Login", :align => "left" %>
+
+      <% unless current_user %>
+          <div class="login-content-texte">
+            <span style="float:left;margin-top: 8px;"><%= link_to "REGISTER", new_user_registration_path %>
+              or LOGIN</span>
+            <%= form_for "user", :url => user_session_path do |f| %>
+                <%= f.text_field :email,:placeholder => "Login", :class => "input-login" %>
+                <%= f.password_field :password,:placeholder => "Password", :class => "input-login" %>
+                <%= f.hidden_field :remember_me,  :value => true %>
+                <%= f.submit "OK", :class => "submit-login" %>
+            <% end %>
+            <div style="margin-top: 4px; margin-right: 40px;float: right;">
+              <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+            </div>
+          </div>
+      <% else %>
+          <div class="login-content-texte">
+            Welcome <b><%= current_user.login %></b> |
+            <%= link_to "My Account", account_path %> |
+            <% if current_user.is_moderator? %>
                 <%= link_to "Admin Panel", admin_path %> |
-				<%= link_to "CMS Admin", "/cms-admin" %> |
+                <%= link_to "CMS Admin", "/cms-admin" %> |
                 <%= link_to "Comments", comments_path %> |
                 <%= link_to "Teams", teams_path %> |
                 <%= link_to "Seasons", seasons_path %> |
                 <%= link_to "Newsletters", newsletters_path %> |
                 <%= link_to "Moderations", moderations_path %> |
-              <% end %>
-              <%= link_to "Logout", logout_path %>
-              </div>
-                <% end %>
+            <% end %>
+            <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
           </div>
-		  <% cache("layout_static_1", {:expires_in => 1.hour}) do %>
-			  <div class="login-content-middle">					
-				<%= cms_snippet_content('coverage') %>
-			  </div>
-			  <div class="login-content-right">
-			    
-				<a href="https://twitter.com/sc2sl" class="twitter-follow-button" data-show-count="false" style="margin-top: 5px;">Follow @sc2sl</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-				<div class="fb-like" data-href="https://www.facebook.com/pages/SC2SL/258966677449790" data-send="false" data-layout="button_count" data-width="75" data-show-faces="false" data-colorscheme="dark" data-font="tahoma"></div>
-			  </div>
-		  <% end %>
+      <% end %>
+    </div>
+    <% cache("layout_static_1", {:expires_in => 1.hour}) do %>
+        <div class="login-content-middle">
+          <%= cms_snippet_content('coverage') %>
         </div>
-      </div>
+        <div class="login-content-right">
+
+          <a href="https://twitter.com/sc2sl" class="twitter-follow-button" data-show-count="false" style="margin-top: 5px;">Follow
+            @sc2sl</a>
+          <script>!function (d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (!d.getElementById(id)) {
+                  js = d.createElement(s);
+                  js.id = id;
+                  js.src = "//platform.twitter.com/widgets.js";
+                  fjs.parentNode.insertBefore(js, fjs);
+              }
+          }(document, "script", "twitter-wjs");</script>
+          <div class="fb-like" data-href="https://www.facebook.com/pages/SC2SL/258966677449790" data-send="false" data-layout="button_count" data-width="75" data-show-faces="false" data-colorscheme="dark" data-font="tahoma"></div>
+        </div>
+    <% end %>
+  </div>
+</div>
 
 
-    <table width="1000" height="92" border="0" align="center" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="380" align="center" valign="middle"><%= cms_snippet_content('main_logo') %></td>
-		
-        <td width="620" align="center" valign="middle"><div id="pubhaut"><%= random_ad("horizontal") %></div></td>
-      </tr>
-    </table>
+<table width="1000" height="92" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="380" align="center" valign="middle"><%= cms_snippet_content('main_logo') %></td>
 
-    <% cache("layout_menu_#{Time.zone}", {:expires_in => 1.minute}) do %>
+    <td width="620" align="center" valign="middle">
+      <div id="pubhaut"><%= random_ad("horizontal") %></div>
+    </td>
+  </tr>
+</table>
+
+<% cache("layout_menu_#{Time.zone}", {:expires_in => 1.minute}) do %>
     <div id="menu">
 
       <%= cms_snippet_content('main_menu') %>
@@ -128,38 +143,40 @@
 
         <div class="menu-live-left">&nbsp;</div>
 
-        <div class="menu-live-right"><span style="float : right ;height : 18px; margin-left : 8px; margin-top : 7px;">NEXT LIVE ON SC2SL <%= @live_match.scheduled_at.strftime("%d %b %H:%M").upcase if @live_match  %> </span></div>
+        <div class="menu-live-right">
+          <span style="float : right ;height : 18px; margin-left : 8px; margin-top : 7px;">NEXT LIVE ON SC2SL <%= @live_match.scheduled_at.strftime("%d %b %H:%M").upcase if @live_match %> </span>
+        </div>
 
       </div>
 
     </div>
-	
-	<% end %>
-	
-	
-    
-    <div id="content-bar">
-	  
-	  <% if @live_match and @live_match.live %>
-		<%= render :partial => "matches/live", :locals => {:live_match => @live_match} %>
-	  <% else %>
-        <% cache("frontpage_articles", {:expires_in => 5.minutes}) do %>
-            <div id="myCarousel" class="carousel">
-              <div class="carousel-inner">
-                
-                <%- @frontpage_articles.find_all{|a| a.photo.exists?}[0..2].each_with_index do |article, i| %>
-                  <%= render :partial => "articles/article_banner", :locals => {:article => article, :active => (i == 0 ? "active" : "") } %>
-                <% end %>
-				
-                
-              </div>
-			  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-            </div>
-        <% end %>
-	  <% end %>
 
-      <% cache("live_section", {:expires_in => 1.minute}) do %>
+<% end %>
+
+
+
+<div id="content-bar">
+
+  <% if @live_match and @live_match.live %>
+      <%= render :partial => "matches/live", :locals => {:live_match => @live_match} %>
+  <% else %>
+      <% cache("frontpage_articles", {:expires_in => 5.minutes}) do %>
+          <div id="myCarousel" class="carousel">
+            <div class="carousel-inner">
+
+              <%- @frontpage_articles.find_all { |a| a.photo.exists? }[0..2].each_with_index do |article, i| %>
+                  <%= render :partial => "articles/article_banner", :locals => {:article => article, :active => (i == 0 ? "active" : "")} %>
+              <% end %>
+
+
+            </div>
+            <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+          </div>
+      <% end %>
+  <% end %>
+
+  <% cache("live_section", {:expires_in => 1.minute}) do %>
       <div id="live">
 
         <div id="live-haut">
@@ -167,11 +184,11 @@
           <div id="live-haut-status">
 
             <% if @live_match and @live_match.live %>
-              <div id="live-haut-status-image"><%= image_tag "content-bar/live/live.jpg", :alt=>"Live" %></div>
-              <div id="live-haut-status-texte"><%= image_tag 'live.gif' %></div>
+                <div id="live-haut-status-image"><%= image_tag "content-bar/live/live.jpg", :alt => "Live" %></div>
+                <div id="live-haut-status-texte"><%= image_tag 'live.gif' %></div>
             <% else %>
-              <div id="live-haut-status-image"><%= image_tag "content-bar/live/offline.jpg", :alt=>"Offline" %></div>
-              <div id="live-haut-status-texte">LIVE IS OFFLINE</div>
+                <div id="live-haut-status-image"><%= image_tag "content-bar/live/offline.jpg", :alt => "Offline" %></div>
+                <div id="live-haut-status-texte">LIVE IS OFFLINE</div>
             <% end %>
 
           </div>
@@ -180,7 +197,12 @@
 
           <div id="live-haut-infos">
 
-            <div id="live-haut-infos-competition"><% if @live_match %><% if @live_match.weeks_id %>Round <%= @live_match.weeks_id %> <% elsif @live_match.playoff_id %> <%= describe_round(0, (@live_match.playoff_id + 1) / 2 + 1) %><% end %><% end %></div>
+            <div id="live-haut-infos-competition">
+              <% if @live_match %>
+                  <% if @live_match.weeks_id %>Round <%= @live_match.weeks_id %>
+                  <% elsif @live_match.playoff_id %> <%= describe_round(0, (@live_match.playoff_id + 1) / 2 + 1) %>
+                  <% end %>
+              <% end %></div>
 
             <div id="live-haut-infos-team"><%= link_to(@live_match.short_title, match_path(@live_match.id)) if !@live_match.nil? %></div>
 
@@ -191,95 +213,101 @@
         <div id="live-ligne">
           <div id="live-ligne-left" align="left">
             <div align="left">
-			  <% if @live_match %>
-			    <% @live_match.casters.each do |caster| %>
+              <% if @live_match %>
+                  <% @live_match.casters.each do |caster| %>
                       <%= flag_icon(caster.country.flag) %>&nbsp;<%= link_to caster.login, caster.website, :target => "_blank" %>
-			    <% end %>
-			  <% end %>
-		    </div>
+                  <% end %>
+              <% end %>
+            </div>
           </div>
 
         </div>
-        <% end %>
-      </div>
-	  
+  <% end %>
+  </div>
 
-      <% cache("calendar_#{@calendar_date.year.to_s}_#{@calendar_date.month.to_s}", {:expires_in => 1.hour}) do  %>
+
+  <% cache("calendar_#{@calendar_date.year.to_s}_#{@calendar_date.month.to_s}", {:expires_in => 1.hour}) do %>
       <div id="head-sponsors" align="center">
         <table width="353" height="12" border="0" cellpadding="0" cellspacing="2" bordercolor="#000000">
           <thead>
-            <tr height="11" align="center" class="month" bgcolor="#f5f5f5">
-              <td height="20" colspan="5" bgcolor="#FFFFFF"><div align="left" class="ntitle2" style="margin-left:2px"></div></td>
-              <td height="20" colspan="2" bgcolor="#FFFFFF" style="text-align: right;">
+          <tr height="11" align="center" class="month" bgcolor="#f5f5f5">
+            <td height="20" colspan="5" bgcolor="#FFFFFF">
+              <div align="left" class="ntitle2" style="margin-left:2px"></div>
+            </td>
+            <td height="20" colspan="2" bgcolor="#FFFFFF" style="text-align: right;">
                 <span class="ntitle2">
-                  <%= link_to image_tag("content-bar/sponsors/flecheg.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"),
-                    matches_path(:calendar_month => (@calendar_date.beginning_of_month-1).strftime("%m"),  :calendar_year => (@calendar_date.beginning_of_month-1).strftime("%Y")) %>
-                  <%= link_to @calendar_date.strftime("%B %Y"), matches_path(:calendar_month =>  @calendar_date.strftime("%m"), :calendar_year => @calendar_date.strftime("%Y") )  %>
-                  <%= link_to image_tag("content-bar/sponsors/fleche.gif", :alt=>"", :width=>"14", :height=>"14", :align=>"bottom"),
-                    matches_path(:calendar_month => (@calendar_date.end_of_month+1).strftime("%m"),  :calendar_year => (@calendar_date.end_of_month+1).strftime("%Y")) %>
+                  <%= link_to image_tag("content-bar/sponsors/flecheg.gif", :alt => "", :width => "14", :height => "14", :align => "bottom"),
+                              matches_path(:calendar_month => (@calendar_date.beginning_of_month-1).strftime("%m"), :calendar_year => (@calendar_date.beginning_of_month-1).strftime("%Y")) %>
+                  <%= link_to @calendar_date.strftime("%B %Y"), matches_path(:calendar_month => @calendar_date.strftime("%m"), :calendar_year => @calendar_date.strftime("%Y")) %>
+                  <%= link_to image_tag("content-bar/sponsors/fleche.gif", :alt => "", :width => "14", :height => "14", :align => "bottom"),
+                              matches_path(:calendar_month => (@calendar_date.end_of_month+1).strftime("%m"), :calendar_year => (@calendar_date.end_of_month+1).strftime("%Y")) %>
                 </span>
-              </td>
-            </tr>
+            </td>
+          </tr>
           </thead>
         </table>
-        
+
         <div id="calendar">
-          <%= calendar_for @layout_matches.to_a, :year => @calendar_date.year, :month => @calendar_date.month, :today => Time.now, :first_day_of_week => 1  do |calendar| %>
-            <%= calendar.head('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun') %>
-            <% calendar.day(:day_method => :scheduled_at) do |date, matches| %>
-              <% if date.month == @calendar_date.month %>
-                <% if matches.size == 0 %>
-                  <%= date.day %>
-                <% else %>
-                  <% str = "" %>
-                  <% id = 0 %>
-				  <% scheduled_at = nil %>
-                  <% for match in matches %>
-                    <% str += match.title + "\n" %>
-                    <% id = match.id %>
-					<% scheduled_at = match.scheduled_at %>
+          <%= calendar_for @layout_matches.to_a, :year => @calendar_date.year, :month => @calendar_date.month, :today => Time.now, :first_day_of_week => 1 do |calendar| %>
+              <%= calendar.head('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun') %>
+              <% calendar.day(:day_method => :scheduled_at) do |date, matches| %>
+                  <% if date.month == @calendar_date.month %>
+                      <% if matches.size == 0 %>
+                          <%= date.day %>
+                      <% else %>
+                          <% str = "" %>
+                          <% id = 0 %>
+                          <% scheduled_at = nil %>
+                          <% for match in matches %>
+                              <% str += match.title + "\n" %>
+                              <% id = match.id %>
+                              <% scheduled_at = match.scheduled_at %>
+                          <% end %>
+                          <%= link_to(date.day, matches_path(:calendar_month => scheduled_at.strftime("%m"), :calendar_year => scheduled_at.strftime("%Y")) + "#match_#{id}", :title => str) %>
+                      <% end %>
                   <% end %>
-                  <%= link_to(date.day, matches_path(:calendar_month => scheduled_at.strftime("%m"), :calendar_year => scheduled_at.strftime("%Y")) + "#match_#{id}", :title => str) %>
-                <% end %>
               <% end %>
-            <% end %>
           <% end %>
         </div>
-        
+
       </div>
+  <% end %>
+
+  <div id="structure">
+    <div id="fullpage3">
+      <% flash.each do |key, msg| %>
+          <%= content_tag :div, msg, :class => ["flash_#{key}"], :id => "notice_#{key}" %>
       <% end %>
+      <%= yield %>
+    </div>
+    <div id="right">
+      <div id="advertissement">
 
-      <div id="structure">
-        <div id="fullpage3">
-          <% flash.each do |key, msg| %>
-            <%= content_tag :div, msg, :class => ["flash_#{key}"], :id => "notice_#{key}" %>
-          <% end %>
-          <%= yield %>
+        <div id="right-titre">
+          <div id="right-titre-texte">ADVERTISEMENT</div>
         </div>
-        <div id="right">
-          <div id="advertissement">
-
-            <div id="right-titre">
-              <div id="right-titre-texte">ADVERTISEMENT</div>
-            </div>
-            <div id="advertissement-image">
-			<%= random_ad("vertical") %>
-			</div>
-          </div>
+        <div id="advertissement-image">
+          <%= random_ad("vertical") %>
         </div>
       </div>
-	  
-	  <% cache("html_footer", {:expires_in => 1.hour}) do %>
+    </div>
+  </div>
+
+  <% cache("html_footer", {:expires_in => 1.hour}) do %>
       <div id="footer">
 
         <div id="footer-menu">
 
-          <table class="footer-menu" width="1000" height="34" border="0" cellpadding="0" cellspacing"0">
-                 <tr>
-              <td width="100" align="center" valign="middle" class="menu-lien"><a href="mailto:contact@sc2sl.com">CONTACT</a></td>
+          <table class="footer-menu" width="1000" height="34" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+            <tr>
+              <td width="100" align="center" valign="middle" class="menu-lien">
+                <a href="mailto:contact@sc2sl.com">CONTACT</a></td>
               <td width="770" align="center"><font color="#333333"><%= cms_snippet_content('footer') %></font></td>
-              <td align="right" width="130" align="right" valign="middle" class="menu-lien"><a href="#">BACK TO THE TOP</a></td>
+              <td align="right" width="130" align="right" valign="middle" class="menu-lien">
+                <a href="#">BACK TO THE TOP</a></td>
             </tr>
+            </tbody>
           </table>
 
         </div>
@@ -287,12 +315,12 @@
       </div>
 
 
+      </div>
+      <div>&nbsp;</div>
 
-    </div>
-    <div>&nbsp;</div>
-    
-  </body>
+      </div>
+      </body>
 
-</html>
+      </html>
 
-<% end %>
+  <% end %>

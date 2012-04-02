@@ -27,7 +27,7 @@
         <%= @user.age %>  years old 
         <% if @user == current_user %>
 
-          <%= link_to 'Update Information', edit_account_path %>
+          <%= link_to 'Update Information', edit_user_registration_path %>
         <% elsif current_admin %>
           <%= link_to "Update Information", edit_admin_user_path(@user) %>
         <% end %>

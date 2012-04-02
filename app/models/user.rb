@@ -1,9 +1,13 @@
 class User < ActiveRecord::Base
   #Authentication
-  acts_as_authentic do |c|
-    c.disable_perishable_token_maintenance true
+  #acts_as_authentic do |c|
+  #  c.disable_perishable_token_maintenance true
     #c.my_config_option = my_value # for available options see documentation in: Authlogic::ActsAsAuthentic
-  end # block optional
+  #end # block optional
+
+  devise :database_authenticatable, :registerable, :recoverable, :encryptable,
+         :rememberable, :trackable, :validatable, :confirmable, :lockable,
+         :timeoutable, :omniauthable
 
   #STATIC
   ROLES = %w[admin moderator superadmin]
@@ -25,7 +29,7 @@ class User < ActiveRecord::Base
 
 
   #Attributes
-  attr_protected :login, :caster, :website, :email, :roles
+  attr_protected :caster, :website, :roles
 
   #Validations
   validates :email, :presence => true, :uniqueness => true, :email_format => true
@@ -66,7 +70,27 @@ class User < ActiveRecord::Base
 
   before_save :capitalize_names #, :reset_tokens
   before_save :check_for_new_photo
-  
+
+
+  def self.find_for_database_authentication(conditions={})
+    self.where("login = ?", conditions[:email]).limit(1).first ||
+        self.where("email = ?", conditions[:email]).limit(1).first
+  end
+
+  def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
+    data = access_token.extra.raw_info
+    if user = User.where(:email => data.email).first
+      user
+      if user.facebook_uid.blank?
+        user.facebook_uid = data.id
+        user.save!
+      end
+    else # Create a user with a stub password.
+      User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :active => true, :subscription => true, :login => (data.nickname + "_" + data.id.to_s)[0..19], :first_name => data.first_name, :last_name => data.last_name, :facebook_uid => data.id)
+    end
+  end
+
+
   def to_s
     if connected_with_facebook? and first_name.to_s.length > 0 and last_name.to_s.length > 0
 	  safe_name
@@ -91,19 +115,6 @@ class User < ActiveRecord::Base
   def connected_with_facebook?
     !self.facebook_uid.nil?
   end
-  
-  def before_connect(facebook_session)
-	  self.first_name = facebook_session.first_name
-	  self.last_name = facebook_session.last_name
-	  self.email = facebook_session.email
-	  self.login = "#{facebook_session.first_name.to_s.downcase}_#{Time.now.to_i.to_s}"[0..19]
-	  self.password = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{self.login}--")[0,6]
-	  self.password_confirmation = self.password
-	  self.active = true
-	  self.subscription = true
-	  self.reset_tokens
-	end
-
 
   def capitalize_names
     self.first_name = self.first_name.capitalize if self.first_name
@@ -142,10 +153,10 @@ class User < ActiveRecord::Base
     self.subscription = true if self.subscription.nil?
   end
 
-  def reset_tokens
-    self.reset_perishable_token
-    self.reset_single_access_token
-  end
+  #def reset_tokens
+  #  self.reset_perishable_token
+  #  self.reset_single_access_token
+  #end
 
   def banned?
     (Moderation.where(:user_id => self.id, :mod_type => "permaban").count > 0) or (Moderation.where(:user_id => self.id).where(:mod_type => "banned").where("ends_at > CURRENT_TIMESTAMP").count > 0)

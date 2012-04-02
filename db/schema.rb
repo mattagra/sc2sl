@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120330162556) do
+ActiveRecord::Schema.define(:version => 20120402013821) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -445,19 +445,16 @@ ActiveRecord::Schema.define(:version => 20120330162556) do
 
   create_table "users", :force => true do |t|
     t.string   "email",                                   :null => false
-    t.string   "crypted_password",                        :null => false
+    t.string   "encrypted_password",                      :null => false
     t.string   "password_salt",                           :null => false
-    t.string   "persistence_token",                       :null => false
-    t.string   "single_access_token",                     :null => false
-    t.string   "perishable_token",                        :null => false
     t.string   "login",                                   :null => false
-    t.integer  "login_count",          :default => 0,     :null => false
-    t.integer  "failed_login_count",   :default => 0,     :null => false
+    t.integer  "sign_in_count",        :default => 0,     :null => false
+    t.integer  "failed_attempts",      :default => 0,     :null => false
     t.datetime "last_request_at"
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string   "current_login_ip"
-    t.string   "last_login_ip"
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.boolean  "active",               :default => false, :null => false
     t.datetime "last_updated"
     t.string   "first_name"
@@ -484,13 +481,24 @@ ActiveRecord::Schema.define(:version => 20120330162556) do
     t.string   "time_zone"
     t.string   "facebook_session_key"
     t.integer  "facebook_uid"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "reset_password_token"
+    t.string   "remember_token"
+    t.datetime "remember_created_at"
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+    t.string   "unconfirmed_email"
   end
 
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email"
-  add_index "users", ["facebook_uid", "facebook_session_key"], :name => "index_users_on_facebook_uid_and_facebook_session_key"
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"
   add_index "users", ["login"], :name => "index_users_on_login"
   add_index "users", ["race"], :name => "index_users_on_race"
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
   create_table "vote_events", :force => true do |t|
     t.integer  "match_id"

@@ -4,7 +4,7 @@ Sc2sl::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   #resources :advertisements
 
   resources :newsletters
@@ -73,18 +73,18 @@ Sc2sl::Application.routes.draw do
     end
   end
   resources :password_resets
-  resource :user_session
+  #resource :user_session
   resource :account, :controller => :users
   resources :users
 
-  get 'logout' => 'user_sessions#destroy'
-  get 'login' => 'user_sessions#new'
-  get 'register' => 'users#new'
+  #get 'logout' => 'user_sessions#destroy'
+  #get 'login' => 'user_sessions#new'
+  #get 'register' => 'users#new'
   match 'profile/:login' => 'users#show', :as => :profile
-  match 'finish_registration' => 'site#finish_registration', :as => :finish_registration
-  match 'finish_activation' => 'site#finish_activation', :as => :finish_activation
+  #match 'finish_registration' => 'site#finish_registration', :as => :finish_registration
+  #match 'finish_activation' => 'site#finish_activation', :as => :finish_activation
 
-  match '/activate/:activation_code' => 'activations#new', :as => :activate
+  #match '/activate/:activation_code' => 'activations#new', :as => :activate
   match '/terms' => "site#terms", :as => :terms
   match '/sitemap' => "site#sitemap", :as => :sitemap
   get '/panda/:caption' => "site#panda", :as => :panda

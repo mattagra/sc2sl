@@ -9,7 +9,6 @@ class Ability
       if user.role? :superadmin
         can :manage, :all
       else
-        can :destroy, UserSession
         can :manage, Vote
         can :show_current, VoteEvent
         can :update, User do |user|
@@ -32,7 +31,6 @@ class Ability
 
     else
       can :create, User
-      can :create, UserSession
     end
 
   end
