@@ -22,7 +22,7 @@
 
       <!-- JAVASCRIPT  -->
 
-      <%= auto_discovery_link_tag(:rss, {:controller => :articles, :action => :index, :host => "sc2sl.com", :format => :rss}, {:title => "Latest SC2SL News"}) %>
+      <%= auto_discovery_link_tag(:rss, {:controller => "/articles", :action => :index, :host => "sc2sl.com", :format => :rss}, {:title => "Latest SC2SL News"}) %>
       <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
 
