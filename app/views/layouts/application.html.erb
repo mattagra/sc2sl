@@ -64,7 +64,7 @@
 <script type="text/javascript">
     window.fbAsyncInit = function() {
         FB.init({
-            appId  : 162853603828753,
+            appId  : '109443772521540',
             status     : true,
             cookie     : true,
             xfbml      : true,
@@ -85,6 +85,7 @@
 
             FB.login(function(response) {
                 if (response.authResponse) {
+                    console.log("Facebook response object", response);
                     $.getJSON('<%= user_omniauth_callback_path(:facebook) %>', function(json) {
                         console.log("Response", json);
                         /*window.location.reload(true); */

@@ -44,10 +44,18 @@ Sc2sl::Application.configure do
   # Do not compress assets
   config.assets.compress = false
 
+
+
   # Expands the lines which load the assets
   config.assets.debug = true
 
 
   require 'openssl'
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
+  Devise.setup do |devise|
+    devise.omniauth :facebook, "109443772521540", "ef239daeeffc458b7a6276bd51d35e09"
+  end
+
+
 end
