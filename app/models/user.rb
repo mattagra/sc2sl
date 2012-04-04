@@ -152,7 +152,6 @@ class User < ActiveRecord::Base
   
 
   def set_defaults
-    self.active = false if self.active.nil?
     self.subscription = true if self.subscription.nil?
   end
 

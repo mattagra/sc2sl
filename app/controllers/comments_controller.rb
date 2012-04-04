@@ -4,20 +4,7 @@ class CommentsController < ApplicationController
   authorize_resource
   
   before_filter :deny_banned, :only => [:new, :create, :edit, :update, :destroy]
-  before_filter :authenticate_super_admin!, :only => [:index]
 
-  def index
-    @current_page = [(params[:page]|| 1).to_i, 1].max
-    @per_page = 10
-    @comments= Comment.newest.paginated(@current_page, @per_page)
-    @comments_count = Comment.count
-    @comment = Comment.new
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @comments }
-    end
-  end
 
   # GET /comments/1
   # GET /comments/1.xml

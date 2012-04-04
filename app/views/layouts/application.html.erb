@@ -39,6 +39,7 @@
 <meta name="title" content="<%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League"/>
 <meta name="description" content="<%= (@description + " | ") %> <%= (@layout_subpage + " - ") unless @layout_subpage.empty? %><%= (@layout_page + " - ") unless @layout_page.empty? %>Starcraft 2 Survivor League"/>
 <meta name="keywords" content="<%= @keywords.join(", ") %>" lang="en" xml:lang="en"/>
+<%= csrf_meta_tags %>
 <script type="text/javascript">
 
     var _gaq = _gaq || [];
@@ -118,12 +119,10 @@
           </div>
       <% else %>
           <div class="login-content-texte">
-            Welcome <b><%= current_user.login %></b> |
-            <%= link_to "My Account", account_path %> |
+            Welcome <b><%= link_to current_user.login, account_path %></b> |
             <% if current_user.is_moderator? %>
                 <%= link_to "Admin Panel", admin_path %> |
                 <%= link_to "CMS Admin", "/cms-admin" %> |
-                <%= link_to "Comments", comments_path %> |
                 <%= link_to "Teams", teams_path %> |
                 <%= link_to "Seasons", seasons_path %> |
                 <%= link_to "Newsletters", newsletters_path %> |

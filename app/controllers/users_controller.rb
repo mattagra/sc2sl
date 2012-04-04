@@ -3,22 +3,6 @@ class UsersController < ApplicationController
 
 
 
-  def create
-    @user = User.new(params[:user])
-    @user.login = params[:user][:login]
-    @user.email = params[:user][:email]
-    @user.reset_tokens
-    if verify_recaptcha(:model => @user, :message => "The security code you entered was incorrect.") and @user.save
-      flash[:notice] = "Thank you for registering. Please check your email to confirm your information before proceding."
-      UserMailer.delay.activation(@user)
-      redirect_to finish_registration_url
-    else
-      flash[:error] = "Some errors prevented you from registering."
-      render :action => :new
-    end
-  end
-
-
 
   def show
     if current_user and params[:login].nil?

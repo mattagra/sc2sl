@@ -28,13 +28,14 @@
 
 
 </tr>
-
+<% unless (form.object.new_record? or (current_user and current_user.is_admin?)) %>
 <tr>
   <td width="140" valign="top"><p><strong>Current Password </strong>*</p></td>
   <td width="260" valign="top"><%= form.password_field :current_password, :size => 30 %></td>
   <td width="140" valign="top"> </td>
   <td width="260" valign="top"></td>
 </tr>
+    <% end %>
 <tr>
   <td width="140" valign="top"><p><strong>Password </strong>*</p>
     <p class="ntitle2">Min. size 6 chars. </p></td>
