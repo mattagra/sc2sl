@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   scope :newest, order('id asc')
   scope :alphabetical, order('LOWER(login) asc')
   scope :recent, order('updated_at desc')
-  scope :inactive, where(:active => false)
+  scope :inactive, where("confirmed_at is null")
   scope :not_a_player, includes(:player).where("players.id is null")
   scope :is_a_player, includes(:player).where("players.id is not null")
   
@@ -202,6 +202,16 @@ class User < ActiveRecord::Base
   
   def commentable(user)
     true
+  end
+
+  def active
+    confirmed?
+  end
+
+  def active=(_new_active)
+    if _new_active = true
+      confirm!
+    end
   end
   
   

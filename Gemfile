@@ -46,7 +46,7 @@ gem "watu_table_builder", :require => "table_builder"
 gem 'sass-rails', "~> 3.2.3"
 gem 'coffee-rails', "~> 3.2.1"
 gem 'execjs'
-
+gem "squeel"  # Last officially released gem
 gem 'mime-types'
 gem 'ckeditor', "3.7.0.rc3"
 

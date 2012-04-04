@@ -1,16 +1,6 @@
 class UserMailer < ActionMailer::Base
   default :from => "SC2SL <webmaster@sc2sl.com>"
 
-  def activation(user)
-    @user = user
-    mail(:to => "#{user.login} <#{user.email}>", :subject => "SC2SL: Account activation")
-  end
-
-  def password_reset(user)
-    @user = user
-    mail(:to => "#{@user.login} <#{@user.email}>", :subject => "SC2SL: Password Reset")
-  end
-
   def username_change(user, old_login)
     @user = user
     @old_login = old_login

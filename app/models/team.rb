@@ -24,9 +24,9 @@ class Team < ActiveRecord::Base
 
   
   def games
-    Game.joins(:match => [:team0, :team1]).where("match.team0_id =? or match.team1_id = ?",self.id, self.id).where({:result.not_eq => nil})
+    Game.joins(:match => [:team0, :team1]).where("matches.team0_id =? or matches.team1_id = ?",self.id, self.id).where("games.result is not null")
   end
-  
+
   #def games  
   #  self.matches.collect{|m| m.completed_games}.flatten.uniq
   #end

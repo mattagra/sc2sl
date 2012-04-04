@@ -58,7 +58,7 @@ ActiveAdmin.register User do
     f.inputs "Options" do
       f.input :subscription
       f.input :time_zone
-	  f.input :active
+	    f.input :active
       f.input :roles, :as => :select, :collection => User::ROLES, :multiple => true
     end
 	f.inputs "Facebook Details" do
@@ -106,7 +106,7 @@ ActiveAdmin.register User do
   member_action :activation, :method => :get do
 	  @user = User.find(params[:id])
 	  if @user
-	    UserMailer.delay.activation(@user)
+	    @user.send_confirmation_instructions
 		flash[:notice] = "Activation Email Sent"
 	    redirect_to :action => :index
       else

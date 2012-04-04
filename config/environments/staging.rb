@@ -61,7 +61,7 @@ Sc2sl::Application.configure do
   config.assets.compress = true
   
   config.assets.compile = true
-  
+  config.active_record.whitelist_attributes= false
   
   
   config.assets.digest = true

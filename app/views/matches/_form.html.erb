@@ -109,7 +109,7 @@
             <th>Winning Team</th>
             <th>Replay</th>
           </tr>
-          <% f.fields_for :games do |game_form| %>
+          <%= f.fields_for :games do |game_form| %>
               <tr>
                 <td><%= game_form.hidden_field :match_order %><%= game_form.object.match_order %> </td>
                 <td><%= game_form.select :player0_id, f.object.team0.players.collect { |p| [p.user.login, p.id] }, :prompt => true %></td>
