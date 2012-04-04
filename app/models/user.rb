@@ -209,7 +209,7 @@ class User < ActiveRecord::Base
   end
 
   def active=(_new_active)
-    if _new_active = true
+    if _new_active == true
       confirm!
     end
   end

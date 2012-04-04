@@ -1,19 +1,20 @@
 <div id="newsmain">
 <%= render :partial => 'head', :locals => { :forum => @forum } %>
-
-<% if @topics.num_pages > 1 %>
+<br /><br />
+<% if @topics_count > 20 %>
   <div class='pages'>
-    Page: Paginate here
+    <%=  paginate_links(20, params[:page], @topics_count, request.path) %>
   </div>
 <% end %>
-<table class='topics subdued' cellspacing='0'>
+<table class='topics subdued' cellspacing='0' >
   <thead>
     <tr>
       <th class="icon"></th>
       <th class="byline">Topic</th>
-      <th class="latest-post">Latest</th>
-      <th class="comments-count">Comments</th>
+      <th class="topic-starter">Topic Starter</th>
+      <th class="comments-count">Posts</th>
       <th class="views-count">Views</th>
+      <th class="last-message">Last message</th>
     </tr>
   </thead>
   <tbody>

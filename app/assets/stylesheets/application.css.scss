@@ -6,6 +6,7 @@
 *= require formtastic_ie7
 *= require bootstrap
 *= require extras
+*= require forums
 */
 
 @import "compass";
@@ -63,6 +64,11 @@ table.bracket {
   top: -3px;
 }
 
+
+.center_text {
+  text-align: center;
+}
+
 .bracket td {
     vertical-align: middle;
     width: 40em;
@@ -79,6 +85,8 @@ table.bracket {
 .bracket th{
     text-align:center;
 }
+
+
 
 /* Season Result Page */
 

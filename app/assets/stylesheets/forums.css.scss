@@ -1,0 +1,40 @@
+table.topics {
+  width: 820px;
+  margin-top: 5px;
+  thead {
+    tr {
+      background-color: #eee;
+    }
+  }
+
+  .icon {
+    width: 50px;
+    text-align: center;
+  }
+
+  .byline {
+    width: 370px;
+  }
+
+  .topic-starter {
+    width: 150px;
+    text-align: center;
+  }
+
+  .comments-count {
+    width: 60px;
+    text-align: center;
+  }
+  .views-count {
+    width: 60px;
+    text-align: center;
+  }
+  .last-message {
+    width: 150px;
+    text-align: center;
+  }
+
+  td.byline {
+    font-size: medium;
+  }
+}

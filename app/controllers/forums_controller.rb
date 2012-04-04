@@ -8,6 +8,7 @@ class ForumsController < ApplicationController
   def show
     @forum = Forum.find(params[:id])
     @topics = @forum.topics.visible.by_pinned_or_most_recent_comment.page(params[:page]).per(20)
+    @topics_count =  @forum.topics.visible.by_pinned_or_most_recent_comment.count
   end
 
 

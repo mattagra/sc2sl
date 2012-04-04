@@ -1,17 +1,21 @@
 <div id="newsmain">
-<div id='topic' class='<%= 'un' unless @topic.locked? %>locked'>
-  <%= render :partial => 'topics/head', :locals => { :topic => @topic } %>
-
-
-  <span class="pagination" style="float: right"><%=  paginate_links(10, @current_page, @comments_count, request.path) %></span><br />
-    <%= render  @topic.comments %>
+  <div id='topic' class='<%= 'un' unless @topic.locked? %>locked'>
+    <%= render :partial => 'topics/head', :locals => {:topic => @topic} %>
+    <span style="float: right">
+      <%= link_to "New Reply", "#newcomment" %>
+      <br/>
+      <span class="pagination" >
+    <%= paginate_links(10, @current_page, @comments_count, request.path) %>
+  </span>
+    </span>
+    <%= render @topic.comments %>
     <% if @topic.comments.size > 0 %>
-      <%= render :partial => "comments/comment_footer" %>
+        <%= render :partial => "comments/comment_footer" %>
     <% end %>
-    
-  <p>
-    <%= render :partial => "comments/form" %>
-  </p>
-  
-</div>
+
+    <p>
+      <%= render :partial => "comments/form" %>
+    </p>
+
+  </div>
 </div>

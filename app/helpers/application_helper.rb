@@ -110,19 +110,19 @@ module ApplicationHelper
       end
     end
     boxes = []
-    left =  link_to("Prev", url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url, :page).merge(:page => "#{[current - 1, 1].max}").collect{|k,v| "#{k}=#{v}"}.join("&"))), :class => "link") + " "
+    left =  link_to("Prev", url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url, :page, :id).merge(:page => "#{[current - 1, 1].max}").collect{|k,v| "#{k}=#{v}"}.join("&"))), :class => "link") + " "
     
     c = 0
     final_pages.each do |page|
       if (c - page).abs > 1
         boxes << "..."
-        boxes <<  link_to(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url, :page).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")), {:class => ((page == current) ? "current_link": "link")}).to_s
+        boxes <<  link_to(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url, :page, :id).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")), {:class => ((page == current) ? "current_link": "link")}).to_s
       else
-          boxes << link_to(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url, :page).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")), {:class => ((page == current) ? "current_link": "link")}  ).to_s
+          boxes << link_to(page.to_s, url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url, :page, :id).merge(:page => page)).collect{|k,v| "#{k}=#{v}"}.join("&")), {:class => ((page == current) ? "current_link": "link")}  ).to_s
       end
       c = page
     end
-    right =  "  " + link_to("Next",url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url, :page).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")), :class => "link")
+    right =  "  " + link_to("Next",url_for(url+"?"+(request.params.except(:action, :controller, :model_name, :year, :month, :day, :url, :page, :id).merge(:page => "#{[current + 1, max_page].min}")).collect{|k,v| "#{k}=#{v}"}.join("&")), :class => "link")
     return (left.html_safe + boxes.join(" ").html_safe + right.html_safe).html_safe # + "per_page: #{per_page}, current: #{current}, total: #{total}"
   end
 

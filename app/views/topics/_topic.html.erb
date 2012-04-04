@@ -1,19 +1,25 @@
 <tr class="topic <%= cycle('odd', 'even') %> <%= topic.locked? ? 'locked' : 'unlocked' %>">
+
   <td class='icon'>
+    <%= image_tag("topics.gif") %>
     <% if topic.locked? %>
       <span class='lock icon'></span>
     <% end %>
     <% if topic.pinned? %>
-      <span class='pin icon'></span>
+      <span class='pin icon'><%= image_tag("pinned.gif") %></span>
     <% end %>
   </td>
   <td class='byline'>
-    <div class='subject'><%= link_to topic.title, forum_topic_path(@forum, topic) %></div>
-    <div class='started-by'> Created by <%= topic.comments.order(:created_at).first.try(:user) %></div>
+    <%= link_to topic.title, forum_topic_path(@forum, topic) %>
   </td>
-  <td class='latest-comment'>
-    last comment link
+  <td class='topic-starter'>
+    <%= topic.comments.order(:created_at).first.try(:user) %>
   </td>
   <td class='comments-count'><%= topic.comments.count %></td>
   <td class='views-count'><%= topic.views %></td>
+  <td class='last-message'>
+    <% comment =  topic.comments.order(:created_at).last %>
+    <%= american_time(comment.created_at) if comment %><br />
+    <%= comment.user.to_s if comment %>
+  </td>
 </tr>

@@ -10,7 +10,7 @@ class Topic < ActiveRecord::Base
 
   
 
-  attr_protected :pinned, :locked, :hidden
+  #attr_protected :pinned, :locked, :hidden
 
   belongs_to :forum
   belongs_to :user
@@ -25,19 +25,20 @@ class Topic < ActiveRecord::Base
   before_validation :set_first_comment_object
   
   def lock_topic!
-    update_attribute(:locked, true)
+    self.locked = true
+
   end
   
   def unlock_topic!
-    update_attribute(:locked, false)
+    self.locked = false
   end
   
   def pin!
-    update_attribute(:pinned, true)
+    self.pinned = true
   end
   
   def unpin!
-    update_attribute(:pinned, false)
+    self.pinned = false
   end
   
   def owner_or_admin?(other_user)

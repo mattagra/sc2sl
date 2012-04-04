@@ -1,17 +1,19 @@
 <tr class="forum <%= cycle("odd", "even") %>">
+  <td class="views-count" align="center"><%= image_tag("forums_icon.png") %></td>
     <td>
-      <%= link_to forum.title, forum_path(forum), :class => "title" %>
+      <%= link_to forum.title, forum_path(forum), :class => "title", :style => "font-size:x-large;" %>
       <div class='description'><%= forum.description %></div>
-      Last Comment
+      Last Post
       <span class='last_comment'>
           <% if last_comment = forum.last_visible_comment -%>
-            <%= link_to(last_comment.topic, forum_topic_path(forum, last_comment.topic)) -%> <%= t('by') %> <%= last_comment.user %> <%= t('time_ago_in_words', :time => time_ago_in_words(last_comment.created_at)) -%>
+            <%= link_to(last_comment.topic.title, forum_topic_path(forum, last_comment.topic)) -%> <%= t('by') %> <%= last_comment.user %> <%= t('time_ago_in_words', :time => time_ago_in_words(last_comment.created_at)) -%>
           <% else %>
             none
           <% end %>
         </span>
     </td>
-    <td class="topics-count"><%= forum.topics.count %></td>
-    <td class="comments-count"><%= forum.comments.count %></td>
-    <td class="views-count"><%= forum.topics.sum(:views) %></td>
+    <td class="topics-count center_text"><%= forum.topics.count %></td>
+    <td class="comments-count center_text"><%= forum.comments.count %></td>
+    <td class="views-count center_text"><%= forum.topics.sum(:views) %></td>
   </tr>
+
