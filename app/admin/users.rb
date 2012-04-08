@@ -75,7 +75,7 @@ ActiveAdmin.register User do
     cache_sweeper :user_sweeper
     def update
       @user = User.find(params[:id])
-      if @user.update_attributes(params[:user], !current_user.is_super_admin?)
+      if @user.update_without_password(params[:user])
         login = @user.login
         unless login == @user.login
           UserMailer.delay.username_change(@user, login)
@@ -90,7 +90,7 @@ ActiveAdmin.register User do
 	
 	def create
 	  @user = User.new
-	  if @user.update_attributes(params[:user], !current_user.is_super_admin?)
+	  if @user.update_attributes(params[:user], :as => 'admin')
         flash[:notice] = "Account created!"
         redirect_to :action => :show, :id => @user.id
       else

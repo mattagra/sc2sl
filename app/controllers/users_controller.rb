@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   authorize_resource
 
 
@@ -25,29 +26,5 @@ class UsersController < ApplicationController
 	
   end
 
-  def edit
-    if params[:id] and current_user and current_user.is_admin?
-      @user = User.find(params[:id])
-    else
-      @user = current_user
-    end
-  end
 
-  def update
-    if params[:id] and current_user and current_user.is_admin?
-      @user = User.find(params[:id])
-    else
-      @user = current_user
-    end
-    login = @user.login
-    if @user.update_attributes(params[:user], !current_user.is_super_admin?)
-      unless login == @user.login
-        UserMailer.delay.username_change(@user, login)
-      end
-      flash[:notice] = "Account updated!"
-      redirect_to profile_path(@user.login)
-    else
-      render :action => :edit
-    end
-  end
 end
