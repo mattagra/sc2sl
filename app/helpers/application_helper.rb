@@ -7,7 +7,7 @@ module ApplicationHelper
   end
 
   def path_locale(path, locale = I18n.locale)
-    locale_path_unless_default(locale) + path
+    ("/" + locale_path_unless_default(locale) unless locale_path_unless_default(locale).blank? ) + path
   end
 
 
