@@ -2,9 +2,14 @@ module ApplicationHelper
   include ActsAsTaggableOn::TagsHelper
 
 
-  def cms_snippet_locale(id, locale)
-    cms_snippet_content(id + ("_" + locale.to_s unless locale == :en).to_s)
+  def cms_snippet_locale(id, locale = I18n.locale)
+    cms_snippet_content(id + ("_" + locale_path_unless_default(locale) unless locale_path_unless_default(locale).blank? ))
   end
+
+  def path_locale(path, locale = I18n.locale)
+    locale_path_unless_default(locale) + path
+  end
+
 
 
   def show_flash
@@ -208,7 +213,15 @@ module ApplicationHelper
   def flag_icon(country)
     "<i class='flag flags-#{country}'></i>".html_safe
   end
-  
+
+
+
+  private
+
+  def locale_path_unless_default(locale, default = :en)
+    (I18n.locale unless I18n.locale == default).to_s
+  end
+
 
   
 

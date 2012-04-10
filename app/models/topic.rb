@@ -17,7 +17,7 @@ class Topic < ActiveRecord::Base
   has_many :comments, :foreign_key => :external_id, :conditions => "external_type = '#{Topic.to_s}'", :dependent => :destroy
   accepts_nested_attributes_for :comments
   
-  validates :title, :presence => true
+  validates :title, :presence => true, :length => {:within => 5..45}
   validates :user, :presence => true
   validates :forum, :presence => true
   

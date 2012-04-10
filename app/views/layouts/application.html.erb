@@ -60,6 +60,7 @@
 
 </head>
 <body>
+<%= link_to "", path_locale("/shop", I18n.locale), :id => "background-image" %>
 <div id="fb-root"></div>
 
 <script type="text/javascript">
@@ -156,15 +157,15 @@
 </div>
 
 
-<table width="1000" height="92" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr>
-    <td width="380" align="center" valign="middle"><%= cms_snippet_content('main_logo') %></td>
+<!--<table width="1000" height="92" border="0" align="center" cellpadding="0" cellspacing="0">-->
+  <!--<tr>-->
+    <!--<td width="380" align="center" valign="middle"><%# cms_snippet_content('main_logo') %></td>-->
 
-    <td width="620" align="center" valign="middle">
-      <div id="pubhaut"><%= random_ad("horizontal") %></div>
-    </td>
-  </tr>
-</table>
+    <!--<td width="620" align="center" valign="middle">-->
+      <!--<div id="pubhaut"><%# random_ad("horizontal") %></div>-->
+    <!--</td>-->
+  <!--</tr>-->
+<!--</table>-->
 
 <% cache("layout_menu_#{Time.zone}", {:expires_in => 1.minute}) do %>
     <div id="menu">
@@ -350,7 +351,7 @@
 
 
       </div>
-      <div>&nbsp;</div>
+
 
       </div>
       </body>

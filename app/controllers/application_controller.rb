@@ -52,7 +52,11 @@ class ApplicationController < ActionController::Base
   end
   
   def default_url_options(options = {})
-  {:locale => I18n.locale}
+    unless I18n.locale == :en
+      {:locale => I18n.locale}
+    else
+      {:locale => nil}
+    end
 end
 
   def set_date_object_and_find_matches
@@ -169,7 +173,7 @@ end
   end
 
   def set_timezone
-    Time.zone =  "Hawaii" #(current_user.time_zone if current_user and !current_user.time_zone.blank?) || Sc2sl::Application.config.time_zone
+    Time.zone =  (current_user.time_zone if current_user and !current_user.time_zone.blank?) || Sc2sl::Application.config.time_zone
   end
 
 
