@@ -1,7 +1,7 @@
 <div id="newsmain">
 					<div id="standmid" align="left">
  <div id="titrenews" align="left">
-        Calendar: <%= @matches_date.strftime("%B %Y") %><br>
+        <%= t ".calendar" %>: <%= l(@matches_date, :format => "%B %Y") %><br>
         <div id="undertitle"><%= link_to "Previous", matches_path(:calendar_month => (@matches_date.beginning_of_month-1).strftime("%m"),  :calendar_year => (@matches_date.beginning_of_month-1).strftime("%Y")) %> - <%= link_to "Next", matches_path(:calendar_month => (@calendar_date.end_of_month+1).strftime("%m"),  :calendar_year => (@calendar_date.end_of_month+1).strftime("%Y")) %><br/> Filter: <select name="gameselect">
           <option selected="selected">Starcraft 2</option>
       </select></div>

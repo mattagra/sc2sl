@@ -57,7 +57,9 @@ ComfortableMexicanSofa.configure do |config|
   
   # Locale definitions. If you want to define your own locale merge
   # {:locale => 'Locale Title'} with this.
-  #   config.locales = {:en => 'English', :es => 'Español'}
+  config.locales = {:en => 'English', :fr => 'French'}
+
+  config.admin_locale = :en
   
   # Admin interface will respect the locale of the site being managed. However you can
   # force it to English by setting this to `:en`

@@ -1,0 +1,516 @@
+	  
+# encoding: utf-8
+fr:
+
+  header:
+    welcome: "Bienvenue"
+    login: "Connexion"
+    logout: "Déconnexion"
+    register: "Registre"
+    facebook_connect: "Connectez-vous avec Facebook"
+    follow: "Suivere"
+    or: "ou"
+    ok: "bien"
+    advertisement: "Publicité"
+    next_live: "SUIVANT EN DIRECT SUR"
+    
+  footer:
+    contact: "Contacter"
+    to_top: "Retour vers le haut"
+  matches:
+    index:
+      calendar: "Calendrier"
+ 
+  
+  date:
+    abbr_day_names:
+    - lun
+    - mar
+    - mer
+    - jeu
+    - ven
+    - sam
+    - dim
+    abbr_month_names:
+    - 
+    - jan.
+    - fév.
+    - mar.
+    - avr.
+    - mai
+    - juin
+    - juil.
+    - août
+    - sept.
+    - oct.
+    - nov.
+    - déc.
+    day_names:
+    - lundi
+    - mardi
+    - mercredi
+    - jeudi
+    - vendredi
+    - samedi
+    - dimanche
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%e %B %Y'
+      short: ! '%e %b'
+    month_names:
+    - 
+    - janvier
+    - février
+    - mars
+    - avril
+    - mai
+    - juin
+    - juillet
+    - août
+    - septembre
+    - octobre
+    - novembre
+    - décembre
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: environ %{count} heure
+        other: environ %{count} heures
+      about_x_months:
+        one: environ %{count} mois
+        other: environ %{count} mois
+      about_x_years:
+        one: environ %{count} an
+        other: environ %{count} ans
+      almost_x_years:
+        one: presque %{count} an
+        other: presque %{count} ans
+      half_a_minute: une demi-minute
+      less_than_x_minutes:
+        one: moins de %{count} minute
+        other: moins de %{count} minutes
+        zero: moins d'une minute
+      less_than_x_seconds:
+        one: moins de %{count} seconde
+        other: moins de %{count} secondes
+        zero: moins d'une seconde
+      over_x_years:
+        one: plus de %{count} an
+        other: plus de %{count} ans
+      x_days:
+        one: ! '%{count} jour'
+        other: ! '%{count} jours'
+      x_minutes:
+        one: ! '%{count} minute'
+        other: ! '%{count} minutes'
+      x_months:
+        one: ! '%{count} mois'
+        other: ! '%{count} mois'
+      x_seconds:
+        one: ! '%{count} seconde'
+        other: ! '%{count} secondes'
+    prompts:
+      day: Jour
+      hour: Heure
+      minute: Minute
+      month: Mois
+      second: Seconde
+      year: Année
+  errors: &errors
+    format: Le %{attribute} %{message}
+    messages:
+      accepted: doit être accepté(e)
+      blank: doit être rempli(e)
+      confirmation: ne concorde pas avec la confirmation
+      empty: doit être rempli(e)
+      equal_to: doit être égal à %{count}
+      even: doit être pair
+      exclusion: n'est pas disponible
+      greater_than: doit être supérieur à %{count}
+      greater_than_or_equal_to: doit être supérieur ou égal à %{count}
+      inclusion: n'est pas inclus(e) dans la liste
+      invalid: n'est pas valide
+      less_than: doit être inférieur à %{count}
+      less_than_or_equal_to: doit être inférieur ou égal à %{count}
+      not_a_number: n'est pas un nombre
+      not_an_integer: doit être un nombre entier
+      odd: doit être impair
+      record_invalid: ! 'La validation a échoué : %{errors}'
+      taken: n'est pas disponible
+      too_long:
+        one: est trop long (pas plus de %{count} caractère)
+        other: est trop long (pas plus de %{count} caractères)
+      too_short:
+        one: est trop court (au moins %{count} caractère)
+        other: est trop court (au moins %{count} caractères)
+      wrong_length:
+        one: ne fait pas la bonne longueur (doit comporter %{count} caractère)
+        other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
+    template:
+      body: ! 'Veuillez vérifier les champs suivants : '
+      header:
+        one: ! 'Impossible d''enregistrer ce(tte) %{model} : %{count} erreur'
+        other: ! 'Impossible d''enregistrer ce(tte) %{model} : %{count} erreurs'
+  helpers:
+    select:
+      prompt: Veuillez sélectionner
+    submit:
+      create: Créer un(e) %{model}
+      submit: Enregistrer ce(tte) %{model}
+      update: Modifier ce(tte) %{model}
+  number:
+    currency:
+      format:
+        delimiter: ! ' '
+        format: ! '%n %u'
+        precision: 2
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: €
+    format:
+      delimiter: ! ' '
+      precision: 3
+      separator: ! ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: milliard
+          million: million
+          quadrillion: million de milliards
+          thousand: millier
+          trillion: billion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 2
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: octet
+            other: octets
+          gb: Go
+          kb: ko
+          mb: Mo
+          tb: To
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ! ' et '
+      two_words_connector: ! ' et '
+      words_connector: ! ', '
+  time:
+    am: am
+    formats:
+      default: ! '%d %B %Y %H:%M:%S'
+      long: ! '%A %d %B %Y %H:%M'
+      short: ! '%d %b %H:%M'
+    pm: pm
+  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  activemodel:
+    errors:
+      <<: *errors
+  activerecord:
+    errors:
+      <<: *errors    
+  errors:
+    messages:
+      expired: "has expired, please request a new one"
+      not_found: "not found"
+      already_confirmed: "was already confirmed, please try signing in"
+      not_locked: "was not locked"
+      not_saved:
+        one: "1 error prohibited this %{resource} from being saved:"
+        other: "%{count} errors prohibited this %{resource} from being saved:"
+
+  devise:
+    failure:
+      already_authenticated: 'You are already signed in.'
+      unauthenticated: 'You need to sign in or sign up before continuing.'
+      unconfirmed: 'You have to confirm your account before continuing.'
+      locked: 'Your account is locked.'
+      invalid: 'Invalid email or password.'
+      invalid_token: 'Invalid authentication token.'
+      timeout: 'Your session expired, please sign in again to continue.'
+      inactive: 'Your account was not activated yet.'
+    sessions:
+      signed_in: 'Signed in successfully.'
+      signed_out: 'Signed out successfully.'
+    passwords:
+      send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
+      updated: 'Your password was changed successfully. You are now signed in.'
+      updated_not_active: 'Your password was changed successfully.'
+      send_paranoid_instructions: "If your e-mail exists on our database, you will receive a password recovery link on your e-mail"
+    confirmations:
+      send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes.'
+      send_paranoid_instructions: 'If your e-mail exists on our database, you will receive an email with instructions about how to confirm your account in a few minutes.'
+      confirmed: 'Your account was successfully confirmed. You are now signed in.'
+    registrations:
+      signed_up: 'Welcome! You have signed up successfully.'
+      signed_up_but_unconfirmed: 'A message with a confirmation link has been sent to your email address. Please open the link to activate your account.'
+      signed_up_but_inactive: 'You have signed up successfully. However, we could not sign you in because your account is not yet activated.'
+      signed_up_but_locked: 'You have signed up successfully. However, we could not sign you in because your account is locked.'
+      updated: 'You updated your account successfully.'
+      update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
+      destroyed: 'Bye! Your account was successfully cancelled. We hope to see you again soon.'
+    unlocks:
+      send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
+      unlocked: 'Your account has been unlocked successfully. Please sign in to continue.'
+      send_paranoid_instructions: 'If your account exists, you will receive an email with instructions about how to unlock it in a few minutes.'
+    omniauth_callbacks:
+      success: 'Successfully authorized from %{kind} account.'
+      failure: 'Could not authorize you from %{kind} because "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Confirmation instructions'
+      reset_password_instructions:
+        subject: 'Reset password instructions'
+      unlock_instructions:
+        subject: 'Unlock Instructions'
+  # -- Models ---------------------------------------------------------------
+  attributes:
+    label: Label
+    slug: Slug
+    parent_id: Parent
+    content: Content
+    identifier: Identifier
+  activerecord:
+    models:
+      cms/site: Site
+      cms/layout: Layout
+      cms/page: Page
+      cms/snippet: Snippet
+      cms/file: File
+    attributes:
+      cms/site:
+        identifier: Identifier
+        hostname: Hostname
+        path: Path
+        locale: Language
+        is_mirrored: Mirrored
+      cms/layout:
+        identifier: Identifier
+        label: Layout Name
+        app_layout: App Layout
+        parent_id: Parent Layout
+        css: Stylesheet
+        js: Javascript
+      cms/page:
+        label: Label
+        layout_id: Layout
+        slug: Slug
+        target_page_id: Redirect to Page
+        is_published: Published
+      cms/file:
+        file: File
+        description: Description
+      cms/snippet:
+        identifier: Identifier
+        
+  # -- Controllers ----------------------------------------------------------
+  cms:
+    base:
+      site_not_found: Site not found
+      fixtures_enabled: CMS Fixtures are enabled. All changes done here will be discarded.
+      
+    sites:
+      created: Site created
+      creation_failure: Failed to create site
+      updated: Site updated
+      update_failure: Failed to update site
+      deleted: Site deleted
+      not_found: Site not found
+      
+    layouts:
+      created: Layout created
+      creation_failure: Failed to create layout
+      updated: Layout updated
+      update_failure: Failed to update layout
+      deleted: Layout deleted
+      not_found: Layout not found
+      
+    pages:
+      created: Page created
+      creation_failure: Failed to create page
+      updated: Page updated
+      update_failure: Failed to update page
+      deleted: Page deleted
+      not_found: Page not found
+      layout_not_found: No Layouts found. Please create one.
+      
+    snippets:
+      created: Snippet created
+      creation_failure: Failed to create snippet
+      updated: Snippet updated
+      update_failure: Failed to update snippet
+      deleted: Snippet deleted
+      not_found: Snippet not found
+      
+    revisions:
+      reverted: Content Reverted
+      record_not_found: Record Not Found
+      not_found: Revision Not Found
+      
+    files:
+      created: Files uploaded
+      creation_failure: Failed to upload files
+      updated: File updated
+      update_failure: Failed to update file
+      deleted: File deleted
+      not_found: File not found
+      
+    content:
+      site_not_found: Site Not Found
+      layout_not_found: Layout Not Found
+      page_not_found: Page Not Found
+  
+  # -- Views ----------------------------------------------------------------
+  cms_admin:
+    base:
+      sites: Sites
+      layouts: Layouts
+      pages: Pages
+      snippets: Snippets
+      files: Files
+      
+    sites:
+      index:
+        title: Sites
+        new_link: Create New Site
+        select: Select Site
+        edit: Edit
+        delete: Delete
+        are_you_sure: Are you sure you want to delete this site?
+      new:
+        title: New Site
+      edit:
+        title: Editing Site
+      form:
+        create: Create Site
+        update: Update Site
+        
+    layouts:
+      index:
+        title: Layouts
+        new_link: Create New Layout
+      index_branch:
+        add_child_layout: Add Child Layout
+        edit: Edit
+        delete: Delete
+        are_you_sure: Are you sure?
+      new:
+        title: New Layout
+      edit:
+        title: Editing Layout
+        revision: Revision
+      form:
+        select_parent_layout: Select Parent Layout
+        select_app_layout: Select Application Layout
+        create: Create Layout
+        update: Update Layout
+      
+    pages:
+      index:
+        title: Pages
+        new_link: Create New Page
+      index_branch:
+        toggle: Toggle
+        add_child_page: Add Child Page
+        edit: Edit
+        delete: Delete
+        are_you_sure: Are you sure?
+      new:
+        title: New Page
+      edit:
+        title: Editing Page
+        revision: Revision
+      form:
+        select_target_page: No Redirect
+        preview: Preview
+        create: Create Page
+        update: Update Page
+      form_blocks:
+        no_tags: |-
+          Layout has no content tags defined.<br/>
+          Edit the content to include a page or field tag. For example: <code>{{cms:page:content}}</code>
+      
+    snippets:
+      index:
+        title: Snippets
+        new_link: Create New Snippet
+        edit: Edit
+        delete: Delete
+        are_you_sure: Are you sure?
+      new:
+        title: New Snippet
+      edit:
+        title: Editing Snippet
+        revision: Revision
+      form:
+        create: Create Snippet
+        update: Update Snippet
+          
+    revisions:
+      show:
+        title: Revisions for
+        revision: Revision
+        full_path: Full Path
+        slug: Slug
+        update: Update to this Revision
+        current: Current
+      
+    files:
+      index:
+        title: Files
+        new_link: Upload New File
+        edit: Edit
+        delete: Delete
+        are_you_sure: Are you sure?
+        button: Upload Files
+      new:
+        title: New File
+      edit:
+        title: Editing File
+      form:
+        current_file: Current File
+        create: Upload File
+        update: Update File
+      page_form:
+        are_you_sure: Are you sure?
+      file:
+        are_you_sure: Are you sure?
+        
+    categories:
+      index:
+        label: Categories
+        edit: Edit
+        done: Done
+        all: All
+        add: Add
+      show:
+        are_you_sure: Are you sure?
+      edit:
+        save: Save
+      form:
+        label: Categories
+        
+    dialogs:
+      image:
+        insert: Insert Image
+      link:
+        create: Create Link

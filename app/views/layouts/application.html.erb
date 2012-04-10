@@ -76,7 +76,7 @@
     (function(d) {
         var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
         js = d.createElement('script'); js.id = id; js.async = true;
-        js.src = "//connect.facebook.net/en_US/all.js";
+        js.src = "//connect.facebook.net/<%= LOCALES[I18n.locale].to_s %>/all.js";
         d.getElementsByTagName('head')[0].appendChild(js);
     }(document));
 
@@ -105,21 +105,20 @@
 
       <% unless current_user %>
           <div class="login-content-texte">
-            <span style="float:left;margin-top: 8px;"><%= link_to "REGISTER", new_user_registration_path %>
-              or LOGIN</span>
+            <span style="float:left;margin-top: 8px;"><%= link_to t("header.register").upcase, new_user_registration_path %>
+              <%= t "header.or" %> <%= t("header.login").upcase %></span>
             <%= form_for "user", :url => user_session_path do |f| %>
                 <%= f.text_field :email,:placeholder => "Login", :class => "input-login" %>
                 <%= f.password_field :password,:placeholder => "Password", :class => "input-login" %>
-                <%= f.hidden_field :remember_me,  :value => true %>
-                <%= f.submit "OK", :class => "submit-login" %>
+                <%= f.submit t("header.ok"), :class => "submit-login" %>
             <% end %>
             <div style="margin-top: 4px; margin-right: 40px;float: right;">
-              <div class="fb-login-button" data-show-faces="false" data-width="300" data-max-rows="1">Connect with Facebook</div>
+              <div class="fb-login-button" data-show-faces="false" data-width="300" data-max-rows="1"><%= t "header.facebook_connect" %></div>
             </div>
           </div>
       <% else %>
           <div class="login-content-texte">
-            Welcome <b><%= link_to current_user.login, account_path %></b> |
+            <%= t "header.welcome" %> <b><%= link_to current_user.login, account_path %></b> |
             <% if current_user.is_moderator? %>
                 <%= link_to "Admin Panel", admin_path %> |
                 <%= link_to "CMS Admin", "/cms-admin" %> |
@@ -128,7 +127,7 @@
                 <%= link_to "Newsletters", newsletters_path %> |
                 <%= link_to "Moderations", moderations_path %> |
             <% end %>
-            <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+            <%= link_to t("header.logout"), destroy_user_session_path, :method => :delete %>
           </div>
       <% end %>
     </div>
@@ -138,8 +137,9 @@
         </div>
         <div class="login-content-right">
 
-          <a href="https://twitter.com/sc2sl" class="twitter-follow-button" data-show-count="false" style="margin-top: 5px;">Follow
+          <a href="https://twitter.com/sc2sl" class="twitter-follow-button" data-show-count="false" data-lang="<%= I18n.locale.to_s %>" style="margin-top: 5px;"><%= t("header.follow") %>
             @sc2sl</a>
+           
           <script>!function (d, s, id) {
               var js, fjs = d.getElementsByTagName(s)[0];
               if (!d.getElementById(id)) {
@@ -149,7 +149,7 @@
                   fjs.parentNode.insertBefore(js, fjs);
               }
           }(document, "script", "twitter-wjs");</script>
-          <div class="fb-like" data-href="https://www.facebook.com/pages/SC2SL/258966677449790" data-send="false" data-layout="button_count" data-width="75" data-show-faces="false" data-colorscheme="dark" data-font="tahoma"></div>
+          <div class="fb-like" data-href="https://www.facebook.com/pages/SC2SL/258966677449790" data-send="false" data-layout="button_count" data-width="75" data-show-faces="false" data-colorscheme="dark" data-font="tahoma" data-action="like"></div>
         </div>
     <% end %>
   </div>
@@ -169,7 +169,7 @@
 <% cache("layout_menu_#{Time.zone}", {:expires_in => 1.minute}) do %>
     <div id="menu">
 
-      <%= cms_snippet_content('main_menu') %>
+      <%= cms_snippet_locale('main_menu', I18n.locale) %>
 
       <div id="menu-live">
 
@@ -178,7 +178,7 @@
         <div class="menu-live-left">&nbsp;</div>
 
         <div class="menu-live-right">
-          <span style="float : right ;height : 18px; margin-left : 8px; margin-top : 7px;">NEXT LIVE ON SC2SL <%= @live_match.scheduled_at.strftime("%d %b %H:%M").upcase if @live_match %> </span>
+          <span style="float : right ;height : 18px; margin-left : 8px; margin-top : 7px;"><%= t("header.next_live")%> SC2SL <%= @live_match.scheduled_at.strftime("%d %b %H:%M").upcase if @live_match %> </span>
         </div>
 
       </div>
@@ -272,7 +272,7 @@
                 <span class="ntitle2">
                   <%= link_to image_tag("content-bar/sponsors/flecheg.gif", :alt => "", :width => "14", :height => "14", :align => "bottom"),
                               matches_path(:calendar_month => (@calendar_date.beginning_of_month-1).strftime("%m"), :calendar_year => (@calendar_date.beginning_of_month-1).strftime("%Y")) %>
-                  <%= link_to @calendar_date.strftime("%B %Y"), matches_path(:calendar_month => @calendar_date.strftime("%m"), :calendar_year => @calendar_date.strftime("%Y")) %>
+                  <%= link_to l(@calendar_date, :format => "%B %Y"), matches_path(:calendar_month => @calendar_date.strftime("%m"), :calendar_year => @calendar_date.strftime("%Y")) %>
                   <%= link_to image_tag("content-bar/sponsors/fleche.gif", :alt => "", :width => "14", :height => "14", :align => "bottom"),
                               matches_path(:calendar_month => (@calendar_date.end_of_month+1).strftime("%m"), :calendar_year => (@calendar_date.end_of_month+1).strftime("%Y")) %>
                 </span>
@@ -283,7 +283,7 @@
 
         <div id="calendar">
           <%= calendar_for @layout_matches.to_a, :year => @calendar_date.year, :month => @calendar_date.month, :today => Time.now, :first_day_of_week => 1 do |calendar| %>
-              <%= calendar.head('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun') %>
+              <%= calendar.head(*(t("date.abbr_day_names"))) %>
               <% calendar.day(:day_method => :scheduled_at) do |date, matches| %>
                   <% if date.month == @calendar_date.month %>
                       <% if matches.size == 0 %>
@@ -318,7 +318,7 @@
       <div id="advertissement">
 
         <div id="right-titre">
-          <div id="right-titre-texte">ADVERTISEMENT</div>
+          <div id="right-titre-texte"><%= t("header.advertisement").upcase %></div>
         </div>
         <div id="advertissement-image">
           <%= random_ad("vertical") %>
@@ -336,10 +336,10 @@
             <tbody>
             <tr>
               <td width="100" align="center" valign="middle" class="menu-lien">
-                <a href="mailto:contact@sc2sl.com">CONTACT</a></td>
-              <td width="770" align="center"><font color="#333333"><%= cms_snippet_content('footer') %></font></td>
-              <td align="right" width="130" align="right" valign="middle" class="menu-lien">
-                <a href="#">BACK TO THE TOP</a></td>
+                <a href="mailto:contact@sc2sl.com"><%= t("footer.contact").upcase %></a></td>
+              <td width="750" align="center"><font color="#333333"><%=  cms_snippet_locale('footer', I18n.locale) %></font></td>
+              <td align="right" width="150" align="right" valign="middle" class="menu-lien">
+                <a href="#"><%= t("footer.to_top").upcase %></a></td>
             </tr>
             </tbody>
           </table>

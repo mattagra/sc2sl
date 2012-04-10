@@ -1,6 +1,12 @@
 module ApplicationHelper
   include ActsAsTaggableOn::TagsHelper
 
+
+  def cms_snippet_locale(id, locale)
+    cms_snippet_content(id + ("_" + locale.to_s unless locale == :en).to_s)
+  end
+
+
   def show_flash
     [:notice, :warning, :message].collect do |key|
       content_tag(:div, flash[key], :class => "flash flash_#{key}") unless flash[key].blank?

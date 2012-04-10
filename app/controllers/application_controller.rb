@@ -14,8 +14,7 @@ class ApplicationController < ActionController::Base
   before_filter :meta_tags
   before_filter :current_voting
   before_filter :set_date_object_and_find_matches
-
-  #before_filter :require_http_auth
+  before_filter :set_locale
   
   unless Rails.application.config.consider_all_requests_local
   rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
@@ -47,6 +46,14 @@ class ApplicationController < ActionController::Base
 
 
   private
+  
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
+  
+  def default_url_options(options = {})
+  {:locale => I18n.locale}
+end
 
   def set_date_object_and_find_matches
     @today = Date.today
