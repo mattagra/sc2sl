@@ -3,11 +3,11 @@ module ApplicationHelper
 
 
   def cms_snippet_locale(id, locale = I18n.locale)
-    cms_snippet_content(id + ("_" + locale_path_unless_default(locale) unless locale_path_unless_default(locale).blank? ))
+    cms_snippet_content(id + ("_" + locale_path_unless_default(locale) unless locale_path_unless_default(locale).blank? ).to_s)
   end
 
   def path_locale(path, locale = I18n.locale)
-    (("/" + locale_path_unless_default(locale).to_s) unless locale_path_unless_default(locale).blank? ) + path
+    (("/" + locale_path_unless_default(locale).to_s) unless locale_path_unless_default(locale).blank? ).to_s + path
   end
 
 
