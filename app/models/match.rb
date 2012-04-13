@@ -112,16 +112,16 @@ class Match < ActiveRecord::Base
 
 
  def caster_ids=(new_caster_ids)
-   self["caster_ids"] = new_caster_ids.join(",")
+   self["caster_ids"] = new_caster_ids.reject{|i| i.blank?}.join(",")
  end
 
  def caster_ids
    self["caster_ids"].split(",") if self["caster_ids"]
   end
 
-  def casters=(new_casters)
-    self.caster_ids = new_casters.collect{|c| c.login}.join(",")
-  end
+  #def casters=(new_casters)
+  #  self.caster_ids = new_casters.collect{|c| c.login}.reject{|l| l.blank?}join(",")
+  #end
 
   def teams
     [self.team0,self.team1]

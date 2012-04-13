@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  team0_id: 1
-  team1_id: 1
-
-two:
-  team0_id: 1
-  team1_id: 1

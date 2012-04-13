@@ -63,6 +63,10 @@ gem 'comfortable_mexican_sofa', '1.6.18'
 
 #gem 'sprockets', :git => "git://github.com/sstephenson/sprockets"
 
+group :test, :development do
+  gem "rspec-rails", "~> 2.6"
+  #gem 'factory_girl_rails', "~> 2.0.0" Add when we do ruby 1.9.2
+end
 
 
 #group :development do
