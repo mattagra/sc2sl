@@ -80,6 +80,16 @@ class User < ActiveRecord::Base
   before_save :capitalize_names #, :reset_tokens
   before_save :check_for_new_photo
 
+  
+    def send_on_create_confirmation_instructions
+      Devise::Mailer.delay.confirmation_instructions(self)
+    end
+    def send_reset_password_instructions
+      Devise::Mailer.delay.reset_password_instructions(self)
+    end
+    def send_unlock_instructions
+      Devise::Mailer.delay.unlock_instructions(self)
+    end
 
 
 
