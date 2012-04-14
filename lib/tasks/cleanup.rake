@@ -9,12 +9,12 @@ namespace 'cleanup' do
   
   desc "delete old users and send reactivation emails to users at certain timeframes."
   task :clean_users => :environment do
-    User.where(:active => false, :created_at.lt => 7.days.ago ).delete_all 
-    User.where(:active => false, :created_at.gt => 24.hours.ago, :created_at.lt => 23.hours.ago).each do |user|
-      UserMailer.delay.activation(user)
+    User.inactive.where(:created_at.lt => 30.days.ago ).delete_all 
+    User.inactive.where(:created_at.gt => 24.hours.ago, :created_at.lt => 23.hours.ago).each do |user|
+      user.send_on_create_confirmation_instructions
     end
-    User.where(:active => false, :created_at.gt => 72.hours.ago, :created_at.lt => 71.hours.ago).each do |user|
-      UserMailer.delay.activation(user)
+    User.inactive.where(:created_at.gt => 72.hours.ago, :created_at.lt => 71.hours.ago).each do |user|
+      user.send_on_create_confirmation_instructions
     end
   end
   
