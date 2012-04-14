@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  include ActiveModel::MassAssignmentSecurity
 
   #Authentication
   #acts_as_authentic do |c|
@@ -31,15 +30,15 @@ class User < ActiveRecord::Base
 
 
   #Attributes
-  attr_protected :caster, :website, :roles
-  attr_accessor  :password, :password_confirmation
-  attr_accessible :password, :password_confirmation, :photo, :country_id,  :signature, :bent_code, :bnet_name, :last_name, :profile_text, :subscription, :time_zone, :first_name, :race, :bnet_server, :birthdate
+  #attr_protected :caster, :website, :roles
+  #attr_accessor  :password, :password_confirmation
+  #attr_accessible :password, :password_confirmation, :photo, :country_id,  :signature, :bent_code, :bnet_name, :last_name, :profile_text, :subscription, :time_zone, :first_name, :race, :bnet_server, :birthdate
   #attr_accessible bnet_server, birthdate(1i), password_confirmation, birthdate(2i), caster, facebook_uid, country_id, birthdate(3i), signature, bent_code, photo_approved, last_name, profile_text, website, subscription, facebook_session_key, bnet_name, time_zone, login, password, roles, email, :first_name, :race, active
-  attr_accessible :caster, :facebook_uid, :photo_approved, :website, :facebook_session_key, :roles, :active
+  #attr_accessible :caster, :facebook_uid, :photo_approved, :website, :facebook_session_key, :roles, :active
   
-  attr_accessible :email, :on => :create
-  attr_accessible :login, :on => :create
-  attr_accessible :encrypted_password, :on => :create
+  #attr_accessible :email, :on => :create
+  #attr_accessible :login, :on => :create
+  #attr_accessible :encrypted_password, :on => :create
 
   #Validations
   validates :email, :presence => true, :uniqueness => true, :email_format => true

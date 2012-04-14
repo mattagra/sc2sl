@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120404032827) do
+ActiveRecord::Schema.define(:version => 20120414142935) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -444,12 +444,11 @@ ActiveRecord::Schema.define(:version => 20120404032827) do
   add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :null => false
-    t.string   "encrypted_password",                    :null => false
-    t.string   "password_salt",                         :null => false
-    t.string   "login",                                 :null => false
-    t.integer  "sign_in_count",          :default => 0, :null => false
-    t.integer  "failed_attempts",        :default => 0, :null => false
+    t.string   "email",                                  :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "login",                                  :null => false
+    t.integer  "sign_in_count",          :default => 0,  :null => false
+    t.integer  "failed_attempts",        :default => 0,  :null => false
     t.datetime "last_request_at"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -490,6 +489,7 @@ ActiveRecord::Schema.define(:version => 20120404032827) do
     t.datetime "locked_at"
     t.string   "unconfirmed_email"
     t.datetime "reset_password_sent_at"
+    t.string   "password_salt",          :default => "", :null => false
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
