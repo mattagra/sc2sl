@@ -160,9 +160,9 @@ module ApplicationHelper
     ret = ""
     case event[1]
     when 'join'
-      ret = image_tag("user/small_green_arrow.png", :height => 9, :width => 10).to_s + "Joined #{link_to(event[2].team.to_s, team_path(event[2].team.slug))}"
+      ret = image_tag("user/small_green_arrow.png", :height => 9, :width => 10).to_s + "Joined " +link_to(event[2].team.to_s, team_path(event[2].team.slug)).to_s
     when 'quit'
-      ret = image_tag("user/small_red_arrow.png", :height => 9, :width => 10).to_s + "Left #{link_to(event[2].team.to_s, team_path(event[2].team.slug))}"
+      ret = image_tag("user/small_red_arrow.png", :height => 9, :width => 10).to_s + "Left " + link_to(event[2].team.to_s, team_path(event[2].team.slug)).to_s
     when "game"
       other = (event[2].players - [event[3]]).first
       if event[2].winning_player == event[3]

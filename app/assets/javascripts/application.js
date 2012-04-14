@@ -3,6 +3,7 @@
 //= require bootstrap
 //= require_self
 //= require jquery.popupwindow
+//= require dddropdownpanel
 
 $('.carousel').carousel({
   interval: 2000
