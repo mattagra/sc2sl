@@ -65,7 +65,7 @@ Sc2sl::Application.configure do
   config.middleware.use ExceptionNotifier,
   :email_prefix => "[Exception] ",
   :sender_address => %{"Exception Notifier" <support@sc2sl.com>},
-  :exception_recipients => %w{webmaster@sc2sl.com}
+  :exception_recipients => %w{michael.darmousseh@gmail.com}
   
   
   # Enable threaded mode

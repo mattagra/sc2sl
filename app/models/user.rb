@@ -108,7 +108,7 @@ class User < ActiveRecord::Base
       end
     else # Create a user with a stub password.
       logger.debug "Facebook attributes hash: #{data.inspect}"
-      user = User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :active => true, :subscription => true, :login => (data.username.to_s.gsub(/[^0-9a-z]/i, '') + "_" + data.id.to_s)[0..19], :first_name => data.first_name, :last_name => data.last_name, :facebook_uid => data.id)
+      user = User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :subscription => true, :login => (data.username.to_s.gsub(/[^0-9a-z]/i, '') + "_" + data.id.to_s)[0..19], :first_name => data.first_name, :last_name => data.last_name, :facebook_uid => data.id)
       user.confirm!
     end
     user
